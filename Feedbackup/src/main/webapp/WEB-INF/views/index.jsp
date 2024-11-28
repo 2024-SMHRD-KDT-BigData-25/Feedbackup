@@ -1,0 +1,39 @@
+<%@page import="com.smhrd.basic.model.MavenMember"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<% MavenMember member = (MavenMember) session.getAttribute("member"); %>
+	
+	<% if(member==null){ %>
+
+	<button onclick="location.href='users/signup'">회원가입</button>
+    <button onclick="location.href='login'">로그인</button>
+    <%} else{%>
+    	<%=member.getNickname() %> <br>
+    
+    	<button onclick="location.href='users'">전체회원정보</button>
+
+     	<button onclick="location.href='users/<%=member.getId()%>/edit'">회원정보수정</button>
+      
+     	<button onclick="deleteMember('<%=member.getId()%>')">회원탈퇴</button>
+    	<button onclick="location.href='logout'">로그아웃</button>
+    <%} %>
+    
+    <script>
+    	function deleteMember(id){
+    		let choice = confirm("정말 탈퇴하시겠습니까?")
+    		
+    		if(choice){
+    			location.href="/myapp/users/"+id+"/delete";
+    		}
+    	}
+    
+    </script>
+</body>
+</html>

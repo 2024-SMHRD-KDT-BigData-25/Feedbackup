@@ -1,4 +1,4 @@
-package com.smhrd.myapp;
+package com.smhrd.basic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
