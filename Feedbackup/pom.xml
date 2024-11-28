@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.6</version>
+		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.smhrd</groupId>
-	<artifactId>Feedbackup</artifactId>
+	<artifactId>basic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Feedbackup</name>
+	<name>BootBasic</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -71,6 +71,12 @@
 			<version>3.0.3</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!--jsp-->
+		<dependency>
+         	<groupId>org.apache.tomcat.embed</groupId>
+         	<artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
