@@ -4,50 +4,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
-</head>
-<body>
+    <title>FeedbackUp | 회원가입</title>
+    
+    <style>
+        @font-face {
+            font-family: 'SUIT-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
 
-    <h1>회원가입</h1>
+        .logo {
+            width: 365px;
+            height: 79px;
+            display: block;
+            margin: 0 auto;
+            margin-top: 40px;
+            margin-bottom: -50px;
+            max-width: 160px;
+            max-height: 35px;
+        }
+
+        body {
+            background-color: #F1F5F9;
+            font-family: 'SUIT-Regular';
+            align-content: center;
+        }
+
+        h1 {
+          font-size: 20px;
+          margin-left: 17px;  
+        }
+
+       .signin-box{
+            width: 330px;
+            height: 650px;
+            background-color: white;
+            margin-left: 1px;
+            padding: 30px;
+            border-radius: 5px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 40px;
+            box-shadow: 0 1px 20px 0 rgb(232, 232, 232);
+            align-content: center;
+       } 
+
+       input {
+            border-radius: 10px;
+            border: 0.5px #CBD5E1 solid;
+            margin-left: 15px;
+            margin-bottom: 18px;
+            padding: 13px;
+       }
+
+       input::placeholder {
+        color: #94A3B8;
+       }
+
+       input:focus{
+        outline-color: #8071FC;
+       }
+
+       .idcheck{
+        border: 0.5px #CBD5E1 solid;
+        border-radius: 10px;
+        color: #8071FC;
+        background-color: white;
+        margin-left: 1px;
+        padding: 13px;
+       }
+
+      .idcheck:hover{
+        background-color: #8071FC;
+        color: white;
+      } 
+
+       .agree {
+            margin: 5px;
+            width: 295px;
+            height: 200px;
+            background-color: #F9F8FF;
+            border-radius: 10px;
+            font-size: 12px;
+       }
+
+       .title {
+        color: #5344D4;
+        font-weight: 700;
+        margin-left: 14px;
+        margin-top: 0px;
+       }
+
+       .check1 {
+        color: #968BEF;
+       }
+
+       .check2 {
+        color: #5344D4;
+       }
+
+       #chkall {
+        accent-color:#5344D4;
+        border: #5344D4 solid 1px;
+        vertical-align: -3px;
+       }
+
+       #term {
+        accent-color:#5344D4;
+        vertical-align: -3px;
+       }
+
+       hr {
+        border: solid #8071FC 1px;
+        margin-left: 15px;
+        transform: scaleY(0.3);
+       }
+
+       #submitBtn {
+        background-color: #8071FC;
+        color: white;
+        font-weight: 600;
+        width: 295px;
+        margin-left: 8px;
+       }
+
+       #submitBtn:hover {
+        color: #8071FC;
+        background-color: white;
+        border-color: #8071FC;
+
+       }
+
+
+    </style>
+  </head>
+
+  <body>
+    <img src="../assets/img/logo2.png" alt="logo" class="logo"><br><br><br><br>
+	<div class="signin-box">
+    <h1>회원가입</h1><br>
     <form action="/myapp/users" method="post" id="signupForm">
-        <input type="text" name="name" placeholder="이름" required><br>
+        <input type="text" name="name" placeholder="이름" required style="width: 260px"><br>
+        <input type="text" id="id" name="id" placeholder="아이디" required style="width: 181px">
+        <button type="button" class="idcheck" style="width: 75px">중복확인</button>
+        <span id="idCheckResult" style="margin-left: 10px; display: none; color: #8071FC;">✔</span><br>
         
-        <input type="text" id="id" name="id" placeholder="아이디" required>
-        <button type="button" class="idcheck">중복 확인</button>
-        <span id="idCheckResult" style="margin-left: 10px; display: none; color: green;">✔</span><br>
+        <input type="password" name="pw" id="pw" placeholder="비밀번호" required style="width: 260px"><br>
+        <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인" required style="width: 260px"><br>
+        <input type="text" name="email" placeholder="이메일 주소" required style="width: 260px"><br>
         
-        <input type="password" name="pw" id="pw" placeholder="비밀번호" required><br>
-        <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인" required><br>
-        <input type="text" name="email" placeholder="이메일" required><br>
-        
-        <img src="" alt="logo" class="logo">
-        <div style="padding: 20px; box-sizing: border-box">
+        <div class="agree" style="padding: 20px; box-sizing: border-box">
             <p class="title">약관동의</p>
             <span class="chk chkall">
                 <span class="cbx">
-                    <input type="checkbox" name="cbx01" id="chkall">
-                    <label for="chkall">모든 약관을 확인하고 전체 동의합니다.</label><br>
+                    <input id="chkall" type="checkbox" name="cbx01" >
+                    <label class="check1" for="chkall">모든 약관을 확인하고 전체 동의합니다.</label><hr><br>
                 </span>
             </span>
 
             <span class="chk chklist">
                 <span class="cbx">
-                    <input type="checkbox" name="cbx02" id="term1">
-                    <label for="term1">[필수] 이용약관 동의</label><br>
+                    <input type="checkbox" name="cbx02" id="term">
+                    <label class="check2" for="term1">[필수] 이용약관 동의</label><br>
                 </span>
             </span>
 
             <span class="chk chklist">
                 <span class="cbx">
-                    <input type="checkbox" name="cbx02" id="term2">
-                    <label for="term2">[필수] 개인정보 수집 및 이용 동의</label>
+                    <input type="checkbox" name="cbx02" id="term">
+                    <label class="check2" for="term2">[필수] 개인정보 수집 및 이용 동의</label>
                 </span>
             </span>
         </div>
-        <input type="submit" value="회원가입" id="submitBtn" disabled> <!-- 기본적으로 버튼 비활성화 -->
+        <br>
+        <input type="submit" value="회원가입" id="submitBtn" disabled onclick="return joinCheck()"> <!-- 기본적으로 버튼 비활성화 -->
     </form>
+   </div>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script>
     let isIdAvailable = false; // 아이디 사용 가능 여부를 추적하는 변수
     let passwordsMatch = false; // 비밀번호 일치 여부를 추적하는 변수
@@ -142,5 +278,5 @@
     });
 </script>
 
-</body>
+  </body>
 </html>
