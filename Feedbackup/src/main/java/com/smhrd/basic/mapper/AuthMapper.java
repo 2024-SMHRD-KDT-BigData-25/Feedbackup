@@ -8,7 +8,7 @@ import com.smhrd.basic.model.MavenMember;
 @Mapper
 public interface AuthMapper {
 	
-	@Select("select * from mavenmember where id = #{id} and pw = #{pw}")
+	@Select("select * from test where id = #{id} and pw = #{pw}")
 	public MavenMember login(MavenMember member);
 
 }

@@ -79,15 +79,36 @@ public class UserController {
 		return "list";
 	}
 	
-	@RequestMapping( value= "/users/check-id", method = RequestMethod.POST )
-	@ResponseBody 
-    public Map<String, Boolean> checkId(
-    		@RequestParam String userId
-    		) {
-        boolean exists = service.checkIdExist(userId); // 중복 여부 체크
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("exists", exists); // exists가 true면 중복, false면 사용 가능
-        return response;
+	@RequestMapping(value = "/users/check-id", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> checkId(@RequestParam String userId) {
+	    Map<String, Object> response = new HashMap<>();
+	    
+	    // 1. 아이디 길이가 4자리 이상인지 체크
+	    if (userId.length() < 4) {
+	        response.put("valid", false);
+	        response.put("message", "아이디는 4자리 이상이어야 합니다.");
+	        response.put("exists", false);  // 중복 여부는 중요하지 않음
+	    } else {
+	        // 2. 아이디 중복 여부 체크
+	        boolean exists = service.checkIdExist(userId);
+	        
+	        if (exists) {
+	            response.put("valid", true);  // 중복된 아이디일 경우
+	            response.put("message", "이미 존재하는 아이디입니다.");
+	        } else {
+	            response.put("valid", true);  // 중복되지 않는 아이디일 경우
+	            response.put("message", "✔ 아이디 사용 가능");
+	        }
+	        response.put("exists", exists);
+	    }
+
+	    return response;
+	}
+	
+	@GetMapping("/users/idfind")
+    public String idfind(@RequestParam String name, @RequestParam String email) {
+        return service.idfind(name, email);
     }
 	
 }

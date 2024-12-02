@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,10 @@ public interface UserMapper {
 	public List<MavenMember> getList();
 	
 	@Select("SELECT COUNT(*) FROM test WHERE id = #{userId}")
-    int countById(String userId); // 아이디 중복 확인을 위한 쿼리
-
+	Integer countByUserId(@Param("userId") String userId);
+	
+	@Select("SELECT id FROM test WHERE name = #{name} AND email = #{email}")
+	String idfind(String name, String email);
+			
 }
 

@@ -36,9 +36,17 @@ public class UserService {
         return mapper.getList();
     }
     
-    // 아이디 중복 확인
     public boolean checkIdExist(String userId) {
-        int count = mapper.countById(userId);
-        return count > 0;  // 중복된 아이디가 있으면 true 반환
+        // userMapper에서 id 중복 여부를 확인
+        Integer count = mapper.countByUserId(userId);
+        return count != null && count > 0;  // 중복이면 true, 아니면 false
+    }
+    
+    public String idfind(String name, String email) {
+        String id = mapper.idfind(name, email);
+        if (id == null) {
+            return "이름 또는 이메일이 일치하지 않습니다.";
+        }
+        return "아이디는 " + id + "입니다.";
     }
 }

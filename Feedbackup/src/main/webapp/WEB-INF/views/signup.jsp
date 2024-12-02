@@ -133,9 +133,15 @@
         color: #8071FC;
         background-color: white;
         border-color: #8071FC;
-
        }
 
+       /* 오류 메시지 스타일 */
+       .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+       }
 
     </style>
   </head>
@@ -146,12 +152,15 @@
     <h1>회원가입</h1><br>
     <form action="/myapp/users" method="post" id="signupForm">
         <input type="text" name="name" placeholder="이름" required style="width: 260px"><br>
+        
         <input type="text" id="id" name="id" placeholder="아이디" required style="width: 181px">
         <button type="button" class="idcheck" style="width: 75px">중복확인</button>
-        <span id="idCheckResult" style="margin-left: 10px; display: none; color: #8071FC;">✔</span><br>
+        <div id="idError" class="error" style="display: none;"></div> <!-- 아이디 오류 메시지 -->
         
         <input type="password" name="pw" id="pw" placeholder="비밀번호" required style="width: 260px"><br>
         <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인" required style="width: 260px"><br>
+        <div id="pwError" class="error" style="display: none;"></div> <!-- 비밀번호 오류 메시지 -->
+        
         <input type="text" name="email" placeholder="이메일 주소" required style="width: 260px"><br>
         
         <div class="agree" style="padding: 20px; box-sizing: border-box">
@@ -178,7 +187,7 @@
             </span>
         </div>
         <br>
-        <input type="submit" value="회원가입" id="submitBtn" disabled onclick="return joinCheck()"> <!-- 기본적으로 버튼 비활성화 -->
+        <input type="submit" value="회원가입" id="submitBtn" disabled> <!-- 기본적으로 버튼 비활성화 -->
     </form>
    </div>
 
@@ -188,28 +197,37 @@
     let isIdAvailable = false; // 아이디 사용 가능 여부를 추적하는 변수
     let passwordsMatch = false; // 비밀번호 일치 여부를 추적하는 변수
     let termsAgreed = false; // 약관 동의 여부를 추적하는 변수
-    let userIdPrevious = ''; // 이전에 입력된 아이디를 저장하는 변수
 
-    // 아이디 중복 확인 함수
+ // 아이디 중복 확인 함수
     $(".idcheck").on("click", function(event) {
         const userId = $("#id").val(); // 입력된 아이디 가져오기
 
+        // 아이디가 4자 미만인 경우 오류 메시지 처리
         if (userId.trim() === "") {
             alert("아이디를 입력해주세요.");
             return;
+        } else if (userId.length < 4) {
+            $("#idError").text("아이디는 4자 이상이어야 합니다.").css("color", "red").show();
+            $("#idCheckResult").hide(); // 4자 미만일 때는 v 표시 숨기기
+            $("#submitBtn").prop("disabled", true); // 4자 미만일 때는 회원가입 버튼 비활성화
+            isIdAvailable = false; // 아이디 사용 불가 상태로 설정
+            return;
         } else {
+            // 아이디가 4자 이상일 때 중복 체크
             $.ajax({
                 url: "/myapp/users/check-id",
                 data: { userId: userId },
                 type: "post",
                 success: function(response) {
                     if (response.exists) {
-                        alert("중복된 아이디입니다.");
+                        // 아이디가 중복되었을 때
+                        $("#idError").text("중복된 아이디입니다.").css("color", "red").show();
                         $("#idCheckResult").hide(); // 중복일 경우 v 표시 숨기기
                         $("#submitBtn").prop("disabled", true); // 중복되면 회원가입 버튼 비활성화
                         isIdAvailable = false; // 아이디 사용 불가 상태로 설정
                     } else {
-                        alert("사용 가능한 아이디입니다.");
+                        // 아이디가 사용 가능할 때
+                        $("#idError").text("사용 가능한 아이디입니다.").css("color", "green").show();
                         $("#idCheckResult").show(); // 사용 가능하면 v 표시 보이기
                         isIdAvailable = true; // 아이디 사용 가능 상태로 설정
                         checkFormCompletion(); // 폼이 모두 충족되었는지 체크
@@ -222,28 +240,32 @@
         }
     });
 
-    // 아이디 변경 시, 회원가입 버튼 비활성화 처리
+    // 아이디 입력 변경 시, 중복 체크 다시 진행
     $("#id").on("input", function() {
         const userId = $("#id").val(); // 현재 입력된 아이디를 가져옴
         if (userId !== userIdPrevious) {
             $("#submitBtn").prop("disabled", true); // 회원가입 버튼 비활성화
             isIdAvailable = false; // 아이디가 사용 가능한지 여부를 다시 false로 설정
             $("#idCheckResult").hide(); // v 표시 숨기기
+            $("#idError").text(""); // 아이디 오류 메시지 초기화
         }
     });
-
-    // 비밀번호 확인 필드와 비밀번호 필드가 일치하는지 체크
+    
     $("#pw, #pwcheck").on("input", function() {
         const password = $("#pw").val();
-        const confirmPassword = $("#pwcheck").val();
+        const passwordCheck = $("#pwcheck").val();
 
-        if (password !== confirmPassword) {
-            passwordsMatch = false; // 비밀번호가 일치하지 않으면 false
-            $("#submitBtn").prop("disabled", true); // 회원가입 버튼 비활성화
+        if (password !== passwordCheck) {
+            // 비밀번호가 불일치할 경우
+            $("#pwError").text("비밀번호가 일치하지 않습니다.").css("color", "red").show();
+            passwordsMatch = false;
         } else {
-            passwordsMatch = true; // 비밀번호가 일치하면 true
-            checkFormCompletion(); // 폼이 모두 충족되었는지 체크
+            // 비밀번호가 일치할 경우
+            $("#pwError").text("비밀번호가 일치합니다.").css("color", "green").show();
+            passwordsMatch = true;
         }
+
+        checkFormCompletion(); // 폼이 모두 충족되었는지 체크
     });
 
     // 약관 동의 여부 체크
@@ -261,7 +283,6 @@
 
     // 폼 상태를 점검하여 버튼 활성화 여부를 결정
     function checkFormCompletion() {
-        // 비밀번호 일치, 아이디 중복 확인, 약관 동의 상태를 모두 확인
         if (isIdAvailable && passwordsMatch && $(".chklist input:checked").length === 2) {
             $("#submitBtn").prop("disabled", false); // 모든 조건을 만족하면 버튼 활성화
         } else {
