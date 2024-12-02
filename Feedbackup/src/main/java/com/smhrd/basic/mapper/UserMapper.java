@@ -30,11 +30,12 @@ public interface UserMapper {
 	@Select("select * from mavenmember")
 	public List<MavenMember> getList();
 	
+	// 아이디 중복 체크
 	@Select("SELECT COUNT(*) FROM test WHERE id = #{userId}")
 	Integer countByUserId(@Param("userId") String userId);
 	
-	@Select("SELECT id FROM test WHERE name = #{name} AND email = #{email}")
-	String idfind(String name, String email);
-			
+	// 이메일과 휴대폰 번호로 아이디와 이름을 찾는 메소드
+    @Select("SELECT id, name FROM test WHERE email = #{email} AND phone = #{phone}")
+    MavenMember idandnamefind(@Param("email") String email, @Param("phone") String phone);
 }
 

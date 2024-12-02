@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.smhrd.basic.model.MavenMember;
 import com.smhrd.basic.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -84,6 +85,7 @@ public class UserController {
 		return "list";
 	}
 	
+	// 회원가입 아이디 확인
 	@RequestMapping(value = "/users/check-id", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> checkId(@RequestParam String userId) {
@@ -112,8 +114,28 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/idfind")
-    public String idfind(@RequestParam String name, @RequestParam String email) {
-        return service.idfind(name, email);
-    }
+	public String idfindForm() {
+	    return "idfind";  // idfind.jsp로 이동
+	}
 	
+	@PostMapping("/users/idfind")
+	public String findId(@RequestParam String email, @RequestParam String phone, Model model) {
+	    // 이메일과 휴대폰 번호로 아이디와 이름을 찾기
+	    MavenMember result = service.idandnamefind(email, phone);
+
+	    if (result != null) {
+	        // 아이디 앞 3글자만 보여주고 나머지는 '*' 처리
+	        String id = result.getId();
+	        String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
+
+	        model.addAttribute("id", maskedId);
+	        model.addAttribute("name", result.getName());
+	        model.addAttribute("success", true);
+	    } else {
+	        model.addAttribute("success", false);
+	        model.addAttribute("message", "일치하는 정보가 없습니다.");
+	    }
+
+	    return "idfind"; // 결과를 idfind.jsp로 전달하여 결과 표시
+	}
 }
