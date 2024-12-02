@@ -32,15 +32,20 @@ public class UserController {
 		return "signup";
 	}
 	
+	@GetMapping("/users/signup_success")
+	public String signupSuccess() {
+	    return "signup_success"; // signup_success.jsp를 반환
+	}
+	
 	@PostMapping("/users")
 	public String signup(@ModelAttribute MavenMember member) {
-		int res = service.signup(member);
-		
-		if(res==0) {
-			return "redirect:/users/signup";
-		}else {
-			return "redirect:/";
-		}
+	    int res = service.signup(member);
+	    
+	    if (res == 0) {
+	        return "redirect:/users/signup"; // 회원가입 실패 시, 다시 회원가입 페이지로 이동
+	    } else {
+	    	return "redirect:/users/signup_success"; // 회원가입 성공 시, signup_success.jsp로 포워딩
+	    }
 	}
 	
 	@GetMapping("/users/{id}/delete")
