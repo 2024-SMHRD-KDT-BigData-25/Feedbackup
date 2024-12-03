@@ -43,8 +43,8 @@ public class UserService {
         return count != null && count > 0;  // 중복이면 true, 아니면 false
     }
     
-    // 아이디와 이름 찾기
-    public MavenMember idandnamefind(String email, String phone) {
-        return mapper.idandnamefind(email, phone);
+    // 이름과 이메일로 찾기
+    public MavenMember idfind(String name, String email) {
+        return mapper.idfind(name, email);  // 매개변수를 name과 email로 수정
     }
 }

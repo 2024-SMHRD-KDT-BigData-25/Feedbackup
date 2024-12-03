@@ -34,8 +34,8 @@ public interface UserMapper {
 	@Select("SELECT COUNT(*) FROM test WHERE id = #{userId}")
 	Integer countByUserId(@Param("userId") String userId);
 	
-	// 이메일과 휴대폰 번호로 아이디와 이름을 찾는 메소드
-    @Select("SELECT id, name FROM test WHERE email = #{email} AND phone = #{phone}")
-    MavenMember idandnamefind(@Param("email") String email, @Param("phone") String phone);
+	// 이름과 이메일로 아이디를 찾는 메소드
+    @Select("SELECT id,name FROM test WHERE name = #{name} AND email = #{email}")
+    MavenMember idfind(@Param("name") String name, @Param("email") String email);
 }
 

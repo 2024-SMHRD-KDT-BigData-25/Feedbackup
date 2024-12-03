@@ -16,6 +16,5 @@ public class MavenMember {
 	private String pw;
 	private String nickname;
 	private String email;
-	private String phone;
 
 }

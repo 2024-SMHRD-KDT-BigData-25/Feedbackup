@@ -59,10 +59,10 @@
 </head>
 <body>
     <h2>아이디 찾기</h2>
-    <h3>가입 시 입력한 이름과 이메일주소로 인증하여 아이디를 확인하실 수 있습니다.</h3>
+    <h3>가입 시 입력한 이름과 이메일 주소를 통해 아이디를 확인하실 수 있습니다.</h3>
     <form action="/myapp/users/idfind" method="post">
+    	<input type="text" name="name" placeholder="이름" required><br>
         <input type="email" name="email" placeholder="이메일" required><br>
-        <input type="text" name="phone" placeholder="휴대폰 번호" required><br>
         <button type="submit">확인</button>
     </form>
 

@@ -162,7 +162,6 @@
         <div id="pwError" class="error" style="display: none;"></div> <!-- 비밀번호 오류 메시지 -->
         
         <input type="text" name="email" placeholder="이메일 주소" required style="width: 260px"><br>
-        <input type="text" name="phone" placeholder="휴대폰 번호" required style="width: 260px"><br>
         
         <div class="agree" style="padding: 20px; box-sizing: border-box">
             <p class="title">약관동의</p>
