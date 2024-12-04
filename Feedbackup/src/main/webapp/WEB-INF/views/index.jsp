@@ -36,7 +36,6 @@
 	}
 	%>
 
-	<!-- TTS 페이지로 이동하는 버튼 추가 -->
 	<button onclick="location.href='tts'">TTS 페이지</button>
 
 	<script>
