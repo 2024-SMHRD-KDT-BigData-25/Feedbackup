@@ -121,22 +121,26 @@ public class UserController {
 	@PostMapping("/users/idfind")
 	public String findId(@RequestParam String name, @RequestParam String email, Model model) {
 	    // 이름과 이메일로 아이디를 찾기
-	    MavenMember result = service.idfind(name, email);
+	    String result = service.idfind(name, email);
 
-	    if (result != null) {
+	    if (result.equals("이름이 존재하지 않습니다.")) {
+	        model.addAttribute("success", false);
+	        model.addAttribute("error", true);
+	        model.addAttribute("message", "이름이 존재하지 않습니다.");
+	    } else if (result.equals("이메일이 틀렸습니다.")) {
+	        model.addAttribute("success", false);
+	        model.addAttribute("error", true);
+	        model.addAttribute("message", "이메일이 틀렸습니다.");
+	    } else {
 	        // 아이디 앞 3글자만 보여주고 나머지는 '*' 처리
-	        String id = result.getId();
-	        String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
+	        String maskedId = result.substring(0, 3) + "*".repeat(result.length() - 3);
 
-	        // 아이디와 이름을 Model에 추가
 	        model.addAttribute("success", true);
 	        model.addAttribute("id", maskedId);
-	        model.addAttribute("name", result.getName());  // 이름도 전달
-	    } else {
-	        model.addAttribute("success", false);
-	        model.addAttribute("message", "일치하는 정보가 없습니다.");
+	        model.addAttribute("name", name);  // 이름도 전달
 	    }
 
 	    return "idfind"; // 결과를 idfind.jsp로 전달하여 결과 표시
 	}
+
 }

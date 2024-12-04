@@ -7,7 +7,7 @@
     <style>
         /* 모달 배경 */
         .modal {
-            display: none;
+            display: none;  /* 기본적으로 모달을 숨김 */
             position: fixed;
             z-index: 1;
             left: 0;
@@ -15,8 +15,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.4); /* 배경 색상 */
         }
         /* 모달 콘텐츠 */
         .modal-content {
@@ -61,56 +60,63 @@
     <h2>아이디 찾기</h2>
     <h3>가입 시 입력한 이름과 이메일 주소를 통해 아이디를 확인하실 수 있습니다.</h3>
     <form action="/myapp/users/idfind" method="post">
-    	<input type="text" name="name" placeholder="이름" required><br>
+        <input type="text" name="name" placeholder="이름" required><br>
         <input type="email" name="email" placeholder="이메일" required><br>
+        <button><a href="/myapp/login">취소</a></button>
         <button type="submit">확인</button>
     </form>
 
-    <!-- 모달 -->
-    <div id="idModal" class="modal">
+    <!-- 성공 모달 -->
+    <div id="successModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h3>아이디 찾기 완료</h3>
-
-            <!-- 아이디와 이름을 한 문장으로 출력 -->
             <p id="idNameResult">
-                <c:if test="${success}">
-                    ${name}님의 아이디는 ${id}입니다.
-                </c:if>
+                ${name}님의 아이디는 ${id}입니다.
             </p>
-
-            <!-- 실패 메시지 출력 -->
-            <p id="errorMessage">
-                <c:if test="${not success}">
-                    ${message}
-                </c:if>
-            </p>
-            
             <h3>*회원정보 보호를 위해 아이디의 일부만 보여지며 전체 아이디는 고객센터를 통해서 확인 부탁드립니다.</h3>
-
-            <!-- 비밀번호 찾기 및 로그인 버튼 -->
             <a href="/myapp/users/pwfind" class="btn">비밀번호 찾기</a>
             <a href="/myapp/login" class="btn">로그인</a>
         </div>
     </div>
 
+    <!-- 실패 모달 -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>아이디 찾기 실패</h3>
+            <p id="errorMessage">${message}</p>
+            <h3>*입력하신 정보를 다시 확인 부탁드립니다.</h3>
+        </div>
+    </div>
+
     <script>
         window.onload = function() {
-            // success가 true이면 모달을 띄운다
+            // success가 true이면 성공 모달을 띄운다
             var success = ${success != null ? success : 'false'};
+            var error = ${error != null ? error : 'false'};
+
+            // 성공 시 모달을 띄운다
             if (success) {
-                document.getElementById('idModal').style.display = "block";
+                document.getElementById('successModal').style.display = "block";
+            }
+            
+            // 실패 시 모달을 띄운다
+            if (error) {
+                document.getElementById('errorModal').style.display = "block";
             }
 
             // 모달 닫기
-            document.querySelector('.close').onclick = function() {
-                document.getElementById('idModal').style.display = "none";
-            }
+            document.querySelectorAll('.close').forEach(function(closeButton) {
+                closeButton.onclick = function() {
+                    closeButton.closest('.modal').style.display = "none";
+                }
+            });
 
             // 페이지 외부를 클릭하면 모달 닫기
             window.onclick = function(event) {
-                if (event.target == document.getElementById('idModal')) {
-                    document.getElementById('idModal').style.display = "none";
+                if (event.target == document.getElementById('successModal') || event.target == document.getElementById('errorModal')) {
+                    event.target.style.display = "none";
                 }
             }
         };
