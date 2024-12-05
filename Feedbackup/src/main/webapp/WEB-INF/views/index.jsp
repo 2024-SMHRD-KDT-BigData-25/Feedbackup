@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"charset="utf-8"></script>
 </head>
 <body>
 	<%
@@ -21,7 +22,7 @@
 	<%
 	} else {
 	%>
-	<%=member.getNickname()%>
+	<%=member.getName()%>님 안녕하세요!
 	<br>
 
 	<button onclick="location.href='users'">전체회원정보</button>

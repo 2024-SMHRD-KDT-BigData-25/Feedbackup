@@ -37,5 +37,9 @@ public interface UserMapper {
 	// 이름과 이메일로 아이디를 찾는 메소드
     @Select("SELECT id,name FROM test WHERE name = #{name} AND email = #{email}")
     MavenMember idfind(@Param("name") String name, @Param("email") String email);
+	
+    // 이름과 이메일과 아이디로 패스워드를 찾는 메소드
+    @Select("SELECT pw,name,id FROM test WHERE name = #{name} AND email = #{email} AND id = #{id}")
+    MavenMember pwfind(@Param("name") String name, @Param("email") String email, @Param("id") String id);
 }
 

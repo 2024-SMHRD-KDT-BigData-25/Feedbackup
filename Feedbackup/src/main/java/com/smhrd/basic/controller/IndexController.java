@@ -20,5 +20,5 @@ public class IndexController {
 	@RequestMapping(value = "/tts", method = RequestMethod.GET)
 	public String ttsPage() {
 		return "tts"; // ttsPage.jsp를 반환
-	}
+	}	
 }

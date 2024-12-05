@@ -25,118 +25,146 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Controller
 public class UserController {
-	
+
 	private final UserService service;
-	
+
 	@GetMapping("/users/signup")
 	public String signupForm() {
 		return "signup";
 	}
-	
+
 	@GetMapping("/users/signup_success")
 	public String signupSuccess() {
-	    return "signup_success"; // signup_success.jsp를 반환
+		return "signup_success"; // signup_success.jsp를 반환
 	}
-	
+
 	@PostMapping("/users")
 	public String signup(@ModelAttribute MavenMember member) {
-	    int res = service.signup(member);
-	    
-	    if (res == 0) {
-	        return "redirect:/users/signup"; // 회원가입 실패 시, 다시 회원가입 페이지로 이동
-	    } else {
-	    	return "redirect:/users/signup_success"; // 회원가입 성공 시, signup_success.jsp로 포워딩
-	    }
+		int res = service.signup(member);
+
+		if (res == 0) {
+			return "redirect:/users/signup"; // 회원가입 실패 시, 다시 회원가입 페이지로 이동
+		} else {
+			return "redirect:/users/signup_success"; // 회원가입 성공 시, signup_success.jsp로 포워딩
+		}
 	}
-	
+
 	@GetMapping("/users/{id}/delete")
-	public String delete(@PathVariable String id,HttpSession session) {
-		
+	public String delete(@PathVariable String id, HttpSession session) {
+
 		int res = service.delete(id);
-		
-		if (res>0) {
+
+		if (res > 0) {
 			session.removeAttribute("member");
 		}
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/users/{id}/edit")
 	public String updateForm() {
 		return "update";
 	}
-	
+
 	@PostMapping("/users/{id}/edit")
 	public String update(MavenMember member, HttpSession session) {
 		int res = service.update(member);
-		
-		if(res==0) {
-			return "redirect:/users/"+member.getId()+"/edit";
-		}else {
+
+		if (res == 0) {
+			return "redirect:/users/" + member.getId() + "/edit";
+		} else {
 			session.setAttribute("member", member);
 			return "redirect:/";
 		}
 	}
-	
+
 	@GetMapping("/users")
 	public String listPage(Model model) { // + forwarding
 		List<MavenMember> list = service.getList();
-		model.addAttribute("list",list);
-		
+		model.addAttribute("list", list);
+
 		return "list";
 	}
-	
+
 	// 회원가입 아이디 확인
 	@RequestMapping(value = "/users/check-id", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> checkId(@RequestParam String userId) {
-	    Map<String, Object> response = new HashMap<>();
-	    
-	    // 1. 아이디 길이가 4자리 이상인지 체크
-	    if (userId.length() < 4) {
-	        response.put("valid", false);
-	        response.put("message", "아이디는 4자리 이상이어야 합니다.");
-	        response.put("exists", false);  // 중복 여부는 중요하지 않음
-	    } else {
-	        // 2. 아이디 중복 여부 체크
-	        boolean exists = service.checkIdExist(userId);
-	        
-	        if (exists) {
-	            response.put("valid", true);  // 중복된 아이디일 경우
-	            response.put("message", "이미 존재하는 아이디입니다.");
-	        } else {
-	            response.put("valid", true);  // 중복되지 않는 아이디일 경우
-	            response.put("message", "✔ 아이디 사용 가능");
-	        }
-	        response.put("exists", exists);
-	    }
+		Map<String, Object> response = new HashMap<>();
 
-	    return response;
+		// 1. 아이디 길이가 4자리 이상인지 체크
+		if (userId.length() < 4) {
+			response.put("valid", false);
+			response.put("message", "아이디는 4자리 이상이어야 합니다.");
+			response.put("exists", false); // 중복 여부는 중요하지 않음
+		} else {
+			// 2. 아이디 중복 여부 체크
+			boolean exists = service.checkIdExist(userId);
+
+			if (exists) {
+				response.put("valid", true); // 중복된 아이디일 경우
+				response.put("message", "이미 존재하는 아이디입니다.");
+			} else {
+				response.put("valid", true); // 중복되지 않는 아이디일 경우
+				response.put("message", "✔ 아이디 사용 가능");
+			}
+			response.put("exists", exists);
+		}
+
+		return response;
 	}
-	
+
 	@GetMapping("/users/idfind")
-    public String idfindForm() {
-        return "idfind";  // idfind.jsp로 이동
-    }
-    
+	public String idfindForm() {
+		return "idfind"; // idfind.jsp로 이동
+	}
+
 	@PostMapping("/users/idfind")
 	public String findId(@RequestParam String name, @RequestParam String email, Model model) {
-	    // 이름과 이메일로 아이디를 찾기
-	    MavenMember result = service.idfind(name, email);
+		// 이름과 이메일로 아이디를 찾기
+		MavenMember result = service.idfind(name, email);
 
-	    if (result != null) {
-	        // 아이디 앞 3글자만 보여주고 나머지는 '*' 처리
-	        String id = result.getId();
-	        String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
+		if (result != null) {
+			// 아이디 앞 3글자만 보여주고 나머지는 '*' 처리
+			String id = result.getId();
+			String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
 
-	        // 아이디와 이름을 Model에 추가
-	        model.addAttribute("success", true);
-	        model.addAttribute("id", maskedId);
-	        model.addAttribute("name", result.getName());  // 이름도 전달
-	    } else {
-	        model.addAttribute("success", false);
-	        model.addAttribute("message", "일치하는 정보가 없습니다.");
-	    }
+			// 아이디와 이름을 Model에 추가
+			model.addAttribute("success", true);
+			model.addAttribute("id", maskedId);
+			model.addAttribute("name", result.getName()); // 이름도 전달
+		} else {
+			model.addAttribute("success", false);
+			model.addAttribute("message", "일치하는 정보가 없습니다.");
+		}
 
-	    return "idfind"; // 결과를 idfind.jsp로 전달하여 결과 표시
+		return "idfind"; // 결과를 idfind.jsp로 전달하여 결과 표시
+
+	}
+
+	@GetMapping("/users/pwfind")
+	public String pwfindForm() {
+		return "pwfind"; // pwfind.jsp로 이동
+	}
+
+	@PostMapping("/users/pwfind")
+	public String findPw(@RequestParam String name, @RequestParam String email, @RequestParam String id, Model model) {
+		// 이름과 이메일과 아이디로 패스워드를 찾기
+		MavenMember result = service.pwfind(name, email, id);
+
+		if (result != null) {
+			// 패스워드 뒤 3글자를 제외해서 보여주고 나머지는 '*' 처리
+			String pw = result.getPw();
+			String maskedpw = pw.substring(0, pw.length() - 3) + "*".repeat(3);
+
+			// 패스워드와 이름을 Model에 추가
+			model.addAttribute("success", true);
+			model.addAttribute("pw", maskedpw);
+			model.addAttribute("name", result.getName()); // 이름도 전달
+		} else {
+			model.addAttribute("success", false);
+			model.addAttribute("message", "일치하는 정보가 없습니다.");
+		}
+
+		return "pwfind"; // 결과를 pwfind.jsp로 전달하여 결과 표시
 	}
 }

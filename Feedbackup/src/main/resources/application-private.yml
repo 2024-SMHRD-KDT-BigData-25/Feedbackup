@@ -1,0 +1,4 @@
+naver:
+  client_id: L4QKlkm7pZNwMZop7UGB
+  redirect_uri: http://localhost:9999/myapp/users/naverlogin/callback
+  client_secret: DKTSnSTTQi

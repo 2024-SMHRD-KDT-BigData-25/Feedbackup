@@ -47,4 +47,8 @@ public class UserService {
     public MavenMember idfind(String name, String email) {
         return mapper.idfind(name, email);  // 매개변수를 name과 email로 수정
     }
+    // 이름과 이메일과 아이디로 패스워드찾기
+    public MavenMember pwfind(String name, String email, String id) {
+        return mapper.pwfind(name, email, id);  // 매개변수를 name과 email로 수정
+    }
 }
