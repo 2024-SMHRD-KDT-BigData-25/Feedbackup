@@ -111,7 +111,7 @@
         
         #auto_login {
            	accent-color: #8071FC; 
-            border: 0.5px #CBD5E1 solid; 
+            border: 0.5px #CBD5E1 solid; /* 색상 변화 안됨, 색상 변화시키면 기능이 사라짐 */
             margin-bottom: 0px; 
             vertical-align: -3px; 
         }
