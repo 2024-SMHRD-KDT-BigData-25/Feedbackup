@@ -39,9 +39,8 @@
         
         .login_wrapper{
         	width: 330px;
-            height: 450px;
+            height: 430px;
         	background-color: white;
-        	margin-left: 1px;
             padding: 30px;
             border-radius: 5px;
             margin-left: auto;
@@ -77,7 +76,7 @@
             justify-content: space-between; /* 요소 간 공간을 최대한 띄움 */
             align-items: center; /* 수직 가운데 정렬 */
             margin-top: -5px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             gap: 5px;
         }
 
@@ -123,6 +122,7 @@
         width: 287.6px;
         height: 43.6px;
         margin-left: 15px;
+        margin-bottom: 10px;
        }
 
        #loginBtn:hover {
@@ -148,6 +148,7 @@
         .link-container {
             text-align: center; 
             font-size: 14px; /* 텍스트 크기 */
+            margin-bottom: 20px;
         }
 
         .link-container a {
