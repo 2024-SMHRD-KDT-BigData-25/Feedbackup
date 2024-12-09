@@ -144,9 +144,9 @@
        }
 
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <img src="../assets/img/logo2.png" alt="logo" class="logo"><br><br><br><br>
 	<div class="signin-box">
     <h1>회원가입</h1><br>

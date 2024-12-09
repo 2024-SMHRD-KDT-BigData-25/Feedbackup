@@ -1,7 +1,6 @@
 package com.smhrd.basic.mapper;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -35,13 +34,12 @@ public interface UserMapper {
 	@Select("SELECT COUNT(*) FROM test WHERE id = #{userId}")
 	Integer countByUserId(@Param("userId") String userId);
 	
-	// 이름과 이메일로 찾기
-    @Select("SELECT * FROM test WHERE name = #{name} AND email = #{email}")
+	// 이름과 이메일로 아이디를 찾는 메소드
+    @Select("SELECT id,name FROM test WHERE name = #{name} AND email = #{email}")
     MavenMember idfind(@Param("name") String name, @Param("email") String email);
-    
-    // 이름으로 찾기
-    @Select("SELECT * FROM test WHERE name = #{name}")
-    MavenMember namefind(@Param("name") String name);
-
+	
+    // 이름과 이메일과 아이디로 패스워드를 찾는 메소드
+    @Select("SELECT pw,name,id FROM test WHERE name = #{name} AND email = #{email} AND id = #{id}")
+    MavenMember pwfind(@Param("name") String name, @Param("email") String email, @Param("id") String id);
 }
 

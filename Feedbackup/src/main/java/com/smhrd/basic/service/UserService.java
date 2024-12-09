@@ -1,7 +1,6 @@
 package com.smhrd.basic.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,19 +44,11 @@ public class UserService {
     }
     
     // 이름과 이메일로 찾기
-    public String idfind(String name, String email) {
-        // 이름이 존재하는지 확인
-        MavenMember member = mapper.namefind(name);  // Optional 제거, null 체크로 변경
-        
-        if (member == null) {
-            return "이름이 존재하지 않습니다.";  // 이름이 데이터베이스에 없음
-        }
-        
-        // 이름은 존재하고 이메일도 확인
-        if (!member.getEmail().equals(email)) {
-            return "이메일이 틀렸습니다.";  // 이메일이 맞지 않음
-        }
-        
-        return member.getId();  // 이메일이 일치하면 아이디 반환
+    public MavenMember idfind(String name, String email) {
+        return mapper.idfind(name, email);  // 매개변수를 name과 email로 수정
+    }
+    // 이름과 이메일과 아이디로 패스워드찾기
+    public MavenMember pwfind(String name, String email, String id) {
+        return mapper.pwfind(name, email, id);  // 매개변수를 name과 email로 수정
     }
 }
