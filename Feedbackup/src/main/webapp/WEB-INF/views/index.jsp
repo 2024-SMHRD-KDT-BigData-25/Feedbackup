@@ -32,7 +32,7 @@
 	<%
 	} else {
 	%>
-	<%=member.getName()%>님 안녕하세요!
+	<a href="/myapp/users/mypage"><%=member.getName()%></a>님 안녕하세요!
 	<br>
 
 	<button onclick="location.href='users'">전체회원정보</button>

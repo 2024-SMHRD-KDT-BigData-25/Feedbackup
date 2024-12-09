@@ -185,6 +185,18 @@ public class UserController {
 	public String testForm() {
 		return "test";
 	}
+	
+	@GetMapping("/users/mypage")
+	public String mypageForm() {
+		return "mypage"; // pwfind.jsp로 이동
+	}
+	
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("member");
+		return "redirect:/";
+	}
 }
 
 
