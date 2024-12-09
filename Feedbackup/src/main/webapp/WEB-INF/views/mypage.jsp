@@ -11,7 +11,7 @@
 	<%
 	MavenMember member = (MavenMember) session.getAttribute("member");
 	%>
-	<h1>My Page</h1> <br>
+	<h1>My Page</h1><br>
 	<%=member.getName()%>님
 	<button onclick="location.href='/myapp/logout'">로그아웃</button>
 	
