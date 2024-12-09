@@ -3,9 +3,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>패스워드 찾기</title>
-    <style>
-        @font-face {
+    <title>비밀번호 찾기</title>
+     <style>
+    	        @font-face {
             font-family: 'SUIT-Regular';
             src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
             font-weight: normal;
@@ -29,7 +29,7 @@
             display: block;
             margin: 0 auto;
             margin-top: 36px;
-            margin-bottom: -70px;
+            margin-bottom: -50px;
             max-width: 160px;
             max-height: 100px;
         }
@@ -39,7 +39,7 @@
             font-family: 'SUIT-Regular';
             align-content: center;
         }
-
+        
         /* 페이지 */
         .find_wrapper{
             width: 430px;
@@ -76,7 +76,7 @@
 			font-size: 20px;
 		}
 		
-		.find_text{
+		.find_text {
 			font-size: 10px;
 			margin-bottom: 25px;
 		}
@@ -91,15 +91,15 @@
 		  	color: black; /* 비활성화된 항목 텍스트 색상 */
 		}
 		
-		#find_pw {
+		#find_id {
 			border-top-left-radius: 30px;
 			border-top-right-radius: 30px;
 			font-weight:bold;
 		}
 		
-		#find_id{
+		#find_pw{
 			color : #94A3B8;
-			border-top-left-radius: 30px;
+			border-top-right-radius: 30px;
 			font-weight:bold;
 		}
 		
@@ -146,7 +146,7 @@
 	        border-color: #8071FC;
        }
        
-        /* 모달 배경 */
+       /* 모달 배경 */
         .modal {
             display: none;
             position: fixed;
@@ -183,7 +183,7 @@
             cursor: pointer;
         }
         
-        /* 모달 메시지 */       
+ 		/* 모달 메시지 */       
         .modal_text{
         	font-size: 10px;
         	color : #94A3B8;
@@ -196,7 +196,7 @@
         .highlight {
 		    color: #8071FC;
 		}
-
+		
         /* 버튼 스타일 */
         .btn {
 		    display: inline-block;
@@ -217,7 +217,18 @@
 	        background-color: white;
 	        border-color: #8071FC;
         }
-          
+        
+        #btn_pw{
+        	color: #64748B;
+	        background-color: #E2E8F0;
+        }
+        
+        #btn_pw:hover{
+        	color: #64748B;
+	        background-color: white;
+	        border-color: #64748B;
+        }
+		     
     </style>
 </head>
 <body>
@@ -227,9 +238,11 @@
             <div id="find_id"><a href="/myapp/users/idfind" style="display: block; width: 100%; height: 100%;">아이디 찾기</a></div>
             <div id="find_pw" class="active">비밀번호 찾기</div>
         </div>
-        <div class="find_bottom" id="pw_section">
-            <h2>비밀번호 찾기</h2>
-            <p class="find_text">가입 시 입력한 이름, 이메일 주소와 아이디를 통해 비밀번호를 확인하실 수 있습니다.</p>
+        <div class="find_bottom">
+            <div>
+                <h2>비밀번호 찾기</h2>
+            </div>
+            <p class="find_text">가입 시 입력한 이름과 이메일 주소와 아이디를 통해 비밀번호를 확인하실 수 있습니다.</p>
             <form action="/myapp/users/pwfind" method="post">
                 <input type="text" name="name" placeholder="이름" required><br>
                 <input type="email" name="email" placeholder="이메일 주소" required><br>
@@ -239,54 +252,65 @@
         </div>
     </div>
 
-    <!-- 모달 -->
-    <div id="pwModal" class="modal">
+    <!-- 이름과 이메일과 아이디가 일치하는 경우 이름과 비밀번호를 출력하는 모달 -->
+    <div id="successModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <img src="../assets/img/check.png" alt="check" class="check"><br><br><br><br>
+            <img src="../assets/img/check.png" alt="check" class="check"><br><br><br>
             <h3>비밀번호 찾기 완료</h3>
-
-            <!-- 아이디와 이름을 한 문장으로 출력 -->
             <p id="pwNameResult">
                 <c:if test="${success}">
                     ${name}님의 비밀번호는 <span class="highlight">${pw}</span>입니다.
                 </c:if>
             </p>
-
-            <!-- 실패 메시지 출력 -->
-            <p id="errorMessage">
-                <c:if test="${not success}">
-                    ${message}
-                </c:if>
-            </p>
-            
-            <p class="modal_text">※회원정보 보호를 위해 비밀번호의 일부만 보여지며<br> 전체 비밀번호는 고객센터를 통해서 확인 부탁드립니다.</p>
-
-            <!-- 로그인 버튼 -->
             <a href="/myapp/login" class="btn">로그인</a>
+        </div>
+    </div>
+
+    <!-- 이름이나 이메일이나 아이디가 일치하지 않는 경우 모달 -->
+    <div id="errorModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="../assets/img/check.png" alt="check" class="check"><br><br><br>
+            <p id="errorMessage"></p>
+            <a href="javascript:void(0);" class="btn" onclick="closeModal()">확인</a> <!-- 확인 버튼 클릭 시 closeModal() 호출 -->
         </div>
     </div>
 
     <script>
         window.onload = function() {
-            // success가 true이면 모달을 띄운다
-            var success = ${success != null ? success : 'false'};
+            var success = '${success != null ? success : 'false'}' === 'true'; // 성공 여부 확인
+            var message = '${message}'; // 전달된 메시지
+
+            // 페이지 로드 시 모달을 자동으로 표시하지 않음
             if (success) {
-                document.getElementById('pwModal').style.display = "block";
+                // 이름과 이메일이 일치하는 경우 성공 모달 표시
+                document.getElementById('successModal').style.display = "block";
+            } else if (message) {
+                // 실패 시, 실패 메시지가 있을 때만 실패 모달 표시
+                document.getElementById('errorModal').style.display = "block";
+                document.getElementById('errorMessage').textContent = message;  // 통합된 message 사용
             }
 
-            // 모달 닫기
-            document.querySelector('.close').onclick = function() {
-                document.getElementById('pwModal').style.display = "none";
-            }
+            // 모달 닫기 이벤트
+            document.querySelectorAll('.close').forEach(function(element) {
+                element.onclick = function() {
+                    element.closest('.modal').style.display = "none";
+                }
+            });
 
-            // 페이지 외부를 클릭하면 모달 닫기
+            // 모달 외부 클릭 시 닫기
             window.onclick = function(event) {
-                if (event.target == document.getElementById('pwModal')) {
-                    document.getElementById('pwModal').style.display = "none";
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = "none";
                 }
             }
         };
+
+        // 확인 버튼 클릭 시 모달 닫기
+        function closeModal() {
+            document.getElementById('errorModal').style.display = "none";
+        }
     </script>
 </body>
 </html>

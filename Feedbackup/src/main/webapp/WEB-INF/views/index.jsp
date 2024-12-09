@@ -1,14 +1,24 @@
 <%@page import="com.smhrd.basic.model.MavenMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"charset="utf-8"></script>
+<title>FeedbackUp</title>
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
+	charset="utf-8"></script>
+
+
+<link rel="stylesheet" as="style" crossorigin
+	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+
 </head>
+
 <body>
+	
 	<%
 	MavenMember member = (MavenMember) session.getAttribute("member");
 	%>
@@ -38,6 +48,7 @@
 	%>
 
 	<button onclick="location.href='tts'">TTS 페이지</button>
+
 
 	<script>
 		function deleteMember(id) {
