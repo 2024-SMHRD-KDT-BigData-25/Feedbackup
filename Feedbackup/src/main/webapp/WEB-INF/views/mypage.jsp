@@ -13,7 +13,7 @@
 	%>
 	<h1>My Page</h1> <br>
 	<%=member.getName()%>님
-	<button onclick="location.href='logout'">로그아웃</button>
+	<button onclick="location.href='/myapp/logout'">로그아웃</button>
 	
 </body>
 </html>

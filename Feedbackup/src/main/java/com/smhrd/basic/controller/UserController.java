@@ -191,12 +191,7 @@ public class UserController {
 		return "mypage"; // pwfind.jsp로 이동
 	}
 	
-	// 로그아웃
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("member");
-		return "redirect:/";
-	}
+
 }
 
 
