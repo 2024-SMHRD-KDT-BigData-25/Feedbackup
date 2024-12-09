@@ -72,14 +72,12 @@
 		}
 		
 		/* 클릭 상태 스타일 */
-		.box.active {
+		.box:hover {
 		    border: 6px solid #8071FC; /* 보라색 태두리 */
-		}
-		  
-		.box.active .text2,
-		.box.active .text3 {
 		    color: #8071FC; /* 보라색 글자 */
 		}
+		  
+
 	</style>
 </head>
 <body>
@@ -99,22 +97,5 @@
 		</div>
 	</div>
 
-<script>
-	document.getElementById("box1").addEventListener("click", function() {
-	  // 다른 박스 스타일 초기화
-	  document.querySelectorAll(".box").forEach(box => box.classList.remove("active"));
-	  
-	  // 현재 클릭된 박스에만 스타일 추가
-	  this.classList.add("active");
-	});
-
-	document.getElementById("box2").addEventListener("click", function() {
-	  // 다른 박스 스타일 초기화
-	  document.querySelectorAll(".box").forEach(box => box.classList.remove("active"));
-	  
-	  // 현재 클릭된 박스에만 스타일 추가
-	  this.classList.add("active");
-	});
-</script>
 </body>
 </html>

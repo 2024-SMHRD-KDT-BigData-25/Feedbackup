@@ -273,84 +273,116 @@
     
 <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function () {
-    let isRecording = false; // 녹음 상태를 추적
-    let timeoutId = null; // 텍스트 강조 애니메이션 중단용 타이머 ID
-    let currentIndex = 0; // 텍스트 강조 중인 인덱스
+    let isRecording = false; // 녹음 상태 플래그
+    let timeoutId = null; // 텍스트 강조 애니메이션 타이머
+    let currentIndex = 0; // 텍스트 강조 인덱스
 
     const personContainer = document.querySelector(".person_container");
-
-    // 녹음 상태와 초기 상태의 HTML 템플릿
-    const recordingHTML = `
-    <div class="recording_container">
-      <img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
-      <div class="recording_status">
-        <span class="recording_icon"></span>
-        <span class="recording_text">녹음중 00:03</span>
-        <div class="waveform">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </div>
-    `;
+    const mikeTextContainer = document.querySelector(".mike_text");
 
     const initialHTML = `
-      <img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
-      <div class="person_text" onclick="startVoiceTest()"> 음성테스트 시작 </div>
+    	<img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
+        <div class="person_text" onclick="startVoiceTest()"> 음성테스트 시작 </div>
     `;
 
-    const karaokeTextHTML = `
-      <div id="karaoke_text">
-        <span>경</span><span>험</span><span>은</span><span> </span><span>만</span><span>들</span><span>어</span><span> </span>
-        <span>낼</span><span> </span><span>수</span><span> </span><span>없</span><span>다</span>.<br>
-        <span>그</span><span>것</span><span>은</span><span> </span><span>시</span><span>도</span><span>해</span><span>야</span><span>만</span>
-        <span> </span><span>한</span><span>다</span>.
-      </div>
+    const recordingHTML = `
+        <div class="recording_container">
+    	<img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
+            <div class="recording_status">
+                <span class="recording_icon"></span>
+                <span class="recording_text">녹음중 00:03</span>
+                <div class="waveform">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
     `;
 
     const mikeTextDefaultHTML = `
-      <span>음성 테스트 시작 후에 아래 문구를 따라 읽어주세요</span>
+        <span>음성 테스트 시작 후에 아래 문구를 따라 읽어주세요</span>
     `;
 
-    const mikeTextContainer = document.querySelector(".mike_text");
+    const karaokeTextHTML = `
+        <div id="karaoke_text">
+            <span>경</span><span>험</span><span>은</span><span> </span><span>만</span><span>들</span><span>어</span><span> </span>
+            <span>낼</span><span> </span><span>수</span><span> </span><span>없</span><span>다</span>.<br>
+            <span>그</span><span>것</span><span>은</span><span> </span><span>시</span><span>도</span><span>해</span><span>야</span><span>만</span>
+            <span> </span><span>한</span><span>다</span>.
+        </div>
+    `;
 
-    // 녹음 상태 전환 함수
-    function startVoiceTest() {
-        if (!isRecording) {
-            // 녹음 시작
-            personContainer.innerHTML = recordingHTML; // 녹음 상태로 변경
-            if (mikeTextContainer) {
-                mikeTextContainer.innerHTML = karaokeTextHTML; // #karaoke_text 복원
-            }
-            isRecording = true;
-            currentIndex = 0; // 텍스트 강조 인덱스 초기화
-            startWaveAnimation(); // 파형 애니메이션 시작
-            highlightNext(); // 텍스트 강조 애니메이션 시작
-        } else {
-            // 초기 상태로 복원
-            personContainer.innerHTML = initialHTML; // 초기 HTML 복원
-            if (mikeTextContainer) {
-                mikeTextContainer.innerHTML = mikeTextDefaultHTML; // 초기 안내 문구 복원
-            }
-            isRecording = false;
-            stopWaveAnimation(); // 파형 애니메이션 중단
-            clearTimeout(timeoutId); // 텍스트 강조 애니메이션 중단
-            currentIndex = 0; // 텍스트 강조 인덱스 초기화
+    // 초기화 함수
+    function resetToInitialState() {
+        console.log("resetToInitialState 호출됨");
+
+        // 초기 상태 복원
+        personContainer.innerHTML = initialHTML;
+
+        if (mikeTextContainer) {
+            mikeTextContainer.innerHTML = karaokeTextHTML; // #karaoke_text 복원
+        }
+
+        // 녹음 상태 초기화
+        isRecording = false;
+        clearTimeout(timeoutId); // 텍스트 강조 중단
+        resetHighlight(); // 텍스트 강조 초기화
+        stopWaveAnimation(); // 파형 초기화
+
+        // 클릭 이벤트 재설정
+        rebindClickEvent();
+    }
+
+    // 녹음 상태로 전환
+    window.startVoiceTest = function startVoiceTest() {
+	    if (!isRecording) {
+	        personContainer.innerHTML = recordingHTML;
+	
+	        // 녹음 컨테이너 클릭 이벤트 추가
+	        const recordingContainer = document.querySelector(".recording_container");
+	        if (recordingContainer) {
+	            recordingContainer.addEventListener("click", resetToInitialState);
+	        }
+	
+	        if (mikeTextContainer) {
+	            mikeTextContainer.innerHTML = karaokeTextHTML;
+	        }
+	
+	        isRecording = true;
+	        currentIndex = 0;
+	        startWaveAnimation();
+	        highlightNext();
+	    }
+	};
+
+    // 클릭 이벤트 재설정 함수
+    function rebindClickEvent() {
+        const newPersonText = document.querySelector(".person_text");
+        if (newPersonText) {
+            newPersonText.addEventListener("click", startVoiceTest);
         }
     }
 
     // 텍스트 강조 애니메이션
     function highlightNext() {
-        if (!isRecording) return; // 녹음 중이 아니면 중단
+        if (!isRecording) return;
+
         const spans = document.querySelectorAll("#karaoke_text span");
         if (spans.length > 0 && currentIndex < spans.length) {
-            spans[currentIndex].classList.add("highlighted"); // 강조
+            spans[currentIndex].classList.add("highlighted");
             currentIndex++;
-            timeoutId = setTimeout(highlightNext, 150); // 다음 글자 강조
+            timeoutId = setTimeout(highlightNext, 150);
         }
+    }
+
+    // 텍스트 강조 초기화
+    function resetHighlight() {
+        const spans = document.querySelectorAll("#karaoke_text span.highlighted");
+        spans.forEach((span) => span.classList.remove("highlighted"));
+        currentIndex = 0;
     }
 
     // 파형 애니메이션 시작
@@ -368,26 +400,15 @@ document.addEventListener("DOMContentLoaded", function () {
     function stopWaveAnimation() {
         const waveformContainer = document.querySelector(".waveform");
         if (waveformContainer) {
-            waveformContainer.innerHTML = ""; // 파형 초기화
+            waveformContainer.innerHTML = "";
         }
     }
 
-    // 이벤트 다시 연결 (HTML 변경 후 이벤트 복원)
-    function rebindClickEvent() {
-        const newPersonText = document.querySelector(".person_text");
-        if (newPersonText) {
-            newPersonText.addEventListener("click", startVoiceTest);
-        }
-
-        // #karaoke_text span에 텍스트 강조 애니메이션을 적용
-        if (isRecording) {
-            highlightNext(); // 강조 애니메이션 재시작
-        }
-    }
-
-    // 초기화: 이벤트 연결
+    // DOMContentLoaded 이후 초기 이벤트 설정
     rebindClickEvent();
 });
+
+
 </script>
 
 
