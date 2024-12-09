@@ -217,9 +217,7 @@
 	        background-color: white;
 	        border-color: #8071FC;
         }
-        
-        
-        
+          
     </style>
 </head>
 <body>
