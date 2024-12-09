@@ -86,8 +86,8 @@
 		
 		.person_container {
 		    position: relative; /* 텍스트의 위치를 이미지에 상대적으로 설정 */
-		    width: 300px; /* 컨테이너 너비 */
-		    height: 200px; /* 컨테이너 높이 */
+		    width: 260px; /* 컨테이너 너비 */
+		    height: 260px; /* 컨테이너 높이 */
 		}
 		  
 		.person_img{
@@ -98,12 +98,25 @@
 		  
 		.person_text {
 		    position: absolute; /* 이미지 위에 텍스트 배치 */
-		    top: 60%; /* 수직 가운데 */
-		    left: 63%; /* 수평 가운데 */
-		    color: white; /* 텍스트 색상 */
-		    font-size: 20px; /* 텍스트 크기 */
-		    font-weight: bold; /* 텍스트 굵기 */
-		    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 */
+		    bottom: 0%; /* 수직 가운데 */
+		    left: 50%; /* 수평 가운데 */
+		    transform: translate(-50%, -50%); /* 정확히 가운데 정렬 */
+		    display: inline-block;
+		    background-color: #8071FC;
+		    color: white;
+		   	text-align: center;
+		    font-size: 13px;
+		    width: 120px;
+		    border-radius: 50px;
+		    border: 0.5px #8071FC solid;
+		    padding: 10px;
+		    
+		}
+		
+		.person_text:hover {
+		   color: #8071FC;
+		   background-color: white;
+		   border-color: #8071FC;
 		}
 		
 		.mike{
@@ -114,75 +127,33 @@
 		}
 		
 		.mike > span{
-		    font-size: 14px;
-		    margin-right: 5px;
-		}
-		
-		.mike > .check_circle{
-		    font-size: 8px;
-		    margin-left: 5px;
-		}
-		
-		.check_circle {
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-		    width: 10px; /* 원의 너비 */
-		    height: 10px; /* 원의 높이 */
-		    background-color: #8071FC; /* 보라색 배경 */
-		    color: white; /* 텍스트(체크표) 색상 */
-		    border-radius: 50%; /* 원형 만들기 */
-		    font-size: 24px; /* 체크표 크기 */
-		    font-weight: bold; /* 체크표 두께 */
-		}
-		
-		.mike > p{
-		    color: #8071FC;
-		    margin-left: 5px;
-		}
-		
-		.connect{
-		    display: flex;
-		    justify-content: center; /* 수평 중앙 정렬 */
-		    text-align: center;
-		}
-		
-		.btn{
-		    display: inline-block;
-		    background-color: #8071FC;
-		    color: white;
-		   
 		    font-size: 13px;
-		    width: 120px;
-		    margin: 0 15px;
-		    margin-top: 20px;
-		    border-radius: 50px;
-		    border: 0.5px #8071FC solid;
-		    padding: 10px;
+		    margin-bottom: 20px;
+		    color: #64748B;
 		}
 		
-		
-		.btn:hover {
-		    color: #8071FC;
-		   background-color: white;
-		   border-color: #8071FC;
+
+		.mike_text {
+		  font-size: 18px;
+		  font-weight: bold;
+		  line-height: 1.5;
+		  text-align: center;
 		}
 		
-		#btn_jump{
-		   color: black;
-		   background-color: white;
+		#karaoke_text span {
+		  color: black; /* 기본 텍스트 색상 */
+		  transition: color 0.2s ease; /* 색상이 변경되는 애니메이션 */
 		}
 		
-		#btn_jump:hover{
-		   color: #64748B;
-		   background-color: white;
-		   border-color: #64748B;
-		}       
+		#karaoke_text span.highlighted {
+		  color: #8071FC; /* 글자 강조 색상 */
+		}
+		      
 	</style>
 </head>
 <body>
     <div class="AI_Interview_wrapper">
-        <div class="text1">연결된 기기를 확인해 주세요.</div>
+        <div class="text1">연결된 기기를 확인해 주세요</div>
         <div class="container">
             <div class="box1" id="box1">
                 <div class="underline">
@@ -210,24 +181,97 @@
                 </div>
             </div>
             <div class="box2" id="box2">
-                <div clas="person_container">
+                <div class="person_container">
                     <img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
-                    <div class="person_text"> 음성 인식 칸?</div>
+                    <div class="person_text" onclick="startVoiceTest()"> 음성테스트 시작 </div>
                 </div>
                 <div class="mike">
-                    <span>마이크</span>
-                    <div>기기칸</div>
-                    <div class="check_circle">
-                        <span>✔</span>
-                    </div>
-                    <P>연결됨</P>
+                    <span>음성 테스트 시작 후에 아래 문구를 따라 읽어주세요</span>
                 </div>
-                <div class="connect">
-                    <div class="btn" id="btn_jump">건너띄기</div>
-                    <div class="btn">연결확인</div>
-                </div>
+                <div class="mike_text">
+				  <div id="karaoke_text">
+				    <span>경</span><span>험</span><span>은</span><span> </span><span>만</span><span>들</span><span>어</span><span> </span>
+				    <span>낼</span><span> </span><span>수</span><span> </span><span>없</span><span>다</span>.<br>
+				    <span>그</span><span>것</span><span>은</span><span> </span><span>시</span><span>도</span><span>해</span><span>야</span><span>만</span>
+				    <span> </span><span>한</span><span>다</span>.
+				  </div>
+				</div>
             </div>
           </div>
     </div>
+    
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    let isAnimating = false; // 애니메이션 상태
+    let currentIndex = 0; // 현재 강조 중인 글자 인덱스
+    let timeoutId = null; // setTimeout ID
+
+    const mikeTextInitialHTML = `
+      <div id="karaoke_text">
+        <span>경</span><span>험</span><span>은</span><span> </span><span>만</span><span>들</span><span>어</span><span> </span>
+        <span>낼</span><span> </span><span>수</span><span> </span><span>없</span><span>다</span>.<br>
+        <span>그</span><span>것</span><span>은</span><span> </span><span>시</span><span>도</span><span>해</span><span>야</span><span>만</span>
+        <span> </span><span>한</span><span>다</span>.
+      </div>
+    `;
+
+    const mikeTextDefaultHTML = `
+      <span>음성 테스트 시작 후에 아래 문구를 따라 읽어주세요</span>
+    `;
+
+    function highlightNext() {
+      const spans = document.querySelectorAll("#karaoke_text span");
+      if (!isAnimating || currentIndex >= spans.length) {
+        isAnimating = false;
+        currentIndex = 0; // 초기화
+        return;
+      }
+
+      if (currentIndex < spans.length) {
+        spans[currentIndex].classList.add("highlighted");
+        currentIndex++;
+        timeoutId = setTimeout(highlightNext, 200); // 다음 글자 강조
+      }
+    }
+
+    function startVoiceTest() {
+      const personText = document.querySelector(".person_text");
+      const mikeText = document.querySelector(".mike_text");
+      const mike = document.querySelector(".mike");
+
+      if (personText && personText.textContent.trim() === "음성테스트 시작") {
+        // "음성테스트 시작" 상태에서 클릭
+        personText.textContent = "녹음시간, 상태"; // 텍스트 변경
+        if (mikeText) {
+          mikeText.innerHTML = mikeTextInitialHTML; // mike_text 내용 변경
+        }
+        isAnimating = true;
+        highlightNext(); // 애니메이션 시작
+      } else if (personText && personText.textContent.trim() === "녹음시간, 상태") {
+        // "녹음시간, 상태" 상태에서 클릭
+        personText.textContent = "음성테스트 시작"; // 텍스트 변경
+        if (mikeText) {
+          mikeText.innerHTML = mikeTextInitialHTML; // mike_text를 초기 상태로 복원
+        }
+        isAnimating = false;
+        clearTimeout(timeoutId); // 실행 중인 애니메이션 중단
+        currentIndex = 0; // 초기화
+      }
+    }
+
+    // 클릭 이벤트 위임
+    document.addEventListener("click", function (e) {
+      if (e.target && e.target.matches(".person_text")) {
+        startVoiceTest();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
 </body>
 </html>
