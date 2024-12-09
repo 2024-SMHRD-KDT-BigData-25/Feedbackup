@@ -40,8 +40,7 @@
 				<p class="title">약관동의</p>
 				<span class="chk chkall"> <span class="cbx"> <input
 						id="chkall" type="checkbox" name="cbx01"> <label
-						class="check1" for="chkall">모든 약관을 확인하고 전체 동의합니다.</label>
-						<br>
+						class="check1" for="chkall">모든 약관을 확인하고 전체 동의합니다.</label> <br>
 				</span>
 				</span> <span class="chk chklist"> <span class="cbx"> <input
 						type="checkbox" name="cbx02" id="term"> <label
