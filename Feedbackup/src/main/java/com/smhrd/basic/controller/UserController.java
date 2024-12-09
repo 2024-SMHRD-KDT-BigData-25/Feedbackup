@@ -167,4 +167,17 @@ public class UserController {
 
 		return "pwfind"; // 결과를 pwfind.jsp로 전달하여 결과 표시
 	}
+	
+	@GetMapping("/AI_Interview")
+	public String AI_InterviewForm() {
+		return "AI_Interview";
+	}
+	
+	@GetMapping("/Interview_Select")
+	public String Interview_Select() {
+		return "Interview_Select";
+	}
+	
 }
+
+

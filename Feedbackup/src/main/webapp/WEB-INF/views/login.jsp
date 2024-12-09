@@ -42,7 +42,6 @@
             height: 430px;
         	background-color: white;
             padding: 30px;
-            border-radius: 5px;
             margin-left: auto;
             margin-right: auto;
             border-radius: 40px;

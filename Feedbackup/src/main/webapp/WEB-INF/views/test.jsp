@@ -37,11 +37,10 @@
         	background-color: white;
         	margin-left: 1px;
             padding: 30px;
-            border-radius: 5px;
             margin-left: auto;
             margin-right: auto;
             border-radius: 40px;
-            box-shadow: 0 1px 20px 0 rgb(232, 232, 232);
+            box-shadow: 0 1px 20px 0 rgb(100, 100, 100);
             align-content: center;
         }
         
