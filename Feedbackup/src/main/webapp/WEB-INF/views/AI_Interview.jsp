@@ -96,129 +96,58 @@
 		    object-fit: cover; /* 이미지 비율 유지 */
 		}
 		  
-		 .person_text {
-		    position: absolute;
-		    bottom: 0%;
-		    left: 50%;
-		    transform: translate(-50%, -50%);
+		.person_text {
+		    position: absolute; /* 이미지 위에 텍스트 배치 */
+		    bottom: 0%; /* 수직 가운데 */
+		    left: 50%; /* 수평 가운데 */
+		    transform: translate(-50%, -50%); /* 정확히 가운데 정렬 */
 		    display: inline-block;
 		    background-color: #8071FC;
 		    color: white;
-		    text-align: center;
+		   	text-align: center;
 		    font-size: 13px;
 		    width: 120px;
 		    border-radius: 50px;
 		    border: 0.5px #8071FC solid;
 		    padding: 10px;
-		  }
-		  
-		  .person_text:hover {
-		    color: #8071FC;
-		    background-color: white;
-		    border-color: #8071FC;
-		  }
-		  
-		  .mike {
+		    
+		}
+		
+		.person_text:hover {
+		   color: #8071FC;
+		   background-color: white;
+		   border-color: #8071FC;
+		}
+		
+		.mike{
 		    display: flex;
-		    align-items: center;
+		    align-items: center; /* 수직 중앙 정렬 */
 		    margin-top: 50px;
 		    margin-bottom: 10px;
-		  }
-		  
-		  .mike > span {
+		}
+		
+		.mike > span{
 		    font-size: 13px;
 		    margin-bottom: 20px;
 		    color: #64748B;
-		  }
-		  
-		  .mike_text {
-		    font-size: 18px;
-		    font-weight: bold;
-		    line-height: 1.5;
-		    text-align: center;
-		  }
-		  
-		  #karaoke_text span {
-		    color: black;
-		    transition: color 0.15s ease;
-		  }
-		  
-		  #karaoke_text span.highlighted {
-		    color: #8071FC;
-		  }
-		  
-		  .recording_container{
-		  	position: relative; /* 텍스트의 위치를 이미지에 상대적으로 설정 */
-		    width: 260px; /* 컨테이너 너비 */
-		    height: 260px; /* 컨테이너 높이 */
-		  }
-		  
-		  .recording_status {
-		  	position: absolute;
-		    bottom: 0%;
-		    left: 50%;
-		    transform: translate(-50%, -50%);
-		    display: flex;
-		    align-items: center;
-		    gap: 5px;
-		    height: 15px;
-		    width: 120px;
-		    border-radius: 50px;
-		    border: 0.5px #8071FC solid;
-		    padding: 10px;
-		    background-color: white;
-		  }
-		  
-		  .recording_icon {
-		    width: 8px;
-		    height: 8px;
-		    background-color: red;
-		    border-radius: 50%;
-		  }
-		  
-		  .recording_text {
-		    font-size: 8px;
-		    color: #666666;
-		  }
-		  
-		  .waveform {
-		    display: flex;
-		    align-items: center;
-		    gap: 3px;
-		  }
-		  
-		  .waveform div {
-		    width: 3px;
-		    height: 10px;
-		    background-color: #a97dff;
-		    border-radius: 2px;
-		    animation: wave 1.2s infinite ease-in-out;
-		  }
-		  
-		  .waveform div:nth-child(2) {
-		    animation-delay: -1.1s;
-		  }
-		  
-		  .waveform div:nth-child(3) {
-		    animation-delay: -1s;
-		  }
-		  
-		  .waveform div:nth-child(4) {
-		    animation-delay: -0.9s;
-		  }
-		  
-		  .waveform div:nth-child(5) {
-		    animation-delay: -0.8s;
-		  }
-		  
-		  @keyframes wave {
-		    0%, 100% {
-		      height: 5px;
-		    }
-		    50% {
-		      height: 15px;
-		    }
-		  }
+		}
+		
+
+		.mike_text {
+		  font-size: 18px;
+		  font-weight: bold;
+		  line-height: 1.5;
+		  text-align: center;
+		}
+		
+		#karaoke_text span {
+		  color: black; /* 기본 텍스트 색상 */
+		  transition: color 0.2s ease; /* 색상이 변경되는 애니메이션 */
+		}
+		
+		#karaoke_text span.highlighted {
+		  color: #8071FC; /* 글자 강조 색상 */
+		}
 		      
 	</style>
 </head>
@@ -272,37 +201,12 @@
     </div>
     
 <script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function () {
-    let isRecording = false; // 녹음 상태를 추적
-    let timeoutId = null; // 텍스트 강조 애니메이션 중단용 타이머 ID
-    let currentIndex = 0; // 텍스트 강조 중인 인덱스
+  document.addEventListener("DOMContentLoaded", function () {
+    let isAnimating = false; // 애니메이션 상태
+    let currentIndex = 0; // 현재 강조 중인 글자 인덱스
+    let timeoutId = null; // setTimeout ID
 
-    const personContainer = document.querySelector(".person_container");
-
-    // 녹음 상태와 초기 상태의 HTML 템플릿
-    const recordingHTML = `
-    <div class="recording_container">
-      <img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
-      <div class="recording_status">
-        <span class="recording_icon"></span>
-        <span class="recording_text">녹음중 00:03</span>
-        <div class="waveform">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </div>
-    `;
-
-    const initialHTML = `
-      <img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
-      <div class="person_text" onclick="startVoiceTest()"> 음성테스트 시작 </div>
-    `;
-
-    const karaokeTextHTML = `
+    const mikeTextInitialHTML = `
       <div id="karaoke_text">
         <span>경</span><span>험</span><span>은</span><span> </span><span>만</span><span>들</span><span>어</span><span> </span>
         <span>낼</span><span> </span><span>수</span><span> </span><span>없</span><span>다</span>.<br>
@@ -315,85 +219,54 @@ document.addEventListener("DOMContentLoaded", function () {
       <span>음성 테스트 시작 후에 아래 문구를 따라 읽어주세요</span>
     `;
 
-    const mikeTextContainer = document.querySelector(".mike_text");
-
-    // 녹음 상태 전환 함수
-    function startVoiceTest() {
-        if (!isRecording) {
-            // 녹음 시작
-            personContainer.innerHTML = recordingHTML; // 녹음 상태로 변경
-            if (mikeTextContainer) {
-                mikeTextContainer.innerHTML = karaokeTextHTML; // #karaoke_text 복원
-            }
-            isRecording = true;
-            currentIndex = 0; // 텍스트 강조 인덱스 초기화
-            startWaveAnimation(); // 파형 애니메이션 시작
-            highlightNext(); // 텍스트 강조 애니메이션 시작
-        } else {
-            // 초기 상태로 복원
-            personContainer.innerHTML = initialHTML; // 초기 HTML 복원
-            if (mikeTextContainer) {
-                mikeTextContainer.innerHTML = mikeTextDefaultHTML; // 초기 안내 문구 복원
-            }
-            isRecording = false;
-            stopWaveAnimation(); // 파형 애니메이션 중단
-            clearTimeout(timeoutId); // 텍스트 강조 애니메이션 중단
-            currentIndex = 0; // 텍스트 강조 인덱스 초기화
-        }
-    }
-
-    // 텍스트 강조 애니메이션
     function highlightNext() {
-        if (!isRecording) return; // 녹음 중이 아니면 중단
-        const spans = document.querySelectorAll("#karaoke_text span");
-        if (spans.length > 0 && currentIndex < spans.length) {
-            spans[currentIndex].classList.add("highlighted"); // 강조
-            currentIndex++;
-            timeoutId = setTimeout(highlightNext, 150); // 다음 글자 강조
-        }
+      const spans = document.querySelectorAll("#karaoke_text span");
+      if (!isAnimating || currentIndex >= spans.length) {
+        isAnimating = false;
+        currentIndex = 0; // 초기화
+        return;
+      }
+
+      if (currentIndex < spans.length) {
+        spans[currentIndex].classList.add("highlighted");
+        currentIndex++;
+        timeoutId = setTimeout(highlightNext, 200); // 다음 글자 강조
+      }
     }
 
-    // 파형 애니메이션 시작
-    function startWaveAnimation() {
-        const waveformContainer = document.querySelector(".waveform");
-        if (waveformContainer) {
-            for (let i = 0; i < 5; i++) {
-                const wave = document.createElement("div");
-                waveformContainer.appendChild(wave);
-            }
+    function startVoiceTest() {
+      const personText = document.querySelector(".person_text");
+      const mikeText = document.querySelector(".mike_text");
+      const mike = document.querySelector(".mike");
+
+      if (personText && personText.textContent.trim() === "음성테스트 시작") {
+        // "음성테스트 시작" 상태에서 클릭
+        personText.textContent = "녹음시간, 상태"; // 텍스트 변경
+        if (mikeText) {
+          mikeText.innerHTML = mikeTextInitialHTML; // mike_text 내용 변경
         }
+        isAnimating = true;
+        highlightNext(); // 애니메이션 시작
+      } else if (personText && personText.textContent.trim() === "녹음시간, 상태") {
+        // "녹음시간, 상태" 상태에서 클릭
+        personText.textContent = "음성테스트 시작"; // 텍스트 변경
+        if (mikeText) {
+          mikeText.innerHTML = mikeTextInitialHTML; // mike_text를 초기 상태로 복원
+        }
+        isAnimating = false;
+        clearTimeout(timeoutId); // 실행 중인 애니메이션 중단
+        currentIndex = 0; // 초기화
+      }
     }
 
-    // 파형 애니메이션 중단
-    function stopWaveAnimation() {
-        const waveformContainer = document.querySelector(".waveform");
-        if (waveformContainer) {
-            waveformContainer.innerHTML = ""; // 파형 초기화
-        }
-    }
-
-    // 이벤트 다시 연결 (HTML 변경 후 이벤트 복원)
-    function rebindClickEvent() {
-        const newPersonText = document.querySelector(".person_text");
-        if (newPersonText) {
-            newPersonText.addEventListener("click", startVoiceTest);
-        }
-
-        // #karaoke_text span에 텍스트 강조 애니메이션을 적용
-        if (isRecording) {
-            highlightNext(); // 강조 애니메이션 재시작
-        }
-    }
-
-    // 초기화: 이벤트 연결
-    rebindClickEvent();
-});
+    // 클릭 이벤트 위임
+    document.addEventListener("click", function (e) {
+      if (e.target && e.target.matches(".person_text")) {
+        startVoiceTest();
+      }
+    });
+  });
 </script>
-
-
-
-
-
 
 
 </body>

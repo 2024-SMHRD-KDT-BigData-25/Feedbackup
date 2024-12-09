@@ -120,27 +120,26 @@ public class UserController {
 
 	@PostMapping("/users/idfind")
 	public String findId(@RequestParam String name, @RequestParam String email, Model model) {
-		// 이름과 이메일로 아이디를 찾기
-		MavenMember result = service.idfind(name, email);
+	    // 이름과 이메일로 먼저 검색
+	    MavenMember result = service.idfind(name, email);
 
-		if (result != null) {
-			// 아이디 앞 3글자만 보여주고 나머지는 '*' 처리
-			String id = result.getId();
-			String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
+	    if (result == null) {
+	        // 이름이나 이메일이 일치하는 회원 정보가 없으면
+	        model.addAttribute("success", false);
+	        model.addAttribute("message", "가입하신 회원정보가 없습니다.");
+	    } else {
+	        // 이름과 이메일이 모두 일치하는 경우 아이디 반환
+	        String id = result.getId();
+	        String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
 
-			// 아이디와 이름을 Model에 추가
-			model.addAttribute("success", true);
-			model.addAttribute("id", maskedId);
-			model.addAttribute("name", result.getName()); // 이름도 전달
-		} else {
-			model.addAttribute("success", false);
-			model.addAttribute("message", "일치하는 정보가 없습니다.");
-		}
+	        model.addAttribute("success", true);
+	        model.addAttribute("id", maskedId);
+	        model.addAttribute("name", result.getName());
+	    }
 
-		return "idfind"; // 결과를 idfind.jsp로 전달하여 결과 표시
-
+	    return "idfind"; // JSP 페이지 이름을 반환
 	}
-
+	
 	@GetMapping("/users/pwfind")
 	public String pwfindForm() {
 		return "pwfind"; // pwfind.jsp로 이동
@@ -151,20 +150,41 @@ public class UserController {
 		// 이름과 이메일과 아이디로 패스워드를 찾기
 		MavenMember result = service.pwfind(name, email, id);
 
-		if (result != null) {
-			// 패스워드 뒤 3글자를 제외해서 보여주고 나머지는 '*' 처리
-			String pw = result.getPw();
-			String maskedpw = pw.substring(0, pw.length() - 3) + "*".repeat(3);
+	    if (result == null) {
+	        // 이름이나 이메일이나 아이디가 일치하는 회원 정보가 없으면
+	        model.addAttribute("success", false);
+	        model.addAttribute("message", "가입하신 회원정보가 없습니다.");
+	    } else {
+	        // 이름과 이메일과 아이디가 모두 일치하는 경우 아이디 반환
+	        String pw = result.getPw();
 
-			// 패스워드와 이름을 Model에 추가
-			model.addAttribute("success", true);
-			model.addAttribute("pw", maskedpw);
-			model.addAttribute("name", result.getName()); // 이름도 전달
-		} else {
-			model.addAttribute("success", false);
-			model.addAttribute("message", "일치하는 정보가 없습니다.");
-		}
+	        model.addAttribute("success", true);
+	        model.addAttribute("pw", pw);
+	        model.addAttribute("name", result.getName());
+	    }
 
 		return "pwfind"; // 결과를 pwfind.jsp로 전달하여 결과 표시
 	}
+	
+	@GetMapping("/Interview_Select")
+	public String Interview_Select() {
+		return "Interview_Select";
+	}
+	
+	@GetMapping("/AI_Interview")
+	public String AI_InterviewForm() {
+		return "AI_Interview";
+	}
+	
+	@GetMapping("/AI_Interview_play")
+	public String AI_Interview_playForm() {
+		return "AI_Interview_play";
+	}
+	
+	@GetMapping("/test")
+	public String testForm() {
+		return "test";
+	}
 }
+
+

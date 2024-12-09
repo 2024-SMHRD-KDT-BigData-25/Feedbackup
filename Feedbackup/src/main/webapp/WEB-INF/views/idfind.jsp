@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>아이디 찾기</title>
-    <style>
-        @font-face {
+     <style>
+    	        @font-face {
             font-family: 'SUIT-Regular';
             src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
             font-weight: normal;
@@ -228,79 +228,90 @@
 	        background-color: white;
 	        border-color: #64748B;
         }
-		        
+		     
     </style>
 </head>
 <body>
     <img src="../assets/img/logo2.png" alt="logo" class="logo"><br><br><br><br>
-	<div class="find_wrapper">
+    <div class="find_wrapper">
         <div class="find_top">
-        	<div id="find_id" class="active">아이디 찾기</div>
-        	<div id="find_pw"><a href="/myapp/users/pwfind" style="display: block; width: 100%; height: 100%;">비밀번호 찾기</a></div>
+            <div id="find_id" class="active">아이디 찾기</div>
+            <div id="find_pw"><a href="/myapp/users/pwfind" style="display: block; width: 100%; height: 100%;">비밀번호 찾기</a></div>
         </div>
-	    <div class="find_bottom">
-	    <div>
-        	<h2>아이디 찾기</h2>
+        <div class="find_bottom">
+            <div>
+                <h2>아이디 찾기</h2>
+            </div>
+            <p class="find_text">가입 시 입력한 이름과 이메일 주소를 통해 아이디를 확인하실 수 있습니다.</p>
+            <form action="/myapp/users/idfind" method="post">
+                <input type="text" name="name" placeholder="이름" required><br>
+                <input type="email" name="email" placeholder="이메일 주소" required><br>
+                <input type="submit" value="확인" id="submitBtn"></input>
+            </form>
         </div>
-		    <p class="find_text">가입 시 입력한 이름과 이메일 주소를 통해 아이디를 확인하실 수 있습니다.</p>
-		    <form action="/myapp/users/idfind" method="post">
-		    	<input type="text" name="name" placeholder="이름" required><br>
-		        <input type="email" name="email" placeholder="이메일 주소" required><br>
-		        <input type="submit" value="확인" id="submitBtn"></input>
-		    </form>
-		</div>
-	</div>
-	
-	
-    <!-- 모달 -->
-    <div id="idModal" class="modal">
+    </div>
+
+    <!-- 이름과 이메일이 일치하는 경우 아이디와 이름을 출력하는 모달 -->
+    <div id="successModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close">&times;</span>
             <img src="../assets/img/check.png" alt="check" class="check"><br><br><br>
             <h3>아이디 찾기 완료</h3>
-
-            <!-- 아이디와 이름을 한 문장으로 출력 -->
             <p id="idNameResult">
                 <c:if test="${success}">
                     ${name}님의 아이디는 <span class="highlight">${id}</span>입니다.
                 </c:if>
             </p>
-
-            <!-- 실패 메시지 출력 -->
-            <p id="errorMessage">
-                <c:if test="${not success}">
-                    ${message}
-                </c:if>
-            </p>
-            
             <p class="modal_text">※회원정보 보호를 위해 아이디의 일부만 보여지며<br> 전체 아이디는 고객센터를 통해서 확인 부탁드립니다.</p>
-
-            <!-- 비밀번호 찾기 및 로그인 버튼 -->
             <a href="/myapp/users/pwfind" class="btn" id="btn_pw">비밀번호 찾기</a>
             <a href="/myapp/login" class="btn">로그인</a>
         </div>
     </div>
 
+    <!-- 이름이나 이메일이 일치하지 않는 경우 모달 -->
+    <div id="errorModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="../assets/img/check.png" alt="check" class="check"><br><br><br>
+            <p id="errorMessage"></p>
+            <a href="javascript:void(0);" class="btn" onclick="closeModal()">확인</a> <!-- 확인 버튼 클릭 시 closeModal() 호출 -->
+        </div>
+    </div>
+
     <script>
         window.onload = function() {
-            // success가 true이면 모달을 띄운다
-            var success = ${success != null ? success : 'false'};
+            var success = '${success != null ? success : 'false'}' === 'true'; // 성공 여부 확인
+            var message = '${message}'; // 전달된 메시지
+
+            // 페이지 로드 시 모달을 자동으로 표시하지 않음
             if (success) {
-                document.getElementById('idModal').style.display = "block";
+                // 이름과 이메일이 일치하는 경우 성공 모달 표시
+                document.getElementById('successModal').style.display = "block";
+            } else if (message) {
+                // 실패 시, 실패 메시지가 있을 때만 실패 모달 표시
+                document.getElementById('errorModal').style.display = "block";
+                document.getElementById('errorMessage').textContent = message;  // 통합된 message 사용
             }
 
-            // 모달 닫기
-            document.querySelector('.close').onclick = function() {
-                document.getElementById('idModal').style.display = "none";
-            }
+            // 모달 닫기 이벤트
+            document.querySelectorAll('.close').forEach(function(element) {
+                element.onclick = function() {
+                    element.closest('.modal').style.display = "none";
+                }
+            });
 
-            // 페이지 외부를 클릭하면 모달 닫기
+            // 모달 외부 클릭 시 닫기
             window.onclick = function(event) {
-                if (event.target == document.getElementById('idModal')) {
-                    document.getElementById('idModal').style.display = "none";
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = "none";
                 }
             }
         };
+
+        // 확인 버튼 클릭 시 모달 닫기
+        function closeModal() {
+            document.getElementById('errorModal').style.display = "none";
+        }
     </script>
 </body>
 </html>
