@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
      <style>
-    	        @font-face {
+               @font-face {
             font-family: 'SUIT-Regular';
             src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
             font-weight: normal;
@@ -24,8 +24,8 @@
         }
         
         .check{
-        	width: 100px;
-        	height: auto;
+           width: 100px;
+           height: auto;
             display: block;
             margin: 0 auto;
             margin-top: 36px;
@@ -55,66 +55,66 @@
         }
         
         .find_top {
-		  	display: flex; /* Flexbox 활성화 */
-		  	justify-content: space-between; /* 좌우로 나란히 정렬 */
-		  	width: 100%; /* 부모 요소의 너비 사용 */
-		  	box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 계산 */
-		  	
-		}
+           display: flex; /* Flexbox 활성화 */
+           justify-content: space-between; /* 좌우로 나란히 정렬 */
+           width: 100%; /* 부모 요소의 너비 사용 */
+           box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 계산 */
+           
+      }
         
-		.find_top div {
-		  	flex: 1; /* 동일한 비율로 나누기 */
-		 	text-align: center; /* 텍스트 중앙 정렬 */
-		  	padding: 20px 0; /* 상하 패딩 */
-		  	margin: 0; /* 기본 여백 제거 */
-		  	cursor: pointer; /* 클릭 가능한 UI 표시 */
-		  	transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
-		  	font-size: 15px;
-		}
+      .find_top div {
+           flex: 1; /* 동일한 비율로 나누기 */
+          text-align: center; /* 텍스트 중앙 정렬 */
+           padding: 20px 0; /* 상하 패딩 */
+           margin: 0; /* 기본 여백 제거 */
+           cursor: pointer; /* 클릭 가능한 UI 표시 */
+           transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+           font-size: 15px;
+      }
 
-		h2{
-			font-size: 20px;
-		}
-		
-		.find_text {
-			font-size: 10px;
-			margin-bottom: 25px;
-		}
-		
-		.find_top div.active {
-		  	background-color: #8071FC; /* 활성 상태 배경 */
-		  	color: white;
-		}
-		
-		.find_top div:not(.active) {
-		  	background-color: white; /* 비활성화된 항목 배경 */
-		  	color: black; /* 비활성화된 항목 텍스트 색상 */
-		}
-		
-		#find_id {
-			border-top-left-radius: 30px;
-			border-top-right-radius: 30px;
-			font-weight:bold;
-		}
-		
-		#find_pw{
-			color : #94A3B8;
-			border-top-right-radius: 30px;
-			font-weight:bold;
-		}
-		
-		a {
-		    text-decoration: none;
-		    color : #94A3B8;
-		}
-		
-		.find_bottom {
-			width: 100%;
-			border-top: 0.5px #BCB4FE solid;
-			padding-top: 40px;
-		}
-		
-	   input {
+      h2{
+         font-size: 20px;
+      }
+      
+      .find_text {
+         font-size: 10px;
+         margin-bottom: 25px;
+      }
+      
+      .find_top div.active {
+           background-color: #8071FC; /* 활성 상태 배경 */
+           color: white;
+      }
+      
+      .find_top div:not(.active) {
+           background-color: white; /* 비활성화된 항목 배경 */
+           color: black; /* 비활성화된 항목 텍스트 색상 */
+      }
+      
+      #find_id {
+         border-top-left-radius: 30px;
+         border-top-right-radius: 30px;
+         font-weight:bold;
+      }
+      
+      #find_pw{
+         color : #94A3B8;
+         border-top-right-radius: 30px;
+         font-weight:bold;
+      }
+      
+      a {
+          text-decoration: none;
+          color : #94A3B8;
+      }
+      
+      .find_bottom {
+         width: 100%;
+         border-top: 0.5px #BCB4FE solid;
+         padding-top: 40px;
+      }
+      
+      input {
             border-radius: 10px;
             border: 0.5px #CBD5E1 solid;
             margin-left: 15px;
@@ -124,26 +124,26 @@
                    }
 
        input::placeholder {
-       		color: #94A3B8;
+             color: #94A3B8;
        }
 
        input:focus{
-         	outline-color: #8071FC;
+            outline-color: #8071FC;
        }
        
        #submitBtn {
-         	background-color: #8071FC;
-         	color: white;
-         	font-weight: 600;
-         	width: 160px;
-         	margin-left: 8px;
-         	margin-bottom: 40px;
+            background-color: #8071FC;
+            color: white;
+            font-weight: 600;
+            width: 160px;
+            margin-left: 8px;
+            margin-bottom: 40px;
        }
 
        #submitBtn:hover {
-	        color: #8071FC;
-	        background-color: white;
-	        border-color: #8071FC;
+           color: #8071FC;
+           background-color: white;
+           border-color: #8071FC;
        }
        
        /* 모달 배경 */
@@ -183,52 +183,52 @@
             cursor: pointer;
         }
         
- 		/* 모달 메시지 */       
+       /* 모달 메시지 */       
         .modal_text{
-        	font-size: 10px;
-        	color : #94A3B8;
+           font-size: 10px;
+           color : #94A3B8;
         }
         
         #pwNameResult{
-        	font-weight: bold;
+           font-weight: bold;
         }
         
         .highlight {
-		    color: #8071FC;
-		}
-		
+          color: #8071FC;
+      }
+      
         /* 버튼 스타일 */
         .btn {
-		    display: inline-block;
-		    background-color: #8071FC;
-		    color: white;
-		    font-weight: 600;
-		    font-size: 13px;
-		    width: 120px;
-		    margin: 0 15px;
-		    margin-top: 20px;
-		    border-radius: 10px;
-		    border: 0.5px #CBD5E1 solid;
-		    padding: 10px;
+          display: inline-block;
+          background-color: #8071FC;
+          color: white;
+          font-weight: 600;
+          font-size: 13px;
+          width: 120px;
+          margin: 0 15px;
+          margin-top: 20px;
+          border-radius: 10px;
+          border: 0.5px #CBD5E1 solid;
+          padding: 10px;
         }
 
         .btn:hover {
- 	        color: #8071FC;
-	        background-color: white;
-	        border-color: #8071FC;
+            color: #8071FC;
+           background-color: white;
+           border-color: #8071FC;
         }
         
         #btn_pw{
-        	color: #64748B;
-	        background-color: #E2E8F0;
+           color: #64748B;
+           background-color: #E2E8F0;
         }
         
         #btn_pw:hover{
-        	color: #64748B;
-	        background-color: white;
-	        border-color: #64748B;
+           color: #64748B;
+           background-color: white;
+           border-color: #64748B;
         }
-		     
+           
     </style>
 </head>
 <body>
