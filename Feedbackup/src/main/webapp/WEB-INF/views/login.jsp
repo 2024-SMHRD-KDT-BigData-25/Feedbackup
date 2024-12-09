@@ -167,7 +167,7 @@
 
 </head>
 <body>
-	<img src="${pageContext.request.contextPath}/assets/img/logo2.png" alt="logo" class="logo"><br><br><br><br>
+	<a href="/myapp"><img src="img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
 	<div class="login_wrapper">
 	<h1>로그인</h1><br>
 	<form action="/myapp/login" method="post">
@@ -185,7 +185,7 @@
 		<input type="submit" value="로그인" id="loginBtn"><br>
 					
 		<a href="/myapp/users/naverlogin" style="text-decoration: none;">
-		<button type="button" id="naverloginBtn"><img src="${pageContext.request.contextPath}/assets/img/naverlogo.jpg" alt="naverlogo" class="naverlogo">네이버 계정으로 로그인</button></a><br> 
+		<button type="button" id="naverloginBtn"><img src="img/naverlogo.jpg" alt="naverlogo" class="naverlogo">네이버 계정으로 로그인</button></a><br> 
 			
 	    <div class="link-container">
 	        <a href="/myapp/users/idfind">아이디 찾기</a>

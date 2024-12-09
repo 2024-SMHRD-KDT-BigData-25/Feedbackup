@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Feedbackup | 회원가입 성공</title>
 <style>
 	.logo {
 	     width: 365px;
@@ -70,7 +70,7 @@
 </style>
 </head>
 <body>
-	<img src="../assets/img/logo2.png" alt="logo" class="logo"><br><br><br><br>
+	<a href="/myapp"><img src="../img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
 	<div class="success">
 		<h2 class="1st">피드백업 회원가입 완료</h1>
 		<h1 style= "margin-bottom: 20px;">저희 피드백업의 가족이 되신 것을 진심으로 환영합니다!</h1>

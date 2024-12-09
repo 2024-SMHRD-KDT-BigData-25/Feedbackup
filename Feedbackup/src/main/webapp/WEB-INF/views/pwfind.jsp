@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>비밀번호 찾기</title>
+    <title>FeedbackUp |비밀번호 찾기</title>
      <style>
     	        @font-face {
             font-family: 'SUIT-Regular';
@@ -232,7 +232,7 @@
     </style>
 </head>
 <body>
-    <img src="../assets/img/logo2.png" alt="logo" class="logo"><br><br><br><br>
+    <a href="/myapp"><img src="../img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
     <div class="find_wrapper">
         <div class="find_top">
             <div id="find_id"><a href="/myapp/users/idfind" style="display: block; width: 100%; height: 100%;">아이디 찾기</a></div>
@@ -256,7 +256,7 @@
     <div id="successModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <img src="../assets/img/check.png" alt="check" class="check"><br><br><br>
+            <img src="img/check.png" alt="check" class="check"><br><br><br>
             <h3>비밀번호 찾기 완료</h3>
             <p id="pwNameResult">
                 <c:if test="${success}">
@@ -271,7 +271,7 @@
     <div id="errorModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <img src="../assets/img/check.png" alt="check" class="check"><br><br><br>
+            <img src="../img/check.png" alt="check" class="check"><br><br><br>
             <p id="errorMessage"></p>
             <a href="javascript:void(0);" class="btn" onclick="closeModal()">확인</a> <!-- 확인 버튼 클릭 시 closeModal() 호출 -->
         </div>

@@ -147,7 +147,7 @@
 </head>
 
 <body>
-    <img src="../assets/img/logo2.png" alt="logo" class="logo"><br><br><br><br>
+    <a href="/myapp"><img src="../img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
 	<div class="signin-box">
     <h1>회원가입</h1><br>
     <form action="/myapp/users" method="post" id="signupForm">
