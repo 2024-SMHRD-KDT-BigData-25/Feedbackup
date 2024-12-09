@@ -276,7 +276,7 @@
             <p class="modal_text">※회원정보 보호를 위해 아이디의 일부만 보여지며<br> 전체 아이디는 고객센터를 통해서 확인 부탁드립니다.</p>
 
             <!-- 비밀번호 찾기 및 로그인 버튼 -->
-            <a href="/myapp/users/pwfind" class="btn" id="btn_pw">비밀번호 찾기</a>
+            <a href="/myapp/users/pwfind" class="btn" id="btn_pw" >비밀번호 찾기</a>
             <a href="/myapp/login" class="btn">로그인</a>
         </div>
     </div>
