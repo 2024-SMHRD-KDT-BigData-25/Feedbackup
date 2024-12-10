@@ -35,7 +35,20 @@
                 <img class="img1" src="img/main1.svg">
                 <span class="imtext">AI 면접 연습을 통한 <br> 당신만을 위한 스마트한 솔루션</span>
                 <span class="imtext2">음성 분석 부터 제스처까지, 가장 정확한 맞춤형 피드백</span>
+                <%
+                MavenMember member = (MavenMember) session.getAttribute("member");
+                %>
+                <%
+                if (member == null) {
+                %>
                 <a class="start" href="/myapp/login">무료로 시작하기&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+                <%
+                } else {
+                %>
+                <a class="start" href="/myapp">무료로 시작하기&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+                <%
+                }
+                %>
                 <img class="img2" src="img/main2.png">
             </div>
         </div>

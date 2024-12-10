@@ -241,7 +241,7 @@
       </div>
       <nav class="nav">
         <ul class="nav-list">
-          <li><a href="#">AI 면접</a></li>
+          <li><a href="/myapp/users/Job_List">AI 면접</a></li>
           <li><a href="#">AI 분석결과</a></li>
           <li><a href="#">훈련</a></li>
           <li><a href="#">고객지원</a></li>
