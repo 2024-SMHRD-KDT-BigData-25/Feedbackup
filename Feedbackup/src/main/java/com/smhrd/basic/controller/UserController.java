@@ -190,8 +190,6 @@ public class UserController {
 	public String mypageForm() {
 		return "mypage"; // pwfind.jsp로 이동
 	}
-	
-
 }
 
 
