@@ -263,14 +263,8 @@
 	<%
 	} else {
 	%>
-	<%=member.getName()%>님 안녕하세요!
+	<button onclick="location.href='/myapp/users/mypage'"><%=member.getName()%></button>님 안녕하세요!
 	<br>
-
-	<button onclick="location.href='users'">전체회원정보</button>
-
-	<button onclick="location.href='users/<%=member.getId()%>/edit'">회원정보수정</button>
-
-	<button onclick="deleteMember('<%=member.getId()%>')">회원탈퇴</button>
 	<button onclick="location.href='logout'">로그아웃</button>
 
 

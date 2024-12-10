@@ -51,4 +51,9 @@ public class UserService {
     public MavenMember pwfind(String name, String email, String id) {
         return mapper.pwfind(name, email, id);  // 매개변수를 name과 email id로 수정
     }
+    
+    // 이름으로 개수 찾기
+    public int checkcount(String name) {
+    	return mapper.countByname(name);
+    }
 }
