@@ -191,6 +191,10 @@ public class UserController {
 		return "mypage"; // pwfind.jsp로 이동
 	}
 	
+	@GetMapping("/users/Job_List")
+	public String Job_ListForm() {
+		return "Job_List";
+	}
 
 }
 

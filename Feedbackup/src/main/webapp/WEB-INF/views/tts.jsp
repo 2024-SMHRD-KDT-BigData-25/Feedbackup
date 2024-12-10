@@ -54,6 +54,9 @@
 		<p>
 			<b>STT Result:</b> <span id="sttResult"></span>
 		</p>
+		<p>
+			<b>ANSWER Result:</b> <span id="answerResult"></span>
+		</p>
 	</div>
 
 
@@ -110,7 +113,15 @@
                         } else {
                             $("#sttResult").text("Error: No text returned.");
                         }
-                    },
+                    
+	                 
+	                    if (response.similarity_score) {
+	                        $("#answerResult").text(response.similarity_score); 
+	                    } else {
+	                        $("#answerResult").text("Error: No similarity score returned.");
+	                    }
+	                },
+                    
                     error: function(xhr, status, error) {
                         $("#sttResult").text("Error: " + xhr.responseText);
                     }
