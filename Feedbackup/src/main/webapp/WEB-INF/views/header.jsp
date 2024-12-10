@@ -119,6 +119,46 @@
       transition: 0.38s;
       cursor: pointer;
     }
+    
+    .btn-user {
+      font-size: 20px;
+      margin-top: 40px;
+      width: 600px;
+      margin-left: -70px;
+      margin-top: 25px;
+    }
+  
+    .btn-user strong {
+    	color: #8071FC;
+    	font-size: 25px;
+    	font-weight: 700;
+    }
+    
+    .btn-user strong:hover {
+    	color: black;
+    	cursor: pointer;
+    }
+    
+    .btn-logout {
+      background: linear-gradient(to right, #8071FC, #ACA4F0);
+      border: none;
+      color: white;
+      width: 500px;
+      height: 50px;
+      margin-top: 20px;
+      display: inline-block;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+    
+    .btn-logout:hover {
+      background: white;
+      border: 1px solid #8071FC;
+      color: #8071FC;
+      transition: 0.38s;
+      cursor: pointer;
+    }
+    
 
     /* 반응형 스타일 */
     @media (max-width: 1024px) {
@@ -159,6 +199,12 @@
         font-size: 14px;
         padding: 12px;
       }
+    }
+    
+    .btn-user {
+    	font-size: 14px;
+    	font-weight: 500;
+    	
     }
 
     @media (max-width: 768px) {
@@ -241,9 +287,9 @@
       </div>
       <nav class="nav">
         <ul class="nav-list">
-          <li><a href="#">AI 면접</a></li>
+          <li><a href="/myapp/Interview_Select">AI 면접</a></li>
           <li><a href="#">AI 분석결과</a></li>
-          <li><a href="#">훈련</a></li>
+          <li><a href="#">족보</a></li>
           <li><a href="#">고객지원</a></li>
         </ul>
       </nav>
@@ -263,9 +309,9 @@
 	<%
 	} else {
 	%>
-	<button onclick="location.href='/myapp/users/mypage'"><%=member.getName()%></button>님 안녕하세요!
-	<br>
-	<button onclick="location.href='logout'">로그아웃</button>
+	<a class="btn-user" onclick="location.href='/myapp/users/mypage'"><strong><%=member.getName()%></strong>&nbsp;&nbsp;님</a>
+	
+	<button class="btn-logout" onclick="location.href='logout'">로그아웃</button>
 
 
 	<%
