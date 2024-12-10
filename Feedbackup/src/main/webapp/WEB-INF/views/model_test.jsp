@@ -1,209 +1,307 @@
-<%@page import="com.smhrd.basic.model.MavenMember"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>음성 및 비디오 캡처</title>
+<title>Real_Interview</title>
 <style>
-body {
-	font-family: 'Arial', sans-serif;
-	text-align: center;
-	margin-top: 50px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+    @font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+    body {
+        background-color: #FFFFFF;
+        font-family: 'SUIT-Regular';
+        align-content: center;
+    }
+
+  .top_btn {
+    display: flex;
+    justify-content: space-between;
+    width: 850px;
+    padding: 20px 0px;
+    box-sizing: border-box;
+    margin: 0px auto;
+  }
+
+  .top_btn .btn1 {
+    border: 1px solid #D4C5FF;
+    background-color: transparent;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #8071FC;
+    cursor: pointer;
+  }
+
+  .top_btn .btn2 {
+    border: 1px solid #D4C5FF;
+    background-color: #8071FC;
+    border-radius: 20px;
+    padding: 10px 30px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+
+  .top_btn .btn1:hover {
+    background-color: #8071FC;
+    color: #FFFFFF;
+  }
+
+  .top_btn .btn2:hover {
+    background-color: #FFFFFF;
+    color: #8071FC;
+  }
+
+  .title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #6C63FF;
+  }
+
+  .title img{
+    width: 140px;
+    height: auto; ;
+  }
+
+  .title_text {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #64748B;
+    font-size: 20px;
+  }
+
+  .content {
+    text-align: center;
+  }
+
+  .content img {
+    width: 850px; 
+    height: auto;
+  }
+
+  .button-container {
+    margin-top: 10px;
+  }
+
+  .button-container button {
+    background-color: #6C63FF;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .button-container button:hover {
+    background-color: #554DBF;
+  }
+  
+  .info {
+	  position: absolute;
+	  top: 26%; /* 사진 기준으로 위치 */
+	  right: 17%;
+	  transform: translate(-50%, -50%);
+	  background-color: #ECEAFF;
+	  color: #6C63FF;
+	  font-size: 12px;
+	  padding: 8px 15px;
+	  border-radius: 20px;
+	  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	}
+	
+	.recording-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  padding: 10px 20px;
+  width: 80%;
+  max-width: 400px;
+  position: fixed;
+  bottom: 45px;
+  left: 540px;
 }
 
-#webcamContainer {
-	width: 640px;
-	height: 480px;
-	position: relative;
-	margin-bottom: 20px;
+.recording-bar .status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-video {
-	width: 100%;
-	height: 100%;
-	border: 2px solid #ccc;
-	transform: scaleX(-1); /* 좌우 반전 */
+.recording-bar .status .icon {
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  border-radius: 50%;
 }
 
-.result {
-	margin-top: 20px;
+.recording-bar .status .text {
+  font-size: 14px;
+  color: #6C63FF;
+  font-weight: bold;
 }
 
-#captureBtn {
-	margin-top: 20px;
+.recording-bar .waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.recording-bar .waveform div {
+  width: 4px;
+  height: 15px;
+  background-color: #D4C5FF;
+  animation: wave 1.2s infinite ease-in-out;
+  border-radius: 2px;
+}
+
+.recording-bar .waveform div:nth-child(2) {
+  animation-delay: -1.1s;
+}
+
+.recording-bar .waveform div:nth-child(3) {
+  animation-delay: -1s;
+}
+
+.recording-bar .waveform div:nth-child(4) {
+  animation-delay: -0.9s;
+}
+
+.recording-bar .waveform div:nth-child(5) {
+  animation-delay: -0.8s;
+}
+
+.recording-bar .waveform div:nth-child(6) {
+  animation-delay: -0.7s;
+}
+
+.recording-bar .waveform div:nth-child(7) {
+  animation-delay: -0.6s;
+}
+
+.recording-bar .waveform div:nth-child(8) {
+  animation-delay: -0.5s;
+}
+
+.recording-bar .waveform div:nth-child(9) {
+  animation-delay: -0.4s;
+}
+
+.recording-bar .waveform div:nth-child(10) {
+  animation-delay: -0.3s;
+}
+
+.recording-bar .waveform div:nth-child(11) {
+  animation-delay: -0.2s;
+}
+
+.recording-bar .waveform div:nth-child(12) {
+  animation-delay: -0.1s;
+}
+
+.recording-bar .waveform div:nth-child(13) {
+  animation-delay: 0s;
+}
+
+@keyframes wave {
+  0%, 100% {
+    height: 5px;
+  }
+  50% {
+    height: 15px;
+  }
+}
+
+.recording-bar button {
+  background-color: #6C63FF;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.recording-bar button:hover {
+  background-color: #554DBF;
 }
 </style>
-<script src="/js/app3.js" defer></script>
-<!-- 외부 스크립트 추가 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // JavaScript를 사용하여 페이지를 변경
+    function startInterview() {
+        const body = document.body;
+
+        // 새로운 페이지 컨텐츠 HTML
+        const newContent = `
+          <div class="top_btn">
+            <button class="btn1">질문 다시 듣기</button>
+          </div>
+          <div class="title"><img src="img/feedbackup.png"></div>
+          <div class="title_text">AI 면접 연습</div>
+          <div class="content">
+            <img src="img/real_person.png" alt="AI 면접 이미지">
+            <div class="info">본 질문은 삼성전자 기출 질문입니다.</div>
+          </div>
+          <div class="recording-bar">
+            <div class="status">
+              <div class="icon"></div>
+              <div class="text">녹음중 00:03</div>
+            </div>
+            <div class="waveform">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <button>답변 마치기</button>
+          </div>
+        `;
+
+        // 페이지를 새로 작성
+        body.innerHTML = newContent;
+    }
+</script>
 </head>
 <body>
-	<h1>음성 및 비디오 캡처</h1>
-
-	<!-- 웹캠 화면을 담을 div -->
-	<div id="webcamContainer">
-		<video id="webcam" autoplay></video>
-	</div>
-
-	<button id="captureBtn">음성 분석 시작</button>
-
-	<div class="result">
-		<h3>분석 결과:</h3>
-		<p>
-			<strong>변환된 텍스트:</strong> <span id="recognizedText"></span>
-		</p>
-		<p>
-			<strong>평균 피치 (Hz):</strong> <span id="averagePitch"></span>
-		</p>
-		<p>
-			<strong>상대적 떨림 (ΔF/F):</strong> <span id="relativeTremor"></span>
-		</p>
-		<p>
-			<strong>머리를 만진 횟수:</strong> <span id="hairTouchCount">0번</span>
-		</p>
-		<p>
-			<strong>코를 만진 횟수:</strong> <span id="noseTouchCount">0번</span>
-		</p>
-	</div>
-
-	<script>
- // 웹캠 스트림 가져오기
-    const webcam = document.getElementById("webcam");
-    const captureBtn = document.getElementById("captureBtn");
-
-    let audioStream = null;
-
-    // 페이지 로드 시 자동으로 웹캠 시작
-    window.onload = function() {
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-                .then(function(stream) {
-                    webcam.srcObject = stream;
-                    audioStream = stream; // 오디오 스트림도 저장
-                })
-                .catch(function(error) {
-                    console.error("웹캠을 사용할 수 없습니다.", error);
-                    alert("웹캠이나 마이크 권한을 허용해 주세요.");
-                });
-        } else {
-            console.error("getUserMedia가 지원되지 않습니다.");
-            alert("이 브라우저에서는 웹캠을 사용할 수 없습니다.");
-        }
-    };
-
-    let isRecording = false;
-    let mediaRecorder;
-    let chunks = [];
-    let motionDetectionInterval = null;
-
-    // 음성 녹음 및 동작 인식 시작/중지
-    captureBtn.addEventListener("click", function () {
-        if (!isRecording) {
-            // 녹음 시작
-            if (!audioStream) {
-                alert("웹캠이나 마이크를 사용할 수 없습니다.");
-                return;
-            }
-
-            chunks = [];
-            mediaRecorder = new MediaRecorder(audioStream);
-
-            mediaRecorder.ondataavailable = function (e) {
-                chunks.push(e.data);
-            };
-
-            mediaRecorder.onstop = function () {
-                const blob = new Blob(chunks, { type: "audio/wav" });
-                const file = new File([blob], "captured_audio.wav", { type: "audio/wav" });
-
-                const formData = new FormData();
-                formData.append("audio", file);
-
-                fetch("/start_capture", {
-                    method: "POST",
-                    body: formData,
-                })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("recognizedText").textContent = data.recognized_text || "음성 분석 실패";
-                    document.getElementById("averagePitch").textContent = data.average_pitch ? data.average_pitch.toFixed(2) : "N/A";
-                    document.getElementById("relativeTremor").textContent = data.relative_tremor ? data.relative_tremor.toFixed(4) : "N/A";
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    document.getElementById("recognizedText").textContent = "음성 분석 실패";
-                    document.getElementById("averagePitch").textContent = "N/A";
-                    document.getElementById("relativeTremor").textContent = "N/A";
-                });
-            };
-
-            mediaRecorder.start(); 
-            startMotionDetection(); 
-            captureBtn.textContent = "녹음 중지 및 분석";
-            isRecording = true;
-        } else {
-            // 녹음 중지
-            if (mediaRecorder && mediaRecorder.state !== "inactive") {
-                mediaRecorder.stop();
-            }
-            stopMotionDetection();
-            captureBtn.textContent = "음성 분석 시작";
-            isRecording = false;
-        }
-    });
-
-
-        // 동작 인식 결과 처리
-        function startMotionDetection() {
-            if (motionDetectionInterval) {
-                console.log("동작 인식이 이미 실행 중입니다.");
-                return; // 이미 실행 중인 경우 아무 작업도 하지 않음
-            }
-
-            motionDetectionInterval = setInterval(() => {
-                const video = document.getElementById("webcam");
-                const canvas = document.createElement("canvas");
-                const context = canvas.getContext("2d");
-
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                canvas.toBlob((blob) => {
-                    const formData = new FormData();
-                    formData.append("frame", blob);
-
-                    fetch("/process_frame", { method: "POST", body: formData })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            console.log("서버 응답:", data);
-
-                            // 분석 결과 업데이트
-                            document.getElementById("hairTouchCount").textContent = `${data.hair_touch_count}번`;
-                            document.getElementById("noseTouchCount").textContent = `${data.nose_touch_count}번`;
-                        })
-                        .catch((error) => console.error("프레임 처리 오류:", error));
-                }, "image/jpeg");
-            }, 1000); // 1초마다 실행
-        }
-
-
-        // 동작 인식 중지
-        function stopMotionDetection() {
-            if (motionDetectionInterval) {
-                clearInterval(motionDetectionInterval);
-                motionDetectionInterval = null; // 상태 초기화
-                console.log("동작 인식이 중지되었습니다.");
-            }
-        }
-
-    </script>
-
+  <div class="top_btn">
+    <button class="btn1">질문 다시 듣기</button>
+    <button class="btn2">나가기</button>
+  </div>
+  <div class="title"><img src="img/feedbackup.png"></div>
+  <div class="title_text">AI 면접 연습</div>
+  <div class="content">
+    <img src="img/real_person.png" alt="AI 면접 이미지">
+    <div class="button-container">
+      <button onclick="startInterview()">시작하기</button>
+    </div>
+  </div>
+  
+  
 </body>
 </html>
