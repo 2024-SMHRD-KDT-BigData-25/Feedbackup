@@ -228,6 +228,11 @@ public class UserController {
 		return "model_test";
 	}
 	
+	@GetMapping("/model_test")
+	public String ModelTest() {
+		return "model_test";
+	}
+	
 }
 
 
