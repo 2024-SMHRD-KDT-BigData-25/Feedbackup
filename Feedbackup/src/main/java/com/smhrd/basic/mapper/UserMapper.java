@@ -21,7 +21,7 @@ public interface UserMapper {
 	
 	public int signup(MavenMember member);
 	
-	@Delete("delete from mavenmember where id = #{id}")
+	@Delete("delete from test where id = #{id}")
 	public int delete(String id);
 	
 	@Update("update mavenmember set pw =#{pw}, nickname=#{nickname} where id = #{id}")
@@ -41,5 +41,10 @@ public interface UserMapper {
     // 이름과 이메일과 아이디로 패스워드를 찾는 메소드
     @Select("SELECT * FROM test WHERE name = #{name} AND email = #{email} AND id = #{id}")
     MavenMember pwfind(@Param("name") String name, @Param("email") String email, @Param("id") String id);
+    
+    // 이름 체크
+	@Select("SELECT COUNT(*) FROM test WHERE name = #{name}")
+	Integer countByname(@Param("name") String name);
+    
 }
 
