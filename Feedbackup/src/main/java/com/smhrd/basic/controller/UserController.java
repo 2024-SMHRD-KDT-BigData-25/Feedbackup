@@ -187,13 +187,40 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/mypage")
-	public String mypageForm() {
-		return "mypage"; // pwfind.jsp로 이동
-	}
+    public String myPage(Model model, HttpSession session) {
+        MavenMember member = (MavenMember) session.getAttribute("member");
+        
+        if (member == null) {
+            return "redirect:/login";  // 로그인하지 않았다면 로그인 페이지로 리다이렉트
+        }
+
+        // 사용자의 이름을 가져와서 countByname 메소드를 호출하여 개수를 조회
+        int nameCount = service.checkcount(member.getName());
+
+        // nameCount 값을 JSP에 전달
+        model.addAttribute("nameCount", nameCount);
+
+        return "mypage";  // mypage.jsp 페이지로 이동
+    }
 	
 	@GetMapping("/users/Job_List")
-	public String Job_ListForm() {
+	public String Job_List() {
 		return "Job_List";
+	}
+	
+	@GetMapping("/users/Real_Interview")
+	public String Real_InterviewForm() {
+		return "Real_Interview";
+	}
+	
+	@GetMapping("/users/Real_Interview_Start")
+	public String Real_Interview_StartForm() {
+		return "Real_Interview_Start";
+	}
+	
+	@GetMapping("/users/Loading")
+	public String LodingForm() {
+		return "Loading";
 	}
 
 }

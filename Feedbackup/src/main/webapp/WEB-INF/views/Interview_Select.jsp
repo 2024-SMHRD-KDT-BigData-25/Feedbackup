@@ -85,12 +85,12 @@
 		<div class="text1">원하는 연습을 선택하세요.</div>
 		<div class="container">
 			<div class="box" id="box1">
-			<img src="${pageContext.request.contextPath}/assets/img/one.png" class="one_img">
+			<img src="img/one.png" class="one_img">
 			<p class="text2">자기소개</p>
 			<p class="text3">나만의 이야기를 완성하는<br>1분 자기소개 연습</p>
 			</div>
 			<div class="box" id="box2">
-			<img src="${pageContext.request.contextPath}/assets/img/AI.png" class="AI_img">
+			<img src="img/AI.png" class="AI_img">
 			<p class="text2">AI 면접</p>
 			<p class="text3">희망 기업의 예상 질문과<br>면접 분석을 통한 연습</p>
 			</div>

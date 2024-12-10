@@ -155,8 +155,8 @@
       <form action="/myapp/users" method="post" id="signupForm">
          <input type="text" name="name" placeholder="이름" required
             style="width: 260px"><br> <input type="text" id="id"
-            name="id" placeholder="아이디" required style="width: 181px">
-         <button type="button" class="idcheck" style="width: 75px">중복확인</button>
+            name="id" placeholder="아이디" required style="width: 166px">
+         <button type="button" class="idcheck" style="width: 90px">중복확인</button>
          <div id="idError" class="error" style="display: none;"></div>
          <!-- 아이디 오류 메시지 -->
 
