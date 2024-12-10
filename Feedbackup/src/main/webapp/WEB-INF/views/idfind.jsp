@@ -232,7 +232,7 @@
     </style>
 </head>
 <body>
-    <a href="index.jsp"><img src="../img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
+    <a href="/myapp"><img src="../img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
     <div class="find_wrapper">
         <div class="find_top">
             <div id="find_id" class="active">아이디 찾기</div>

@@ -20,39 +20,10 @@
 </head>
 
 <body>
-<<<<<<< HEAD
+
 	 <!-- 푸터 불러오기 -->
     <div><jsp:include page="header.jsp"></jsp:include> </div>
-=======
-	
-	<%
-	MavenMember member = (MavenMember) session.getAttribute("member");
-	%>
 
-	<%
-	if (member == null) {
-	%>
-
-	<button onclick="location.href='users/signup'">회원가입</button>
-	<button onclick="location.href='login'">로그인</button>
-	<%
-	} else {
-	%>
-	<a href="/myapp/users/mypage"><%=member.getName()%></a>님 안녕하세요!
-	<br>
-
-	<button onclick="location.href='users'">전체회원정보</button>
-
-	<button onclick="location.href='users/<%=member.getId()%>/edit'">회원정보수정</button>
-
-	<button onclick="deleteMember('<%=member.getId()%>')">회원탈퇴</button>
-	<button onclick="location.href='logout'">로그아웃</button>
-
-
-	<%
-	}
-	%>
->>>>>>> branch 'master' of https://github.com/2024-SMHRD-KDT-BigData-25/Feedbackup
 
 	<button onclick="location.href='tts'">TTS 페이지</button>
 

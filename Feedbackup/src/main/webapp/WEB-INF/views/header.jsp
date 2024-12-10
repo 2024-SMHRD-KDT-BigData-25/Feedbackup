@@ -279,5 +279,16 @@
 	%>
       </div>  
     </header>
+    
+    	<script>
+		function deleteMember(id) {
+			let choice = confirm("정말 탈퇴하시겠습니까?")
+
+			if (choice) {
+				location.href = "/myapp/users/" + id + "/delete";
+			}
+		}
+	</script>
+    
   </body>
 </html>
