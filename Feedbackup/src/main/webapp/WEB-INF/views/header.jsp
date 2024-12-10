@@ -1,3 +1,6 @@
+<%@page import="com.smhrd.basic.model.MavenMember"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -232,8 +235,8 @@
   <body>
     <header class="header">
       <div class="logo">
-        <a href="#">
-          <img src="../img/logo2.png" title="logo" height="59" width="265">
+        <a href="/myapp">
+          <img src="img/logo2.png" title="logo" height="59" width="265">
         </a>
       </div>
       <nav class="nav">
@@ -245,9 +248,47 @@
         </ul>
       </nav>
       <div class="auth-btn">
-        <button class="btn-login" onclick="location.href='login'">로그인</button>
-        <button class="btn-sign" onclick="location.href='users/signup'">시작하기</button>
+      
+      <%
+	MavenMember member = (MavenMember) session.getAttribute("member");
+	%>
+
+	<%
+	if (member == null) {
+	%>
+
+	<button class="btn-sign" onclick="location.href='login'">로그인</button>
+	<button class="btn-login" onclick="location.href='users/signup'">시작하기</button>
+	
+	<%
+	} else {
+	%>
+	<%=member.getName()%>님 안녕하세요!
+	<br>
+
+	<button onclick="location.href='users'">전체회원정보</button>
+
+	<button onclick="location.href='users/<%=member.getId()%>/edit'">회원정보수정</button>
+
+	<button onclick="deleteMember('<%=member.getId()%>')">회원탈퇴</button>
+	<button onclick="location.href='logout'">로그아웃</button>
+
+
+	<%
+	}
+	%>
       </div>  
     </header>
+    
+    	<script>
+		function deleteMember(id) {
+			let choice = confirm("정말 탈퇴하시겠습니까?")
+
+			if (choice) {
+				location.href = "/myapp/users/" + id + "/delete";
+			}
+		}
+	</script>
+    
   </body>
 </html>

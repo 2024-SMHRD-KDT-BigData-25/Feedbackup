@@ -1,0 +1,295 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.subpic {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.img1 {
+    width: 100%;
+    margin-top: 20%;
+    margin-left: 3%;
+    position: absolute;
+    object-fit: cover;
+    border-radius: 5%;
+    object-position: center;
+}
+
+.img2 {
+    width: 50%;
+    z-index: 1;
+    margin-top: 600px;
+    object-position: 50%;
+}
+
+.imtext, .imtext2, .start {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    text-align: center;
+}
+
+.imtext {
+    position: absolute;
+    top: 200px;
+    font-size: 60px;
+    font-weight: 800;
+    z-index: 1;
+    text-align: center;
+}
+
+.imtext2 {
+    position: absolute;
+    top: 400px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #475569;
+}
+
+.start {
+    position: absolute;
+    top: 470px;
+    z-index: 1;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    background-color: #8071FC;
+    text-decoration-line: none;
+    padding: 20px 40px;
+    font-size: 20px;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* 인덱스 2번째 섹션 */
+.index-two-page {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.idx2 {
+    position: relative;
+    margin-top: 150px;
+    margin-bottom: -20px;
+}
+
+.idx2-title {
+    font-size: 45px;
+    font-weight: 800;
+    margin-top: 100px;
+    padding: 30px;
+}
+
+.idx2-sub {
+    margin: 10%;
+    font-size: 20px;
+    color: #64748B;
+    font-weight: 500;
+    margin-top: 100px;
+}
+
+.text-wrapper {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.text-wrapper2 {
+    font-size: 13px;
+}
+
+.overlap1, .overlap2, .overlap3 {
+    display: inline-block;
+    margin: 15px;
+    text-align: center;
+}
+
+.index-two-page img {
+    margin-bottom: 20px;
+    margin-top: 35px;
+}
+
+.overlap1 {
+    width: 349px;
+    height: 349px;
+    background-color: #F3EDFF;
+    border-radius: 30px;
+    
+}
+
+.overlap2 {
+    width: 349px;
+    height: 349px;
+    background-color: #EDF3FF;
+    border-radius: 30px;
+}
+
+.overlap3 {
+    width: 349px;
+    height: 349px;
+    background-color: #FFEDED;
+    border-radius: 30px;
+}
+
+/* 인덱스 3번째 */
+.idx3 {
+   margin-left: 150px;
+   margin-top: 130px;
+   font-size: 50px;
+   font-weight: 900;
+}
+
+.scroll-indicator {
+  margin-top: 20px;
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.card-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card1 {
+  padding: 20px;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease-out;
+  margin-left: -100px;
+  background-color: white;
+  width: 100%;
+}
+
+.card1.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-number {
+  font-size: 34px;
+  color: #6c63ff;
+  font-weight: 600;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  font-weight: 700;
+}
+
+.card-description {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #767A85;
+}
+
+.card-content img {
+  position: absolute;
+  left: 100px;
+  display: flex;
+  
+  position: relative;
+  z-index: 1;
+  float: right;
+  width: 70%;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+    .imtext {
+        font-size: 50px;
+        top: 120px;
+    }
+
+    .imtext2 {
+        font-size: 20px;
+        top: 320px;
+    }
+
+    .start {
+        font-size: 18px;
+        padding: 18px 30px;
+        top: 380px;
+    }
+
+    .img2 {
+        width: 40%;
+        margin-top: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .img1 {
+        margin-top: 10%;
+    }
+
+    .imtext {
+        font-size: 40px;
+        top: 80px;
+    }
+
+    .imtext2 {
+        font-size: 18px;
+        top: 220px;
+    }
+
+    .start {
+        font-size: 16px;
+        padding: 15px 30px;
+        top: 280px;
+    }
+
+    .img2 {
+        width: 60%;
+        margin-top: 450px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .img1 {
+        margin-top: 5%;
+    }
+
+    .imtext {
+        font-size: 30px;
+        top: 40px;
+    }
+
+    .imtext2 {
+        font-size: 16px;
+        top: 180px;
+    }
+
+    .start {
+        font-size: 14px;
+        padding: 12px 25px;
+        top: 230px;
+    }
+
+    .img2 {
+        width: 70%;
+        margin-top: 380px;
+    }
+}
+
