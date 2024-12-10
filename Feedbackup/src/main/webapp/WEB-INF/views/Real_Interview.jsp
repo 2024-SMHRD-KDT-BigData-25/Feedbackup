@@ -68,14 +68,16 @@
   }
 
   .title img{
-    width: 100px;
-    height: auto;;
+    width: 140px;
+    height: auto; ;
   }
 
-  .title_text{
+  .title_text {
     margin-top: 0px;
     margin-bottom: 20px;
     text-align: center;
+    color: #64748B;
+    font-size: 20px;
   }
 
   .content {
@@ -83,12 +85,12 @@
   }
 
   .content img {
-    width: 850px;
+    width: 850px; 
     height: auto;
   }
 
   .button-container {
-    margin-top: 10px;
+    margin-top: 7px;
   }
 
   .button-container button {

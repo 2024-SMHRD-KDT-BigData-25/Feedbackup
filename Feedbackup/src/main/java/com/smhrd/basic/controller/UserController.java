@@ -217,6 +217,11 @@ public class UserController {
 	public String Real_Interview_StartForm() {
 		return "Real_Interview_Start";
 	}
+	
+	@GetMapping("/users/Loading")
+	public String LodingForm() {
+		return "Loading";
+	}
 
 }
 
