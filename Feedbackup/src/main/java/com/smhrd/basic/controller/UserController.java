@@ -190,6 +190,21 @@ public class UserController {
 	public String mypageForm() {
 		return "mypage"; // pwfind.jsp로 이동
 	}
+	
+	@GetMapping("/users/Job_List")
+	public String Job_List() {
+		return "Job_List";
+	}
+	
+	@GetMapping("/users/Real_Interview")
+	public String Real_InterviewForm() {
+		return "Real_Interview";
+	}
+	
+	@GetMapping("/users/Real_Interview_Start")
+	public String Real_Interview_StartForm() {
+		return "Real_Interview_Start";
+	}
 
 }
 
