@@ -52,16 +52,18 @@
   color: #6C63FF;
 }
 
-.title_text{
-  margin-top: 0px;
-  margin-bottom: 20px;
-  text-align: center;
-}
+  .title img{
+    width: 140px;
+    height: auto; ;
+  }
 
-.title img{
-  width: 100px;
-  height: auto;;
-}
+  .title_text {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #64748B;
+    font-size: 20px;
+  }
 
 .content {
   position: relative;
@@ -101,7 +103,7 @@
   width: 80%;
   max-width: 400px;
   position: fixed;
-  bottom: 50px;
+  bottom: 45px;
   left: 540px;
 }
 
