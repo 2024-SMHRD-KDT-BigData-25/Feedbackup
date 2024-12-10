@@ -20,24 +20,14 @@
     }
 
   .top_btn {
-    display: flex;
-    justify-content: space-between;
+ 	display: flex;
+    justify-content: flex-end;
     width: 850px;
     padding: 20px 0px;
     box-sizing: border-box;
     margin: 0px auto;
   }
 
-  .top_btn .btn1 {
-    border: 1px solid #D4C5FF;
-    background-color: transparent;
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #8071FC;
-    cursor: pointer;
-  }
 
   .top_btn .btn2 {
     border: 1px solid #D4C5FF;
@@ -48,12 +38,9 @@
     font-weight: bold;
     color: #FFFFFF;
     cursor: pointer;
+    
   }
 
-  .top_btn .btn1:hover {
-    background-color: #8071FC;
-    color: #FFFFFF;
-  }
 
   .top_btn .btn2:hover {
     background-color: #FFFFFF;
@@ -111,7 +98,6 @@
 </head>
 <body>
   <div class="top_btn">
-    <button class="btn1">질문 다시 듣기</button>
     <button class="btn2">나가기</button>
   </div>
   <div class="title"><img src="../img/feedbackup.png"></div>
