@@ -360,7 +360,8 @@ video {
 		        lastHairTouchCount = 0;
 		        lastNoseTouchCount = 0;
 		        console.log("녹음을 시작합니다.");
-		
+			
+		        document.getElementById("playTTSButton").click();
 		        // 녹음 준비
 		        chunks = [];
 		        mediaRecorder = new MediaRecorder(audioStream);
