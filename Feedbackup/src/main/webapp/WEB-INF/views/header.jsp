@@ -286,7 +286,7 @@
         <ul class="nav-list">
           <li><a href="/myapp/Interview_Select">AI 면접</a></li>
           <li><a href="/myapp/users/result_list">AI 분석결과</a></li>
-          <li><a href="#">족보</a></li>
+          <li><a href="/myapp/QandA">합격자 답안</a></li>
           <li><a href="#">고객지원</a></li>
         </ul>
       </nav>
@@ -308,7 +308,7 @@
    %>
    <a class="btn-user" onclick="location.href='/myapp/users/mypage'"><strong><%=member.getName()%></strong>&nbsp;&nbsp;님</a>
    
-   <button class="btn-logout" onclick="location.href='logout'">로그아웃</button>
+   <button class="btn-logout" onclick="location.href='/myapp/logout'">로그아웃</button>
 
 
    <%

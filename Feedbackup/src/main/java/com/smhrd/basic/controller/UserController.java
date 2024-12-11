@@ -78,11 +78,14 @@ public class UserController {
 		}
 	}
 
-	@GetMapping("result_list")
+	@GetMapping("/users/result_list")
 	public String getResultPage(HttpSession session, Model model) {
-	    MavenMember member = (MavenMember) session.getAttribute("member");
-
-	    String userName = member.getName(); // 로그인한 사용자의 이름
+		MavenMember member = (MavenMember) session.getAttribute("member");
+		 
+		if (member == null) {
+		        return "redirect:/login"; // member가 세션에 없으면 로그인 페이지로 리다이렉트
+		    }
+	    String userName = member.getName();
 	    List<MavenMember> users = service.findUsersByName(userName); // 같은 이름을 가진 사용자 조회
 
 	    // users 리스트를 모델에 추가하여 JSP로 전달
@@ -278,11 +281,6 @@ public class UserController {
 	}
 	
 
-	@GetMapping("/users/result_list")
-	public String result_listForm() {
-		return "result_list";
-	}
-
 	@GetMapping("/result_test")
 	public String ResultTest() {
 		return "result_test";
@@ -291,6 +289,14 @@ public class UserController {
 	@GetMapping("/users/Result")
 	public String ResultForm() {
 		return "Result";
+	}
+	
+	@GetMapping("/QandA")
+	public String listPage(Model model) { // + forwarding
+		List<MavenMember> list = service.getqanda();
+		model.addAttribute("list",list);
+		
+		return "QandA";
 	}
 }
 
