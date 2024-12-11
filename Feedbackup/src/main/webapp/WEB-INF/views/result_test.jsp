@@ -21,9 +21,9 @@
     <div id="resultsContainer"></div>
 
     <!-- 선택된 결과를 보여줄 버튼 추가 -->
-    <button id="loadResult0">0번 데이터 보기</button>
-    <button id="loadResult1">1번 데이터 보기</button>
-    <button id="loadResult2">2번 데이터 보기</button>
+    <button id="loadResult0">가장 최근의 첫번째 데이터</button>
+    <button id="loadResult1">가장 최근의 두번째 데이터</button>
+    <button id="loadResult2">가장 최근의 세번째 데이터</button>
     
     <button id="resetButton">데이터 초기화</button>
     
@@ -44,13 +44,21 @@
             });
     }
 
-    // 선택된 결과를 화면에 출력하는 함수
+    window.onload = function() {
+        getSavedResults(); // 데이터를 가져온 후 loadResult 호출
+    };
+
     function loadResult(index) {
-        const firstResult = savedResults[index];
-        
-        if (firstResult) {
-            const averagePitch = firstResult.averagePitch || 0;
-            let pitchDescription = '';
+        // 최신 3개 데이터의 인덱스를 가져옴
+        const resultIndex = savedResults.length - 1 - index;
+        const selectedResult = savedResults[resultIndex];
+
+        if (!selectedResult) {
+            console.error("선택된 데이터가 없습니다.");
+            return;
+        }
+
+        console.log("선택된 결과:", selectedResult);
 
             // 피치 설명 문구 생성
             if (averagePitch < 120) {
@@ -63,14 +71,14 @@
                 pitchDescription = "매우 높은 피치: 음성이 지나치게 높은 톤으로 들릴 수 있습니다.";
             }
 
-            const hairTouchCount = firstResult.hairTouchCount || 0;
-            const noseTouchCount = firstResult.noseTouchCount || 0;
+            const hairTouchCount = selectedResult.hairTouchCount || 0;
+            const noseTouchCount = selectedResult.noseTouchCount || 0;
             const totalTouches = (hairTouchCount + noseTouchCount) / 2;
 
             const formattedTotalTouches = totalTouches.toFixed(2);
 
             // 상대적 떨림 분석
-            const relativeTremor = firstResult.relativeTremor || 0;
+            const relativeTremor = selectedResult.relativeTremor || 0;
             let tremorDescription = '';
 
             if (relativeTremor < 0.03) {
@@ -96,32 +104,27 @@
             }
 
             // UI에 반영
-            document.getElementById("recognizedText").textContent = firstResult.recognizedText || "데이터 없음";
-            document.getElementById("averagePitch").textContent = firstResult.averagePitch ? firstResult.averagePitch.toFixed(2) : "0";
-            document.getElementById("relativeTremor").textContent = firstResult.relativeTremor ? firstResult.relativeTremor.toFixed(4) : "0";
-            document.getElementById("hairTouchCount").textContent = firstResult.hairTouchCount || "0";
-            document.getElementById("noseTouchCount").textContent = firstResult.noseTouchCount || "0";
-            document.getElementById("timestamp").textContent = firstResult.timestamp || "타임스탬프 없음";
+            document.getElementById("recognizedText").textContent = selectedResult.recognizedText || "데이터 없음";
+            document.getElementById("averagePitch").textContent = selectedResult.averagePitch ? selectedResult.averagePitch.toFixed(2) : "0";
+            document.getElementById("relativeTremor").textContent = selectedResult.relativeTremor ? selectedResult.relativeTremor.toFixed(4) : "0";
+            document.getElementById("hairTouchCount").textContent = selectedResult.hairTouchCount || "0";
+            document.getElementById("noseTouchCount").textContent = selectedResult.noseTouchCount || "0";
+            document.getElementById("timestamp").textContent = selectedResult.timestamp || "타임스탬프 없음";
             document.getElementById("pitchDescription").textContent = pitchDescription;
             document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
             document.getElementById("tremorDescription").textContent = tremorDescription;
         }
-    }
-
-    // 페이지가 로드될 때 저장된 결과를 가져오기
-    window.onload = function() {
-        getSavedResults();
-    };
+    
 
     // 버튼 클릭 시 결과 로드
     document.getElementById("loadResult0").addEventListener("click", function() {
-        loadResult(0);
+        loadResult(0); // 가장 최근의 결과 (0번) 로드
     });
     document.getElementById("loadResult1").addEventListener("click", function() {
-        loadResult(1);
+        loadResult(1); // 뒤에서 2번째 결과 (1번) 로드
     });
     document.getElementById("loadResult2").addEventListener("click", function() {
-        loadResult(2);
+        loadResult(2); // 뒤에서 3번째 결과 (2번) 로드
     });
 
     // 초기화 함수

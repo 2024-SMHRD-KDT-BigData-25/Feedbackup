@@ -340,16 +340,17 @@ video {
 		// 버튼 클릭 시 음성 분석 및 동작 인식 시작/중지
 		
 		let executionCount = 0; // 실행 횟수를 추적하는 변수
-        
+		let analysisCompleted = false; // 분석 완료 여부를 추적하는 변수
+		
 		captureBtn.addEventListener("click", function () {
-			if (executionCount >= 3) {
-	            // 3번 실행되면 다른 페이지로 이동
-	            window.location.href = "/myapp/result_test"; // 원하는 페이지 URL로 변경
-	            return;
-	        }
-			
-			console.log("버튼 클릭됨. 현재 녹음 상태:", isRecording);
-
+		    if (executionCount >= 3 && !analysisCompleted) {
+		        // 분석 완료 후 결과 저장 및 페이지 이동
+		        saveResults(); 
+		        return;
+		    }
+		
+		    console.log("버튼 클릭됨. 현재 녹음 상태:", isRecording);
+		
 		    if (!isRecording) {
 		        // 녹음 시작 전 카운트 초기화
 		        document.getElementById("hairTouchCount").textContent = "0번";
@@ -357,19 +358,10 @@ video {
 		        lastHairTouchCount = 0;
 		        lastNoseTouchCount = 0;
 		        console.log("녹음을 시작합니다.");
-		        // 녹음 시작
-		        
-		        document.getElementById("playTTSButton").click();	
-		
-		        if (!audioStream) {
-		            alert("웹캠이나 마이크를 사용할 수 없습니다.");
-		            return;
-		        }
 		
 		        // 녹음 준비
 		        chunks = [];
 		        mediaRecorder = new MediaRecorder(audioStream);
-		
 		        mediaRecorder.ondataavailable = function (e) {
 		            chunks.push(e.data);
 		        };
@@ -386,12 +378,7 @@ video {
 		                method: "POST",
 		                body: formData,
 		            })
-		            .then((response) => {
-		                if (!response.ok) {
-		                    throw new Error("서버 오류");
-		                }
-		                return response.json();
-		            })
+		            .then((response) => response.json())
 		            .then((data) => {
 		                console.log("서버 응답:", data);
 		                // 음성 분석 결과 출력
@@ -405,8 +392,11 @@ video {
 		                document.getElementById("relativeTremor").textContent =
 		                    data.relative_tremor ? data.relative_tremor.toFixed(4) : "N/A";
 		
-		                // 결과 저장
-		                saveResults();
+		                // 분석이 완료되었으므로 결과를 저장하고 페이지를 이동
+		                analysisCompleted = true; // 분석 완료 상태로 변경
+		                if (executionCount >= 3) {
+		                    saveResults(); // 3번째 분석이 끝나면 결과 저장
+		                }
 		            })
 		            .catch((error) => {
 		                console.error("Error:", error);
@@ -419,11 +409,6 @@ video {
 		        mediaRecorder.start(); // 녹음 시작
 		        startMotionDetection(); // 동작 인식 시작
 		
-		        // 머리 만진 횟수와 코 만진 횟수 초기화
-		        lastHairTouchCount = 0; // 머리 만진 횟수 초기화
-		        lastNoseTouchCount = 0; // 코 만진 횟수 초기화
-				
-		     	// 녹음 상태 표시
 		        recordingBar.style.display = "flex"; // .recording-bar 보이기
 		        document.getElementById("status").style.display = "block"; // 상태 텍스트 보이기
 		        document.getElementById("waveform").style.display = "flex"; // 웨이브폼 보이기
@@ -431,26 +416,21 @@ video {
 		        
 		        captureBtn.textContent = "분석하기"; // 버튼 텍스트 변경
 		        isRecording = true;
-		        
-		     	// 실행 횟수 증가
-	            executionCount++;
 		
+		        executionCount++;
 		    } else {
-		        console.log("녹음을 중지합니다.");
-		        // 녹음을 중지하려는 경우
+		        // 음성 녹음을 중지하려는 경우
 		        if (mediaRecorder && mediaRecorder.state !== "inactive") {
 		            mediaRecorder.stop(); // 녹음 중지
 		        }
 		        stopMotionDetection(); // 동작 인식 중지
-				
-		     	// .recording-bar 숨기기
-		        recordingBar.style.display = "none";  // .recording-bar 숨기기
 		        
+		        recordingBar.style.display = "none";  // .recording-bar 숨기기
 		        captureBtn.textContent = "시작하기"; // 버튼 텍스트 복원
 		        isRecording = false;
 		    }
 		});
-
+		
         // 동작 인식 결과 처리
         function startMotionDetection() {
             if (motionDetectionInterval) {
@@ -510,16 +490,14 @@ video {
             }
         }
 
-     // 결과 저장 및 초기화 함수
+     // 분석 결과 저장 및 페이지 이동
         function saveResults() {
-            // 현재 분석 결과 가져오기
             const hairTouchCount = lastHairTouchCount;
             const noseTouchCount = lastNoseTouchCount;
             const recognizedText = document.getElementById("recognizedText").textContent;
             const averagePitch = parseFloat(document.getElementById("averagePitch").textContent) || 0;
             const relativeTremor = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
 
-            // 결과 저장 (로컬 스토리지 또는 서버)
             const result = {
                 hairTouchCount,
                 noseTouchCount,
@@ -541,8 +519,8 @@ video {
             })
             .then((data) => {
                 console.log("서버에 저장 완료:", data);
-                // 값 초기화
-                resetTouchCounts();
+                // 분석이 끝났으면 페이지 이동
+                window.location.href = "/myapp/result_test"; // 원하는 페이지 URL로 변경
             })
             .catch((error) => console.error("결과 저장 중 오류:", error));
         }
