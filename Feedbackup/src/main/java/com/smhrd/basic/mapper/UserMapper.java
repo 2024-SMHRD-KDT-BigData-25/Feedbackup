@@ -45,6 +45,13 @@ public interface UserMapper {
     // 이름 체크
 	@Select("SELECT COUNT(*) FROM test WHERE name = #{name}")
 	Integer countByname(@Param("name") String name);
-    
+	
+	@Select("SELECT q_text FROM QUESTIONS WHERE job_code = #{jobCode} ORDER BY RAND() LIMIT 1")
+    String findQTextByJobCode(@Param("jobCode") String jobCode);
+	
+	@Select("SELECT a_text FROM QUESTIONS WHERE q_text = #{qText}")
+	String findATextByQText(@Param("qText") String qText);
+	
+
 }
 
