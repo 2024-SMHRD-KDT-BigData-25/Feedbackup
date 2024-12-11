@@ -208,6 +208,28 @@ public class UserController {
 		return "Job_List";
 	}
 	
+	@PostMapping("/users/Job_List")
+	public String searchJobCodeAndGetAnswer(@RequestParam("jobCode") String jobCode, Model model) {
+	    // jobCode를 받아서 q_text 값을 가져옵니다.
+	    String qText = service.getQTextByJobCode(jobCode);
+
+	    // qText 값이 정상적으로 가져와졌는지 확인
+	    System.out.println("검색된 q_text 값: " + qText);
+
+	    // qText 값을 모델에 추가하여 JSP로 전달
+	    model.addAttribute("qText", qText);
+
+	    // q_text에 해당하는 a_text를 가져옵니다.
+	    String aText = service.getATextByQText(qText);
+
+	    // aText 값도 모델에 추가하여 JSP로 전달
+	    System.out.println("검색된 a_text 값: " + aText);
+	    model.addAttribute("aText", aText);
+
+	    // 결과를 출력할 JSP 페이지로 이동
+	    return "Job_List";  // Job_List.jsp
+	}
+	
 	@GetMapping("/users/Real_Interview")
 	public String Real_InterviewForm() {
 		return "Real_Interview";
