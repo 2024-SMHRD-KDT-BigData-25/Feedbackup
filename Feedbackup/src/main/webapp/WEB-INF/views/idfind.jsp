@@ -259,7 +259,7 @@
             <h3>아이디 찾기 완료</h3>
             <p id="idNameResult">
                 <c:if test="${success}">
-                    ${name}님의 아이디는 <span class="highlight">${id}</span>입니다.
+                    ${name}님의 아이디는 <span class="highlight">${user_id}</span>입니다.
                 </c:if>
             </p>
             <p class="modal_text">※회원정보 보호를 위해 아이디의 일부만 보여지며<br> 전체 아이디는 고객센터를 통해서 확인 부탁드립니다.</p>
