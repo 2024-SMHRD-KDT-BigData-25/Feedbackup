@@ -105,6 +105,14 @@
 .category-button.active {
   background-color: #8071FC;
   color: white;
+  border: 2px solid #8071FC;
+  font-weight: bold;
+}
+
+.category-button.active:hover {
+  /* 호버 상태가 유지되도록 추가 스타일 지정 */
+  background-color: #8071FC;
+  color: white;
 }
 
 .sex_container{
@@ -233,7 +241,7 @@
   <div class="text1">희망하시는 기업을 선택해 주세요</div>
   <div class="text2">* 확실한 면접 준비를 위해 각각 한가지만 선택가능 합니다.</div>
 <div class="search-container">
-  <form action="/myapp/users/Job_List" method="POST">
+  <form id="search-form" action="/myapp/users/Job_List" method="POST">
     <input 
       type="text" 
       id="search-input" 
@@ -292,38 +300,65 @@
 </div>
 
 <script>
-  // 엔터키 또는 버튼 클릭으로 검색 실행
-  document.getElementById('search-input').addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-      searchCompany();
+//검색 기능
+document.getElementById('search-form').addEventListener('submit', function (event) {
+  event.preventDefault(); // 기본 제출 동작 중단
+  searchCompany(); // 검색 로직 실행
+  this.submit(); // 폼 데이터 제출
+});
+
+function searchCompany() {
+  const input = document.getElementById('search-input').value.toLowerCase();
+  const buttons = document.querySelectorAll('.category-button');
+  let result = '';
+  const activeCompanies = []; // 활성화된 버튼 저장 배열
+
+  buttons.forEach(button => {
+    const companyName = button.textContent.toLowerCase();
+
+    if (companyName.includes(input)) {
+      result += `${button.textContent} `;
+      button.classList.add('active');
+      activeCompanies.push(companyName); // 활성화된 버튼 이름 저장
+    } else {
+      button.classList.remove('active');
     }
   });
 
-  function searchCompany() {
-	  const input = document.getElementById('search-input').value.toLowerCase();
-	  const buttons = document.querySelectorAll('.category-button');
-	  let result = '';
+  if (!input) {
+    result = '검색어를 입력하세요.';
+  } else if (result === '') {
+    result = '일치하는 기업이 없습니다.';
+  }
 
-	  buttons.forEach(button => {
-	    const companyName = button.textContent.toLowerCase();
-	    
-	    // 기업 이름에 검색어가 포함되면 버튼에 active 클래스 추가
-	    if (companyName.includes(input)) {
-	      result += `${button.textContent} `;
-	      button.classList.add('active'); // 버튼에 색상 추가
-	    } else {
-	      button.classList.remove('active'); // 검색어와 일치하지 않으면 색상 제거
-	    }
-	  });
+  document.getElementById('search-result').textContent = result;
 
-	  if (!input) {
-	    result = '검색어를 입력하세요.';
-	  } else if (result === '') {
-	    result = '일치하는 기업이 없습니다.';
-	  }
+  // 로컬 스토리지에 활성화된 버튼 저장
+  localStorage.setItem('activeCompanies', JSON.stringify(activeCompanies));
+}
 
-	  document.getElementById('search-result').textContent = result;
-	}
+// 페이지 로드 시 로컬 스토리지에서 버튼 상태 복원
+window.addEventListener('DOMContentLoaded', function () {
+  const activeCompanies = JSON.parse(localStorage.getItem('activeCompanies')) || [];
+  const buttons = document.querySelectorAll('.category-button');
+
+  buttons.forEach(button => {
+    const companyName = button.textContent.toLowerCase();
+
+    if (activeCompanies.includes(companyName)) {
+      button.classList.add('active'); // 로컬 스토리지에 저장된 버튼 복원
+    }
+  });
+});
+
+// 클릭 이벤트로 active 상태 유지
+document.querySelectorAll('.category-button').forEach(button => {
+  button.addEventListener('click', function () {
+    document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
 </script>
 
 </body>
