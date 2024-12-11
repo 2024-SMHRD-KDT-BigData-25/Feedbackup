@@ -255,6 +255,10 @@ public class UserController {
 		return "model_test";
 	}
 	
+	@GetMapping("/users/result_list")
+	public String result_listForm() {
+		return "result_list";
+	}
 }
 
 
