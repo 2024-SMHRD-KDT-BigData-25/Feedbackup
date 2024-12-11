@@ -343,15 +343,9 @@ video {
 		
 		let executionCount = 0; // 실행 횟수를 추적하는 변수
 		let analysisCompleted = false; // 분석 완료 여부를 추적하는 변수
-		
+
 		captureBtn.addEventListener("click", function () {
-		    if (executionCount >= 3 && !analysisCompleted) {
-		        // 분석 완료 후 결과 저장 및 페이지 이동
-		        saveResults(); 
-		        return;
-		    }
-		
-		    console.log("버튼 클릭됨. 현재 녹음 상태:", isRecording);
+			console.log("버튼 클릭됨. 현재 녹음 상태:", isRecording);
 		
 		    if (!isRecording) {
 		        // 녹음 시작 전 카운트 초기화
@@ -384,6 +378,7 @@ video {
 		            .then((response) => response.json())
 		            .then((data) => {
 		                console.log("서버 응답:", data);
+		                
 		                // 음성 분석 결과 출력
 		                if (data.recognized_text) {
 		                    document.getElementById("recognizedText").textContent = data.recognized_text;
@@ -394,13 +389,10 @@ video {
 		                    data.average_pitch ? data.average_pitch.toFixed(2) : "N/A";
 		                document.getElementById("relativeTremor").textContent =
 		                    data.relative_tremor ? data.relative_tremor.toFixed(4) : "N/A";
-		
-		                // 분석이 완료되었으므로 결과를 저장하고 페이지를 이동
-		                analysisCompleted = true; // 분석 완료 상태로 변경
-		                if (executionCount >= 3) {
-		                    saveResults(); // 3번째 분석이 끝나면 결과 저장
-		                }
-		            })
+						
+		                 // 분석 결과를 서버에 저장
+		                 saveResults();
+		           	})
 		            .catch((error) => {
 		                console.error("Error:", error);
 		                document.getElementById("recognizedText").textContent = "음성 분석 실패";
@@ -420,7 +412,6 @@ video {
 		        captureBtn.textContent = "분석하기"; // 버튼 텍스트 변경
 		        isRecording = true;
 		
-		        executionCount++;
 		    } else {
 		        // 음성 녹음을 중지하려는 경우
 		        if (mediaRecorder && mediaRecorder.state !== "inactive") {
@@ -522,8 +513,12 @@ video {
             })
             .then((data) => {
                 console.log("서버에 저장 완료:", data);
+
                 // 분석이 끝났으면 페이지 이동
-                window.location.href = "/myapp/result_test"; // 원하는 페이지 URL로 변경
+                executionCount++;
+                if (executionCount >= 3) {
+                    window.location.href = "/myapp/result_test"; // 원하는 페이지 URL로 변경
+                }
             })
             .catch((error) => console.error("결과 저장 중 오류:", error));
         }
