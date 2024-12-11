@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>My Page</title>
+    <title>FeedbackUp | 마이페이지</title>
 </head>
 <body>
     <%

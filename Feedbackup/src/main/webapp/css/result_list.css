@@ -1,0 +1,100 @@
+body {
+    background-color: #F1F5F9;
+	font-family: 'Pretendard', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-wrap {
+    text-align: center;
+	margin-top: 170px;
+}
+
+.list-wrap > h2 {
+    font-size: 40px;
+    font-weight: 800;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #8071fc;
+    border-radius: 20px;
+    background-color: white;
+    color: #8071FC;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+button.active {
+    background-color: #8071FC;
+    color: white;
+}
+   
+
+button:hover {
+    background-color: #8071FC;
+    color: white;
+    transition: 0.38s;
+    cursor: pointer;
+}
+
+.list-result {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+    width: 800px;
+   
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited h2{
+    color: #8071FC;
+}
+
+a:visited p,span{
+    color: black;
+}
+
+.result-box {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: left;
+    transition: all 0.3s ease;
+    
+}
+
+.result-box:hover {
+    transform: translateY(-5px);
+    border: #8071FC 3px solid;
+    background-color: #F3EDFF;
+    cursor: pointer;
+}
+
+.result-box h2 {
+    font-size: 20px;
+    color: #8071FC;
+    margin-bottom: 30px;
+    margin-top: -1px;
+}
+
+.result-box p {
+    font-size: 15px;
+    color: black;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.result-box span {
+    float: right;
+    font-size: 13px;
+    color: #64748B;
+}
