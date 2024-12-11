@@ -290,6 +290,14 @@ public class UserController {
 	public String ResultForm() {
 		return "Result";
 	}
+	
+	@GetMapping("/QandA")
+	public String listPage(Model model) { // + forwarding
+		List<MavenMember> list = service.getqanda();
+		model.addAttribute("list",list);
+		
+		return "QandA";
+	}
 }
 
 

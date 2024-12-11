@@ -61,5 +61,8 @@ public interface UserMapper {
 	// 같은 이름을 가진 사용자들 정보 가져오기
     @Select("SELECT * FROM test WHERE name = #{name}")
     List<MavenMember> findUsersByName(@Param("name") String name);
+    
+    @Select("SELECT * FROM QUESTIONS")
+    List<MavenMember> getqanda();
 }
 
