@@ -260,15 +260,6 @@ video {
 	<div id="webcamContainer">
 		<video id="webcam" autoplay></video>
 		<div class="info">본 질문은 삼성전자 기출 질문입니다.</div>
-		
-	<p>첫 번째 질문: ${firstqText}</p>
-    <p>첫 번째 답변: ${firstaText}</p>
-    
-    <p>두 번째 질문: ${secondqText}</p>
-    <p>두 번째 답변: ${secondaText}</p>
-    
-    <p>세 번째 질문: ${thirdqText}</p>
-    <p>세 번째 답변: ${thirdaText}</p>
 	</div>
 	<div>
     </div>
