@@ -260,6 +260,15 @@ video {
 	<div id="webcamContainer">
 		<video id="webcam" autoplay></video>
 		<div class="info">본 질문은 삼성전자 기출 질문입니다.</div>
+		
+	<p>첫 번째 질문: ${firstqText}</p>
+    <p>첫 번째 답변: ${firstaText}</p>
+    
+    <p>두 번째 질문: ${secondqText}</p>
+    <p>두 번째 답변: ${secondaText}</p>
+    
+    <p>세 번째 질문: ${thirdqText}</p>
+    <p>세 번째 답변: ${thirdaText}</p>
 	</div>
 	<div>
     </div>
@@ -558,49 +567,43 @@ video {
             console.log("결과가 초기화되었습니다.");
         }
         
-     // 버튼 클릭 이벤트 리스너
+     	// 질문 리스트와 인덱스 전역 정의
+        const questions = ["${firstqText}", "${secondqText}", "${thirdqText}"];
+        let currentIndex = 0;
+
+        // TTS 버튼 클릭 이벤트 리스너
         document.getElementById("playTTSButton").addEventListener("click", function () {
-            // 변수로 텍스트 설정
-            const textToConvert = "당신이 우리 회사에 입사한다면 처음 하고싶은 일이 무엇인가요?";
+            if (currentIndex < questions.length) {
+            	currentIndex++;
+                const textToConvert = questions[currentIndex-1];
 
-            if (textToConvert) {
-                // 텍스트를 URL 인코딩
-                const encodedText = encodeURIComponent(textToConvert);
+                if (textToConvert) {
+                    const encodedText = encodeURIComponent(textToConvert);
+                    const ttsServerUrl = "http://localhost:5000/tts-server/api/infer-glowtts?text=" + encodedText;
+                    const audioElement = document.getElementById("ttsAudio");
 
-                // TTS 서버 URL 생성
-                const ttsServerUrl = "http://localhost:5000/tts-server/api/infer-glowtts?text=" + encodedText;
-
-                // 오디오 엘리먼트 가져오기
-                const audioElement = document.getElementById("ttsAudio");
-
-                // 오디오 소스 URL 설정
-                audioElement.src = ttsServerUrl;
-
-                // 오디오 재생
-                audioElement.play()
-                    .then(() => {
-                        console.log("TTS 오디오 재생이 시작되었습니다.");
-                    })
-                    .catch((error) => {
-                        console.error("TTS 오디오 재생 실패:", error);
-                    });
+                    audioElement.src = ttsServerUrl;
+                    audioElement.play()
+                        .then(() => {
+                            console.log(`TTS 재생 중: ${textToConvert}`);
+                        })
+                        .catch((error) => console.error("TTS 오디오 재생 실패:", error));
+                } else {
+                    console.error("변환할 텍스트가 비어 있습니다.");
+                }
             } else {
-                console.error("변환할 텍스트가 비어 있습니다.");
+                console.log("모든 문장이 재생되었습니다.");
             }
-            
         });
-     	// '질문 다시 듣기' 버튼 클릭 이벤트 리스너
+
+        // '질문 다시 듣기' 버튼 클릭 이벤트 리스너
         document.querySelector(".btn1").addEventListener("click", function () {
-            const audioElement = document.getElementById("ttsAudio"); // 기존 TTS 오디오 엘리먼트 가져오기
+            const audioElement = document.getElementById("ttsAudio");
 
             if (audioElement.src) {
                 audioElement.play()
-                    .then(() => {
-                        console.log("TTS 오디오 재생이 시작되었습니다.");
-                    })
-                    .catch((error) => {
-                        console.error("TTS 오디오 재생 실패:", error);
-                    });
+                    .then(() => console.log("TTS 오디오 재생이 시작되었습니다."))
+                    .catch((error) => console.error("TTS 오디오 재생 실패:", error));
             } else {
                 console.error("TTS 오디오 소스가 설정되지 않았습니다.");
             }
