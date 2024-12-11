@@ -58,13 +58,27 @@ public class UserService {
     }
     
     // 
-    public String getQTextByJobCode(String jobCode) {
+    public List<String> getQTextByJobCode(String jobCode) {
         return mapper.findQTextByJobCode(jobCode);
     }
     
     // q_text를 기준으로 a_text를 가져오는 메서드
-    public String getATextByQText(String qText) {
-        return mapper.findATextByQText(qText);
+    public String getATextByfirstqText(String firstqText) {
+        return mapper.findATextByfirstqText(firstqText);
     }
     
+ // q_text를 기준으로 a_text를 가져오는 메서드
+    public String getATextBysecondqText(String secondqText) {
+        return mapper.findATextBysecondqText(secondqText);
+    }
+    
+ // q_text를 기준으로 a_text를 가져오는 메서드
+    public String getATextBythirdqText(String thirdqText) {
+        return mapper.findATextBythirdqText(thirdqText);
+    }
+    
+ // 이름을 기준으로 사용자 정보를 찾는 메소드
+    public List<MavenMember> findUsersByName(String name) {
+        return mapper.findUsersByName(name);
+    }
 }

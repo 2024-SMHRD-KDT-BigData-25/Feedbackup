@@ -12,26 +12,23 @@
   <style>
      body {
       font-family: 'SUIT-Regular';
-      position: relative;
+      position: relative; 
     }
 
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 50px;
-      margin-left: 40px;
-      margin-right: 20px;
+      height: 130px;
+      background-color: white;
     }
 
     .logo {
-      
       object-fit: cover;
       margin-left: 20px;
     }
 
     .nav {
-      
       display: block;
       margin: 0 auto;
       
@@ -130,7 +127,7 @@
   
     .btn-user strong {
        color: #8071FC;
-       font-size: 25px;
+       font-size: 23px;
        font-weight: 700;
     }
     
