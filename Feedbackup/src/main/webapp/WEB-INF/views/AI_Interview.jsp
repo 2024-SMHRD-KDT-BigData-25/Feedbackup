@@ -45,7 +45,8 @@
 					</P>
 					<P>
 						<span class="circle">2</span>&nbsp;&nbsp; 이어폰 사용 시 마이크에 닿은 옷 또는
-						머리카락 때문에 소음이 생길수 있으니 주의해 주세요.
+						머리카락 때문에 소음이 생길수 있으니 
+						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주의해 주세요.
 					</P>
 					<P>
 						<span class="circle">3</span>&nbsp;&nbsp; 다른 사람의 음성이 녹음되지 않도록 해
@@ -56,7 +57,8 @@
 					<h4>오류를 일으키는 주요원인</h4>
 					<P>
 						<span class="circle">1</span>&nbsp;&nbsp; 마이크 사용 중 하울링(소리 증폭 현상)이
-						발생하면 소리가 커져서 음성 검출이 어려워질 수 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;있습니다.
+						발생하면 소리가 커져서 음성 검출이 
+						<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;어려워질 수 있습니다.
 					</P>
 					<P>
 						<span class="circle">2</span>&nbsp;&nbsp; 이어폰 사용 시에는 마이크가 있는 기기를
