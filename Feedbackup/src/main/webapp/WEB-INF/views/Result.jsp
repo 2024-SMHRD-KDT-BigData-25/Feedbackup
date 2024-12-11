@@ -631,66 +631,165 @@ body {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Helper Function: 그래프 높이 설정
-    function setBarHeight(barId, valueId, value) {
-        const bar = document.getElementById(barId);
-        const barValue = document.getElementById(valueId);
+	//막대 그래프 높이를 설정하는 함수
+	function setBarHeight(barId, valueId, value) {
+    console.log(`Attempting to set height for ${barId} with value: ${value}`);
 
-        if (!bar || !barValue) {
-            console.error(`Element with ID ${barId} or ${valueId} not found`);
-            return;
-        }
+    const bar = document.getElementById(barId);
+    const barValue = document.getElementById(valueId);
 
-        const maxHeight = 300; // 그래프 최대값
-        const minHeight = 0;   // 그래프 초기 최소값
-        const normalizedHeight = ((value - minHeight) / (maxHeight - minHeight)) * 100; // 비율 계산
-
-        // 목표 높이 설정
-        bar.style.height = `${normalizedHeight}%`;
-        barValue.innerText = value; // 값을 표시
+    if (!bar || !barValue) {
+        console.error(`DOM element not found: barId=${barId}, valueId=${valueId}`);
+        return;
     }
 
-    // 음성 분석 그래프 IntersectionObserver 설정
-    const observerOptions = {
-        root: null, // 뷰포트를 기준으로 관찰
-        rootMargin: '0px',
-        threshold: 0.1 // 10% 이상 보이면 트리거
-    };
-
-    const observerCallback = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // 그래프 애니메이션 실행
-                setBarHeight('bar1', 'bar-value1', 150); // 높낮이
-                setBarHeight('bar2', 'bar-value2', 200); // 떨림
-                setBarHeight('bar3', 'bar-value3', 250); // 속도
-
-                observer.unobserve(entry.target); // 한 번 실행 후 관찰 중지
-            }
-        });
-    };
-
-    // 초기화: 음성 그래프 높이 0
-    function initializeBars() {
-        const bars = document.querySelectorAll('.bar');
-        bars.forEach(bar => {
-            bar.style.height = '0'; // 초기 높이 설정
-        });
+    if (value === undefined || value === null || value === "") {
+        console.error(`Invalid value provided for ${barId}: ${value}`);
+        return;
     }
 
-    initializeBars(); // 초기화
+    const maxHeight = 300;
+    const minHeight = 90;
+    const normalizedHeight = ((value - minHeight) / (maxHeight - minHeight)) * 100;
 
-    // 음성 그래프 관찰 시작
-    const voiceTarget = document.querySelector('.voice');
-    if (voiceTarget) {
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-        observer.observe(voiceTarget);
-    } else {
-        console.error('.voice 요소를 찾을 수 없습니다.');
-    }
+    bar.style.height = normalizedHeight+'%';
+    barValue.innerText = value;
+    console.log(`Successfully set height for ${barId} to ${normalizedHeight}%`);
+}
+
+	// 초기 상태로 막대 높이를 0으로 설정
+	function resetBarHeight(barId) {
+	    const bar = document.getElementById(barId);
+	    bar.style.height = '0'; // 초기 높이 설정
+	}
+	
+	// IntersectionObserver 설정
+	const options = {
+	    root: null, // 뷰포트를 기준으로 관찰
+	    rootMargin: '0px',
+	    threshold: 0.1 // 10% 이상 보이면 트리거
+	};
+	
+	const observerCallback = (entries, observer) => {
+	    entries.forEach(entry => {
+	        if (entry.isIntersecting) {
+	            console.log('Element is in view');
+
+	            // 명확한 데이터 전달
+	            const bars = [
+	                { barId: 'bar1', valueId: 'bar-value1', value: 150 },
+	                { barId: 'bar2', valueId: 'bar-value2', value: 200 },
+	                { barId: 'bar3', valueId: 'bar-value3', value: 250 },
+	            ];
+
+	            // 디버깅 로그 추가
+	            bars.forEach(({ barId, valueId, value }) => {
+	                console.log('Preparing to set height: barId='+barId+','+'valueId='+valueId+','+'value='+value);
+	                setBarHeight(barId, valueId, value);
+	            });
+
+	            observer.unobserve(entry.target);
+	        }
+	    });
+	};
+	
+	// 초기화: 모든 막대를 높이 0으로 설정
+	resetBarHeight('bar1');
+	resetBarHeight('bar2');
+	resetBarHeight('bar3');
+	
+	// 관찰할 대상 요소
+	const target = document.querySelector('.voice');
+	if (target) {
+	    const observer = new IntersectionObserver(observerCallback, options);
+	    observer.observe(target);
+	} else {
+	    console.error('.voice 요소를 찾을 수 없습니다.');
+	}
+	
+	// 제스쳐
+	// 데이터 값 설정
+	const gestureBarData = [
+	  { label: "머리카락 만짐", value: 4 },
+	  { label: "코 만짐", value: 1 },
+	];
+	
+	// 최대값 기준으로 막대 비율 계산
+	const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value)); // 최대값 계산
+	
+	// 각 막대의 길이를 설정하는 함수
+	function setGestureBarWidth(barId, valueId, value, maxValue) {
+	  const barElement = document.getElementById(barId);
+	  const valueElement = document.getElementById(valueId);
+	
+	  if (!barElement || !valueElement) {
+	    console.error(`Element with ID ${barId} or ${valueId} not found`);
+	    return;
+	  }
+	
+	  // 값에 따른 비율 계산 (최대 100%)
+	  const widthPercentage = (value / maxValue) * 100;
+	
+	  // 막대의 길이와 값 설정 (애니메이션 적용)
+	  setTimeout(() => {
+	    barElement.style.width = widthPercentage+'%';
+	  }, 100); // 애니메이션 지연 시간 추가
+	 
+	  valueElement.innerText = +value+'회';
+	}
+	
+	// 초기 상태로 막대 길이를 0으로 설정
+	function resetGestureBars(barId) {
+	  const barElement = document.getElementById(barId);
+	  if (barElement) {
+	    barElement.style.width = '0'; // 초기 길이 설정
+	  }
+	}
+	
+	// IntersectionObserver 설정
+	const gestureObserverOptions = {
+	  root: null, // 뷰포트를 기준으로 관찰
+	  rootMargin: '0px',
+	  threshold: 0.1, // 10% 이상 보이면 트리거
+	};
+	
+	const gestureObserverCallback = (entries, observer) => {
+	  entries.forEach(entry => {
+	    if (entry.isIntersecting) {
+	      console.log('Bars are in view'); // 뷰포트에 들어올 때 실행 확인
+	
+	      // 데이터 기반으로 막대 설정
+	      setGestureBarWidth(
+	        'gesture-bar1',
+	        'gesture-value1',
+	        gestureBarData[0].value,
+	        maxGestureBarValue
+	      );
+	      setGestureBarWidth(
+	        'gesture-bar2',
+	        'gesture-value2',
+	        gestureBarData[1].value,
+	        maxGestureBarValue
+	      );
+	
+	      observer.unobserve(entry.target); // 한 번 실행 후 관찰 중지
+	    }
+	  });
+	};
+	
+	// 초기화: 모든 막대를 길이 0으로 설정
+	resetGestureBars('gesture-bar1');
+	resetGestureBars('gesture-bar2');
+	
+	// 관찰할 대상 요소
+	const gestureBarsContainer = document.querySelector('.gesture-bars'); // 막대 그래프 컨테이너
+	if (gestureBarsContainer) {
+	  const gestureObserver = new IntersectionObserver(gestureObserverCallback, gestureObserverOptions);
+	  gestureObserver.observe(gestureBarsContainer); // 관찰 시작
+	} else {
+	  console.error('.gesture-bars 요소를 찾을 수 없습니다.');
+	}
 });
-
-
 
 </script>
 </body>

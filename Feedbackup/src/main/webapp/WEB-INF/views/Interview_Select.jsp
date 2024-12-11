@@ -7,10 +7,8 @@
 <title>FeedbackUp | AI Interview</title>
 	<style>
 		@font-face {
-		    font-family: 'SUIT-Regular';
+		    font-family: 'SUIT';
 		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-		    font-weight: normal;
-		    font-style: normal;
 		}
 		        
 		body {
@@ -21,19 +19,20 @@
 		
 		.Interview_wrapper{
 		    text-align: center;
-		    margin-top: 170px;
+		    margin-top: 150px;
+		    margin-bottom: 80px;
 		}
 		
 		.text1{
-		    font-size: 26px;
-		    font-weight: bold;
+		    font-size: 35px;
+		    font-weight: 800;
 		    margin-top: 40px;
 		    margin-bottom: 70px;
 		}
 		
 		.text2{
 		    font-size: 32px;
-		    font-weight: bold;
+		    font-weight: 800;
 		    margin: 0px auto;
 		}
 		

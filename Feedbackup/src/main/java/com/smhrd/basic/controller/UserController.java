@@ -1,5 +1,6 @@
 package com.smhrd.basic.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,13 +78,18 @@ public class UserController {
 		}
 	}
 
-	@GetMapping("/users")
-	public String listPage(Model model) { // + forwarding
-		List<MavenMember> list = service.getList();
-		model.addAttribute("list", list);
+	@GetMapping("result_list")
+	public String getResultPage(HttpSession session, Model model) {
+	    MavenMember member = (MavenMember) session.getAttribute("member");
 
-		return "list";
+	    String userName = member.getName(); // 로그인한 사용자의 이름
+	    List<MavenMember> users = service.findUsersByName(userName); // 같은 이름을 가진 사용자 조회
+
+	    // users 리스트를 모델에 추가하여 JSP로 전달
+	    model.addAttribute("users", users);
+	    return "result_list"; // result_list.jsp로 이동
 	}
+
 
 	// 회원가입 아이디 확인
 	@RequestMapping(value = "/users/check-id", method = RequestMethod.POST)
@@ -211,20 +217,36 @@ public class UserController {
 	@PostMapping("/users/Job_List")
 	public String searchJobCodeAndGetAnswer(@RequestParam("jobCode") String jobCode, Model model) {
 	    // jobCode를 받아서 q_text 값을 가져옵니다.
-	    String qText = service.getQTextByJobCode(jobCode);
+		List<String> qText = service.getQTextByJobCode(jobCode);
+		String firstqText = qText.get(0);
+		String secondqText = qText.get(1);
+		String thirdqText = qText.get(2);
+		
+		// q_text에 해당하는 a_text를 가져옵니다.
+		String firstaText = service.getATextByfirstqText(firstqText);
+		String secondaText = service.getATextBysecondqText(secondqText);
+		String thirdaText = service.getATextBythirdqText(thirdqText);
 
-	    // qText 값이 정상적으로 가져와졌는지 확인
-	    System.out.println("검색된 q_text 값: " + qText);
+	    
+		// qText 값이 정상적으로 가져와졌는지 확인
+		System.out.println("검색된 q_text 값: " + qText);
+		
+		
+	    System.out.println("검색된 q_text 값: " + firstqText);
+	    System.out.println("검색된 a_text 값: " + firstaText);
+	    System.out.println("검색된 q_text 값: " + secondqText);
+	    System.out.println("검색된 a_text 값: " + secondaText);
+	    System.out.println("검색된 q_text 값: " + thirdqText);
+	    System.out.println("검색된 a_text 값: " + thirdaText);
 
 	    // qText 값을 모델에 추가하여 JSP로 전달
-	    model.addAttribute("qText", qText);
-
-	    // q_text에 해당하는 a_text를 가져옵니다.
-	    String aText = service.getATextByQText(qText);
-
-	    // aText 값도 모델에 추가하여 JSP로 전달
-	    System.out.println("검색된 a_text 값: " + aText);
-	    model.addAttribute("aText", aText);
+	    model.addAttribute("firstqText", firstqText);
+	    model.addAttribute("secondqText", secondqText);
+	    model.addAttribute("thirdqText", thirdqText);
+	    
+	    model.addAttribute("firstaText", firstaText);
+	    model.addAttribute("secondaText", secondaText);
+	    model.addAttribute("thirdaText", thirdaText);
 
 	    // 결과를 출력할 JSP 페이지로 이동
 	    return "Job_List";  // Job_List.jsp
