@@ -129,14 +129,14 @@
     }
   
     .btn-user strong {
-    	color: #8071FC;
-    	font-size: 25px;
-    	font-weight: 700;
+       color: #8071FC;
+       font-size: 25px;
+       font-weight: 700;
     }
     
     .btn-user strong:hover {
-    	color: black;
-    	cursor: pointer;
+       color: black;
+       cursor: pointer;
     }
     
     .btn-logout {
@@ -202,9 +202,9 @@
     }
     
     .btn-user {
-    	font-size: 14px;
-    	font-weight: 500;
-    	
+       font-size: 14px;
+       font-weight: 500;
+       
     }
 
     @media (max-width: 768px) {
@@ -296,39 +296,39 @@
       <div class="auth-btn">
       
       <%
-	MavenMember member = (MavenMember) session.getAttribute("member");
-	%>
+   MavenMember member = (MavenMember) session.getAttribute("member");
+   %>
 
-	<%
-	if (member == null) {
-	%>
+   <%
+   if (member == null) {
+   %>
 
-	<button class="btn-sign" onclick="location.href='login'">로그인</button>
-	<button class="btn-login" onclick="location.href='users/signup'">시작하기</button>
-	
-	<%
-	} else {
-	%>
-	<a class="btn-user" onclick="location.href='/myapp/users/mypage'"><strong><%=member.getName()%></strong>&nbsp;&nbsp;님</a>
-	
-	<button class="btn-logout" onclick="location.href='logout'">로그아웃</button>
+   <button class="btn-sign" onclick="location.href='login'">로그인</button>
+   <button class="btn-login" onclick="location.href='users/signup'">시작하기</button>
+   
+   <%
+   } else {
+   %>
+   <a class="btn-user" onclick="location.href='/myapp/users/mypage'"><strong><%=member.getName()%></strong>&nbsp;&nbsp;님</a>
+   
+   <button class="btn-logout" onclick="location.href='logout'">로그아웃</button>
 
 
-	<%
-	}
-	%>
+   <%
+   }
+   %>
       </div>  
     </header>
     
-    	<script>
-		function deleteMember(id) {
-			let choice = confirm("정말 탈퇴하시겠습니까?")
+       <script>
+      function deleteMember(id) {
+         let choice = confirm("정말 탈퇴하시겠습니까?")
 
-			if (choice) {
-				location.href = "/myapp/users/" + id + "/delete";
-			}
-		}
-	</script>
+         if (choice) {
+            location.href = "/myapp/users/" + id + "/delete";
+         }
+      }
+   </script>
     
   </body>
 </html>

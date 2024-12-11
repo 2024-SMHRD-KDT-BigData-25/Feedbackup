@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interview_Select</title>
+<title>FeedbackUp | AI Interview</title>
 	<style>
 		@font-face {
 		    font-family: 'SUIT-Regular';
@@ -21,6 +21,7 @@
 		
 		.Interview_wrapper{
 		    text-align: center;
+		    margin-top: 170px;
 		}
 		
 		.text1{
@@ -56,6 +57,7 @@
 		    border-radius: 30px;
 		    box-shadow: 0 1px 20px 0 rgb(180, 180, 180);
 		    box-sizing: border-box; /* 패딩과 테두리 포함 */
+		    transition: all 0.3s ease;
 		}
 		
 		.one_img{
@@ -73,29 +75,52 @@
 		
 		/* 클릭 상태 스타일 */
 		.box:hover {
-		    border: 6px solid #8071FC; /* 보라색 태두리 */
-		    color: #8071FC; /* 보라색 글자 */
+		    border: 6px solid #8071FC; 
+		    color: #8071FC;
+		    background-color: #F3EDFF; 
+		    trainsition: 0.5s;
+		}
+		
+		a:link {
+			color: black;
+			text-decoration: none;
+		}
+		
+		a:visited {
+			color: black;
+			text-decoration: none;
 		}
 		  
 
 	</style>
 </head>
+
 <body>
+
+     <!-- 푸터 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
+
 	<div class="Interview_wrapper">
 		<div class="text1">원하는 연습을 선택하세요.</div>
 		<div class="container">
 			<div class="box" id="box1">
-			<img src="img/one.png" class="one_img">
-			<p class="text2">자기소개</p>
-			<p class="text3">나만의 이야기를 완성하는<br>1분 자기소개 연습</p>
+				<img src="img/one.png" class="one_img">
+				<p class="text2">자기소개</p>
+				<p class="text3">나만의 이야기를 완성하는<br>1분 자기소개 연습</p>
 			</div>
+			
+			<a href="/myapp/AI_Interview">
 			<div class="box" id="box2">
-			<img src="img/AI.png" class="AI_img">
-			<p class="text2">AI 면접</p>
-			<p class="text3">희망 기업의 예상 질문과<br>면접 분석을 통한 연습</p>
+				<img src="img/AI.png" class="AI_img">
+				<p class="text2">AI 면접</p>
+				<p class="text3">희망 기업의 예상 질문과<br>면접 분석을 통한 연습</p>
 			</div>
+			</a>
 		</div>
 	</div>
+
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 
 </body>
 </html>

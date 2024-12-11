@@ -23,6 +23,8 @@ body {
 	align-content: center;
 }
 
+
+
 .text1 {
 	font-size: 26px;
 	font-weight: bold;
@@ -114,12 +116,14 @@ li {
 	border-radius: 50px;
 	border: 0.5px #8071FC solid;
 	padding: 10px;
+	transition: all 0.3s ease;
 }
 
 .person_text:hover {
 	color: #8071FC;
 	background-color: white;
 	border-color: #8071FC;
+	cursor: pointer;
 }
 
 .mike {
@@ -441,9 +445,11 @@ li {
 	display: flex;
     align-items: center;
     justify-content: center;
-}
+
 </style>
 </head>
+
+
 <body>
 	<div class="AI_Interview_wrapper">
 		<div class="text1">연결된 기기를 확인해 주세요</div>
