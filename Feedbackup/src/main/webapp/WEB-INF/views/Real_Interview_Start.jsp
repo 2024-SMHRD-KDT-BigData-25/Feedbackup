@@ -288,6 +288,11 @@ video {
 
     <div class="recording" align = center>
 		<button id="captureBtn">시작하기</button>
+		<!-- 오디오 플레이어 (숨겨져 있음) -->
+    <audio id="ttsAudio" style="display: none;"></audio>
+
+    <!-- 버튼 -->
+    <button id="playTTSButton" style="display: none;">Play TTS</button>
 	</div>
     
    <div class="result" hidden>
@@ -334,7 +339,9 @@ video {
         
 		// 버튼 클릭 시 음성 분석 및 동작 인식 시작/중지
 		captureBtn.addEventListener("click", function () {
+			
 		    console.log("버튼 클릭됨. 현재 녹음 상태:", isRecording);
+		    
 		    if (!isRecording) {
 		        // 녹음 시작 전 카운트 초기화
 		        document.getElementById("hairTouchCount").textContent = "0번";
@@ -343,6 +350,8 @@ video {
 		        lastNoseTouchCount = 0;
 		        console.log("녹음을 시작합니다.");
 		        // 녹음 시작
+		        
+		        document.getElementById("playTTSButton").click();	
 		
 		        if (!audioStream) {
 		            alert("웹캠이나 마이크를 사용할 수 없습니다.");
@@ -535,6 +544,54 @@ video {
             document.getElementById("noseTouchCount").textContent = "0번";
             console.log("결과가 초기화되었습니다.");
         }
+        
+     // 버튼 클릭 이벤트 리스너
+        document.getElementById("playTTSButton").addEventListener("click", function () {
+            // 변수로 텍스트 설정
+            const textToConvert = "당신이 우리 회사에 입사한다면 처음 하고싶은 일이 무엇인가요?";
+
+            if (textToConvert) {
+                // 텍스트를 URL 인코딩
+                const encodedText = encodeURIComponent(textToConvert);
+
+                // TTS 서버 URL 생성
+                const ttsServerUrl = "http://localhost:5000/tts-server/api/infer-glowtts?text=" + encodedText;
+
+                // 오디오 엘리먼트 가져오기
+                const audioElement = document.getElementById("ttsAudio");
+
+                // 오디오 소스 URL 설정
+                audioElement.src = ttsServerUrl;
+
+                // 오디오 재생
+                audioElement.play()
+                    .then(() => {
+                        console.log("TTS 오디오 재생이 시작되었습니다.");
+                    })
+                    .catch((error) => {
+                        console.error("TTS 오디오 재생 실패:", error);
+                    });
+            } else {
+                console.error("변환할 텍스트가 비어 있습니다.");
+            }
+            
+        });
+     	// '질문 다시 듣기' 버튼 클릭 이벤트 리스너
+        document.querySelector(".btn1").addEventListener("click", function () {
+            const audioElement = document.getElementById("ttsAudio"); // 기존 TTS 오디오 엘리먼트 가져오기
+
+            if (audioElement.src) {
+                audioElement.play()
+                    .then(() => {
+                        console.log("TTS 오디오 재생이 시작되었습니다.");
+                    })
+                    .catch((error) => {
+                        console.error("TTS 오디오 재생 실패:", error);
+                    });
+            } else {
+                console.error("TTS 오디오 소스가 설정되지 않았습니다.");
+            }
+        });
     </script>
 	
 </body>
