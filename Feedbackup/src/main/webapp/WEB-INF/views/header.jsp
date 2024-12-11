@@ -308,7 +308,7 @@
    %>
    <a class="btn-user" onclick="location.href='/myapp/users/mypage'"><strong><%=member.getName()%></strong>&nbsp;&nbsp;님</a>
    
-   <button class="btn-logout" onclick="location.href='logout'">로그아웃</button>
+   <button class="btn-logout" onclick="location.href='/myapp/logout'">로그아웃</button>
 
 
    <%
