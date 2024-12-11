@@ -122,12 +122,22 @@
   <div class="title"><img src="../img/feedbackup.png"></div>
   <div class="title_text">AI 면접 연습</div>
   <div class="content">
+<div>
+  </div>
     <!-- 웹캠 화면을 담을 div -->
 	<div id="webcamContainer">
 		<video id="webcam" autoplay></video>
 	</div>
     <div class="button-container">
-      <a href="/myapp/users/Real_Interview_Start"><button>시작하기</button></a>
+      <form action="/myapp/users/Real_Interview_Start" method="POST">
+    <input type="hidden" name="firstqText" value="${firstqText}">
+    <input type="hidden" name="secondqText" value="${secondqText}">
+    <input type="hidden" name="thirdqText" value="${thirdqText}">
+    <input type="hidden" name="firstaText" value="${firstaText}">
+    <input type="hidden" name="secondaText" value="${secondaText}">
+    <input type="hidden" name="thirdaText" value="${thirdaText}">
+    <button type="submit" class="button-container">시작하기</button>
+	</form>
     </div>
   </div>
   
