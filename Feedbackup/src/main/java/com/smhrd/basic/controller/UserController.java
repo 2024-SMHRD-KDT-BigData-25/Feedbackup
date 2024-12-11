@@ -225,12 +225,17 @@ public class UserController {
 	
 	@GetMapping("/model")
 	public String Model() {
-		return "model_test";
+		return "model";
 	}
 	
 	@GetMapping("/model_test")
 	public String ModelTest() {
 		return "model_test";
+	}
+	
+	@GetMapping("/result_test")
+	public String ResultTest() {
+		return "result_test";
 	}
 	
 }
