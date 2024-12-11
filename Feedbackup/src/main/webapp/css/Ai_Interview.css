@@ -32,7 +32,7 @@ body {
 
 .box1 {
 	width: 385px; /* 원하는 너비 */
-	height: 450px; /* 원하는 높이 */
+	height: 480px; /* 원하는 높이 */
 	background-color: white; /* 임시 스타일 */
 	border-radius: 30px;
 	border: 1px solid #8071FC;
@@ -41,7 +41,7 @@ body {
 
 .box2 {
 	width: 260px; /* 원하는 너비 */
-	max-height: 450px; /* 원하는 높이 */
+	max-height: 480px; /* 원하는 높이 */
 	background-color: white; /* 임시 스타일 */
 	border-radius: 30px;
 	border: 1px solid #8071FC;
@@ -95,7 +95,7 @@ li {
 
 .person_text {
 	position: absolute;
-	bottom: -80%;
+	bottom: -90%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	display: inline-block;
@@ -126,7 +126,7 @@ li {
 }
 
 .mike>span {
-	font-size: 13px;
+	font-size: 11px;
 	margin-bottom: 20px;
 	color: #64748B;
 }
@@ -136,7 +136,7 @@ li {
 	font-weight: bold;
 	line-height: 1.5;
 	text-align: center;
-	margin-top: -5px;
+	margin-top: 15px;
 }
 
 #karaoke_text span {
