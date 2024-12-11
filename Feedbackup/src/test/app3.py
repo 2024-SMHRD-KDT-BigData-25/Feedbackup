@@ -1,5 +1,4 @@
 from flask import Flask, render_template, jsonify, request
-from flask_cors import CORS
 import cv2
 import pyaudio
 import wave
@@ -14,7 +13,6 @@ import math
 
 # Flask 앱 설정
 app = Flask(__name__)
-CORS(app)
 
 # Mediapipe 설정
 mp_hands = mp.solutions.hands
@@ -194,6 +192,8 @@ def index():
 hair_touch_count = 0
 nose_touch_count = 0
 
+head_tilt_count = 0
+
 # Flask 라우팅 설정
 @app.route('/process_frame', methods=['POST'])
 def process_frame():
@@ -294,7 +294,6 @@ def start_capture():
         print(f"오류 발생: {e}")  # 오류 상세 로그 출력
         return jsonify({"error": f"Server processing error: {str(e)}"}), 500
 
-
 def transcribe_audio(file_path):
     """Whisper 모델을 사용하여 음성을 텍스트로 변환"""
     audio_input, _ = librosa.load(file_path, sr=16000)  # Whisper 모델의 입력 크기와 일치하도록 설정
@@ -305,45 +304,6 @@ def transcribe_audio(file_path):
 
     return result['text']
 
-# 결과를 저장할 임시 저장소 (예: 메모리 또는 파일)
-saved_results = []
-
-@app.route('/save_results', methods=['POST'])
-def save_results():
-    try:
-        # 클라이언트에서 보낸 데이터 읽기
-        data = request.json
-        if not data:
-            return jsonify({"error": "No data received"}), 400
-
-        # 데이터 저장 (여기서는 메모리에 저장)
-        saved_results.append(data)
-        print("저장된 데이터:", data)
-
-        # 저장 성공 응답
-        return jsonify({"message": "Results saved successfully", "saved_data": data}), 200
-
-    except Exception as e:
-        print("오류 발생:", e)
-        return jsonify({"error": "Failed to save results"}), 500
-
-@app.route('/get_results', methods=['GET'])
-def get_results():
-    # 저장된 결과를 반환
-    return jsonify({"saved_results": saved_results})
-
-
-@app.route('/reset_touch_counts', methods=['POST'])
-def reset_touch_counts():
-    # 서버 측에서 카운트를 초기화하는 코드
-    global hair_touch_count, nose_touch_count
-    hair_touch_count = 0
-    nose_touch_count = 0
-    return jsonify({
-        "hair_touch_count": hair_touch_count,
-        "nose_touch_count": nose_touch_count
-    })
-
 print("Flask 서버 시작 중...")
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5700, debug=True)
+    app.run(host='0.0.0.0', port=5700, debug=True)
