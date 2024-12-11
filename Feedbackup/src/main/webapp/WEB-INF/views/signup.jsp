@@ -39,7 +39,7 @@
 
        .signup-box{
             width: 330px;
-            height: 620px;
+            min-height: 620px;
             background-color: white;
             margin-left: 1px;
             padding: 30px;
@@ -160,8 +160,8 @@
       <br>
       <form action="/myapp/users" method="post" id="signupForm">
          <input type="text" name="name" placeholder="이름" required
-            style="width: 260px"><br> <input type="text" id="id"
-            name="id" placeholder="아이디" required style="width: 166px">
+            style="width: 260px"><br> <input type="text" id="user_id"
+            name="user_id" placeholder="아이디" required style="width: 166px">
          <button type="button" class="idcheck" style="width: 90px">중복확인</button>
          <div id="idError" class="error" style="display: none;"></div>
          <!-- 아이디 오류 메시지 -->
@@ -208,14 +208,14 @@
       $(".idcheck").on(
             "click",
             function(event) {
-               const userId = $("#id").val(); // 입력된 아이디 가져오기
+               const userId = $("#user_id").val(); // 입력된 아이디 가져오기
 
                // 아이디가 4자 미만인 경우 오류 메시지 처리
                if (userId.trim() === "") {
                   alert("아이디를 입력해주세요.");
                   return;
                } else if (userId.length < 4) {
-                  $("#idError").text("아이디는 4자 이상이어야 합니다.").css("color",
+                  $("#idError").text("* 아이디는 4자 이상이어야 합니다.").css("color",
                         "red").show();
                   $("#idCheckResult").hide(); // 4자 미만일 때는 v 표시 숨기기
                   $("#submitBtn").prop("disabled", true); // 4자 미만일 때는 회원가입 버튼 비활성화
@@ -254,8 +254,8 @@
             });
 
       // 아이디 입력 변경 시, 중복 체크 다시 진행
-      $("#id").on("input", function() {
-         const userId = $("#id").val(); // 현재 입력된 아이디를 가져옴
+      $("#user_id").on("input", function() {
+         const userId = $("#user_id").val(); // 현재 입력된 아이디를 가져옴
          if (userId !== userIdPrevious) {
             $("#submitBtn").prop("disabled", true); // 회원가입 버튼 비활성화
             isIdAvailable = false; // 아이디가 사용 가능한지 여부를 다시 false로 설정
@@ -272,12 +272,12 @@
 
                if (password !== passwordCheck) {
                   // 비밀번호가 불일치할 경우
-                  $("#pwError").text("비밀번호가 일치하지 않습니다.").css("color",
+                  $("#pwError").text("* 비밀번호가 일치하지 않습니다.").css("color",
                         "red").show();
                   passwordsMatch = false;
                } else {
                   // 비밀번호가 일치할 경우
-                  $("#pwError").text("비밀번호가 일치합니다.")
+                  $("#pwError").text("* 비밀번호가 일치합니다.")
                         .css("color", "green").show();
                   passwordsMatch = true;
                }

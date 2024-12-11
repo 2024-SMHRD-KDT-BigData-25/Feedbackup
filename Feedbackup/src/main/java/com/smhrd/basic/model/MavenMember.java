@@ -12,6 +12,7 @@ import lombok.ToString;
 public class MavenMember {
 	
 	private String name;
+	private String user_id;
 	private String id;
 	private String pw;
 	private String nickname;

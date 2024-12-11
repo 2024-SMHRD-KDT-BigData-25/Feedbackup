@@ -21,26 +21,20 @@ public interface UserMapper {
 	
 	public int signup(MavenMember member);
 	
-	@Delete("delete from test where id = #{id}")
-	public int delete(String id);
-	
-	@Update("update mavenmember set pw =#{pw}, nickname=#{nickname} where id = #{id}")
-	public int update(MavenMember member);
-	
-	@Select("select * from mavenmember")
-	public List<MavenMember> getList();
+	@Delete("delete from USERS where user_id = #{user_id}")
+	public int delete(String user_id);
 	
 	// 아이디 중복 체크
-	@Select("SELECT COUNT(*) FROM test WHERE id = #{userId}")
+	@Select("SELECT COUNT(*) FROM USERS WHERE user_id = #{userId}")
 	Integer countByUserId(@Param("userId") String userId);
 	
 	// 이름과 이메일로 아이디를 찾는 메소드
-    @Select("SELECT * FROM test WHERE name = #{name} AND email = #{email}")
+    @Select("SELECT * FROM USERS WHERE name = #{name} AND email = #{email}")
     MavenMember idfind(@Param("name") String name, @Param("email") String email);
 	
     // 이름과 이메일과 아이디로 패스워드를 찾는 메소드
-    @Select("SELECT * FROM test WHERE name = #{name} AND email = #{email} AND id = #{id}")
-    MavenMember pwfind(@Param("name") String name, @Param("email") String email, @Param("id") String id);
+    @Select("SELECT * FROM USERS WHERE name = #{name} AND email = #{email} AND user_id = #{user_id}")
+    MavenMember pwfind(@Param("name") String name, @Param("email") String email, @Param("user_id") String user_id);
     
     // 이름 체크
 	@Select("SELECT COUNT(*) FROM test WHERE name = #{name}")

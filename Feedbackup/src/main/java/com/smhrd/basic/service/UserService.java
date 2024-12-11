@@ -26,16 +26,6 @@ public class UserService {
         return mapper.delete(id);
     }
     
-    // 회원 정보 수정
-    public int update(MavenMember member) {
-        return mapper.update(member);
-    }
-    
-    // 회원 목록 조회
-    public List<MavenMember> getList() {
-        return mapper.getList();
-    }
-    
     // 아이디 중복 확인
     public boolean checkIdExist(String userId) {
         // userMapper에서 id 중복 여부를 확인

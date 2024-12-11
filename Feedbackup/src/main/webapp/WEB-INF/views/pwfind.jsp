@@ -247,7 +247,7 @@
             <form action="/myapp/users/pwfind" method="post">
                 <input type="text" name="name" placeholder="이름" required><br>
                 <input type="email" name="email" placeholder="이메일 주소" required><br>
-                <input type="text" name="id" placeholder="아이디" required><br>
+                <input type="text" name="user_id" placeholder="아이디" required><br>
                 <input type="submit" value="확인" id="submitBtn"></input>
             </form>
         </div>
@@ -257,7 +257,7 @@
     <div id="successModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <img src="/img/check.png" alt="check" class="check"><br><br><br>
+            <img src="../img/check.png" alt="check" class="check"><br><br><br>
             <h3>비밀번호 찾기 완료</h3>
             <p id="pwNameResult">
                 <c:if test="${success}">
