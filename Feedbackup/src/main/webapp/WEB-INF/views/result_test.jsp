@@ -7,7 +7,7 @@
     <title>AJAX 데이터 결과</title>
 </head>
 <body>
-    <h3>분석 결과:</h3>
+    <h3>Question 1:</h3>
     <p><strong>변환된 텍스트:</strong> <span id="recognizedText"></span></p>
     <p><strong>평균 피치 (Hz):</strong> <span id="averagePitch"></span></p>
     <p><strong>상대적 떨림 (ΔF/F):</strong> <span id="relativeTremor"></span></p>
