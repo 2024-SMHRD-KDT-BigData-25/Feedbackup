@@ -334,7 +334,8 @@ video {
         
 		// 버튼 클릭 시 음성 분석 및 동작 인식 시작/중지
 		captureBtn.addEventListener("click", function () {
-		    console.log("버튼 클릭됨. 현재 녹음 상태:", isRecording);
+			
+			console.log("버튼 클릭됨. 현재 녹음 상태:", isRecording);
 		    if (!isRecording) {
 		        // 녹음 시작 전 카운트 초기화
 		        document.getElementById("hairTouchCount").textContent = "0번";

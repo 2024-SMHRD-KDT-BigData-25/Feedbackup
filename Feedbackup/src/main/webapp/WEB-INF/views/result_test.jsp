@@ -14,7 +14,10 @@
     <p><strong>머리를 만진 횟수:</strong> <span id="hairTouchCount"></span>번</p>
     <p><strong>코를 만진 횟수:</strong> <span id="noseTouchCount"></span>번</p>
     <p><strong>타임스탬프:</strong> <span id="timestamp"></span></p>
-
+	
+	<div id="resultsContainer"></div>
+    <button id="resetButton">데이터 초기화</button>
+	
     <script>
     function getSavedResults() {
         fetch("http://localhost:5700/get_results")
@@ -40,11 +43,31 @@
             });
     }
 
-
     // 페이지가 로드될 때 저장된 결과를 가져오기
     window.onload = function() {
         getSavedResults();  // 저장된 결과를 서버에서 가져옵니다
     };
+    
+ 	// 초기화 함수
+    function resetResults() {
+        fetch("http://localhost:5700/reset_results", {
+            method: "POST"
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("초기화 응답:", data.message);
+            // UI에서도 데이터 초기화
+            document.getElementById("resultsContainer").innerHTML = "<p>데이터가 초기화되었습니다.</p>";
+        })
+        .catch(error => {
+            console.error("초기화 요청 중 오류 발생:", error);
+        });
+    }
+
+    // 초기화 버튼 이벤트 연결
+    document.getElementById("resetButton").addEventListener("click", resetResults);
+
+    
     </script>
 </body>
 </html>

@@ -332,6 +332,11 @@ def get_results():
     # 저장된 결과를 반환
     return jsonify({"saved_results": saved_results})
 
+@app.route('/reset_results', methods=['POST'])
+def reset_results():
+    global saved_results
+    saved_results = []  # 데이터를 초기화
+    return jsonify({"message": "데이터가 초기화되었습니다."}), 200
 
 @app.route('/reset_touch_counts', methods=['POST'])
 def reset_touch_counts():
