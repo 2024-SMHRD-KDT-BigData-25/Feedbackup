@@ -288,7 +288,7 @@
       <nav class="nav">
         <ul class="nav-list">
           <li><a href="/myapp/Interview_Select">AI 면접</a></li>
-          <li><a href="#">AI 분석결과</a></li>
+          <li><a href="/myapp/result_list">AI 분석결과</a></li>
           <li><a href="#">족보</a></li>
           <li><a href="#">고객지원</a></li>
         </ul>

@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
     <title>FeedbackUp | AI 분석결과</title>
-    <link rel="stylesheet" href="result_list.css">
+    <link rel="stylesheet" href="css/result_list.css">
 </head>
 
 <body>
@@ -68,6 +70,6 @@
     <div><jsp:include page="footer.jsp"></jsp:include> </div>
 
 
-    <script src="result_list.js"></script>
+    <script src="js/result_list.js"></script>
 </body>
 </html>
