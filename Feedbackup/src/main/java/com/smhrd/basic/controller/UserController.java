@@ -128,7 +128,7 @@ public class UserController {
 	        String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
 
 	        model.addAttribute("success", true);
-	        model.addAttribute("id", maskedId);
+	        model.addAttribute("user_id", maskedId);
 	        model.addAttribute("name", result.getName());
 	    }
 
@@ -141,9 +141,9 @@ public class UserController {
 	}
 
 	@PostMapping("/users/pwfind")
-	public String findPw(@RequestParam String name, @RequestParam String email, @RequestParam String id, Model model) {
+	public String findPw(@RequestParam String name, @RequestParam String email, @RequestParam String user_id, Model model) {
 		// 이름과 이메일과 아이디로 패스워드를 찾기
-		MavenMember result = service.pwfind(name, email, id);
+		MavenMember result = service.pwfind(name, email, user_id);
 
 	    if (result == null) {
 	        // 이름이나 이메일이나 아이디가 일치하는 회원 정보가 없으면
