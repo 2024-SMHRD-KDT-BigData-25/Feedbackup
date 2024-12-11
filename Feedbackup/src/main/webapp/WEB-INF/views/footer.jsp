@@ -44,10 +44,6 @@
         border-color: #8071FC;
       }
 
-      .container{
-        padding-bottom: 110px;
-      }
-
       html, body {
         margin: 0;
         padding: 0;
@@ -104,7 +100,7 @@
 
       footer p {
         margin-top: 0;
-        margin-bottom: 0;
+        
         vertical-align: bottom;
         align-items: baseline;
         display: flex;

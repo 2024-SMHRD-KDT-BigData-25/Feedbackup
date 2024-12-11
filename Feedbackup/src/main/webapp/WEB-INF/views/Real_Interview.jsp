@@ -28,7 +28,6 @@
     margin: 0px auto;
   }
 
-
   .top_btn .btn2 {
     border: 1px solid #D4C5FF;
     background-color: #8071FC;
@@ -40,7 +39,6 @@
     cursor: pointer;
     
   }
-
 
   .top_btn .btn2:hover {
     background-color: #FFFFFF;
@@ -94,19 +92,75 @@
   .button-container button:hover {
     background-color: #554DBF;
   }
+  
+  <!-- 추가 --!>
+	#webcamContainer {
+		width: 640px;
+		height: 480px;
+		position: relative;
+		margin-bottom: 20px;
+	}
+	video {
+		width: 40%;
+		height: 30%;
+		border: 2px solid #ccc;
+		transform: scaleX(-1); /* 좌우 반전 */
+	}
+	.result {
+		margin-top: 20px;
+	}
+	#captureBtn {
+		margin-top: 20px;
+	}  
+
 </style>
 </head>
 <body>
   <div class="top_btn">
-    <button class="btn2">나가기</button>
+    <button class="btn2" onclick="window.location.href='/myapp/AI_Interview';">나가기</button>
   </div>
   <div class="title"><img src="../img/feedbackup.png"></div>
   <div class="title_text">AI 면접 연습</div>
   <div class="content">
-    <img src="../img/real_person.png" alt="AI 면접 이미지">
+    <!-- 웹캠 화면을 담을 div -->
+	<div id="webcamContainer">
+		<video id="webcam" autoplay></video>
+	</div>
     <div class="button-container">
       <a href="/myapp/users/Real_Interview_Start"><button>시작하기</button></a>
     </div>
   </div>
+  
+<script>
+//웹캠 스트림 가져오기
+const webcam = document.getElementById("webcam");
+
+let audioStream = null;
+
+// 페이지 로드 시 자동으로 웹캠 시작
+window.onload = function() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(function(stream) {
+                // 비디오 스트림 설정
+                webcam.srcObject = stream;
+
+                // 오디오 스트림 비활성화
+                audioStream = stream.getAudioTracks();
+                if (audioStream && audioStream.length > 0) {
+                    audioStream.forEach(track => track.enabled = false); // 오디오 트랙 비활성화
+                }
+            })
+            .catch(function(error) {
+                console.error("웹캠을 사용할 수 없습니다.", error);
+                alert("웹캠이나 마이크 권한을 허용해 주세요.");
+            });
+    } else {
+        console.error("getUserMedia가 지원되지 않습니다.");
+        alert("이 브라우저에서는 웹캠을 사용할 수 없습니다.");
+    }
+};
+
+</script>
 </body>
 </html>

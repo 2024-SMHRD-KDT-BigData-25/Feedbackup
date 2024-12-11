@@ -4,9 +4,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>My Page</title>
+    <title>FeedbackUp | 마이페이지</title>
+    <link rel="stylesheet" href="../css/mypage.css">
 </head>
 <body>
+
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
+
     <%
     MavenMember member = (MavenMember) session.getAttribute("member");
     if (member == null) {
@@ -14,24 +19,34 @@
         return;
     }
     %>
-    <h1>My Page</h1>
-    <br>
-    <%= member.getName() %>님  <!-- 로그인한 사용자의 이름 출력 -->
-    
-    <!-- 로그아웃 버튼 -->
-    <button onclick="location.href='/myapp/logout'">로그아웃</button>
-    
-    <!-- 회원탈퇴 버튼 -->
-    <button onclick="deleteMember('<%= member.getId() %>')">회원탈퇴</button>
-    
-    <br><br>
-    자기소개 피드백 
-    <br><br>
-    면접 피드백
-    <br>
+    <div class="mp-wrap">
+        <div class="mp-box">
+            <div class="mp-user">
+                <h2>My Page</h2>
+                <div class="mp-text">
+                    <p class="mp-uname"><%= member.getName() %></p>
+                    &nbsp;<p class="mp-nim">님</p>
+                    &nbsp;&nbsp;<img src="../img/logo4.svg">
+                    <button class="btn-mylogout" onclick="location.href='/myapp/logout'">로그아웃</button>
+                </div>
+            </div>
+            <div class="mp-content-box">
+                <div class="interview-result">
+                    <p>면접 분석 결과</p>
+                    <span>${nameCount}</span>
+                </div>
+                <div class="introduce-result">
+                    <p>자기소개 분석 결과</p>
+                    <span>${nameCount}</span>
+                </div>
+            </div>
+            <button class="btn-out" onclick="deleteMember('<%= member.getId() %>')">탈퇴하기</button>
+        </div>
+    </div>
 
-    <!-- 이름으로 센 개수 출력 -->
-    <p>면접 피드백 수 : ${nameCount}</p>  <!-- 컨트롤러에서 전달된 nameCount 출력 -->
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
+    
     
     <script>
         // 회원 탈퇴 함수
