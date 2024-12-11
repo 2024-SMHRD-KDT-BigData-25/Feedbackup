@@ -21,17 +21,11 @@ public interface UserMapper {
 	
 	public int signup(MavenMember member);
 	
-	@Delete("delete from test where id = #{id}")
+	@Delete("delete from USERS where user_id = #{id}")
 	public int delete(String id);
 	
-	@Update("update mavenmember set pw =#{pw}, nickname=#{nickname} where id = #{id}")
-	public int update(MavenMember member);
-	
-	@Select("select * from mavenmember")
-	public List<MavenMember> getList();
-	
 	// 아이디 중복 체크
-	@Select("SELECT COUNT(*) FROM test WHERE id = #{userId}")
+	@Select("SELECT COUNT(*) FROM USERS WHERE user_id = #{userId}")
 	Integer countByUserId(@Param("userId") String userId);
 	
 	// 이름과 이메일로 아이디를 찾는 메소드

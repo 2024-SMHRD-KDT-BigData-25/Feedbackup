@@ -40,7 +40,7 @@
                     <span>${nameCount}</span>
                 </div>
             </div>
-            <button class="btn-out" onclick="deleteMember('<%= member.getId() %>')">탈퇴하기</button>
+            <button class="btn-out" onclick="deleteMember('<%= member.getUser_id() %>')">탈퇴하기</button>
         </div>
     </div>
 

@@ -54,6 +54,7 @@ public class UserController {
 	public String delete(@PathVariable String id, HttpSession session) {
 
 		int res = service.delete(id);
+		System.out.println("res " + res);
 
 		if (res > 0) {
 			session.removeAttribute("member");
@@ -61,22 +62,7 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/users/{id}/edit")
-	public String updateForm() {
-		return "update";
-	}
 
-	@PostMapping("/users/{id}/edit")
-	public String update(MavenMember member, HttpSession session) {
-		int res = service.update(member);
-
-		if (res == 0) {
-			return "redirect:/users/" + member.getId() + "/edit";
-		} else {
-			session.setAttribute("member", member);
-			return "redirect:/";
-		}
-	}
 
 	@GetMapping("/users/result_list")
 	public String getResultPage(HttpSession session, Model model) {
@@ -138,7 +124,7 @@ public class UserController {
 	        model.addAttribute("message", "가입하신 회원정보가 없습니다.");
 	    } else {
 	        // 이름과 이메일이 모두 일치하는 경우 아이디 반환
-	        String id = result.getId();
+	        String id = result.getUser_id();
 	        String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
 
 	        model.addAttribute("success", true);

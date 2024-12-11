@@ -215,7 +215,7 @@
                   alert("아이디를 입력해주세요.");
                   return;
                } else if (userId.length < 4) {
-                  $("#idError").text("아이디는 4자 이상이어야 합니다.").css("color",
+                  $("#idError").text("* 아이디는 4자 이상이어야 합니다.").css("color",
                         "red").show();
                   $("#idCheckResult").hide(); // 4자 미만일 때는 v 표시 숨기기
                   $("#submitBtn").prop("disabled", true); // 4자 미만일 때는 회원가입 버튼 비활성화
@@ -272,12 +272,12 @@
 
                if (password !== passwordCheck) {
                   // 비밀번호가 불일치할 경우
-                  $("#pwError").text("비밀번호가 일치하지 않습니다.").css("color",
+                  $("#pwError").text("* 비밀번호가 일치하지 않습니다.").css("color",
                         "red").show();
                   passwordsMatch = false;
                } else {
                   // 비밀번호가 일치할 경우
-                  $("#pwError").text("비밀번호가 일치합니다.")
+                  $("#pwError").text("* 비밀번호가 일치합니다.")
                         .css("color", "green").show();
                   passwordsMatch = true;
                }
