@@ -313,27 +313,21 @@ video {
     
         // 페이지 로드 시 자동으로 웹캠 시작
 		window.onload = function() {
-		    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-		        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-		            .then(function(stream) {
-		                // 비디오 스트림 설정
-		                webcam.srcObject = stream;
-		
-		                // 오디오 스트림 비활성화
-		                audioStream = stream.getAudioTracks();
-		                if (audioStream && audioStream.length > 0) {
-		                    audioStream.forEach(track => track.enabled = false); // 오디오 트랙 비활성화
-		                }
-		            })
-		            .catch(function(error) {
-		                console.error("웹캠을 사용할 수 없습니다.", error);
-		                alert("웹캠이나 마이크 권한을 허용해 주세요.");
-		            });
-		    } else {
-		        console.error("getUserMedia가 지원되지 않습니다.");
-		        alert("이 브라우저에서는 웹캠을 사용할 수 없습니다.");
-		    }
-		};
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                    .then(function(stream) {
+                        webcam.srcObject = stream;
+                        audioStream = stream; // 오디오 스트림도 저장
+                    })
+                    .catch(function(error) {
+                        console.error("웹캠을 사용할 수 없습니다.", error);
+                        alert("웹캠이나 마이크 권한을 허용해 주세요.");
+                    });
+            } else {
+                console.error("getUserMedia가 지원되지 않습니다.");
+                alert("이 브라우저에서는 웹캠을 사용할 수 없습니다.");
+            }
+        };
     
         let isRecording = false; // 음성 녹음 상태
         let mediaRecorder;
