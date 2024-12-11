@@ -231,8 +231,6 @@ video {
             }, 1000); // 1초마다 실행
         }
         
-        
-
      // 동작 인식 중지 및 값 초기화
         function stopMotionDetection() {
             if (motionDetectionInterval) {
