@@ -39,7 +39,7 @@
 
        .signup-box{
             width: 330px;
-            height: 620px;
+            min-height: 620px;
             background-color: white;
             margin-left: 1px;
             padding: 30px;
