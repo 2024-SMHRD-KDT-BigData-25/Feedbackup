@@ -297,7 +297,6 @@ video {
             document.getElementById("noseTouchCount").textContent = "0번";
             console.log("결과가 초기화되었습니다.");
         }
-     
     </script>
 
 </body>
