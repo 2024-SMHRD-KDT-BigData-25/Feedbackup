@@ -39,7 +39,7 @@
 
        .signup-box{
             width: 330px;
-            height: 710px;
+            height: 620px;
             background-color: white;
             margin-left: 1px;
             padding: 30px;
@@ -111,7 +111,12 @@
         vertical-align: -3px;
        }
 
-       #term {
+       #term1 {
+        accent-color:#5344D4;
+        vertical-align: -3px;
+       }
+       
+       #term2 {
         accent-color:#5344D4;
         vertical-align: -3px;
        }
@@ -142,6 +147,7 @@
             font-size: 12px;
             margin-top: -10px;
             margin-bottom: 15px;
+            margin-left: 20px;
        }
 
     </style>
@@ -168,9 +174,8 @@
          <!-- 비밀번호 오류 메시지 -->
 
          <input type="text" name="email" placeholder="이메일 주소" required
-            style="width: 260px"><br> <input type="text"
-            name="phone" placeholder="휴대폰 번호" required style="width: 260px"><br>
-
+            style="width: 260px"><br> 
+            
          <div class="agree" style="padding: 20px; box-sizing: border-box">
             <p class="title">약관동의</p>
             <span class="chk chkall"> <span class="cbx"> <input
@@ -178,11 +183,11 @@
                   class="check1" for="chkall">모든 약관을 확인하고 전체 동의합니다.</label> <br>
             </span>
             </span> <span class="chk chklist"> <span class="cbx"> <input
-                  type="checkbox" name="cbx02" id="term"> <label
+                  type="checkbox" name="cbx02" id="term1"> <label
                   class="check2" for="term1">[필수] 이용약관 동의</label><br>
             </span>
             </span> <span class="chk chklist"> <span class="cbx"> <input
-                  type="checkbox" name="cbx02" id="term"> <label
+                  type="checkbox" name="cbx02" id="term2"> <label
                   class="check2" for="term2">[필수] 개인정보 수집 및 이용 동의</label>
             </span>
             </span>
@@ -227,14 +232,14 @@
                      success : function(response) {
                         if (response.exists) {
                            // 아이디가 중복되었을 때
-                           $("#idError").text("중복된 아이디입니다.").css(
+                           $("#idError").text("* 중복된 아이디입니다.").css(
                                  "color", "red").show();
                            $("#idCheckResult").hide(); // 중복일 경우 v 표시 숨기기
                            $("#submitBtn").prop("disabled", true); // 중복되면 회원가입 버튼 비활성화
                            isIdAvailable = false; // 아이디 사용 불가 상태로 설정
                         } else {
                            // 아이디가 사용 가능할 때
-                           $("#idError").text("사용 가능한 아이디입니다.").css(
+                           $("#idError").text("* 사용 가능한 아이디입니다.").css(
                                  "color", "green").show();
                            $("#idCheckResult").show(); // 사용 가능하면 v 표시 보이기
                            isIdAvailable = true; // 아이디 사용 가능 상태로 설정

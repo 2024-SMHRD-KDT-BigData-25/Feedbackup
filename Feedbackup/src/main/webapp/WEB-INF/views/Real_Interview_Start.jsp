@@ -261,6 +261,8 @@ video {
 		<video id="webcam" autoplay></video>
 		<div class="info">본 질문은 삼성전자 기출 질문입니다.</div>
 	</div>
+	<div>
+    </div>
   </div>
   <div class="recording-bar" style="display: none;">
     <div class="status" id="status" style="display: none;">

@@ -252,12 +252,31 @@ public class UserController {
 	    model.addAttribute("thirdaText", thirdaText);
 
 	    // 결과를 출력할 JSP 페이지로 이동
-	    return "Job_List";  // Job_List.jsp
+	    return "Real_Interview";
 	}
 	
 	@GetMapping("/users/Real_Interview")
 	public String Real_InterviewForm() {
 		return "Real_Interview";
+	}
+	
+	@PostMapping("/users/Real_Interview_Start")
+	public String startRealInterview(@RequestParam("firstqText") String firstqText,
+	                                 @RequestParam("secondqText") String secondqText,
+	                                 @RequestParam("thirdqText") String thirdqText,
+	                                 @RequestParam("firstaText") String firstaText,
+	                                 @RequestParam("secondaText") String secondaText,
+	                                 @RequestParam("thirdaText") String thirdaText,
+	                                 Model model) {
+	    // 받은 데이터를 모델에 다시 추가하여 JSP로 전달
+	    model.addAttribute("firstqText", firstqText);
+	    model.addAttribute("secondqText", secondqText);
+	    model.addAttribute("thirdqText", thirdqText);
+	    model.addAttribute("firstaText", firstaText);
+	    model.addAttribute("secondaText", secondaText);
+	    model.addAttribute("thirdaText", thirdaText);
+
+	    return "Real_Interview_Start"; // Real_Interview_Start.jsp
 	}
 	
 	@GetMapping("/users/Real_Interview_Start")
