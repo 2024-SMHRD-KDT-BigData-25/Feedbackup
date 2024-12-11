@@ -46,12 +46,20 @@ public interface UserMapper {
 	@Select("SELECT COUNT(*) FROM test WHERE name = #{name}")
 	Integer countByname(@Param("name") String name);
 	
-	@Select("SELECT q_text FROM QUESTIONS WHERE job_code = #{jobCode} ORDER BY RAND() LIMIT 1")
-    String findQTextByJobCode(@Param("jobCode") String jobCode);
+	@Select("SELECT q_text FROM QUESTIONS WHERE job_code = #{jobCode} ORDER BY RAND() LIMIT 3")
+	List<String> findQTextByJobCode(@Param("jobCode") String jobCode);
 	
-	@Select("SELECT a_text FROM QUESTIONS WHERE q_text = #{qText}")
-	String findATextByQText(@Param("qText") String qText);
+	@Select("SELECT a_text FROM QUESTIONS WHERE q_text = #{firstqText}")
+	String findATextByfirstqText(@Param("firstqText") String firstqText);
 	
-
+	@Select("SELECT a_text FROM QUESTIONS WHERE q_text = #{secondqText}")
+	String findATextBysecondqText(@Param("secondqText") String secondqText);
+	
+	@Select("SELECT a_text FROM QUESTIONS WHERE q_text = #{thirdqText}")
+	String findATextBythirdqText(@Param("thirdqText") String thirdqText);
+	
+	// 같은 이름을 가진 사용자들 정보 가져오기
+    @Select("SELECT * FROM test WHERE name = #{name}")
+    List<MavenMember> findUsersByName(@Param("name") String name);
 }
 
