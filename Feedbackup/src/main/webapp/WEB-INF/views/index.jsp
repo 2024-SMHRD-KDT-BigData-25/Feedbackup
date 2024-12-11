@@ -21,7 +21,7 @@
 
 <body>
 
-	 <!-- 푸터 불러오기 -->
+	 <!-- 헤더 불러오기 -->
     <div><jsp:include page="header.jsp"></jsp:include> </div>
 
 

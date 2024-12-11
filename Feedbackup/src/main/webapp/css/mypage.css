@@ -1,0 +1,145 @@
+body {
+    background-color: #F1F5F9;
+	font-family: 'Pretendard', sans-serif;
+}
+
+.mp-wrap {
+    text-align: center;
+	margin-top: 150px;
+    margin-left: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mp-box {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: left;
+    transition: all 0.3s ease;
+    width: 800px;
+    height: 600px;
+    margin-bottom: 150px;
+}
+
+.mp-user {
+    margin-left: 60px;
+    margin-top: 60px;
+}
+
+.mp-text {
+    margin-top: 70px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+.mp-uname {
+    color: #8071FC;
+    font-size: 30px;
+    font-weight: 800;
+    display: inline;
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.mp-nim {
+    font-size: 15px;
+    font-weight: 500;
+    display: inline;
+}
+
+img {
+    width: 6%;
+}
+
+.mp-content-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    margin-top: 60px;
+    gap: 50px;
+}
+
+.interview-result {
+    background-color: #F6F6F6;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: left;
+    transition: all 0.3s ease;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+}
+
+.introduce-result {
+    background-color: #F6F6F6;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: left;
+    transition: all 0.3s ease;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+}
+
+.interview-result:hover {
+	background-color: #F3EDFF;
+	border: 5px solid #8071FC;
+	color:#8071FC;
+}
+
+.introduce-result:hover {
+	background-color: #F3EDFF;
+	border: 5px solid #8071FC;
+	color:#8071FC;
+}
+
+
+.mp-content-box p {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.mp-content-box span {
+    font-size: 35px;
+    font-weight: 900;
+    color: #8071FC;
+}
+
+button {
+    border: none;
+    background-color: white;
+}
+
+.btn-mylogout {
+    font-size: 14px;
+    color: black;
+    margin-left: 15px;
+}
+
+.btn-mylogout:hover {
+    color: #8071FC;
+    cursor: pointer;
+}
+
+.btn-out {
+    font-size: 13px;
+    color: #94A3B8;
+    float: right;
+    margin-right: 30px;
+    margin-top: 60px;
+}
+
+.btn-out:hover {
+    color: black;
+    cursor: pointer;
+}
