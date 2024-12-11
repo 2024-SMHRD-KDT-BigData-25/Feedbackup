@@ -129,7 +129,7 @@
 		<video id="webcam" autoplay></video>
 	</div>
     <div class="button-container">
-      <form action="/myapp/users/Real_Interview_Start" method="POST">
+    <form action="/myapp/users/Real_Interview_Start" method="POST">
     <input type="hidden" name="firstqText" value="${firstqText}">
     <input type="hidden" name="secondqText" value="${secondqText}">
     <input type="hidden" name="thirdqText" value="${thirdqText}">
