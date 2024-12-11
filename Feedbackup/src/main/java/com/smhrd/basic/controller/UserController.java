@@ -266,7 +266,10 @@ public class UserController {
 		return "result_test";
 	}
 	
-
+	@GetMapping("/users/Result")
+	public String ResultForm() {
+		return "Result";
+	}
 }
 
 
