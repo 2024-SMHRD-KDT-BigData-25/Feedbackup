@@ -56,4 +56,15 @@ public class UserService {
     public int checkcount(String name) {
     	return mapper.countByname(name);
     }
+    
+    // 
+    public String getQTextByJobCode(String jobCode) {
+        return mapper.findQTextByJobCode(jobCode);
+    }
+    
+    // q_text를 기준으로 a_text를 가져오는 메서드
+    public String getATextByQText(String qText) {
+        return mapper.findATextByQText(qText);
+    }
+    
 }

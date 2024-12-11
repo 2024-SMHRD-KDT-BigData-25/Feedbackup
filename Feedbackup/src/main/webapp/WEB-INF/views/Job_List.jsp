@@ -232,17 +232,18 @@
 <div clsss="Job_list_wrapper">
   <div class="text1">희망하시는 기업을 선택해 주세요</div>
   <div class="text2">* 확실한 면접 준비를 위해 각각 한가지만 선택가능 합니다.</div>
-  <div class="search-container">
-  <input 
-    type="text" 
-    id="search-input" 
-    placeholder="기업명을 검색하세요" 
-    class="search-input" 
-  />
-  <button 
-    onclick="searchCompany()" 
-    class="search-button">검색</button>
-	</div>
+<div class="search-container">
+  <form action="/myapp/users/Job_List" method="POST">
+    <input 
+      type="text" 
+      id="search-input" 
+      name="jobCode" 
+      placeholder="기업명을 검색하세요" 
+      class="search-input" 
+    />
+    <button type="submit" class="search-button">검색</button>
+  </form>
+</div>
 	<div id="search-result" class="search-result"></div>
   <div class="category-container">
     <div class="category-step">
@@ -299,28 +300,30 @@
   });
 
   function searchCompany() {
-    const input = document.getElementById('search-input').value.toLowerCase();
-    const buttons = document.querySelectorAll('.category-button');
-    let result = '';
+	  const input = document.getElementById('search-input').value.toLowerCase();
+	  const buttons = document.querySelectorAll('.category-button');
+	  let result = '';
 
-    buttons.forEach(button => {
-      const companyName = button.textContent.toLowerCase();
-      if (companyName.includes(input)) {
-        result += `${button.textContent} `;
-        button.classList.add('active');
-      } else {
-        button.classList.remove('active');
-      }
-    });
+	  buttons.forEach(button => {
+	    const companyName = button.textContent.toLowerCase();
+	    
+	    // 기업 이름에 검색어가 포함되면 버튼에 active 클래스 추가
+	    if (companyName.includes(input)) {
+	      result += `${button.textContent} `;
+	      button.classList.add('active'); // 버튼에 색상 추가
+	    } else {
+	      button.classList.remove('active'); // 검색어와 일치하지 않으면 색상 제거
+	    }
+	  });
 
-    if (!input) {
-      result = '검색어를 입력하세요.';
-    } else if (result === '검색 결과: ') {
-      result = '일치하는 기업이 없습니다.';
-    }
+	  if (!input) {
+	    result = '검색어를 입력하세요.';
+	  } else if (result === '') {
+	    result = '일치하는 기업이 없습니다.';
+	  }
 
-    document.getElementById('search-result').textContent = result;
-  }
+	  document.getElementById('search-result').textContent = result;
+	}
 </script>
 
 </body>
