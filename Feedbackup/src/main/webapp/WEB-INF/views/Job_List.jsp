@@ -169,6 +169,13 @@
   font-weight: bold;
 }
 
+.box.active{
+  background-color: #8071FC;
+  color: white;
+  border: 2px solid #8071FC;
+  font-weight: bold;
+}
+
 .search-container {
   display: flex;
   justify-content: right;
@@ -191,7 +198,7 @@
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 3px 20px;
+  padding: 9px 10px;
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -233,6 +240,17 @@
 .sex_select .step-circle{
 	margin-bottom:20px;
 }
+
+  .error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .search-result {
+    text-align: center;
+    margin-top: 20px;
+  }
 </style>
 
 </head>
@@ -295,47 +313,69 @@
   	</div>
   </div>
   <div class="next">
-  	<div class="next_btn">다음</div>
+  	<a href="/myapp/AI_Interview" style="text-decoration: none;"><div class="next_btn">다음</div></a>
   </div>
 </div>
 
 <script>
-//검색 기능
+//성별 선택 클릭 이벤트 처리
+document.querySelectorAll('.box').forEach(box => {
+  box.addEventListener('click', function () {
+    // 모든 성별 버튼에서 active 클래스 제거
+    document.querySelectorAll('.box').forEach(btn => btn.classList.remove('active'));
+
+    // 현재 클릭된 성별 버튼에 active 클래스 추가
+    this.classList.add('active');
+  });
+});
+
+//검색 폼 제출 이벤트 처리
 document.getElementById('search-form').addEventListener('submit', function (event) {
   event.preventDefault(); // 기본 제출 동작 중단
   searchCompany(); // 검색 로직 실행
   this.submit(); // 폼 데이터 제출
 });
 
-function searchCompany() {
-  const input = document.getElementById('search-input').value.toLowerCase();
-  const buttons = document.querySelectorAll('.category-button');
-  let result = '';
-  const activeCompanies = []; // 활성화된 버튼 저장 배열
-
-  buttons.forEach(button => {
-    const companyName = button.textContent.toLowerCase();
-
-    if (companyName.includes(input)) {
-      result += `${button.textContent} `;
-      button.classList.add('active');
-      activeCompanies.push(companyName); // 활성화된 버튼 이름 저장
-    } else {
-      button.classList.remove('active');
-    }
-  });
-
-  if (!input) {
-    result = '검색어를 입력하세요.';
-  } else if (result === '') {
-    result = '일치하는 기업이 없습니다.';
+// 검색 입력 필드에서 Enter 키 처리
+document.getElementById('search-input').addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') { // 엔터 키 확인
+    event.preventDefault(); // 기본 엔터 동작(폼 제출) 중단
+    searchCompany(); // 검색 실행
+    document.getElementById('search-form').submit(); // 폼 데이터 제출
   }
+});
 
-  document.getElementById('search-result').textContent = result;
 
-  // 로컬 스토리지에 활성화된 버튼 저장
-  localStorage.setItem('activeCompanies', JSON.stringify(activeCompanies));
-}
+function searchCompany() {
+	  const input = document.getElementById('search-input').value.trim().toLowerCase(); // 검색어 가져오기
+	  const buttons = document.querySelectorAll('.category-button'); // 모든 버튼 가져오기
+	  let result = '';
+	  const activeCompanies = []; // 활성화된 버튼 저장 배열
+
+	  buttons.forEach(button => {
+	    const companyName = button.textContent.trim().toLowerCase(); // 버튼 텍스트 가져오기
+
+	    // 검색어가 버튼 텍스트에 포함되어 있는지 확인
+	    if (companyName.includes(input)) {
+	      result += `${button.textContent} `;
+	      button.classList.add('active');
+	      activeCompanies.push(companyName); // 활성화된 버튼 이름 저장
+	    } else {
+	      button.classList.remove('active');
+	    }
+	  });
+
+	  if (!input) {
+	    result = '검색어를 입력하세요.';
+	  } else if (result === '') {
+	    result = '일치하는 기업이 없습니다.';
+	  }
+
+	  document.getElementById('search-result').textContent = result;
+
+	  // 로컬 스토리지에 활성화된 버튼 저장
+	  localStorage.setItem('activeCompanies', JSON.stringify(activeCompanies));
+	}
 
 // 페이지 로드 시 로컬 스토리지에서 버튼 상태 복원
 window.addEventListener('DOMContentLoaded', function () {
