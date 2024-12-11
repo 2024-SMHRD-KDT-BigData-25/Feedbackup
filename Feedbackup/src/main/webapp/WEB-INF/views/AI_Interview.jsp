@@ -215,41 +215,13 @@ li {
 	animation-delay: -0.8s;
 }
 
-@
-keyframes wave { 0%, 100% {
-	height: 5px;
-}
-
-50
-
-
-
-
-
-
-%
-{
-height
-
-
-
-
-
-
-:
-
-
-
-
-
-
-15px
-
-
-
-
-;
-}
+@keyframes wave {
+    0%, 100% {
+        height: 5px;
+    }
+    50% {
+        height: 15px;
+    }
 }
 
 /* 모달 배경 */
@@ -271,11 +243,12 @@ height
 	margin: 11% auto;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 350px;
+	width: 600px;
 	text-align: center;
+	border: 2px solid #8071FC;
 	border-radius: 30px;
 }
-/* 닫기 버튼 */
+/* 확인 버튼 */
 .close {
 	color: #aaa;
 	float: right;
@@ -289,10 +262,31 @@ height
 	cursor: pointer;
 }
 
-/* 모달 메시지 */
+/* 분석중 메시지 */
 .modal_text {
-	font-size: 40px;
+	font-size: 28px;
+	color: #333333;
+}
+
+/* 성공 메시지2 */
+.modal_text2 {
+	font-size: 34px;
+	color: #8071FC;
+	font-weight: 700;
+
+}
+
+/* 성공 메시지4 */
+.modal_text4 {
+	font-size: 24px;
 	color: #94A3B8;
+}
+
+/* 실패 메시지3 */
+.modal_text3 {
+	font-size: 34px;
+	color: #8071FC;
+	font-weight: 700;
 }
 
 #Result {
@@ -333,6 +327,120 @@ height
 	color: #64748B;
 	background-color: white;
 	border-color: #64748B;
+}
+
+/* 로딩 컨테이너 */
+.loading-container {
+    position: relative; /* 내부 자식 요소의 기준점 */
+    width: 100%; /* 부모 크기에 맞춤 */
+    height: 120px; /* 고정 크기 설정 */
+}
+
+
+/* 회전하는 테두리 */
+.rotating-border {
+    position: absolute; /* loading-container 기준 */
+    top: 6%; /* 부모 기준 중앙 */
+    left: 40%; /* 부모 기준 중앙 */
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #D9D9D9;
+    border-top: 6px solid #8071FC;
+    animation: spin 1.2s linear infinite;
+    z-index: 1;
+}
+
+/* 고정된 이미지 */
+.static-image {
+    position: absolute; /* 부모 기준으로 위치 설정 */
+    top: 50%; /* 부모 기준 중앙 */
+    left: 49%; /* 부모 기준 중앙 */
+	transform: translate(-50%, -50%);
+	width: 70px;
+	height: 70px;
+	background-color: #fff;
+	border-radius: 50%;
+	overflow: hidden;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.static-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* 고정된 이미지 */
+.static-image2 {
+    position: absolute; /* 부모 기준으로 위치 설정 */
+    top: 50%; /* 부모 기준 중앙 */
+    left: 50%; /* 부모 기준 중앙 */
+	transform: translate(-50%, -50%);
+	width: 100px;
+	height: 100px;
+	background-color: #fff;
+	overflow: hidden;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.static-image2 img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+/* 고정된 이미지 */
+.static-image3 {
+    position: absolute; /* 부모 기준으로 위치 설정 */
+    top: 50%; /* 부모 기준 중앙 */
+    left: 50%; /* 부모 기준 중앙 */
+	transform: translate(-50%, -50%);
+	width: 100px;
+	height: 100px;
+	background-color: #fff;
+	overflow: hidden;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.static-image3 img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+@keyframes spin {
+	    0% {
+	        transform: rotate(0deg);
+	    }
+	    100% {
+	        transform: rotate(360deg);
+	    }
+	}
+	
+	/* 고정된 이미지 */
+.modal-image {
+    position: absolute; /* 부모 기준으로 위치 설정 */
+    top: 50%; /* 부모 기준 중앙 */
+    left: 50%; /* 부모 기준 중앙 */
+	transform: translate(-50%, -50%);
+	width: 70px;
+	height: 70px;
+	background-color: #fff;
+	border-radius: 50%;
+	overflow: hidden;
+	display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
 </head>
@@ -417,13 +525,42 @@ height
 		</div>
 	</div>
 
-	<div id="resultModal" class="modal">
-		<div class="modal-content">
-			<h3>분석 완료</h3>
-			<p id="modalMessage" class="modal_text"></p>
-			<button class="btn" id="btn_confirm">확인</button>
-		</div>
-	</div>
+<div id="resultModal" class="modal">
+    <div class="modal-content">
+        <div class="loading-container">
+            <div class="rotating-border"></div>
+            <div class="static-image">
+                <img id="modalImage" src="img/logo1.png" alt="로고">
+            </div>
+        </div>
+        <p id="modalMessage" class="modal_text">분석 중입니다...</p>
+        <button class="btn" id="btn_confirm">확인</button>
+    </div>
+</div>
+
+<div id="resultModal2" class="modal">
+    <div class="modal-content">
+        <div class="loading-container">         
+            <div class="static-image2">
+                <img id="modalImage" src="img/voice-test-suc.svg" alt="일치">
+            </div>
+        </div>
+        <p id="modalMessage" class="modal_text2">음성 인식에 성공했어요!</p><p id="modalMessage" class="modal_text4"> 연습중에도 목소리 크기를 유지해주세요.</p>
+        <button class="btn" id="btn_confirm">확인</button>
+    </div>
+</div>
+
+<div id="resultModal3" class="modal">
+    <div class="modal-content">
+        <div class="loading-container">
+            <div class="static-image3">
+                <img id="modalImage" src="img/voice-test-fail.svg" alt="불일치">
+            </div>
+        </div>
+        <p id="modalMessage" class="modal_text3">음성 인식에 실패했어요...</p><p id="modalMessage" class="modal_text4">발음을 더 명확히 하거나 조용한 환경에서 다시 시도해주세요.</p>
+        <button class="btn" id="btn_confirm">확인</button>
+    </div>
+</div>
 
 	<script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function () {
@@ -433,32 +570,44 @@ document.addEventListener("DOMContentLoaded", function () {
     let recordingTimeout = null;
     let currentIndex = 0;
     
-    // 모달 열기 함수
-   function openModal(message) {
-    const modal = document.getElementById("resultModal");
-    const modalMessage = document.getElementById("modalMessage");
-
-    if (!modal || !modalMessage) {
-        console.error("Modal elements not found.");
-        return;
+ 	// 모든 모달 닫기 함수
+    function closeAllModals() {
+        const modals = document.querySelectorAll(".modal");
+        modals.forEach(modal => {
+            modal.style.display = "none"; // 모든 모달 숨기기
+        });
     }
+    
+    //모달 열기
+    function openModal(modalId) {
+        // 모든 모달 닫기
+       	closeAllModals()
 
-    modalMessage.innerText = message; // 메시지 설정
-    modal.style.display = "block"; // 모달 표시
-
- 	// 확인 버튼 동작 설정
-    const confirmButton = document.getElementById("btn_confirm");
-    confirmButton.onclick = function () {
-        modal.style.display = "none"; // 모달 닫기
-    };
-
- 	// 모달 외부를 클릭해도 닫히도록 설정
-    modal.addEventListener("click", function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
+        // 해당 모달 요소 가져오기
+        const modal = document.getElementById(modalId);
+        if (!modal) {
+            console.error(`Modal with ID ${modalId} not found.`);
+            return;
         }
-    });
-}
+
+        // 모달 표시
+        modal.style.display = "block";
+
+        // 확인 버튼 동작 설정
+        const confirmButton = modal.querySelector("#btn_confirm");
+        if (confirmButton) {
+            confirmButton.onclick = function () {
+                modal.style.display = "none"; // 모달 닫기
+            };
+        }
+
+        // 모달 외부를 클릭해도 닫히도록 설정
+        modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    }
 
     const personContainer = document.querySelector(".person_container");
     const mikeTextContainer = document.querySelector(".mike_text");
@@ -527,7 +676,7 @@ document.addEventListener("DOMContentLoaded", function () {
              // 텍스트 비교 및 결과 표시 함수
                 function compareTranscription(transcribedText) {
                     // 기대하는 텍스트
-                    const expectedText = "경험은 만들어낼수없다그것은시도해야만한다";
+                    const expectedText = "경험은만들어낼수없다그것은시도해야만한다";
 
                     // 입력 텍스트를 정규화: 공백과 특수문자 제거
                     const normalizeText = (text) => text.replace(/[^가-힣]/g, "").trim();
@@ -535,27 +684,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     const normalizedTranscribedText = normalizeText(transcribedText);
                     const normalizedExpectedText = normalizeText(expectedText);
 
-                    // 결과 DIV 생성
-                    const resultDiv = document.createElement("div");
+                    // 결과 비교하여 적절한 모달 열기
+                    const modalId = (normalizedTranscribedText === normalizedExpectedText) 
+                        ? "resultModal2"  // 일치하는 경우
+                        : "resultModal3"; // 일치하지 않는 경우
 
-                    // 결과 비교
-                    if (normalizedTranscribedText === normalizedExpectedText) {
-                    	openModal("일치합니다"); // 일치 시 모달 표시
-                    } else {
-                        openModal("일치하지 않습니다"); // 불일치 시 모달 표시
-                    }
-
-                    // 결과를 #karaoke_text 아래에 표시
-                    const karaokeDiv = document.querySelector("#karaoke_text");
-                    if (karaokeDiv) {
-                        // 이전 결과 제거
-                        const existingResult = document.querySelector("#karaoke_text + div");
-                        if (existingResult) {
-                            existingResult.remove();
-                        }
-                        // 새로운 결과 추가
-                        karaokeDiv.parentNode.appendChild(resultDiv);
-                    }
+                    openModal(modalId);
                 }
 
                 mediaRecorder.onstop = function () {
@@ -565,6 +699,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // 녹음 후 바로 초기화
                     resetToInitialState();
+                    openModal("resultModal")
 
                     // STT 서버로 전송
                     $.ajax({
@@ -649,12 +784,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
-
-
-
-
-
-
-
 </body>
 </html>
