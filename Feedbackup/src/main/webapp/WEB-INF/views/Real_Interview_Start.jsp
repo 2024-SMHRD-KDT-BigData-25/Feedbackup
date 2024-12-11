@@ -340,7 +340,15 @@ video {
         let lastNoseTouchCount = 0;  // 전역 변수로 선언
         
 		// 버튼 클릭 시 음성 분석 및 동작 인식 시작/중지
+		
+		let executionCount = 0; // 실행 횟수를 추적하는 변수
+        
 		captureBtn.addEventListener("click", function () {
+			if (executionCount >= 3) {
+	            // 3번 실행되면 다른 페이지로 이동
+	            window.location.href = "/myapp/result_test"; // 원하는 페이지 URL로 변경
+	            return;
+	        }
 			
 			console.log("버튼 클릭됨. 현재 녹음 상태:", isRecording);
 
@@ -425,6 +433,9 @@ video {
 		        
 		        captureBtn.textContent = "분석하기"; // 버튼 텍스트 변경
 		        isRecording = true;
+		        
+		     	// 실행 횟수 증가
+	            executionCount++;
 		
 		    } else {
 		        console.log("녹음을 중지합니다.");

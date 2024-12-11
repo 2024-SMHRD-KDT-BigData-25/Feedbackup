@@ -81,4 +81,9 @@ public class UserService {
     public List<MavenMember> findUsersByName(String name) {
         return mapper.findUsersByName(name);
     }
+    
+ // 회원 목록 조회
+    public List<MavenMember> getqanda() {
+        return mapper.getqanda();
+    }
 }
