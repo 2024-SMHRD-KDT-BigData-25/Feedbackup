@@ -222,7 +222,17 @@ public class UserController {
 	public String LodingForm() {
 		return "Loading";
 	}
-
+	
+	@GetMapping("/model")
+	public String Model() {
+		return "model_test";
+	}
+	
+	@GetMapping("/model_test")
+	public String ModelTest() {
+		return "model_test";
+	}
+	
 }
 
 

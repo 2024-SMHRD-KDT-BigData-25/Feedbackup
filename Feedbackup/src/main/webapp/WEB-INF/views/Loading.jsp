@@ -28,16 +28,18 @@
 	        margin-top: 81px;
 	      }
 	    
-	      .title img{
-	        width: 100px;
-	        height: auto;;
-	      }
-	
-	      .title_text{
-	        margin-top: 0px;
-	        margin-bottom: 20px;
-	        text-align: center;
-	      }
+		  .title img{
+		    width: 140px;
+		    height: auto; ;
+		  }
+		
+		  .title_text {
+		    margin-top: 0px;
+		    margin-bottom: 120px;
+		    text-align: center;
+		    color: #64748B;
+		    font-size: 20px;
+		  }
 	
 	.loading-container {
 	    position: relative;
@@ -78,7 +80,7 @@
 	
 	.text-container {
 	    margin-top: 40px;
-	    font-size: 16px;
+	    font-size: 20px;
 	    color: #8071FC;
 	    text-align: center;
 	    position: relative;

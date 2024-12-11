@@ -85,12 +85,109 @@
                 </div>
             </div>
       </div>
+      
+      <!-- 인덱스 3번째 -->
+      <div class="index-three-page">
+            <p class="idx3">
+                <span class="idx3-title">이제 면접 준비도 스마트하고, 철저하게</span>
+            </p>
+
+  
+    <section class="all-card">
+        <!-- 카드 1 -->
+        <div class="card" data-index="1">
+            <div class="card-content">
+                <div class="card-number">01</div>
+                <h2 class="card-title">계정 만들기</h2>
+                <p class="card-description">
+                    회원가입 또는 소셜 계정으로 30초면 간단하게 회원가입이 가능하며,<br>
+                    가입 즉시 무료 서비스를 바로 이용할 수 있습니다.
+                </p>
+            </div>
+            <img src="img/main6.svg" alt="계정 만들기 이미지">
+            
+        </div>
+
+        <!-- 카드 2 -->
+        <div class="card" data-index="2">
+            <div class="card-content">
+                <div class="card-number">02</div>
+                <h2 class="card-title">희망 기업 선택</h2>
+                <p class="card-description">
+                    카카오, 삼성, SK 등 자신의 관심 직군을 선택하면, 해당 분야에 최적화된<br>
+                    맞춤형 면접 질문을 제공받을 수 있습니다.
+                </p>
+            </div>
+            <img src="img/main7.svg" alt="희망 기업 선택 이미지">
+        </div>
+
+        <!-- 카드 3 -->
+        <div class="card" data-index="3">
+            <div class="card-content">
+                <div class="card-number">03</div>
+                <h2 class="card-title">AI 면접 연습</h2>
+                <p class="card-description">
+                    실제 면접장같은 긴장감 속에서 AI와 함께 음성/텍스트 기반 모의<br>
+                    면접을 진행하고, 실시간으로 개인별 맞춤 피드백을 받을 수 있습니다.
+                </p>
+            </div>
+            <img src="img/main8.svg" alt="AI 면접 연습 이미지">
+        </div>
+    </section>
+
+
+    <!-- 4번째 인덱스 -->
+    <section class="pricing-section">
+        <div>
+        <h1 class="pricing-title">요금제 및 가격</h1>
+        <p class="pricing-subtitle">간단하고 투명한 가격, 설정 수수료나 계약이 없습니다.<br>신용카드 없이 시도하고 언제든지 취소하세요.</p>
+        
+        <div class="pricing-cards">
+            <!-- Welcome Card -->
+            <div class="pricing-card">
+                <h2 class="plan-name">Welcome</h2>
+                <p class="plan-price"><strong>무료</strong> / 가입 직후 24시간</p>
+                <ul class="plan-features">
+                    
+                    <li>✔ 예상 질문 3개 제공</li>
+                    <li>✔ 분석 결과 1회</li>
+                </ul>
+                <a href="#" class="start-button">지금 시작하기</a>
+            </div>
+
+            <!-- Premium Card -->
+            <div class="pricing-card premium">
+                <h2 class="plan-name">Premium</h2>
+                <p class="plan-price"><strong>6,000원</strong> / 1회당</p>
+                <ul class="plan-features">
+                    
+                    <li>✔ 예상 질문 무제한 제공</li>
+                    <li>✔ 분석 결과 무제한</li>
+                    <li>✔ 분석 결과 히스토리 보관</li>
+                </ul>
+                <a href="#" class="start-button">지금 시작하기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5번째 인덱스 -->
+     <section class="hero-container">
+        <div class="hero-content">
+            <img src="img/main9.svg">
+            <h1 class="hero-title">정확하고 스마트한 면접준비,<br>지금 시작하세요</h1>
+            <p class="hero-subtitle">
+                간단하고 투명한 가격, 설정 수수료나 계약이 없습니다.<br>
+                신용카드 없이 시도하고 언제든지 취소하세요.
+            </p>
+            <button class="hero-button">무료로 시작하기&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </section>
 	
 
 	<!-- 푸터 불러오기 -->
     <div><jsp:include page="footer.jsp"></jsp:include> </div>
    
-
+	<script src="js/index.js"></script>
 
 
 	<script>
