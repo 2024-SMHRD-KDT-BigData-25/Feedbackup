@@ -12,7 +12,7 @@
             font-style: normal;
         }
 
-        .logo {
+        .idfind-logo {
             width: 365px;
             height: 79px;
             display: block;
@@ -38,6 +38,13 @@
             background-color: #F1F5F9;
             font-family: 'SUIT-Regular';
             align-content: center;
+        }
+        
+        .top{
+        	margin-top: 20px;
+        	display: flex;
+        	justify-content: center;
+        	margin-bottom : 20px;
         }
         
         /* 페이지 */
@@ -232,7 +239,10 @@
     </style>
 </head>
 <body>
-    <a href="/myapp"><img src="../img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
+
+    <div class="top">
+    	<a href="/myapp"><img src="../img/logo2.png" alt="logo" class="idfind-logo"></a><br><br><br><br>
+    </div>
     <div class="find_wrapper">
         <div class="find_top">
             <div id="find_id" class="active">아이디 찾기</div>

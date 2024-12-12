@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Real_Interview</title>
+<title>One_Real_Interview</title>
 <style>
     @font-face {
     font-family: 'SUIT-Regular';
@@ -116,6 +116,9 @@
 </style>
 </head>
 <body>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
+    
   <div class="top_btn">
     <button class="btn2" onclick="window.location.href='/myapp/AI_Interview';">나가기</button>
   </div>
@@ -129,20 +132,20 @@
 		<video id="webcam" autoplay></video>
 	</div>
     <div class="button-container">
-    <form action="/myapp/users/Real_Interview_Start" method="POST">
-    <input type="hidden" name="firstqText" value="${firstqText}">
+    <form action="/myapp/users/One_Real_Interview_Start" method="POST">
+    <div type="hidden" name="firstqText" value="${firstqText}"></div>
     <input type="hidden" name="secondqText" value="${secondqText}">
     <input type="hidden" name="thirdqText" value="${thirdqText}">
     <input type="hidden" name="firstaText" value="${firstaText}">
     <input type="hidden" name="secondaText" value="${secondaText}">
     <input type="hidden" name="thirdaText" value="${thirdaText}">
-    <input type="hidden" name="firstNumber" value="${firstNumber}">
-    <input type="hidden" name="secondNumber" value="${secondNumber}">
-    <input type="hidden" name="thirdNumber" value="${thirdNumber}">
     <button type="submit" class="button-container">시작하기</button>
 	</form>
     </div>
   </div>
+  
+  	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
   
 <script>
 //웹캠 스트림 가져오기

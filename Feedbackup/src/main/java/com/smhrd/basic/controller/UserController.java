@@ -204,6 +204,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/users/Job_List")
+
 	public String searchJobCodeAndGetAnswer(@RequestParam("jobCode") String jobCode, Model model) {
 	    // jobCode를 받아서 q_text 값을 가져옵니다.
 		List<String> qText = service.getQTextByJobCode(jobCode);
@@ -228,7 +229,27 @@ public class UserController {
 	    System.out.println("검색된 q_text 값: " + thirdqText);
 	    System.out.println("검색된 a_text 값: " + thirdaText);
 
-	    // qText 값을 모델에 추가하여 JSP로 전달
+
+
+		// qText 값이 정상적으로 가져와졌는지 확인
+		System.out.println("검색된 q_text 값: " + qText);
+		
+		
+	    System.out.println("검색된 q_text 값: " + firstqText);
+	    System.out.println("검색된 a_text 값: " + firstaText);
+
+	    
+	    System.out.println("검색된 q_text 값: " + secondqText);
+	    System.out.println("검색된 a_text 값: " + secondaText);
+
+	    
+	    System.out.println("검색된 q_text 값: " + thirdqText);
+	    System.out.println("검색된 a_text 값: " + thirdaText);
+
+
+
+	    // 모델에 값 추가
+
 	    model.addAttribute("firstqText", firstqText);
 	    model.addAttribute("secondqText", secondqText);
 	    model.addAttribute("thirdqText", thirdqText);
@@ -236,6 +257,7 @@ public class UserController {
 	    model.addAttribute("firstaText", firstaText);
 	    model.addAttribute("secondaText", secondaText);
 	    model.addAttribute("thirdaText", thirdaText);
+	    
 
 	    // 결과를 출력할 JSP 페이지로 이동
 	    return "Real_Interview";
@@ -253,6 +275,9 @@ public class UserController {
 	                                 @RequestParam("firstaText") String firstaText,
 	                                 @RequestParam("secondaText") String secondaText,
 	                                 @RequestParam("thirdaText") String thirdaText,
+	                                 @RequestParam("firstNumber") int firstNumber,
+	                                 @RequestParam("secondNumber") int secondNumber,
+	                                 @RequestParam("thirdNumber") int thirdNumber,
 	                                 Model model) {
 	    // 받은 데이터를 모델에 다시 추가하여 JSP로 전달
 	    model.addAttribute("firstqText", firstqText);
@@ -261,6 +286,9 @@ public class UserController {
 	    model.addAttribute("firstaText", firstaText);
 	    model.addAttribute("secondaText", secondaText);
 	    model.addAttribute("thirdaText", thirdaText);
+	    model.addAttribute("firstNumber", firstNumber);
+	    model.addAttribute("secondNumber", secondNumber);
+	    model.addAttribute("thirdNumber", thirdNumber);
 
 	    return "Real_Interview_Start"; // Real_Interview_Start.jsp
 	}
@@ -302,6 +330,31 @@ public class UserController {
 		model.addAttribute("list",list);
 		
 		return "QandA";
+	}
+	
+	@GetMapping("/One_Interview")
+	public String One_InterviewForm() {
+		return "One_Interview";
+	}
+	
+	@GetMapping("/users/Gender")
+	public String GenderForm() {
+		return "Gender";
+	}
+	
+	@GetMapping("/users/One_Real_Interview")
+	public String One_Real_Interview() {
+		return "One_Real_Interview";
+	}
+	
+	@GetMapping("/users/One_Real_Interview_Start")
+	public String One_Real_Interview_StartForm() {
+		return "One_Real_Interview_Start";
+	}
+	
+	@GetMapping("/users/One_Result")
+	public String One_ResultForm() {
+		return "One_Result";
 	}
 }
 

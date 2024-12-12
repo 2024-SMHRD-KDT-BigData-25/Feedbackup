@@ -15,7 +15,7 @@
             font-style: normal;
         }
 
-        .logo {
+        .signup-logo {
             width: 365px;
             height: 79px;
             display: block;
@@ -154,7 +154,7 @@
 </head>   
 
 <body>
-    <a href="/myapp"><img src="../img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
+    <a href="/myapp"><img src="../img/logo2.png" alt="logo" class="signup-logo"></a><br><br><br><br>
     <div class="signup-box">
       <h1>회원가입</h1>
       <br>

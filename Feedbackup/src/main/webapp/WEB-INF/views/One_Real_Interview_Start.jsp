@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Real_Interview_Start</title>
+<title>One_Real_Interview_Start</title>
 <style>
 @font-face {
   font-family: 'SUIT-Regular';
@@ -212,7 +212,6 @@
 }
 
 <!-- 추가 --!>
-
 #webcamContainer {
 	width: 640px;
 	height: 480px;
@@ -248,104 +247,11 @@ video {
   font-weight: bold;
 }
 
-<!-- 모달 관련 --!>
-
-/* 로딩 컨테이너 */
-.loading-container {
-    position: relative; /* 내부 자식 요소의 기준점 */
-    width: 100%; /* 부모 크기에 맞춤 */
-    height: 120px; /* 고정 크기 설정 */
-}
-
-/* 회전하는 테두리 */
-.rotating-border {
-    position: absolute; /* loading-container 기준 */
-    top: 42%; /* 부모 기준 중앙 */
-    left: 46.5%; /* 부모 기준 중앙 */
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid #D9D9D9;
-    border-top: 6px solid #8071FC;
-    animation: spin 1.2s linear infinite;
-    z-index: 1;
-}
-
-/* 고정된 이미지 */
-.static-image {
-    position: absolute; /* 부모 기준으로 위치 설정 */
-    top: 50%; /* 부모 기준 중앙 */
-    left: 50%; /* 부모 기준 중앙 */
-    transform: translate(-50%, -50%);
-    width: 70px;
-    height: 70px;
-    background-color: #fff;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.static-image img {
-   width: 100%;
-   height: 100%;
-   object-fit: cover;
-}
-
-@keyframes spin {
-       0% {
-           transform: rotate(0deg);
-       }
-       100% {
-           transform: rotate(360deg);
-       }
-   }
-
-/* 모달 배경 */
-.modal {
-   position: absolute;
-   display: none;
-   position: fixed;
-   z-index: 1;
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100%;
-   overflow: auto;
-   background-color: rgb(0, 0, 0);
-   background-color: rgba(0, 0, 0, 0.4);
-}
-/* 모달 콘텐츠 */
-.modal-content {
-   background-color: #fefefe;
-   margin: 11% auto;
-   padding: 20px;
-   border: 1px solid #888;
-   width: 600px;
-   height: 250px;
-   text-align: center;
-   border: 2px solid #8071FC;
-   border-radius: 30px;
-}
-/* 확인 버튼 */
-.close {
-   color: #aaa;
-   float: right;
-   font-size: 28px;
-   font-weight: bold;
-}
-
-.close:hover, .close:focus {
-   color: black;
-   text-decoration: none;
-   cursor: pointer;
-}
-
 </style>
 </head>
 <body>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
   <div class="top_btn">
     <button class="btn1">질문 다시 듣기</button>
   </div>
@@ -358,21 +264,6 @@ video {
 		<div class="info">본 질문은 삼성전자 기출 질문입니다.</div>
 	</div>
 	<div>
-
-    
-    <span>${firstNumber}</span>
-
-    <br>
-    
-    <span>${secondNumber}</span>
-
-    <br>
-    
-    <span>${thirdNumber}</span>
-
-    <br>
-
-
     </div>
   </div>
   <div class="recording-bar" style="display: none;">
@@ -417,30 +308,8 @@ video {
 		<p><strong>코를 만진 횟수:</strong> <span id="noseTouchCount">0번</span></p>
 	</div>
 	
-	<div id="resultModal" class="modal" hidden>
-	    <div class="modal-content">
-	        <div class="loading-container">
-	            <div class="rotating-border"></div>
-	            <div class="static-image">
-	                <img id="modalImage" src="../img/logo1.png" alt="로고">
-	            </div>
-	        </div>
-	        <p id="modalMessage" class="modal_text">분석 중입니다...</p>
-	        <button class="btn" id="btn_confirm">확인</button>
-	    </div>
-	</div>
-	
-	<div id="resultModal2" class="modal" hidden>
-	    <div class="modal-content">
-	        <div class="loading-container">         
-	            <div class="static-image">
-	                <img id="modalImage" src="../img/check.png" alt="로고">
-	            </div>
-	        </div>
-	        <p id="modalMessage" class="modal_text">분석이 완료되었습니다.</p>
-	        <button class="btn" id="btn_confirm">확인</button>
-	    </div>
-	</div>
+		<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 	
 	<script>
         // 웹캠 스트림 가져오기
@@ -475,8 +344,6 @@ video {
         let lastHairTouchCount = 0;  // 전역 변수로 선언
         let lastNoseTouchCount = 0;  // 전역 변수로 선언
         
-        const questionNumbers = ["${firstNumber}", "${secondNumber}", "${thirdNumber}"];
-        
 		// 버튼 클릭 시 음성 분석 및 동작 인식 시작/중지
 		
 		let executionCount = 0; // 실행 횟수를 추적하는 변수
@@ -507,8 +374,7 @@ video {
 		
 		            const formData = new FormData();
 		            formData.append("audio", file);
-		            formData.append("questionNumber", questionNumbers[executionCount]);
-		            
+		
 		            // 서버로 음성 데이터 전송
 		            fetch("http://localhost:5700/start_capture", {
 		                method: "POST",
@@ -548,7 +414,7 @@ video {
 		        document.getElementById("waveform").style.display = "flex"; // 웨이브폼 보이기
 		        document.getElementById("icon").style.display = "flex";
 		        
-		        captureBtn.textContent = "답변 마치기"; // 버튼 텍스트 변경
+		        captureBtn.textContent = "분석하기"; // 버튼 텍스트 변경
 		        isRecording = true;
 		
 		    } else {
@@ -558,7 +424,6 @@ video {
 		        }
 		        stopMotionDetection(); // 동작 인식 중지
 		        
-		        openModal("resultModal")
 		        recordingBar.style.display = "none";  // .recording-bar 숨기기
 		        captureBtn.textContent = "시작하기"; // 버튼 텍스트 복원
 		        isRecording = false;
@@ -640,9 +505,7 @@ video {
                 relativeTremor,
                 timestamp: new Date().toISOString(),
             };
-            
-            
-            
+
             // 서버에 저장
             fetch("http://localhost:5700/save_results", {
                 method: "POST",
@@ -655,13 +518,11 @@ video {
             })
             .then((data) => {
                 console.log("서버에 저장 완료:", data);
-                
-				openModal("resultModal2")
-				
+
                 // 분석이 끝났으면 페이지 이동
                 executionCount++;
                 if (executionCount >= 3) {
-                    window.location.href = "/myapp/users/Result"; // 원하는 페이지 URL로 변경
+                    window.location.href = "/myapp/result_test"; // 원하는 페이지 URL로 변경
                 }
             })
             .catch((error) => console.error("결과 저장 중 오류:", error));
@@ -717,52 +578,6 @@ video {
                 console.error("TTS 오디오 소스가 설정되지 않았습니다.");
             }
         });
-        
-        
-        
-        
-            function closeAllModals() {
-                const modals = document.querySelectorAll(".modal");
-                modals.forEach(modal => {
-                    modal.style.display = "none"; // 모든 모달 숨기기
-                });
-            }
-            
-            //모달 열기
-            function openModal(modalId) {
-                // 모든 모달 닫기
-                  closeAllModals()
-
-                // 해당 모달 요소 가져오기
-                const modal = document.getElementById(modalId);
-                if (!modal) {
-                    console.error(`Modal with ID ${modalId} not found.`);
-                    return;
-                }
-
-                // 모달 표시
-                modal.style.display = "block";
-
-                // 확인 버튼 동작 설정
-                const confirmButton = modal.querySelector("#btn_confirm");
-                if (confirmButton) {
-                    confirmButton.onclick = function () {
-                        modal.style.display = "none"; // 모달 닫기
-                    };
-                }
-
-                // 모달 외부를 클릭해도 닫히도록 설정
-                modal.addEventListener("click", function (event) {
-                    if (event.target === modal) {
-                        modal.style.display = "none";
-                    }
-                });
-            }
-            
-         // DOMContentLoaded에서 초기화 작업
-            document.addEventListener("DOMContentLoaded", function () {
-                // 필요 시 여기에 초기화 작업 추가
-        }); 
     </script>
 	
 </body>

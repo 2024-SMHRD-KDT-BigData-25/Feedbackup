@@ -67,6 +67,21 @@ public class UserService {
         return mapper.findATextBythirdqText(thirdqText);
     }
     
+// q_text를 기준으로 QUESTION_ID를 가져오는 메서드
+    public int getATextByfirstNumber(String firstqText) {
+        return mapper.findATextByfirstNumber(firstqText);
+    }
+    
+ // q_text를 기준으로 QUESTION_ID를 가져오는 메서드
+    public int getATextBysecondNumber(String secondqText) {
+        return mapper.findATextBysecondNumber(secondqText);
+    }
+    
+ // q_text를 기준으로 QUESTION_ID를 가져오는 메서드
+    public int getATextBythirdNumber(String thirdqText) {
+        return mapper.findATextBythirdNumber(thirdqText);
+    }
+    
  // 이름을 기준으로 사용자 정보를 찾는 메소드
     public List<MavenMember> findUsersByName(String name) {
         return mapper.findUsersByName(name);

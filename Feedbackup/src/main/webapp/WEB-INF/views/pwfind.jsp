@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
      <style>
-               @font-face {
+            @font-face {
             font-family: 'SUIT-Regular';
             src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
+        
 
-        .logo {
+        .pwfind-logo {
             width: 365px;
             height: 79px;
             display: block;
@@ -233,7 +234,10 @@
     </style>
 </head>
 <body>
-    <img src="../img/logo2.png" alt="logo" class="logo"><br><br><br><br>
+    
+    <div class="top">
+    	<a href="/myapp"><img src="../img/logo2.png" alt="logo" class="pwfind-logo"></a><br><br><br><br>
+    </div>
     <div class="find_wrapper">
         <div class="find_top">
             <div id="find_id"><a href="/myapp/users/idfind" style="display: block; width: 100%; height: 100%;">아이디 찾기</a></div>
@@ -278,6 +282,8 @@
         </div>
     </div>
 
+
+    
     <script>
         window.onload = function() {
             var success = '${success != null ? success : 'false'}' === 'true'; // 성공 여부 확인

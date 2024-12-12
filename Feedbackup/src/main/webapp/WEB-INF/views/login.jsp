@@ -17,7 +17,7 @@
    font-style: normal;
 }
 
-.logo {
+.login-logo {
    width: 365px;
    height: 79px;
    display: block;
@@ -170,8 +170,8 @@ a:visited {
 
 </head>
 <body>
-
-      <a href="/myapp"><img src="img/logo2.png" alt="logo" class="logo"></a><br> <br> <br> <br>
+    
+      <a href="/myapp"><img src="img/logo2.png" alt="logo" class="login-logo"></a><br> <br> <br> <br>
       <div class="login_wrapper">
          <h1>로그인</h1>
          <br>
@@ -206,5 +206,6 @@ a:visited {
          </form>
 
       </div>
+      
 </body>
 </html>

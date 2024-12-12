@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>AI_Interview</title>
-<link rel="stylesheet" href="css/Ai_Interview.css">
+<link rel="stylesheet" href="css/One_Interview.css">
 <style>
 
 
@@ -123,7 +123,7 @@
             </div>
         </div>
         <p id="modalMessage" class="modal_text2">음성 인식에 성공했어요!</p><p id="modalMessage" class="modal_text4"> 연습중에도 목소리 크기를 유지해주세요.</p>
-        <a href="users/Job_List" class="btn" id="btn_confirm">다음</a>
+        <a href="users/Gender" class="btn" id="btn_confirm">다음</a>
     </div>
 </div>
 
@@ -134,7 +134,7 @@
                 <img id="modalImage" src="img/voice-test-fail.svg" alt="불일치">
             </div>
         </div>
-        <p id="modalMessage" class="modal_text3">음성 인식에 실패했어요...</p><p id="modalMessage" class="modal_text4">발음을 더 명확히 하거나<br>조용한 환경에서 다시 시도해주세요.</p>
+        <p id="modalMessage" class="modal_text3">음성 인식에 실패했어요...</p><p id="modalMessage" class="modal_text4">발음을 더 명확히 하거나 조용한 환경에서 다시 시도해주세요.</p>
         <button class="btn" id="btn_confirm">확인</button>
     </div>
 </div>

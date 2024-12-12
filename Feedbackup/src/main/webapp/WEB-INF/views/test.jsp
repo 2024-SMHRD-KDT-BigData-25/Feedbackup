@@ -4,418 +4,407 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI_Interview</title>
-	<style>
-		@font-face {
-		    font-family: 'SUIT-Regular';
-		    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-		    font-weight: normal;
-		    font-style: normal;
-		}
-		        
-		body {
-		    background-color: #F1F5F9;
-		    font-family: 'SUIT-Regular';
-		    align-content: center;
-		}
-		
-		.text1{
-		    font-size: 26px;
-		    font-weight: bold;
-		    margin-top: 40px;
-		    margin-bottom: 70px;
-		    text-align: center;
-		}
-		
-		.container{
-		    display: flex;
-		    justify-content: center;
-		    gap: 20px;
-		}
-		
-		.box1 {
-		    width: 385px; /* 원하는 너비 */
-		    height: 450px; /* 원하는 높이 */
-		    background-color: white; /* 임시 스타일 */
-		    border-radius: 30px;
-		    border: 1px solid #8071FC;
-		    padding: 30px;
-		}
-		
-		.box2 {
-		    width: 260px; /* 원하는 너비 */
-		    max-height: 450px; /* 원하는 높이 */
-		    background-color: white; /* 임시 스타일 */
-		    border-radius: 30px;
-		    border: 1px solid #8071FC;
-		    padding: 30px;
-		}
-		
-		h4{ 
-		    margin: 0px;
-		    margin-bottom: 0px;
-		    font-size: 14px;
-		}
-		
-		p {
-		    font-size: 10px;
-		}
-		
-		li{
-		    font-size: 10px;
-		}
-		
-		.underline{
-		    border-bottom: 1px solid #CEB3FF;
-		    margin-bottom: 15px;
-		}
-		
-		.circle {
-		    display: inline-block; /* 인라인 요소로 취급 */
-		    width: 16px; /* 원의 너비 */
-		    height: 16px; /* 원의 높이 */
-		    line-height: 16px; /* 텍스트 수직 정렬 */
-		    text-align: center; /* 텍스트 중앙 정렬 */
-		    background-color: white; /* 파란색 배경 */
-		    border:#CEB3FF 1px solid;
-		    color: black;
-		    border-radius: 50%; /* 원형 만들기 */
-		    font-size: 10px; /* 텍스트 크기 */
-		    font-weight: bold;
-		}
-		
-		.person_container {
-		    position: relative; /* 텍스트의 위치를 이미지에 상대적으로 설정 */
-		    width: 260px; /* 컨테이너 너비 */
-		    height: 260px; /* 컨테이너 높이 */
-		}
-		  
-		.person_img{
-		    width: 260px; /* 원하는 너비 */
-		    height: 260px; /* 원하는 높이 */
-		    object-fit: cover; /* 이미지 비율 유지 */
-		}
-		  
-		 .person_text {
-		    position: absolute;
-		    bottom: 0%;
-		    left: 50%;
-		    transform: translate(-50%, -50%);
-		    display: inline-block;
-		    background-color: #8071FC;
-		    color: white;
-		    text-align: center;
-		    font-size: 13px;
-		    width: 120px;
-		    border-radius: 50px;
-		    border: 0.5px #8071FC solid;
-		    padding: 10px;
-		  }
-		  
-		  .person_text:hover {
-		    color: #8071FC;
-		    background-color: white;
-		    border-color: #8071FC;
-		  }
-		  
-		  .mike {
-		    display: flex;
-		    align-items: center;
-		    margin-top: 50px;
-		    margin-bottom: 10px;
-		  }
-		  
-		  .mike > span {
-		    font-size: 13px;
-		    margin-bottom: 20px;
-		    color: #64748B;
-		  }
-		  
-		  .mike_text {
-		    font-size: 18px;
-		    font-weight: bold;
-		    line-height: 1.5;
-		    text-align: center;
-		  }
-		  
-		  #karaoke_text span {
-		    color: black;
-		    transition: color 0.15s ease;
-		  }
-		  
-		  #karaoke_text span.highlighted {
-		    color: #8071FC;
-		  }
-		  
-		  .recording_container{
-		  	position: relative; /* 텍스트의 위치를 이미지에 상대적으로 설정 */
-		    width: 260px; /* 컨테이너 너비 */
-		    height: 260px; /* 컨테이너 높이 */
-		  }
-		  
-		  .recording_status {
-		  	position: absolute;
-		    bottom: 0%;
-		    left: 50%;
-		    transform: translate(-50%, -50%);
-		    display: flex;
-		    align-items: center;
-		    gap: 5px;
-		    height: 15px;
-		    width: 120px;
-		    border-radius: 50px;
-		    border: 0.5px #8071FC solid;
-		    padding: 10px;
-		    background-color: white;
-		  }
-		  
-		  .recording_icon {
-		    width: 8px;
-		    height: 8px;
-		    background-color: red;
-		    border-radius: 50%;
-		  }
-		  
-		  .recording_text {
-		    font-size: 8px;
-		    color: #666666;
-		  }
-		  
-		  .waveform {
-		    display: flex;
-		    align-items: center;
-		    gap: 3px;
-		  }
-		  
-		  .waveform div {
-		    width: 3px;
-		    height: 10px;
-		    background-color: #a97dff;
-		    border-radius: 2px;
-		    animation: wave 1.2s infinite ease-in-out;
-		  }
-		  
-		  .waveform div:nth-child(2) {
-		    animation-delay: -1.1s;
-		  }
-		  
-		  .waveform div:nth-child(3) {
-		    animation-delay: -1s;
-		  }
-		  
-		  .waveform div:nth-child(4) {
-		    animation-delay: -0.9s;
-		  }
-		  
-		  .waveform div:nth-child(5) {
-		    animation-delay: -0.8s;
-		  }
-		  
-		  @keyframes wave {
-		    0%, 100% {
-		      height: 5px;
-		    }
-		    50% {
-		      height: 15px;
-		    }
-		  }
-		      
-	</style>
+<title>Job_List</title>
+<style>
+    @font-face {
+        font-family: 'SUIT-Regular';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    body {
+        background-color: #F1F5F9;
+        font-family: 'SUIT-Regular';
+        align-content: center;
+    }
+
+    .text1 {
+        font-size: 26px;
+        font-weight: bold;
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    .text2 {
+        font-size: 10px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #64748B;
+    }
+
+    .category-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        width: 800px;
+        background-color: #FFFFFF;
+        border: 1px solid #8071FC;
+        border-radius: 30px;
+        padding: 40px 40px;
+        margin: 0px auto;
+        margin-top: -10px;
+    }
+
+    .category-step {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 30px;
+    }
+
+    .step-circle {
+        width: 40px;
+        height: 40px;
+        background-color: #8071FC;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        font-weight: 900;
+    }
+
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 20px;
+    }
+
+    .category-button {
+        background-color: #F3F3F3;
+        color: #333333;
+        border: 1px solid white;
+        border-radius: 10px;
+        font-size: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        font-weight: 550;
+        width: 100px;
+        height: 30px;
+    }
+
+    .category-button:hover {
+        box-sizing: border-box;
+        background-color: #F3EDFF;
+        color: #8071FC;
+        border: 2px solid #8071FC;
+        font-weight: bold;
+    }
+
+    .category-button.active {
+        background-color: #8071FC;
+        color: white;
+        border: 2px solid #8071FC;
+        font-weight: bold;
+    }
+
+    .sex_container {
+        text-align: center;
+        align-items: center;
+        gap: 20px;
+        width: 800px;
+        height: 180px;
+        background-color: #FFFFFF;
+        border: 1px solid #8071FC;
+        border-radius: 30px;
+        padding: 30px 40px;
+        margin: 30px auto;
+        color: #8071FC;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .sex_select {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        margin: 0px auto;
+    }
+
+    .sex {
+        justify-content: center;
+        display: flex;
+        gap: 20px;
+        font-size: 18px;
+        width: 620px;
+    }
+
+    .box {
+        background-color: #FFFFFF;
+        border: 1px solid #CBD5E1;
+        width: 140px;
+        height: 140px;
+        margin-top: 20px;
+        border-radius: 15px;
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 1px 20px 0 rgb(220, 220, 220);
+    }
+
+    .box:hover {
+        background-color: #F3EDFF;
+        color: #8071FC;
+        border: 2px solid #8071FC;
+        font-weight: bold;
+    }
+
+    .box.active {
+        background-color: #8071FC;
+        color: white;
+        border: 2px solid #8071FC;
+        font-weight: bold;
+    }
+    
+	.man{
+		width: 90px;
+	}
+	
+	.woman{
+		width: 78px;
+		margin-top: 12px; 
+	}
+    
+    .box > div{
+    	margin-top: 5px;
+    }
+
+    .next {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .next_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 1px solid #8071FC;
+        border-radius: 50px;
+        width: 160px;
+        height: 65px;
+        background-color: #8071FC;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .next_btn:hover {
+        background-color: #6a5ecc;
+    }
+    
+    .search-container {
+	  display: flex;
+	  justify-content: right;
+	  margin: 0px 320px;
+	  gap: 10px;
+	
+	}
+	
+	.search-input {
+	  width: 180px;
+	  height: 30px;
+	  padding: 3px;
+	  border: 1px solid #8071FC;
+	  border-radius: 5px;
+	  font-size: 14px;
+	}
+	
+	.search-button {
+	  background-color: #8071FC;
+	  color: white;
+	  border: none;
+	  border-radius: 5px;
+	  padding: 9px 10px;
+	  font-size: 14px;
+	  cursor: pointer;
+	  transition: background-color 0.2s;
+	}
+	
+	.search-button:hover {
+	  background-color: #6a5ecc;
+	}
+	
+	.search-result {
+	  margin: 20px auto;
+	  text-align: center;
+	  font-size: 16px;
+	  color: #333;
+	}
+</style>
 </head>
 <body>
-    <div class="AI_Interview_wrapper">
-        <div class="text1">연결된 기기를 확인해 주세요</div>
-        <div class="container">
-            <div class="box1" id="box1">
-                <div class="underline">
-                    <h4>마이크 테스트 가이드</h4>
-                    <P><span class="circle">1</span>&nbsp;&nbsp; 마이크가 pc(노트북)에 연결되어 있는지 확인해 주세요.</P>
-                    <P><span class="circle">2</span>&nbsp;&nbsp; 상단 팝업의 마이크 권한을 "허용"으로 선택해 주세요.</P>
-                    <P><span class="circle">3</span>&nbsp;&nbsp; 영상은 녹화되지 않으며 음성만 녹음됩니다.</P>
-                </div>
-                <div class="underline">
-                    <h4>소음</h4>
-                    <P><span class="circle">1</span>&nbsp;&nbsp; 조용한 공간에서 면접을 진행해 주세요</P>
-                    <P><span class="circle">2</span>&nbsp;&nbsp; 이어폰 사용 시 마이크에 닿은 옷 또는 머리카락 때문에 소음이 생길수 있으니 주의해 주세요.</P>
-                    <P><span class="circle">3</span>&nbsp;&nbsp; 다른 사람의 음성이 녹음되지 않도록 해 주세요</P>
-                </div>
-                <div class="underline">
-                    <h4>오류를 일으키는 주요원인</h4>
-                    <P><span class="circle">1</span>&nbsp;&nbsp; 마이크 사용 중 하울링(소리 증폭 현상)이 발생하면 소리가 커져서 음성 검출이 어려워질 수 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;있습니다.</P>
-                    <P><span class="circle">2</span>&nbsp;&nbsp; 이어폰 사용 시에는 마이크가 있는 기기를 사용해 주세요.</P>
-                    <P><span class="circle">3</span>&nbsp;&nbsp; 음성 전달에 영향을 미치는 마스크를 착용하지 말아 주세요.</P>
-                </div>
-                <div>
-                    <h4>답변 주의사항</h4>
-                    <P><span class="circle">1</span>&nbsp;&nbsp; 소리가 작거나 발음이 부정확하면 음성 인식이 어려울 수 있습니다.</P>
-                    <P><span class="circle">2</span>&nbsp;&nbsp; 답변할 때 정확한 음성과 크기로 답변해 주세요.</P>
-                </div>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
+<div class="Job_list_wrapper">
+    <div class="text1">희망하시는 기업을 선택해 주세요</div>
+    <div class="text2">* 확실한 면접 준비를 위해 각각 한가지만 선택가능 합니다.</div>
+    <form id="main-form" action="/myapp/users/Job_List" method="POST">
+        <!-- Hidden Inputs -->
+        <input type="hidden" id="selected-gender" name="gender" value="">
+        <input type="hidden" id="selected-company" name="company" value="">
+        
+        <!-- 검색창 -->
+        <div class="search-container">
+            <input 
+                type="text" 
+                id="search-input" 
+                name="jobCode" 
+                placeholder="기업명을 검색하세요" 
+                class="search-input" 
+            />
+            <button type="button" id="search-button" class="search-button">검색</button>
+        </div>
+        <div id="search-result" class="search-result"></div>
+        
+        <!-- 기업 선택 -->
+        <div class="category-container">
+            <div class="category-step">
+                <div class="step-circle">1</div>
             </div>
-            <div class="box2" id="box2">
-                <div class="person_container">
-                    <img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
-                    <div class="person_text" onclick="startVoiceTest()"> 음성테스트 시작 </div>
-                </div>
-                <div class="mike">
-                    <span>음성 테스트 시작 후에 아래 문구를 따라 읽어주세요</span>
-                </div>
-                <div class="mike_text">
-				  <div id="karaoke_text">
-				    <span>경</span><span>험</span><span>은</span><span> </span><span>만</span><span>들</span><span>어</span><span> </span>
-				    <span>낼</span><span> </span><span>수</span><span> </span><span>없</span><span>다</span>.<br>
-				    <span>그</span><span>것</span><span>은</span><span> </span><span>시</span><span>도</span><span>해</span><span>야</span><span>만</span>
-				    <span> </span><span>한</span><span>다</span>.
-				  </div>
-				</div>
+            <div class="category-grid">
+                <button type="button" class="category-button">카카오</button>
+                <button type="button" class="category-button">현대자동차</button>
+                <button type="button" class="category-button">삼성전자</button>
+                <button type="button" class="category-button">SKT</button>
+                <button type="button" class="category-button">SK 하이닉스</button>
+                <button type="button" class="category-button">KT</button>
+                <button type="button" class="category-button">LG</button>
+                <button type="button" class="category-button">포스코</button>
+                <button type="button" class="category-button">롯데</button>
+                <button type="button" class="category-button">한화</button>
+                <button type="button" class="category-button">GS</button>
+                <button type="button" class="category-button">농협</button>
+                <button type="button" class="category-button">두산</button>
+                <button type="button" class="category-button">LS</button>
+                <button type="button" class="category-button">한진</button>
+                <button type="button" class="category-button">CJ</button>
+                <button type="button" class="category-button">신세계</button>
+                <button type="button" class="category-button">셀트리온</button>
+                <button type="button" class="category-button">쿠팡</button>
+                <button type="button" class="category-button">금호아시아나</button>
+                <button type="button" class="category-button">하림</button>
+                <button type="button" class="category-button">SM</button>
+                <!-- Add more companies as needed -->
             </div>
-          </div>
-    </div>
-    
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function () {
-    let isRecording = false; // 녹음 상태 플래그
-    let timeoutId = null; // 텍스트 강조 애니메이션 타이머
-    let currentIndex = 0; // 텍스트 강조 인덱스
-
-    const personContainer = document.querySelector(".person_container");
-    const mikeTextContainer = document.querySelector(".mike_text");
-
-    const initialHTML = `
-    	<img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
-        <div class="person_text" onclick="startVoiceTest()"> 음성테스트 시작 </div>
-    `;
-
-    const recordingHTML = `
-        <div class="recording_container">
-    	<img src="${pageContext.request.contextPath}/assets/img/person.png" alt="배경 이미지" class="person_img">
-            <div class="recording_status">
-                <span class="recording_icon"></span>
-                <span class="recording_text">녹음중 00:03</span>
-                <div class="waveform">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+        </div>
+        
+        <!-- 성별 선택 -->
+        <div class="sex_container">
+            <div>정확한 음성 분석을 위해 성별을 선택해 주세요</div>
+            <div class="sex_select">
+	            <div class="category-step">
+		      		<div class="step-circle">2</div>
+		    	</div>	
+                <div class="sex">
+			  		<div class="box" data-gender="male">
+				  		<img src="../img/man.png" class="man">
+				  		<div>남성</div>
+			  		</div>
+			  		<div class="box" data-gender="woman">
+			  			<img src="../img/woman.png" class="woman">
+				  		<div>여성</div>
+			  		</div>
                 </div>
             </div>
         </div>
-    `;
-
-    const mikeTextDefaultHTML = `
-        <span>음성 테스트 시작 후에 아래 문구를 따라 읽어주세요</span>
-    `;
-
-    const karaokeTextHTML = `
-        <div id="karaoke_text">
-            <span>경</span><span>험</span><span>은</span><span> </span><span>만</span><span>들</span><span>어</span><span> </span>
-            <span>낼</span><span> </span><span>수</span><span> </span><span>없</span><span>다</span>.<br>
-            <span>그</span><span>것</span><span>은</span><span> </span><span>시</span><span>도</span><span>해</span><span>야</span><span>만</span>
-            <span> </span><span>한</span><span>다</span>.
+        
+        <!-- 다음 버튼 -->
+        <div class="next">
+            <button type="button" class="next_btn">다음</button>
         </div>
-    `;
+    </form>
+</div>
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 
-    // 초기화 함수
-    function resetToInitialState() {
-        console.log("resetToInitialState 호출됨");
+<script>
+//검색 로직
+document.getElementById('search-button').addEventListener('click', searchCompany);
+document.getElementById('search-input').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        searchCompany();
+    }
+});
 
-        // 초기 상태 복원
-        personContainer.innerHTML = initialHTML;
+function searchCompany() {
+    const input = document.getElementById('search-input').value.trim().toLowerCase();
+    const buttons = document.querySelectorAll('.category-button');
+    let result = '';
+    const activeCompanies = []; // 활성화된 버튼 저장 배열
 
-        if (mikeTextContainer) {
-            mikeTextContainer.innerHTML = karaokeTextHTML; // #karaoke_text 복원
+    buttons.forEach(button => {
+        const companyName = button.textContent.trim().toLowerCase();
+
+        // 검색어가 버튼 텍스트에 포함되어 있는지 확인
+        if (companyName.includes(input)) {
+            result += `${button.textContent} `;
+            button.classList.add('active');
+            document.getElementById('selected-company').value = button.textContent.trim(); // 선택된 기업 설정
+            activeCompanies.push(companyName);
+        } else {
+            button.classList.remove('active');
         }
+    });
 
-        // 녹음 상태 초기화
-        isRecording = false;
-        clearTimeout(timeoutId); // 텍스트 강조 중단
-        resetHighlight(); // 텍스트 강조 초기화
-        stopWaveAnimation(); // 파형 초기화
-
-        // 클릭 이벤트 재설정
-        rebindClickEvent();
+    if (!input) {
+        result = '검색어를 입력하세요.';
+    } else if (result === '') {
+        result = '일치하는 기업이 없습니다.';
     }
 
-    // 녹음 상태로 전환
-    window.startVoiceTest = function startVoiceTest() {
-	    if (!isRecording) {
-	        personContainer.innerHTML = recordingHTML;
-	
-	        // 녹음 컨테이너 클릭 이벤트 추가
-	        const recordingContainer = document.querySelector(".recording_container");
-	        if (recordingContainer) {
-	            recordingContainer.addEventListener("click", resetToInitialState);
-	        }
-	
-	        if (mikeTextContainer) {
-	            mikeTextContainer.innerHTML = karaokeTextHTML;
-	        }
-	
-	        isRecording = true;
-	        currentIndex = 0;
-	        startWaveAnimation();
-	        highlightNext();
-	    }
-	};
+    document.getElementById('search-result').textContent = result;
+}
 
-    // 클릭 이벤트 재설정 함수
-    function rebindClickEvent() {
-        const newPersonText = document.querySelector(".person_text");
-        if (newPersonText) {
-            newPersonText.addEventListener("click", startVoiceTest);
-        }
+// 성별 선택
+document.querySelectorAll('.box').forEach(box => {
+    box.addEventListener('click', function () {
+        document.querySelectorAll('.box').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('selected-gender').value = this.dataset.gender; // 선택된 성별 설정
+    });
+});
+
+// 기업 선택 (검색 없이 클릭만으로도 가능)
+document.querySelectorAll('.category-button').forEach(button => {
+    button.addEventListener('click', function () {
+        document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('selected-company').value = this.textContent.trim(); // 선택된 기업 설정
+    });
+});
+
+// 다음 버튼 클릭
+document.querySelector('.next_btn').addEventListener('click', function () {
+    const gender = document.getElementById('selected-gender').value;
+    const company = document.getElementById('selected-company').value;
+
+    if (!gender) {
+        alert('성별을 선택해 주세요.');
+        return;
     }
 
-    // 텍스트 강조 애니메이션
-    function highlightNext() {
-        if (!isRecording) return;
-
-        const spans = document.querySelectorAll("#karaoke_text span");
-        if (spans.length > 0 && currentIndex < spans.length) {
-            spans[currentIndex].classList.add("highlighted");
-            currentIndex++;
-            timeoutId = setTimeout(highlightNext, 150);
-        }
+    if (!company) {
+        alert('기업을 선택해 주세요.');
+        return;
     }
 
-    // 텍스트 강조 초기화
-    function resetHighlight() {
-        const spans = document.querySelectorAll("#karaoke_text span.highlighted");
-        spans.forEach((span) => span.classList.remove("highlighted"));
-        currentIndex = 0;
-    }
-
-    // 파형 애니메이션 시작
-    function startWaveAnimation() {
-        const waveformContainer = document.querySelector(".waveform");
-        if (waveformContainer) {
-            for (let i = 0; i < 5; i++) {
-                const wave = document.createElement("div");
-                waveformContainer.appendChild(wave);
-            }
-        }
-    }
-
-    // 파형 애니메이션 중단
-    function stopWaveAnimation() {
-        const waveformContainer = document.querySelector(".waveform");
-        if (waveformContainer) {
-            waveformContainer.innerHTML = "";
-        }
-    }
-
-    // DOMContentLoaded 이후 초기 이벤트 설정
-    rebindClickEvent();
+    document.getElementById('main-form').submit();
 });
 
 
 </script>
-
-
-
-
-
-
-
 </body>
 </html>
