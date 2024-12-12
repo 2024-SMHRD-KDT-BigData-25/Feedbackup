@@ -136,7 +136,6 @@
 
     <!-- 4번째 인덱스 -->
     <section class="pricing-section">
-        <div>
         <h1 class="pricing-title">요금제 및 가격</h1>
         <p class="pricing-subtitle">간단하고 투명한 가격, 설정 수수료나 계약이 없습니다.<br>신용카드 없이 시도하고 언제든지 취소하세요.</p>
         
@@ -171,6 +170,7 @@
                 <a href="#" class="start-button">지금 시작하기</a>
             </div>
         </div>
+        
     </section>
 
     <!-- 5번째 인덱스 -->
@@ -185,9 +185,9 @@
             <button class="hero-button">무료로 시작하기&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </section>
-    
+    </div>
     <button id="topButton"><i class="fa-solid fa-chevron-up"></i></button>
-	
+
 
 	<!-- 푸터 불러오기 -->
     <div><jsp:include page="footer.jsp"></jsp:include> </div>

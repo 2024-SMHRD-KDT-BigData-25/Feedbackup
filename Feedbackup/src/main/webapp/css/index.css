@@ -139,14 +139,15 @@ body {
     font-size: 13px;
 }
 
+.squer {
+    display: flex; /* Flexbox를 사용하여 정렬 */
+    justify-content: center;
+}
+
 .overlap1, .overlap2, .overlap3 {
     display: inline-block;
     margin: 15px;
     text-align: center;
-}
-
-.overlap1 {
-	margin-top: 50px;
 }
 
 .index-two-page img {
