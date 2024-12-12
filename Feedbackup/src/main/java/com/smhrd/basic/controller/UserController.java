@@ -215,6 +215,10 @@ public class UserController {
 		String firstaText = service.getATextByfirstqText(firstqText);
 		String secondaText = service.getATextBysecondqText(secondqText);
 		String thirdaText = service.getATextBythirdqText(thirdqText);
+		
+		int firstNumber = service.getATextByfirstNumber(firstqText);
+		int secondNumber = service.getATextBysecondNumber(secondqText);
+		int thirdNumber = service.getATextBythirdNumber(thirdqText);
 
 	    
 		// qText 값이 정상적으로 가져와졌는지 확인
@@ -223,10 +227,15 @@ public class UserController {
 		
 	    System.out.println("검색된 q_text 값: " + firstqText);
 	    System.out.println("검색된 a_text 값: " + firstaText);
+	    System.out.println("검색된 ID 값: " + firstNumber);
+	    
 	    System.out.println("검색된 q_text 값: " + secondqText);
 	    System.out.println("검색된 a_text 값: " + secondaText);
+	    System.out.println("검색된 ID 값: " + secondNumber);
+	    
 	    System.out.println("검색된 q_text 값: " + thirdqText);
 	    System.out.println("검색된 a_text 값: " + thirdaText);
+	    System.out.println("검색된 ID 값: " + thirdNumber);
 
 	    // qText 값을 모델에 추가하여 JSP로 전달
 	    model.addAttribute("firstqText", firstqText);
@@ -236,6 +245,10 @@ public class UserController {
 	    model.addAttribute("firstaText", firstaText);
 	    model.addAttribute("secondaText", secondaText);
 	    model.addAttribute("thirdaText", thirdaText);
+	    
+	    model.addAttribute("firstNumber", firstNumber);
+	    model.addAttribute("secondNumber", secondNumber);
+	    model.addAttribute("thirdNumber", thirdNumber);
 
 	    // 결과를 출력할 JSP 페이지로 이동
 	    return "Real_Interview";
@@ -253,6 +266,9 @@ public class UserController {
 	                                 @RequestParam("firstaText") String firstaText,
 	                                 @RequestParam("secondaText") String secondaText,
 	                                 @RequestParam("thirdaText") String thirdaText,
+	                                 @RequestParam("firstNumber") int firstNumber,
+	                                 @RequestParam("secondNumber") int secondNumber,
+	                                 @RequestParam("thirdNumber") int thirdNumber,
 	                                 Model model) {
 	    // 받은 데이터를 모델에 다시 추가하여 JSP로 전달
 	    model.addAttribute("firstqText", firstqText);
@@ -261,6 +277,9 @@ public class UserController {
 	    model.addAttribute("firstaText", firstaText);
 	    model.addAttribute("secondaText", secondaText);
 	    model.addAttribute("thirdaText", thirdaText);
+	    model.addAttribute("firstNumber", firstNumber);
+	    model.addAttribute("secondNumber", secondNumber);
+	    model.addAttribute("thirdNumber", thirdNumber);
 
 	    return "Real_Interview_Start"; // Real_Interview_Start.jsp
 	}

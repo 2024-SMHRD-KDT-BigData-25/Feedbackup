@@ -277,23 +277,23 @@ video {
     position: absolute; /* 부모 기준으로 위치 설정 */
     top: 50%; /* 부모 기준 중앙 */
     left: 50%; /* 부모 기준 중앙 */
-   transform: translate(-50%, -50%);
-   width: 70px;
-   height: 70px;
-   background-color: #fff;
-   border-radius: 50%;
-   overflow: hidden;
-   display: flex;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .static-image img {
    width: 100%;
    height: 100%;
    object-fit: cover;
 }
+
 @keyframes spin {
        0% {
            transform: rotate(0deg);
@@ -305,6 +305,7 @@ video {
 
 /* 모달 배경 */
 .modal {
+   position: absolute;
    display: none;
    position: fixed;
    z-index: 1;
@@ -357,6 +358,21 @@ video {
 		<div class="info">본 질문은 삼성전자 기출 질문입니다.</div>
 	</div>
 	<div>
+
+    
+    <span>${firstNumber}</span>
+
+    <br>
+    
+    <span>${secondNumber}</span>
+
+    <br>
+    
+    <span>${thirdNumber}</span>
+
+    <br>
+
+
     </div>
   </div>
   <div class="recording-bar" style="display: none;">
@@ -459,6 +475,8 @@ video {
         let lastHairTouchCount = 0;  // 전역 변수로 선언
         let lastNoseTouchCount = 0;  // 전역 변수로 선언
         
+        const questionNumbers = ["${firstNumber}", "${seconNumber}", "${thirNumber}"];
+        
 		// 버튼 클릭 시 음성 분석 및 동작 인식 시작/중지
 		
 		let executionCount = 0; // 실행 횟수를 추적하는 변수
@@ -489,7 +507,8 @@ video {
 		
 		            const formData = new FormData();
 		            formData.append("audio", file);
-		
+		            formData.append("questionNumber", questionNumbers[executionCount]);
+		            
 		            // 서버로 음성 데이터 전송
 		            fetch("http://localhost:5700/start_capture", {
 		                method: "POST",
