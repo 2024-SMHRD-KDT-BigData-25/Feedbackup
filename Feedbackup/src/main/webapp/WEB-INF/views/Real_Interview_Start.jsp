@@ -247,6 +247,60 @@ video {
   font-weight: bold;
 }
 
+<!-- 모달 관련 --!>
+/* 로딩 컨테이너 */
+.loading-container {
+    position: relative; /* 내부 자식 요소의 기준점 */
+    width: 100%; /* 부모 크기에 맞춤 */
+    height: 120px; /* 고정 크기 설정 */
+}
+
+/* 회전하는 테두리 */
+.rotating-border {
+    position: absolute; /* loading-container 기준 */
+    top: 6%; /* 부모 기준 중앙 */
+    left: 35%; /* 부모 기준 중앙 */
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #D9D9D9;
+    border-top: 6px solid #8071FC;
+    animation: spin 1.2s linear infinite;
+    z-index: 1;
+}
+
+/* 고정된 이미지 */
+.static-image {
+    position: absolute; /* 부모 기준으로 위치 설정 */
+    top: 50%; /* 부모 기준 중앙 */
+    left: 50%; /* 부모 기준 중앙 */
+   transform: translate(-50%, -50%);
+   width: 70px;
+   height: 70px;
+   background-color: #fff;
+   border-radius: 50%;
+   overflow: hidden;
+   display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.static-image img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+@keyframes spin {
+       0% {
+           transform: rotate(0deg);
+       }
+       100% {
+           transform: rotate(360deg);
+       }
+   }
+
 </style>
 </head>
 <body>
@@ -304,6 +358,31 @@ video {
 		<p><strong>상대적 떨림 (ΔF/F):</strong> <span id="relativeTremor"></span></p>
 		<p><strong>머리를 만진 횟수:</strong> <span id="hairTouchCount">0번</span></p>
 		<p><strong>코를 만진 횟수:</strong> <span id="noseTouchCount">0번</span></p>
+	</div>
+	
+	<div id="resultModal" class="modal">
+	    <div class="modal-content">
+	        <div class="loading-container">
+	            <div class="rotating-border"></div>
+	            <div class="static-image">
+	                <img id="modalImage" src="img/logo1.png" alt="로고">
+	            </div>
+	        </div>
+	        <p id="modalMessage" class="modal_text">분석 중입니다...</p>
+	        <button class="btn" id="btn_confirm">확인</button>
+	    </div>
+	</div>
+	
+	<div id="resultModal2" class="modal">
+	    <div class="modal-content">
+	        <div class="loading-container">         
+	            <div class="static-image">
+	                <img id="modalImage" src="img/check.png" alt="로고">
+	            </div>
+	        </div>
+	        <p id="modalMessage" class="modal_text">음성이 일치합니다.</p>
+	        <button class="btn" id="btn_confirm">확인</button>
+	    </div>
 	</div>
 	
 	<script>
@@ -573,6 +652,9 @@ video {
                 console.error("TTS 오디오 소스가 설정되지 않았습니다.");
             }
         });
+        
+        
+        
     </script>
 	
 </body>
