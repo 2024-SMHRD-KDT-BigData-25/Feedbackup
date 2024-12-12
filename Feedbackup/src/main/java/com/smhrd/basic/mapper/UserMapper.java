@@ -52,6 +52,15 @@ public interface UserMapper {
 	@Select("SELECT a_text FROM QUESTIONS WHERE q_text = #{thirdqText}")
 	String findATextBythirdqText(@Param("thirdqText") String thirdqText);
 	
+	@Select("SELECT question_id FROM QUESTIONS WHERE q_text = #{firstqText}")
+	int findATextByfirstNumber(@Param("firstqText") String firstqText);
+
+	@Select("SELECT question_id FROM QUESTIONS WHERE q_text = #{secondqText}")
+	int findATextBysecondNumber(@Param("secondqText") String secondqText);
+
+	@Select("SELECT question_id FROM QUESTIONS WHERE q_text = #{thirdqText}")
+	int findATextBythirdNumber(@Param("thirdqText") String thirdqText);
+	
 	// 같은 이름을 가진 사용자들 정보 가져오기
     @Select("SELECT * FROM test WHERE name = #{name}")
     List<MavenMember> findUsersByName(@Param("name") String name);

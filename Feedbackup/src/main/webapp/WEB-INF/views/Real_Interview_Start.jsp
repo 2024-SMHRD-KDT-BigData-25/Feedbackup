@@ -316,6 +316,21 @@ video {
 		<div class="info">본 질문은 삼성전자 기출 질문입니다.</div>
 	</div>
 	<div>
+
+    
+    <span>${firstNumber}</span>
+
+    <br>
+    
+    <span>${secondNumber}</span>
+
+    <br>
+    
+    <span>${thirdNumber}</span>
+
+    <br>
+
+
     </div>
   </div>
   <div class="recording-bar" style="display: none;">
@@ -393,6 +408,8 @@ video {
         let lastHairTouchCount = 0;  // 전역 변수로 선언
         let lastNoseTouchCount = 0;  // 전역 변수로 선언
         
+        const questionNumbers = ["${firstNumber}", "${seconNumber}", "${thirNumber}"];
+        
 		// 버튼 클릭 시 음성 분석 및 동작 인식 시작/중지
 		
 		let executionCount = 0; // 실행 횟수를 추적하는 변수
@@ -423,7 +440,8 @@ video {
 		
 		            const formData = new FormData();
 		            formData.append("audio", file);
-		
+		            formData.append("questionNumber", questionNumbers[executionCount]);
+		            
 		            // 서버로 음성 데이터 전송
 		            fetch("http://localhost:5700/start_capture", {
 		                method: "POST",

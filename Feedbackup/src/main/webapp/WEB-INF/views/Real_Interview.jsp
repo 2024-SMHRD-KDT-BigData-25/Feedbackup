@@ -136,6 +136,9 @@
     <input type="hidden" name="firstaText" value="${firstaText}">
     <input type="hidden" name="secondaText" value="${secondaText}">
     <input type="hidden" name="thirdaText" value="${thirdaText}">
+    <input type="hidden" name="firstaText" value="${firstNumber}">
+    <input type="hidden" name="secondaText" value="${secondNumber}">
+    <input type="hidden" name="thirdaText" value="${thirdNumber}">
     <button type="submit" class="button-container">시작하기</button>
 	</form>
     </div>
