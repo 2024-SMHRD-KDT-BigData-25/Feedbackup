@@ -18,3 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cards.forEach((card) => observer.observe(card));
 });
+
+
+
+const topButton = document.getElementById('topButton');
+
+
+window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        topButton.style.display = "block";
+    } else {
+        topButton.style.display = "none";
+    }
+};
+
+
+topButton.onclick = function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};

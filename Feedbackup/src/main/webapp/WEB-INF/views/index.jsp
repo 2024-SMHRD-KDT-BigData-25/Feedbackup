@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 	<link rel="stylesheet" href="css/index.css">
     <script src="js/header.js"></script>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css" />
     <script src="https://kit.fontawesome.com/eefb1e8780.js" crossorigin="anonymous"></script>
 
 
@@ -100,7 +100,8 @@
                 <div class="card-number">01</div>
                 <h2 class="card-title">계정 만들기</h2>
                 <p class="card-description">
-                    회원가입 또는 소셜 계정으로 30초면 간단하게 회원가입이 가능하며,<br>
+                    회원가입 또는 소셜 계정으로 <br>
+                    30초면 간단하게 회원가입이 가능하며, <br>
                     가입 즉시 무료 서비스를 바로 이용할 수 있습니다.
                 </p>
             </div>
@@ -114,7 +115,8 @@
                 <div class="card-number">02</div>
                 <h2 class="card-title">희망 기업 선택</h2>
                 <p class="card-description">
-                    카카오, 삼성, SK 등 자신의 관심 직군을 선택하면, 해당 분야에 최적화된<br>
+                    카카오, 삼성, SK 등 자신의 관심 직군을 선택하면, <br>
+                    해당 분야에 최적화된 <br>
                     맞춤형 면접 질문을 제공받을 수 있습니다.
                 </p>
             </div>
@@ -127,8 +129,9 @@
                 <div class="card-number">03</div>
                 <h2 class="card-title">AI 면접 연습</h2>
                 <p class="card-description">
-                    실제 면접장같은 긴장감 속에서 AI와 함께 음성/텍스트 기반 모의<br>
-                    면접을 진행하고, 실시간으로 개인별 맞춤 피드백을 받을 수 있습니다.
+                    실제 면접장같은 긴장감 속에서 AI와 함께 <br>
+                    음성/텍스트 기반 모의 면접을 진행하고, <br>
+                    실시간으로 개인별 맞춤 피드백을 받을 수 있습니다. <br>
                 </p>
             </div>
             <img src="img/main8.svg" alt="AI 면접 연습 이미지">
@@ -145,6 +148,7 @@
         <div class="pricing-cards">
             <!-- Welcome Card -->
             <div class="pricing-card">
+            	
                 <h2 class="plan-name">Welcome</h2>
                 <p class="plan-price"><strong>무료</strong> / 가입 직후 24시간</p>
                 <ul class="plan-features">
@@ -156,9 +160,12 @@
             </div>
 
             <!-- Premium Card -->
-            <div class="pricing-card premium">
-                <h2 class="plan-name">Premium</h2>
-                <p class="plan-price"><strong>6,000원</strong> / 1회당</p>
+            <div class="pricing-card-premium">
+            	<div class="pc-cbox">
+            		<h2 class="plan-name">Premium</h2>
+            		<p class="plan-price"><strong>6,000원</strong> / 1회당</p>
+            	</div>
+                
                 <ul class="plan-features">
                     
                     <li>✔ 예상 질문 무제한 제공</li>
@@ -182,6 +189,8 @@
             <button class="hero-button">무료로 시작하기&nbsp;<i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </section>
+    
+    <button id="topButton"><i class="fa-solid fa-chevron-up"></i></button>
 	
 
 	<!-- 푸터 불러오기 -->
