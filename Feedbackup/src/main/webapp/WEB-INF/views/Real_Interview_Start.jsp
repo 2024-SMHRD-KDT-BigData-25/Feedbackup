@@ -642,7 +642,7 @@ video {
                 // 분석이 끝났으면 페이지 이동
                 executionCount++;
                 if (executionCount >= 3) {
-                    window.location.href = "/myapp/result_test"; // 원하는 페이지 URL로 변경
+                    window.location.href = "/myapp/users/Result"; // 원하는 페이지 URL로 변경
                 }
             })
             .catch((error) => console.error("결과 저장 중 오류:", error));
