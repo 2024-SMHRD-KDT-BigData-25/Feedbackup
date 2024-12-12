@@ -763,48 +763,6 @@ video {
             document.addEventListener("DOMContentLoaded", function () {
                 // 필요 시 여기에 초기화 작업 추가
         }); 
-         
-            // DOMContentLoaded에서 초기화 작업
-            document.addEventListener("DOMContentLoaded", function () {
-                // 필요 시 여기에 초기화 작업 추가
-            }); 
-
-            // 요청 데이터 확인용 로그 추가
-            captureBtn.addEventListener("click", function () {
-                if (!isRecording) {
-                    console.log("녹음 시작");
-
-                    // 녹음 준비 후 데이터 전송 시 요청 내용 로그 출력
-                    mediaRecorder.onstop = function () {
-                        const blob = new Blob(chunks, { type: "audio/wav" });
-                        const file = new File([blob], "captured_audio.wav", { type: "audio/wav" });
-
-                        const formData = new FormData();
-                        formData.append("audio", file);
-                        formData.append("questionNumber", questionNumbers[executionCount]);
-
-                        // 요청 데이터 로그 출력
-                        console.log("요청 데이터:");
-                        for (let pair of formData.entries()) {
-                            console.log(`${pair[0]}: ${pair[1]}`);
-                        }
-
-                        // 서버로 데이터 전송
-                        fetch("http://localhost:5700/start_capture", {
-                            method: "POST",
-                            body: formData,
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            console.log("서버 응답:", data);
-                        })
-                        .catch((error) => {
-                            console.error("Error:", error);
-                        });
-                    };
-                }
-            });
-
     </script>
 	
 </body>
