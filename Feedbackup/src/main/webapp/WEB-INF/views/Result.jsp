@@ -536,9 +536,9 @@ body {
           <!-- 그래프 2: 떨림 -->
           <div class="graph-container">
             <div class="y-axis">
-              <span>0.015</span>
               <span>0.01</span>
-              <span>0.005</span>
+              <span>0.006</span>
+              <span>0.003</span>
               <span>0</span>
             </div>
             <div class="grid-lines">
@@ -643,6 +643,31 @@ bar.style.height = normalizedHeight+'%';
 barValue.innerText = value;
 console.log(`Successfully set height for ${barId} to ${normalizedHeight}%`);
 }
+
+function setBarHeight2(barId, valueId, value) {
+	console.log(`Attempting to set height for ${barId} with value: ${value}`);
+
+	const bar = document.getElementById(barId);
+	const barValue = document.getElementById(valueId);
+
+	if (!bar || !barValue) {
+	    console.error(`DOM element not found: barId=${barId}, valueId=${valueId}`);
+	    return;
+	}
+
+	if (value === undefined || value === null || value === "") {
+	    console.error(`Invalid value provided for ${barId}: ${value}`);
+	    return;
+	}
+
+	const maxHeight = 0.01;
+	const minHeight = 0;
+	const normalizedHeight = ((value - minHeight) / (maxHeight - minHeight)) * 100;
+
+	bar.style.height = normalizedHeight+'%';
+	barValue.innerText = value;
+	console.log(`Successfully set height for ${barId} to ${normalizedHeight}%`);
+	}
 
 //각 막대의 길이를 설정하는 함수
 function setGestureBarWidth(barId, valueId, value, maxValue) {
@@ -815,13 +840,13 @@ function loadResult(index) {
 
     // 피치 설명 문구 생성
     if (averagePitch < 120) {
-    	pitchDescription = "낮은 피치: 목소리가 차분하거나 낮게 들릴 수 있습니다.";
+    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 낮은 피치로 분석되었습니다. 차분하고 안정적인 인상을 주지만, 때로는 너무 낮게 들릴 수 있어 상대방에게 다소 침체된 느낌을 줄 수 있습니다. 목소리의 톤을 조금 더 높여 긍정적인 이미지를 전달하는 것이 좋습니다.";
     } else if (120 <= averagePitch && averagePitch < 180) {
-    	pitchDescription = "중간 피치: 일반적인 남성 음성 톤입니다.";
+    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 중간 피치로 분석되었습니다. 일반적으로 안정적이고 자연스러운 톤으로, 면접 시 적합한 목소리 톤입니다. 다만, 일정 부분 더 강렬하고 명확한 표현을 위해 목소리를 조금 더 강조해 보세요.";
    	} else if (180 <= averagePitch && averagePitch < 250) {
-    	pitchDescription = "높은 피치: 음성이 밝거나 높은 톤으로 들릴 수 있습니다.";
+    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 높은 피치로 분석되었습니다. 밝고 경쾌한 인상을 주지만, 너무 높으면 긴장하거나 불안해 보일 수 있습니다. 목소리 톤을 적절히 낮춰 안정감을 더하는 것이 중요합니다.";
     } else if (averagePitch => 250) {
-    	pitchDescription = "매우 높은 피치: 음성이 지나치게 높은 톤으로 들릴 수 있습니다.";
+    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 매우 높은 피치로 분석되었습니다. 지나치게 높은 목소리는 불안정하거나 긴장한 인상을 줄 수 있습니다. 목소리의 톤을 낮추어 좀 더 안정적이고 신뢰감을 주는 톤을 유지하는 것이 좋습니다.";
     }
 
     const hairTouchCount = selectedResult.hairTouchCount || 0;
@@ -835,31 +860,32 @@ function loadResult(index) {
     let tremorDescription = '';
 
     if (relativeTremor < 0.03) {
-    	tremorDescription = "매우 안정적: 떨림이 거의 없는 상태입니다.";
+    	tremorDescription = "떨림 분석 결과, 면접자님의 목소리는 매우 안정적입니다. 떨림이 거의 없으며, 자신감 있고 차분한 인상을 주어 면접에 적합합니다. 이러한 안정감 있는 톤을 계속 유지하면 더 긍정적인 영향을 줄 수 있습니다.";
     } else if (0.03 <= relativeTremor && relativeTremor < 0.07) {
-        tremorDescription = "자연스러운 수준의 떨림: 떨림이 있지만 일반적으로 자연스럽게 느껴집니다.";
+        tremorDescription = "떨림 분석 결과, 면접자님의 목소리는 자연스러운 수준의 떨림을 보입니다. 떨림이 있지만 일반적으로 자연스럽게 느껴지며, 과도한 긴장 없이 잘 표현되고 있습니다. 떨림을 더 줄이려고 노력하면 더 자신감 있는 인상을 줄 수 있습니다.";
     } else if (0.07 <= relativeTremor && relativeTremor < 0.12) {
-        tremorDescription = "약간의 긴장 또는 미세한 떨림: 긴장 가능성이 있습니다.";
+        tremorDescription = "떨림 분석 결과, 면접자님의 목소리에는 약간의 긴장 또는 미세한 떨림이 있습니다. 이는 긴장 상태를 나타낼 수 있으며, 면접에 불안감이 반영될 수 있습니다. 더 깊은 호흡과 안정적인 발음 연습을 통해 떨림을 줄여 보세요.";
     } else if (relativeTremor >= 0.12) {
-        tremorDescription = "과도한 떨림: 긴장감이나 불안정한 음성이 뚜렷이 느껴집니다.";
+        tremorDescription = "떨림 분석 결과, 면접자님의 목소리는 과도한 떨림을 보입니다. 강한 떨림은 불안감을 드러낼 수 있으며, 면접관에게 부정적인 인상을 줄 수 있습니다. 긴장 완화와 차분한 목소리 톤을 연습하면 떨림을 효과적으로 줄일 수 있습니다.";
     }
 	
     // 움직임 분석
     let gestureAnalysis = '';
     if (totalTouches >= 10) {
-        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘미흡’입니다.';
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘미흡’입니다. 면접 중 손으로 머리나 코를 자주 만지셨습니다. 면접에서 긴장이나 불안의 신호로 해석될 수 있으니, 신경 쓰셔야 할 부분입니다.';
     } else if (totalTouches >= 7) {
-        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다.';
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다. 머리나 코를 만지는 횟수가 다소 있었지만, 과도하지 않았습니다. 면접 중 약간의 긴장감은 자연스러운 반응일 수 있습니다.';
     } else if (totalTouches >= 4) {
-        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘양호’입니다.';
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘양호’입니다. 손으로 머리나 코를 만지신 횟수가 적었습니다. 긴장하지 않고 자연스러운 면접을 진행하신 것으로 보입니다.';
     } else {
-        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다.';
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다. 손으로 머리나 코를 만지신 횟수가 매우 적었습니다. 면접 중 안정감과 자신감을 잘 표현하셨습니다.';
     }
     
     //그래프 업데이트
     setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
-	setBarHeight('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
+	setBarHeight2('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
 
+	
 	// UI에 반영
 	document.getElementById("recognizedText").textContent = selectedResult.recognizedText || "데이터 없음";
     document.getElementById("averagePitch").textContent = selectedResult.averagePitch ? selectedResult.averagePitch.toFixed(2) : "0";
@@ -890,13 +916,13 @@ function loadResult(index) {
 	
 	// 버튼 클릭 시 결과 로드
 	document.getElementById("loadResult0").addEventListener("click", function() {
-	    loadResult(0); // 가장 최근의 결과 (0번) 로드
+	    loadResult(2); // 가장 최근의 결과 (0번) 로드
 	});
 	document.getElementById("loadResult1").addEventListener("click", function() {
 	    loadResult(1); // 뒤에서 2번째 결과 (1번) 로드
 	});
 	document.getElementById("loadResult2").addEventListener("click", function() {
-	    loadResult(2); // 뒤에서 3번째 결과 (2번) 로드
+	    loadResult(0); // 뒤에서 3번째 결과 (2번) 로드
 	});
 	
 // 서버에서 데이터를 가져오기
