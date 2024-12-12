@@ -260,8 +260,8 @@ video {
 /* 회전하는 테두리 */
 .rotating-border {
     position: absolute; /* loading-container 기준 */
-    top: 6%; /* 부모 기준 중앙 */
-    left: 35%; /* 부모 기준 중앙 */
+    top: 42%; /* 부모 기준 중앙 */
+    left: 46.5%; /* 부모 기준 중앙 */
     transform: translate(-50%, -50%);
     width: 100px;
     height: 100px;
@@ -323,6 +323,7 @@ video {
    padding: 20px;
    border: 1px solid #888;
    width: 600px;
+   height: 250px;
    text-align: center;
    border: 2px solid #8071FC;
    border-radius: 30px;
