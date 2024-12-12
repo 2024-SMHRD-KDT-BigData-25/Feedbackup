@@ -303,6 +303,31 @@ public class UserController {
 		
 		return "QandA";
 	}
+	
+	@GetMapping("/One_Interview")
+	public String One_InterviewForm() {
+		return "One_Interview";
+	}
+	
+	@GetMapping("/users/Gender")
+	public String GenderForm() {
+		return "Gender";
+	}
+	
+	@GetMapping("/users/One_Real_Interview")
+	public String One_Real_Interview() {
+		return "One_Real_Interview";
+	}
+	
+	@GetMapping("/users/One_Real_Interview_Start")
+	public String One_Real_Interview_StartForm() {
+		return "One_Real_Interview_Start";
+	}
+	
+	@GetMapping("/users/One_Result")
+	public String One_ResultForm() {
+		return "One_Result";
+	}
 }
 
 

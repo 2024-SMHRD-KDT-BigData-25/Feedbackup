@@ -1,7 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="com.smhrd.basic.model.MavenMember"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
@@ -9,42 +8,57 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-        }
-        .header {
+		body {
+		    background-color: #F1F5F9;
+			font-family: 'Pretendard', sans-serif;
+		}
+        .top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ddd;
+            border: 1px solid #e0e0e0;
+            border-top: 2px solid #999;
             padding-bottom: 10px;
+            width: 1000px;
+            margin: 40px auto;
+            padding: 40px;
+            box-sizing: border-box;
+            background-color: white;
         }
-        .header h1 {
-            font-size: 20px;
-            margin: 0;
+        .top h1 {
+            font-size: 30px;
+		    margin: 0px;
+		    margin-left: 80px;
         }
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid #ddd;
-            margin-top: 20px;
+        
+        .top > p{
+        	margin-left: 450px;
         }
-        .tabs button {
-            flex: 1;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: none;
-            border-bottom: 2px solid transparent;
-            cursor: pointer;
+        
+        .top > form{
+        	margin-right: 80px;
+        	height: 28px;
         }
-        .tabs button.active {
-            border-bottom: 2px solid #007bff;
-            font-weight: bold;
+        
+        .tab-title{
+        	width: 1000px;
+        	margin: 0 auto;
+        	font-size: 20px;
+        	font-weight: bold;
+        	margin-bottom: 10px;
         }
-    .tab-content {
-        margin-top: 20px;
-    }
+        
+   	    .tab-content {
+	        margin-top: 20px;
+	        width: 1000px;
+            margin: 0 auto;
+            border: 1px solid #e0e0e0;
+            border-top: 1px solid #999;
+            padding: 40px;
+            box-sizing: border-box;
+            background-color: white;
+	    }
+    
         .question {
             border: 1px solid #ddd;
             padding: 10px;
@@ -149,8 +163,9 @@
     }
 %>
 
-<div class="header">
+<div class="top">
     <h1><%= selectedJobCode %></h1>
+    <p>그룹사별 전체</p>
     <form method="get" action="">
         <select name="selectedJobCode" onchange="this.form.submit()">
             <% 
@@ -172,6 +187,8 @@
         </select>
     </form>
 </div>
+
+<div class="tab-title">면접 질문 및 합격자 답변</div>
 
 <div class="tab-content" id="tab1">
     <% 
@@ -206,8 +223,6 @@
 
 <div class="pagination">
     <button class="active">1</button>
-    <button>2</button>
-    <button>3</button>
 </div>
 
 <div class="back-button">
