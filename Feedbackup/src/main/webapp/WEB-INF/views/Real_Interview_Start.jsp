@@ -277,23 +277,23 @@ video {
     position: absolute; /* 부모 기준으로 위치 설정 */
     top: 50%; /* 부모 기준 중앙 */
     left: 50%; /* 부모 기준 중앙 */
-   transform: translate(-50%, -50%);
-   width: 70px;
-   height: 70px;
-   background-color: #fff;
-   border-radius: 50%;
-   overflow: hidden;
-   display: flex;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .static-image img {
    width: 100%;
    height: 100%;
    object-fit: cover;
 }
+
 @keyframes spin {
        0% {
            transform: rotate(0deg);
@@ -305,6 +305,7 @@ video {
 
 /* 모달 배경 */
 .modal {
+   position: absolute;
    display: none;
    position: fixed;
    z-index: 1;
