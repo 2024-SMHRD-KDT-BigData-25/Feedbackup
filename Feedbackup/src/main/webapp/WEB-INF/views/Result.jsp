@@ -693,7 +693,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				
 	            const bars = [
 	                { barId: 'bar1', valueId: 'bar-value1', value: averagePitchValue },
-	                { barId: 'bar2', valueId: 'bar-value2', value: scaledRelativeTremorValue  }
+	                { barId: 'bar2', valueId: 'bar-value2', value: RelativeTremorValue  }
 	            ];
 
 	            // 디버깅 로그 추가
@@ -782,19 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 백엔드 스크립트 코드 추가
 let savedResults = [];
 
-// 서버에서 데이터를 가져오기
-function getSavedResults() {
-    fetch("http://localhost:5700/get_results")
-        .then(response => response.json())
-        .then(data => {
-            console.log("서버에서 가져온 결과:", data.saved_results);
-            savedResults = data.saved_results; // 데이터를 전역 변수에 저장
-            loadResult(0); // 기본적으로 0번 데이터를 로드
-        })
-        .catch(error => {
-            console.error("서버에서 데이터를 가져오는 중 오류 발생:", error);
-        });
-}
+
 
 window.onload = function() {
     getSavedResults(); // 데이터를 가져온 후 loadResult 호출
@@ -858,6 +846,11 @@ function loadResult(index) {
         } else if (totalTouches < 4) {
             gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다.';
         }
+        
+      	//그래프 업데이트
+		setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
+		setBarHeight('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
+	
 
         // UI에 반영
         document.getElementById("recognizedText").textContent = selectedResult.recognizedText || "데이터 없음";
@@ -870,10 +863,7 @@ function loadResult(index) {
         document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
         document.getElementById("tremorDescription").textContent = tremorDescription;
     
-		//그래프 업데이트
-		setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
-		setBarHeight('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
-	
+		
 		// gestureBarData 업데이트
 	    const gestureBarData = [
 	        { label: "머리카락 만짐", value: hairTouchCount },
@@ -900,7 +890,21 @@ function loadResult(index) {
 	document.getElementById("loadResult2").addEventListener("click", function() {
 	    loadResult(2); // 뒤에서 3번째 결과 (2번) 로드
 });
-
+	
+// 서버에서 데이터를 가져오기
+function getSavedResults() {
+	fetch("http://localhost:5700/get_results")
+		.then(response => response.json())
+		.then(data => {
+			console.log("서버에서 가져온 결과:", data.saved_results);
+			savedResults = data.saved_results; // 데이터를 전역 변수에 저장
+			loadResult(0); // 기본적으로 0번 데이터를 로드
+		})
+		.catch(error => {
+			console.error("서버에서 데이터를 가져오는 중 오류 발생:", error);
+		});
+	}
+	
 // 초기화 함수
 function resetResults() {
     fetch("http://localhost:5700/reset_results", {
