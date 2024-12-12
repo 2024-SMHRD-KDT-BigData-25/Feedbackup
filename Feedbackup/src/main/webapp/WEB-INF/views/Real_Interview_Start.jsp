@@ -463,7 +463,7 @@ video {
 		        document.getElementById("waveform").style.display = "flex"; // 웨이브폼 보이기
 		        document.getElementById("icon").style.display = "flex";
 		        
-		        captureBtn.textContent = "분석하기"; // 버튼 텍스트 변경
+		        captureBtn.textContent = "답변 마치기"; // 버튼 텍스트 변경
 		        isRecording = true;
 		
 		    } else {
