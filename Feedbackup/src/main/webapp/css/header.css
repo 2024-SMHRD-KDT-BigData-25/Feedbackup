@@ -9,6 +9,7 @@
       align-items: center;
       height: 130px;
       background-color: white;
+      font-family: initial; /* 브라우저 기본 글꼴 사용 */
     }
 
     .logo {
@@ -126,7 +127,7 @@
 }
     
     .btn-user strong:hover {
-       color: black;
+       color: #8071FC;
        cursor: pointer;
     }
     

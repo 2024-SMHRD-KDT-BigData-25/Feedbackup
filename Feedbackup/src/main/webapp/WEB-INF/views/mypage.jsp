@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FeedbackUp | 마이페이지</title>
-    <link rel="stylesheet" href="../css/mypage.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css">
 </head>
 <body>
 
