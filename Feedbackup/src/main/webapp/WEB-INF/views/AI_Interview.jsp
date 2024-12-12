@@ -134,7 +134,7 @@
                 <img id="modalImage" src="img/voice-test-fail.svg" alt="불일치">
             </div>
         </div>
-        <p id="modalMessage" class="modal_text3">음성 인식에 실패했어요...</p><p id="modalMessage" class="modal_text4">발음을 더 명확히 하거나 조용한 환경에서 다시 시도해주세요.</p>
+        <p id="modalMessage" class="modal_text3">음성 인식에 실패했어요...</p><p id="modalMessage" class="modal_text4">발음을 더 명확히 하거나<br>조용한 환경에서 다시 시도해주세요.</p>
         <button class="btn" id="btn_confirm">확인</button>
     </div>
 </div>
