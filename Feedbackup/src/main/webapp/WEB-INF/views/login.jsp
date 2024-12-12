@@ -170,8 +170,6 @@ a:visited {
 
 </head>
 <body>
-	 <!-- 헤더 불러오기 -->
-    <div><jsp:include page="header.jsp"></jsp:include> </div>
     
       <a href="/myapp"><img src="img/logo2.png" alt="logo" class="login-logo"></a><br> <br> <br> <br>
       <div class="login_wrapper">
@@ -209,7 +207,5 @@ a:visited {
 
       </div>
       
-      	<!-- 푸터 불러오기 -->
-    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 </body>
 </html>

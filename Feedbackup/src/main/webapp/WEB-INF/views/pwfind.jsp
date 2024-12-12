@@ -233,10 +233,10 @@
     </style>
 </head>
 <body>
-	 <!-- 헤더 불러오기 -->
-    <div><jsp:include page="header.jsp"></jsp:include> </div>
     
-    <img src="../img/logo2.png" alt="logo" class="pwfind-logo"><br><br><br><br>
+    <div class="top">
+    	<a href="/myapp"><img src="../img/logo2.png" alt="logo" class="idfind-logo"></a><br><br><br><br>
+    </div>
     <div class="find_wrapper">
         <div class="find_top">
             <div id="find_id"><a href="/myapp/users/idfind" style="display: block; width: 100%; height: 100%;">아이디 찾기</a></div>
@@ -281,8 +281,7 @@
         </div>
     </div>
 
-		<!-- 푸터 불러오기 -->
-    <div><jsp:include page="footer.jsp"></jsp:include> </div>
+
     
     <script>
         window.onload = function() {
