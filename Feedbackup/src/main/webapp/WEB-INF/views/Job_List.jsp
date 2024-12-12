@@ -137,7 +137,7 @@
 
     .box {
         background-color: #FFFFFF;
-        border: 1px solid #8071FC;
+        border: 1px solid #CBD5E1;
         width: 140px;
         height: 140px;
         margin-top: 20px;
@@ -148,6 +148,7 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        box-shadow: 0 1px 20px 0 rgb(220, 220, 220);
     }
 
     .box:hover {
@@ -162,6 +163,19 @@
         color: white;
         border: 2px solid #8071FC;
         font-weight: bold;
+    }
+    
+	.man{
+		width: 90px;
+	}
+	
+	.woman{
+		width: 78px;
+		margin-top: 12px; 
+	}
+    
+    .box > div{
+    	margin-top: 5px;
     }
 
     .next {
@@ -292,14 +306,14 @@
 		      		<div class="step-circle">2</div>
 		    	</div>	
                 <div class="sex">
-                    <div class="box" data-gender="male">
-                        <img src="../img/man.png" alt="남성">
-                        <div>남성</div>
-                    </div>
-                    <div class="box" data-gender="female">
-                        <img src="../img/woman.png" alt="여성">
-                        <div>여성</div>
-                    </div>
+			  		<div class="box" data-gender="male">
+				  		<img src="../img/man.png" class="man">
+				  		<div>남성</div>
+			  		</div>
+			  		<div class="box" data-gender="woman">
+			  			<img src="../img/woman.png" class="woman">
+				  		<div>여성</div>
+			  		</div>
                 </div>
             </div>
         </div>

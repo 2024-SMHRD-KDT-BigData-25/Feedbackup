@@ -23,16 +23,21 @@
 		.text1{
 		    font-size: 26px;
 		    font-weight: bold;
-		    margin-top: 40px;
+		    margin-top: 100px;
 		    text-align: center;
 		}
 		
-
+		.text2 {
+	        font-size: 10px;
+	        margin-top: 10px;
+	        margin-bottom: 20px;
+	        text-align: center;
+	        color: #64748B;
+    	}
 .sex_container{
   text-align: center;
   align-items: center;
   width: 800px;
-  height: 200px;
   padding: 30px 40px;
   margin: 30px auto;
 
@@ -55,12 +60,16 @@
 
 .box{
   background-color: #FFFFFF;
-  border: 1px solid #8071FC;
-  width: 140px;
-  height: 140px;
-  margin-top:20px;
+  border: 1px solid #CBD5E1;
+  width: 250px;
+  height: 250px;
   border-radius: 15px;
   font-size: 15px;
+  display: flex; /* 플렉스 컨테이너 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  justify-content: center; /* 수직 가운데 정렬 */
+  align-items: center; /* 수평 가운데 정렬 */
+  box-shadow: 0 1px 20px 0 rgb(220, 220, 220);
 }
 
 .box:hover{
@@ -78,6 +87,20 @@
   font-weight: bold;
 }
 
+.box div{
+	margin-top: 20px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.man{
+	width: 150px;
+}
+
+.woman{
+	width: 130px;
+	margin-top: 20px; 
+}
 
 .next{
 	display: flex;
@@ -115,22 +138,23 @@
     text-align: center;
     margin-top: 20px;
   }
+  
 </style>
 
 </head>
 <body>
 <div class="Gender_wrapper">
-  <div class="text1">성별을 선택해 주세요</div>
-
+  <div class="text1">성별을 선택해주세요</div>
+  <div class="text2">정확한 음성분석을 위해 사용됩니다.</div>
   <div class="sex_container">
   	<div class="sex_select">
       	<div class="sex">
 	  		<div class="box" data-gender="male">
-		  		<img src="../img/man.png">
+		  		<img src="../img/man.png" class="man">
 		  		<div>남성</div>
 	  		</div>
 	  		<div class="box" data-gender="woman">
-	  			<img src="../img/woman.png" style="margin-top: 12px;">
+	  			<img src="../img/woman.png" class="woman">
 		  		<div>여성</div>
 	  		</div>
   		</div>
