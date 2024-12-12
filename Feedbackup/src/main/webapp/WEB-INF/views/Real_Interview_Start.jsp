@@ -247,6 +247,60 @@ video {
   font-weight: bold;
 }
 
+<!-- 모달 관련 --!>
+/* 로딩 컨테이너 */
+.loading-container {
+    position: relative; /* 내부 자식 요소의 기준점 */
+    width: 100%; /* 부모 크기에 맞춤 */
+    height: 120px; /* 고정 크기 설정 */
+}
+
+/* 회전하는 테두리 */
+.rotating-border {
+    position: absolute; /* loading-container 기준 */
+    top: 6%; /* 부모 기준 중앙 */
+    left: 35%; /* 부모 기준 중앙 */
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #D9D9D9;
+    border-top: 6px solid #8071FC;
+    animation: spin 1.2s linear infinite;
+    z-index: 1;
+}
+
+/* 고정된 이미지 */
+.static-image {
+    position: absolute; /* 부모 기준으로 위치 설정 */
+    top: 50%; /* 부모 기준 중앙 */
+    left: 50%; /* 부모 기준 중앙 */
+   transform: translate(-50%, -50%);
+   width: 70px;
+   height: 70px;
+   background-color: #fff;
+   border-radius: 50%;
+   overflow: hidden;
+   display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.static-image img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+@keyframes spin {
+       0% {
+           transform: rotate(0deg);
+       }
+       100% {
+           transform: rotate(360deg);
+       }
+   }
+
 </style>
 </head>
 <body>
@@ -409,7 +463,7 @@ video {
 		        document.getElementById("waveform").style.display = "flex"; // 웨이브폼 보이기
 		        document.getElementById("icon").style.display = "flex";
 		        
-		        captureBtn.textContent = "분석하기"; // 버튼 텍스트 변경
+		        captureBtn.textContent = "답변 마치기"; // 버튼 텍스트 변경
 		        isRecording = true;
 		
 		    } else {
@@ -573,6 +627,9 @@ video {
                 console.error("TTS 오디오 소스가 설정되지 않았습니다.");
             }
         });
+        
+        
+        
     </script>
 	
 </body>
