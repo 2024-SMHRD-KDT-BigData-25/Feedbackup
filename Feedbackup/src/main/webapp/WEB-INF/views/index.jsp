@@ -24,10 +24,6 @@
 	 <!-- 헤더 불러오기 -->
     <div><jsp:include page="header.jsp"></jsp:include> </div>
 
-
-	<button onclick="location.href='tts'">TTS 페이지</button>
-
-
 	 <!-- 메인 -->
     <div class="container">
         <div class="index-one-page">
