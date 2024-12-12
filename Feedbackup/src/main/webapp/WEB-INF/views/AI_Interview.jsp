@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // STT 서버로 전송
                     $.ajax({
-                        url: "http://localhost:5001/stt", // STT 서버 URL
+                        url: "http://localhost:5100/stt", // STT 서버 URL
                         type: "POST",
                         data: formData,
                         processData: false,
