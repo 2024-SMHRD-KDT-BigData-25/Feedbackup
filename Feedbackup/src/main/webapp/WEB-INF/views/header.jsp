@@ -278,8 +278,8 @@
   <body>
     <header class="header">
       <div class="logo">
-        <a href="/myapp">
-          <img src="img/logo2.png" title="logo" height="59" width="265">
+        <a href="${pageContext.request.contextPath}/">
+          <img src="${pageContext.request.contextPath}/img/logo2.png" title="logo" height="59" width="265">
         </a>
       </div>
       <nav class="nav">

@@ -148,7 +148,8 @@
     </style>
 </head>
 <body>
-
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
 
 <%
     // 리스트 가져오기
@@ -235,7 +236,8 @@
 <div class="pagination">
     <button class="active">1</button>
 </div>
-
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 
 <script>
 function showTab(tabId, event) {

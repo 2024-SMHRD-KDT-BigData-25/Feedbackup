@@ -453,6 +453,8 @@ body {
 </style>
 </head>
 <body>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
   
   <div class="container">
     <div class="top-buttons">
@@ -597,6 +599,8 @@ body {
   </div>
 </div>
 
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 	//막대 그래프 높이를 설정하는 함수
