@@ -147,10 +147,11 @@
             	
                 <h2 class="plan-name">Welcome</h2>
                 <p class="plan-price"><strong>무료</strong> / 가입 직후 24시간</p>
+                <hr>
                 <ul class="plan-features">
                     
-                    <li>✔ 예상 질문 3개 제공</li>
-                    <li>✔ 분석 결과 1회</li>
+                    <li>예상 질문 3개 제공</li>
+                    <li>분석 결과 1회</li>
                 </ul>
                 <a href="#" class="start-button">지금 시작하기</a>
             </div>
@@ -164,9 +165,9 @@
                 
                 <ul class="plan-features">
                     
-                    <li>✔ 예상 질문 무제한 제공</li>
-                    <li>✔ 분석 결과 무제한</li>
-                    <li>✔ 분석 결과 히스토리 보관</li>
+                    <li>예상 질문 무제한 제공</li>
+                    <li>분석 결과 무제한</li>
+                    <li>분석 결과 히스토리 보관</li>
                 </ul>
                 <a href="#" class="start-button">지금 시작하기</a>
             </div>
