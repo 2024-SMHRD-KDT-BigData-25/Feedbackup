@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <title>비밀번호 찾기</title>
      <style>
-               @font-face {
+            @font-face {
             font-family: 'SUIT-Regular';
             src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
+        
 
         .pwfind-logo {
             width: 365px;
@@ -235,7 +236,7 @@
 <body>
     
     <div class="top">
-    	<a href="/myapp"><img src="../img/logo2.png" alt="logo" class="idfind-logo"></a><br><br><br><br>
+    	<a href="/myapp"><img src="../img/logo2.png" alt="logo" class="pwfind-logo"></a><br><br><br><br>
     </div>
     <div class="find_wrapper">
         <div class="find_top">
