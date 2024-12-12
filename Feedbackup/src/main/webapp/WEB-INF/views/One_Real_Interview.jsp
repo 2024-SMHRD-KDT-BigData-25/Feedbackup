@@ -133,7 +133,7 @@
 	</div>
     <div class="button-container">
     <form action="/myapp/users/One_Real_Interview_Start" method="POST">
-    <input type="hidden" name="firstqText" value="${firstqText}">
+    <div type="hidden" name="firstqText" value="${firstqText}"></div>
     <input type="hidden" name="secondqText" value="${secondqText}">
     <input type="hidden" name="thirdqText" value="${thirdqText}">
     <input type="hidden" name="firstaText" value="${firstaText}">
