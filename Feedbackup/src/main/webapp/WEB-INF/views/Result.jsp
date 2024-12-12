@@ -456,7 +456,8 @@ body {
   
   <div class="container">
     <div class="top-buttons">
-      <button class="btn">나가기</button>
+      <button class="btn" id="resetButton">데이터 초기화</button>
+      <button class="btn" onclick="window.location.href='/myapp/';">나가기</button>
     </div>
 
     <div class="title"><img src="../img/feedbackup.png"></div>
@@ -613,7 +614,7 @@ body {
   </div>
 </div>
 
-<button id="resetButton">데이터 초기화</button>
+
 
 <script>
 
@@ -719,8 +720,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	    console.error('.voice 요소를 찾을 수 없습니다.');
 	}
 	
-	// 최대값 기준으로 막대 비율 계산
-	const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value)); // 최대값 계산
 	
 	
 	
@@ -890,7 +889,6 @@ function loadResult(index) {
 	    setGestureBarWidth('gesture-bar1', 'gesture-value1', gestureBarData[0].value, maxGestureBarValue);
 	    setGestureBarWidth('gesture-bar2', 'gesture-value2', gestureBarData[1].value, maxGestureBarValue);
 
-	    
 	}
 	// 버튼 클릭 시 결과 로드
 	document.getElementById("loadResult0").addEventListener("click", function() {
@@ -918,9 +916,10 @@ function resetResults() {
     });
 }
 
+
+
 // 초기화 버튼 이벤트 연결
 document.getElementById("resetButton").addEventListener("click", resetResults);
-
 
 </script>
 </body>
