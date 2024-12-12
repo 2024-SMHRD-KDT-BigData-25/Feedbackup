@@ -59,6 +59,10 @@
         }
 
         console.log("선택된 결과:", selectedResult);
+        
+	     	// 피치 설명 문구 생성
+	        const averagePitch = selectedResult.averagePitch || 0; // averagePitch 값 확인 및 초기화
+	        let pitchDescription = ""; // pitchDescription 변수 명확히 선언
 
             // 피치 설명 문구 생성
             if (averagePitch < 120) {

@@ -255,7 +255,7 @@
 
 </head>
 <body>
-<div clsss="Job_list_wrapper">
+<div class="Job_list_wrapper">
   <div class="text1">희망하시는 기업을 선택해 주세요</div>
   <div class="text2">* 확실한 면접 준비를 위해 각각 한가지만 선택가능 합니다.</div>
 <div class="search-container">
@@ -306,8 +306,8 @@
       		<div class="step-circle">2</div>
     	</div>
       	<div class="sex">
-  		<div class="box">남성</div>
-  		<div class="box">여성</div>
+  		<div class="box" data-gender="male">남성</div>
+  		<div class="box" data-gender="woman">여성</div>
   	</div>
   	</div>
   </div>
@@ -318,6 +318,7 @@
 </div>
 
 <script>
+
 //성별 선택 클릭 이벤트 처리
 document.querySelectorAll('.box').forEach(box => {
   box.addEventListener('click', function () {
