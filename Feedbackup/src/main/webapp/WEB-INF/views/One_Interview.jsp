@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>AI_Interview</title>
-<link rel="stylesheet" href="css/Ai_Interview.css">
+<link rel="stylesheet" href="css/One_Interview.css">
 <style>
 
 
@@ -123,7 +123,7 @@
             </div>
         </div>
         <p id="modalMessage" class="modal_text2">음성 인식에 성공했어요!</p><p id="modalMessage" class="modal_text4"> 연습중에도 목소리 크기를 유지해주세요.</p>
-        <a href="users/Job_List" class="btn" id="btn_confirm">다음</a>
+        <a href="users/Gender" class="btn" id="btn_confirm">다음</a>
     </div>
 </div>
 
