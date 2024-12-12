@@ -216,6 +216,10 @@ public class UserController {
 		String firstaText = service.getATextByfirstqText(firstqText);
 		String secondaText = service.getATextBysecondqText(secondqText);
 		String thirdaText = service.getATextBythirdqText(thirdqText);
+		
+		int firstNumber = service.getATextByfirstNumber(firstqText);
+		int secondNumber = service.getATextBysecondNumber(secondqText);
+		int thirdNumber = service.getATextBythirdNumber(thirdqText);
 
 	    
 		// qText 값이 정상적으로 가져와졌는지 확인
@@ -224,27 +228,17 @@ public class UserController {
 		
 	    System.out.println("검색된 q_text 값: " + firstqText);
 	    System.out.println("검색된 a_text 값: " + firstaText);
-	    System.out.println("검색된 q_text 값: " + secondqText);
-	    System.out.println("검색된 a_text 값: " + secondaText);
-	    System.out.println("검색된 q_text 값: " + thirdqText);
-	    System.out.println("검색된 a_text 값: " + thirdaText);
-
-
-
-		// qText 값이 정상적으로 가져와졌는지 확인
-		System.out.println("검색된 q_text 값: " + qText);
-		
-		
-	    System.out.println("검색된 q_text 값: " + firstqText);
-	    System.out.println("검색된 a_text 값: " + firstaText);
-
+	    System.out.println("검색된 ID 값: " + firstNumber);
 	    
 	    System.out.println("검색된 q_text 값: " + secondqText);
 	    System.out.println("검색된 a_text 값: " + secondaText);
-
+	    System.out.println("검색된 ID 값: " + secondNumber);
 	    
 	    System.out.println("검색된 q_text 값: " + thirdqText);
 	    System.out.println("검색된 a_text 값: " + thirdaText);
+	    System.out.println("검색된 ID 값: " + thirdNumber);
+
+
 
 
 
@@ -258,6 +252,10 @@ public class UserController {
 	    model.addAttribute("secondaText", secondaText);
 	    model.addAttribute("thirdaText", thirdaText);
 	    
+
+	    model.addAttribute("firstNumber", firstNumber);
+	    model.addAttribute("secondNumber", secondNumber);
+	    model.addAttribute("thirdNumber", thirdNumber);
 
 	    // 결과를 출력할 JSP 페이지로 이동
 	    return "Real_Interview";
