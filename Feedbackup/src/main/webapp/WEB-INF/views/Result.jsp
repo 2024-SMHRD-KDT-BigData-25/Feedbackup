@@ -655,14 +655,21 @@ function setGestureBarWidth(barId, valueId, value, maxValue) {
   }
 
   // 값에 따른 비율 계산 (최대 100%)
-  const widthPercentage = (value / maxValue) * 100;
-
+  let widthPercentage = (value / maxValue) * 100;
+  
   // 막대의 길이와 값 설정 (애니메이션 적용)
   setTimeout(() => {
     barElement.style.width = widthPercentage+'%';
   }, 100); // 애니메이션 지연 시간 추가
  
-  valueElement.innerText = +value+'회';
+  //0일 경우 텍스트 색상 변경 (흰색이 아니라 잘 보이는 색으로)
+  if (value === 0) {
+    valueElement.innerText = '0회';
+    valueElement.style.color = '#999'; // 0일 경우 회색으로 표시
+  } else {
+    valueElement.innerText = +value + '회';
+    valueElement.style.color = '#FFFFFF'; // 값이 있을 때 기본 텍스트 색상 (검정)
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -840,13 +847,13 @@ function loadResult(index) {
     // 움직임 분석
     let gestureAnalysis = '';
     if (totalTouches >= 10) {
-        gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘미흡’입니다.';
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘미흡’입니다.';
     } else if (totalTouches >= 7) {
-        gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다.';
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다.';
     } else if (totalTouches >= 4) {
-        gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘양호’입니다.';
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘양호’입니다.';
     } else {
-        gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다.';
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다.';
     }
     
     //그래프 업데이트
