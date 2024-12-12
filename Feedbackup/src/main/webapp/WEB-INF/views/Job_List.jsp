@@ -268,7 +268,6 @@
       class="search-input" 
     />
     <button type="submit" class="search-button">검색</button>
-  </form>
 </div>
 	<div id="search-result" class="search-result"></div>
   <div class="category-container">
@@ -313,7 +312,8 @@
   	</div>
   </div>
   <div class="next">
-  	<a href="/myapp/AI_Interview" style="text-decoration: none;"><div class="next_btn">다음</div></a>
+    <button type="submit" style="text-decoration: none;" class="next_btn">검색</button>
+  </form>
   </div>
 </div>
 

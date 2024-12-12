@@ -123,7 +123,7 @@
             </div>
         </div>
         <p id="modalMessage" class="modal_text2">음성 인식에 성공했어요!</p><p id="modalMessage" class="modal_text4"> 연습중에도 목소리 크기를 유지해주세요.</p>
-        <button class="btn" id="btn_confirm">다음</button>
+        <a href="users/Job_List" class="btn" id="btn_confirm">다음</a>
     </div>
 </div>
 
