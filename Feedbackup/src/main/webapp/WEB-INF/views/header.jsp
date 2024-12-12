@@ -102,10 +102,10 @@
     }
 
     .btn-login:hover {
-      background-color: #8071FC;
+      background-color: black;
       color: white;
       transition: 0.35s;
-      border-color: #8071FC;
+      border-color: white;
       cursor: pointer;
     }
 
@@ -307,8 +307,8 @@
 	   if (member == null) {
 	%>
 	   <!-- 절대 경로로 수정 -->
-	   <button class="btn-sign" onclick="location.href='<%=request.getContextPath()%>/login'">로그인</button>
-	   <button class="btn-login" onclick="location.href='<%=request.getContextPath()%>/users/signup'">시작하기</button>
+	   <button class="btn-login" onclick="location.href='<%=request.getContextPath()%>/login'">로그인</button>
+	   <button class="btn-sign" onclick="location.href='<%=request.getContextPath()%>/users/signup'">시작하기</button>
 	<%
 	   } else {
 	%>

@@ -536,10 +536,10 @@ body {
           <!-- 그래프 2: 떨림 -->
           <div class="graph-container">
             <div class="y-axis">
-              <span>275</span>
-              <span>200</span>
-              <span>125</span>
-              <span>50</span>
+              <span>0.015</span>
+              <span>0.01</span>
+              <span>0.005</span>
+              <span>0</span>
             </div>
             <div class="grid-lines">
               <div class="grid-line"></div>
@@ -570,7 +570,7 @@ body {
       </div>
     </div>
     
-<!-- 왜인지는 모르겠으나 있어야함 -->
+<!-- 있어야 페이지가 돌아감 (더미 데이터)   -->
 <div id="hairTouchCount" style="display: none;"></div>
 <div id="noseTouchCount" style="display: none;"></div>
 
@@ -606,7 +606,7 @@ body {
         </div>
         <div class="gesture-summary">
           <ul>
-            <li>결과 내용<br><br><div id="gestureAnalysis"></div></li>
+            <li>결과 내용<div id="gestureAnalysis"></div></li>
           </ul>
         </div>
       </div>
@@ -688,12 +688,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const averagePitchValue = parseFloat(document.getElementById("averagePitch").textContent) || 0;
 				const relativeTremorValue = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
 	            
-				// 그래프 비율을 위한 수치 조정 (곱하기 100,000)
-				const scaledRelativeTremorValue = relativeTremorValue*100000;
+				// 그래프 비율을 위한 수치 조정 (더하기 100)
+				const scaledRelativeTremorValue = relativeTremorValue+100;
 				
 	            const bars = [
 	                { barId: 'bar1', valueId: 'bar-value1', value: averagePitchValue },
-	                { barId: 'bar2', valueId: 'bar-value2', value: RelativeTremorValue  }
+	                { barId: 'bar2', valueId: 'bar-value2', value: scaledRelativeTremorValue  }
 	            ];
 
 	            // 디버깅 로그 추가
@@ -720,9 +720,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	    console.error('.voice 요소를 찾을 수 없습니다.');
 	}
 	
-	
-	
-	
 	// 초기 상태로 막대 길이를 0으로 설정
 	function resetGestureBars(barId) {
 	  const barElement = document.getElementById(barId);
@@ -737,6 +734,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	  rootMargin: '0px',
 	  threshold: 0.1, // 10% 이상 보이면 트리거
 	};
+	
+	// gestureBarData 업데이트
+    const gestureBarData = [
+        { label: "머리카락 만짐", value: hairTouchCount },
+        { label: "코 만짐", value: noseTouchCount },
+    ];
+	
+ 	// 최대값 계산 (그래프 비율 조정용)
+    const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value));
 	
 	const gestureObserverCallback = (entries, observer) => {
 	  entries.forEach(entry => {
@@ -777,12 +783,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
-
 // 백엔드 스크립트 코드 추가
 let savedResults = [];
-
-
 
 window.onload = function() {
     getSavedResults(); // 데이터를 가져온 후 loadResult 호출
@@ -800,86 +802,85 @@ function loadResult(index) {
 
     console.log("선택된 결과:", selectedResult);
     
-     	// 피치 설명 문구 생성
-        const averagePitch = selectedResult.averagePitch || 0; // averagePitch 값 확인 및 초기화
-        let pitchDescription = ""; // pitchDescription 변수 명확히 선언
+    // 피치 설명 문구 생성
+    const averagePitch = selectedResult.averagePitch || 0; // averagePitch 값 확인 및 초기화
+    let pitchDescription = ""; // pitchDescription 변수 명확히 선언
 
-        // 피치 설명 문구 생성
-        if (averagePitch < 120) {
-            pitchDescription = "낮은 피치: 목소리가 차분하거나 낮게 들릴 수 있습니다.";
-        } else if (120 <= averagePitch && averagePitch < 180) {
-            pitchDescription = "중간 피치: 일반적인 남성 음성 톤입니다.";
-        } else if (180 <= averagePitch && averagePitch < 250) {
-            pitchDescription = "높은 피치: 음성이 밝거나 높은 톤으로 들릴 수 있습니다.";
-        } else if (averagePitch => 250) {
-            pitchDescription = "매우 높은 피치: 음성이 지나치게 높은 톤으로 들릴 수 있습니다.";
-        }
+    // 피치 설명 문구 생성
+    if (averagePitch < 120) {
+    	pitchDescription = "낮은 피치: 목소리가 차분하거나 낮게 들릴 수 있습니다.";
+    } else if (120 <= averagePitch && averagePitch < 180) {
+    	pitchDescription = "중간 피치: 일반적인 남성 음성 톤입니다.";
+   	} else if (180 <= averagePitch && averagePitch < 250) {
+    	pitchDescription = "높은 피치: 음성이 밝거나 높은 톤으로 들릴 수 있습니다.";
+    } else if (averagePitch => 250) {
+    	pitchDescription = "매우 높은 피치: 음성이 지나치게 높은 톤으로 들릴 수 있습니다.";
+    }
 
-        const hairTouchCount = selectedResult.hairTouchCount || 0;
-        const noseTouchCount = selectedResult.noseTouchCount || 0;
-        const totalTouches = (hairTouchCount + noseTouchCount) / 2;
+    const hairTouchCount = selectedResult.hairTouchCount || 0;
+    const noseTouchCount = selectedResult.noseTouchCount || 0;
+    const totalTouches = hairTouchCount + noseTouchCount;
 
-        const formattedTotalTouches = totalTouches.toFixed(2);
+    const formattedTotalTouches = totalTouches.toFixed(2);
 
-        // 상대적 떨림 분석
-        const relativeTremor = selectedResult.relativeTremor || 0;
-        let tremorDescription = '';
+    // 상대적 떨림 분석
+    const relativeTremor = selectedResult.relativeTremor || 0;
+    let tremorDescription = '';
 
-        if (relativeTremor < 0.03) {
-            tremorDescription = "매우 안정적: 떨림이 거의 없는 상태입니다.";
-        } else if (0.03 <= relativeTremor && relativeTremor < 0.07) {
-            tremorDescription = "자연스러운 수준의 떨림: 떨림이 있지만 일반적으로 자연스럽게 느껴집니다.";
-        } else if (0.07 <= relativeTremor && relativeTremor < 0.12) {
-            tremorDescription = "약간의 긴장 또는 미세한 떨림: 긴장 가능성이 있습니다.";
-        } else if (relativeTremor >= 0.12) {
-            tremorDescription = "과도한 떨림: 긴장감이나 불안정한 음성이 뚜렷이 느껴집니다.";
-        }
-
-        // 움직임 분석
-        let gestureAnalysis = '';
-        if (totalTouches >= 10) {
-            gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘미흡’입니다.';
-        } else if (10 < totalTouches && totalTouches <= 7) {
-            gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다.';
-        } else if (7 < totalTouches && totalTouches <= 4) {
-            gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘양호’입니다.';
-        } else if (totalTouches < 4) {
-            gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다.';
-        }
-        
-      	//그래프 업데이트
-		setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
-		setBarHeight('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
+    if (relativeTremor < 0.03) {
+    	tremorDescription = "매우 안정적: 떨림이 거의 없는 상태입니다.";
+    } else if (0.03 <= relativeTremor && relativeTremor < 0.07) {
+        tremorDescription = "자연스러운 수준의 떨림: 떨림이 있지만 일반적으로 자연스럽게 느껴집니다.";
+    } else if (0.07 <= relativeTremor && relativeTremor < 0.12) {
+        tremorDescription = "약간의 긴장 또는 미세한 떨림: 긴장 가능성이 있습니다.";
+    } else if (relativeTremor >= 0.12) {
+        tremorDescription = "과도한 떨림: 긴장감이나 불안정한 음성이 뚜렷이 느껴집니다.";
+    }
 	
-
-        // UI에 반영
-        document.getElementById("recognizedText").textContent = selectedResult.recognizedText || "데이터 없음";
-        document.getElementById("averagePitch").textContent = selectedResult.averagePitch ? selectedResult.averagePitch.toFixed(2) : "0";
-        document.getElementById("relativeTremor").textContent = selectedResult.relativeTremor ? selectedResult.relativeTremor.toFixed(4) : "0";
-        document.getElementById("hairTouchCount").textContent = selectedResult.hairTouchCount || "0";
-        document.getElementById("noseTouchCount").textContent = selectedResult.noseTouchCount || "0";
-        document.getElementById("timestamp").textContent = selectedResult.timestamp || "타임스탬프 없음";
-        document.getElementById("pitchDescription").textContent = pitchDescription;
-        document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
-        document.getElementById("tremorDescription").textContent = tremorDescription;
+    // 움직임 분석
+    let gestureAnalysis = '';
+    if (totalTouches >= 10) {
+        gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘미흡’입니다.';
+    } else if (totalTouches >= 7) {
+        gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다.';
+    } else if (totalTouches >= 4) {
+        gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘양호’입니다.';
+    } else {
+        gestureAnalysis = '면접 제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다.';
+    }
     
-		
-		// gestureBarData 업데이트
-	    const gestureBarData = [
-	        { label: "머리카락 만짐", value: hairTouchCount },
-	        { label: "코 만짐", value: noseTouchCount },
-	    ];
+    //그래프 업데이트
+    setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
+	setBarHeight('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
+
+	// UI에 반영
+	document.getElementById("recognizedText").textContent = selectedResult.recognizedText || "데이터 없음";
+    document.getElementById("averagePitch").textContent = selectedResult.averagePitch ? selectedResult.averagePitch.toFixed(2) : "0";
+    document.getElementById("relativeTremor").textContent = selectedResult.relativeTremor ? selectedResult.relativeTremor.toFixed(4) : "0";
+    document.getElementById("hairTouchCount").textContent = selectedResult.hairTouchCount || "0";
+    document.getElementById("noseTouchCount").textContent = selectedResult.noseTouchCount || "0";
+    document.getElementById("timestamp").textContent = selectedResult.timestamp || "타임스탬프 없음";
+    document.getElementById("pitchDescription").textContent = pitchDescription;
+    document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
+    document.getElementById("tremorDescription").textContent = tremorDescription;
+    
+    // gestureBarData 업데이트
+    const gestureBarData = [
+    	{ label: "머리카락 만짐", value: hairTouchCount },
+    	{ label: "코 만짐", value: noseTouchCount },
+	];
 	
-	    console.log("업데이트된 제스처 데이터:", gestureBarData);
+	console.log("업데이트된 제스처 데이터:", gestureBarData);
 	    
-	 	// 최대값 계산 (그래프 비율 조정용)
-	    const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value));
-		
-	 	// 막대 그래프 업데이트
-	    setGestureBarWidth('gesture-bar1', 'gesture-value1', gestureBarData[0].value, maxGestureBarValue);
-	    setGestureBarWidth('gesture-bar2', 'gesture-value2', gestureBarData[1].value, maxGestureBarValue);
+	// 최대값 계산 (그래프 비율 조정용)
+	const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value));
+	
+	// 막대 그래프 업데이트
+	setGestureBarWidth('gesture-bar1', 'gesture-value1', gestureBarData[0].value, maxGestureBarValue);
+	setGestureBarWidth('gesture-bar2', 'gesture-value2', gestureBarData[1].value, maxGestureBarValue);
 
 	}
+	
 	// 버튼 클릭 시 결과 로드
 	document.getElementById("loadResult0").addEventListener("click", function() {
 	    loadResult(0); // 가장 최근의 결과 (0번) 로드
@@ -889,7 +890,7 @@ function loadResult(index) {
 	});
 	document.getElementById("loadResult2").addEventListener("click", function() {
 	    loadResult(2); // 뒤에서 3번째 결과 (2번) 로드
-});
+	});
 	
 // 서버에서 데이터를 가져오기
 function getSavedResults() {
@@ -919,8 +920,6 @@ function resetResults() {
         console.error("초기화 요청 중 오류 발생:", error);
     });
 }
-
-
 
 // 초기화 버튼 이벤트 연결
 document.getElementById("resetButton").addEventListener("click", resetResults);
