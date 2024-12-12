@@ -503,12 +503,6 @@ body {
     <div class="section"> 
       <div class="section-header">
         <div class="section-title">AI 음성 분석 상세 결과</div>
-        <div class="tabs">
-          <button class="active" id="loadResult0">Q1</button>
-          <button id="loadResult1">Q2</button>
-          <button id="loadResult2">Q3</button>
-          
-        </div>
       </div>
       <div class="card">
         <div class="voice_title box1">
@@ -575,8 +569,9 @@ body {
       </div>
     </div>
     
-<div id="hairTouchCount"></div>
-<div id="noseTouchCount"></div>
+<!-- 왜인지는 모르겠으나 있어야함 -->
+<div id="hairTouchCount" style="display: none;"></div>
+<div id="noseTouchCount" style="display: none;"></div>
 
   <!-- AI 제스처 분석 -->
   <div class="title_container">
@@ -585,11 +580,6 @@ body {
   <div class="section">
     <div class="section-header">
       <div class="section-title">AI 제스쳐 분석 상세 결과</div>
-      <div class="tabs">
-        <button class="active" id="loadResult0">Q1</button>
-        <button id="loadResult1">Q2</button>
-        <button id="loadResult2">Q3</button>
-      </div>
     </div>
     <div class="gesture-analysis-container">
       <div class="gesture-content">
@@ -615,7 +605,7 @@ body {
         </div>
         <div class="gesture-summary">
           <ul>
-            <li><div id="gestureAnalysis"></div></li>
+            <li>결과 내용<br><br><div id="gestureAnalysis"></div></li>
           </ul>
         </div>
       </div>
@@ -729,13 +719,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	    console.error('.voice 요소를 찾을 수 없습니다.');
 	}
 	
-	// 제스쳐
-	// 데이터 값 설정
-	const gestureBarData = [
-	  { label: "머리카락 만짐", value: 4 },
-	  { label: "코 만짐", value: 1 },
-	];
-	
 	// 최대값 기준으로 막대 비율 계산
 	const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value)); // 최대값 계산
 	
@@ -837,11 +820,11 @@ function loadResult(index) {
         // 피치 설명 문구 생성
         if (averagePitch < 120) {
             pitchDescription = "낮은 피치: 목소리가 차분하거나 낮게 들릴 수 있습니다.";
-        } else if (120 <= averagePitch && averagePitch <= 180) {
+        } else if (120 <= averagePitch && averagePitch < 180) {
             pitchDescription = "중간 피치: 일반적인 남성 음성 톤입니다.";
-        } else if (180 <= averagePitch && averagePitch <= 250) {
+        } else if (180 <= averagePitch && averagePitch < 250) {
             pitchDescription = "높은 피치: 음성이 밝거나 높은 톤으로 들릴 수 있습니다.";
-        } else if (averagePitch > 250) {
+        } else if (averagePitch => 250) {
             pitchDescription = "매우 높은 피치: 음성이 지나치게 높은 톤으로 들릴 수 있습니다.";
         }
 
@@ -891,6 +874,23 @@ function loadResult(index) {
 		//그래프 업데이트
 		setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
 		setBarHeight('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
+	
+		// gestureBarData 업데이트
+	    const gestureBarData = [
+	        { label: "머리카락 만짐", value: hairTouchCount },
+	        { label: "코 만짐", value: noseTouchCount },
+	    ];
+	
+	    console.log("업데이트된 제스처 데이터:", gestureBarData);
+	    
+	 	// 최대값 계산 (그래프 비율 조정용)
+	    const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value));
+		
+	 	// 막대 그래프 업데이트
+	    setGestureBarWidth('gesture-bar1', 'gesture-value1', gestureBarData[0].value, maxGestureBarValue);
+	    setGestureBarWidth('gesture-bar2', 'gesture-value2', gestureBarData[1].value, maxGestureBarValue);
+
+	    
 	}
 	// 버튼 클릭 시 결과 로드
 	document.getElementById("loadResult0").addEventListener("click", function() {
