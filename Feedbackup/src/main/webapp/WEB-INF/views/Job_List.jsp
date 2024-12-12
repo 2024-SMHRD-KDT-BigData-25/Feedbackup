@@ -245,6 +245,8 @@
 </style>
 </head>
 <body>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
 <div class="Job_list_wrapper">
     <div class="text1">희망하시는 기업을 선택해 주세요</div>
     <div class="text2">* 확실한 면접 준비를 위해 각각 한가지만 선택가능 합니다.</div>
@@ -324,6 +326,8 @@
         </div>
     </form>
 </div>
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 
 <script>
     // 검색 로직

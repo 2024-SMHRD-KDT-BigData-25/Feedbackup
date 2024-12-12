@@ -125,7 +125,7 @@
     <div id="wrap">
       <footer>
         <div class="footerdiv">
-          <img id="logo" src="img/logo3.svg" alt="logo" />
+          <img id="logo" src="${pageContext.request.contextPath}/img/logo3.svg" alt="logo" />
         </div>
         <div class="container" style="display: flex;">
             <div class="address">

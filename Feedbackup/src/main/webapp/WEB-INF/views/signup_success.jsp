@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Feedbackup | 회원가입 성공</title>
 <style>
-	.logo {
+	.signup_success-logo {
 	     width: 365px;
 	     height: 79px;
 	     display: block;
@@ -70,7 +70,9 @@
 </style>
 </head>
 <body>
-	<a href="/myapp"><img src="../img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
+	<a href="/myapp"><img src="../img/logo2.png" alt="logo" class="signup_success-logo"></a><br><br><br><br>
 	<div class="success">
 		<h2 class="1st">피드백업 회원가입 완료</h1>
 		<h1 style= "margin-bottom: 20px;">저희 피드백업의 가족이 되신 것을 진심으로 환영합니다!</h1>
@@ -78,6 +80,7 @@
 		<h1>AI 면접 연습으로 성공을 향해 나아가세요!</h1><br>
 		<a href="/myapp/login" class="login">로그인</a>	
 	</div>
-
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 </body>
 </html>

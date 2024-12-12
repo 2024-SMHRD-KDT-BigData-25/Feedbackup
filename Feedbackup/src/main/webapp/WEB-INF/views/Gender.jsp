@@ -143,6 +143,9 @@
 
 </head>
 <body>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
+
 <div class="Gender_wrapper">
   <div class="text1">성별을 선택해주세요</div>
   <div class="text2">정확한 음성분석을 위해 사용됩니다.</div>
@@ -164,7 +167,9 @@
   	<button type="submit" style="text-decoration: none;" class="next_btn">다음</button>
   </div>
 </div>
-
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
+    
 <script>
 
 //성별 선택 클릭 이벤트 처리

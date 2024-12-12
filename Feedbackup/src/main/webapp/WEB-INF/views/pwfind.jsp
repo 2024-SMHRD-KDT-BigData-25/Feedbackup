@@ -12,7 +12,7 @@
             font-style: normal;
         }
 
-        .logo {
+        .pwfind-logo {
             width: 365px;
             height: 79px;
             display: block;
@@ -233,7 +233,10 @@
     </style>
 </head>
 <body>
-    <img src="../img/logo2.png" alt="logo" class="logo"><br><br><br><br>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
+    
+    <img src="../img/logo2.png" alt="logo" class="pwfind-logo"><br><br><br><br>
     <div class="find_wrapper">
         <div class="find_top">
             <div id="find_id"><a href="/myapp/users/idfind" style="display: block; width: 100%; height: 100%;">아이디 찾기</a></div>
@@ -278,6 +281,9 @@
         </div>
     </div>
 
+		<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
+    
     <script>
         window.onload = function() {
             var success = '${success != null ? success : 'false'}' === 'true'; // 성공 여부 확인

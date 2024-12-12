@@ -250,6 +250,8 @@ video {
 </style>
 </head>
 <body>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
   <div class="top_btn">
     <button class="btn1">질문 다시 듣기</button>
   </div>
@@ -305,6 +307,9 @@ video {
 		<p><strong>머리를 만진 횟수:</strong> <span id="hairTouchCount">0번</span></p>
 		<p><strong>코를 만진 횟수:</strong> <span id="noseTouchCount">0번</span></p>
 	</div>
+	
+		<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 	
 	<script>
         // 웹캠 스트림 가져오기

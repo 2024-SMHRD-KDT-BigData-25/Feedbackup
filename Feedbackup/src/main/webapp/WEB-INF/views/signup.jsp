@@ -15,7 +15,7 @@
             font-style: normal;
         }
 
-        .logo {
+        .signup-logo {
             width: 365px;
             height: 79px;
             display: block;
@@ -152,9 +152,10 @@
 
     </style>
 </head>   
-
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
 <body>
-    <a href="/myapp"><img src="../img/logo2.png" alt="logo" class="logo"></a><br><br><br><br>
+    <a href="/myapp"><img src="../img/logo2.png" alt="logo" class="signup-logo"></a><br><br><br><br>
     <div class="signup-box">
       <h1>회원가입</h1>
       <br>
@@ -196,7 +197,8 @@
          <!-- 기본적으로 버튼 비활성화 -->
       </form>
    </div>
-
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
    <script>

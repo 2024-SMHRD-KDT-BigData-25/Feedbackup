@@ -6,13 +6,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css" />
     <title>Header</title>
   </head>
 
   <style>
      body {
-      font-family: 'SUIT-Regular';
-      position: relative; 
+      font-family: 'Pretendard", sans-serif';
+      position: relative;
     }
 
     .header {
@@ -26,6 +27,7 @@
     .logo {
       object-fit: cover;
       margin-left: 20px;
+      margin-right: 30px;
     }
 
     .nav {
@@ -278,8 +280,8 @@
   <body>
     <header class="header">
       <div class="logo">
-        <a href="/myapp">
-          <img src="img/logo2.png" title="logo" height="59" width="265">
+        <a href="${pageContext.request.contextPath}/">
+          <img src="${pageContext.request.contextPath}/img/logo2.png" title="logo" height="59" width="265">
         </a>
       </div>
       <nav class="nav">

@@ -116,6 +116,9 @@
 </style>
 </head>
 <body>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
+    
   <div class="top_btn">
     <button class="btn2" onclick="window.location.href='/myapp/AI_Interview';">나가기</button>
   </div>
@@ -140,6 +143,9 @@
 	</form>
     </div>
   </div>
+  
+  	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
   
 <script>
 //웹캠 스트림 가져오기
