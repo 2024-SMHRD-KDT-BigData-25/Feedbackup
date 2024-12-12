@@ -360,31 +360,6 @@ video {
 		<p><strong>코를 만진 횟수:</strong> <span id="noseTouchCount">0번</span></p>
 	</div>
 	
-	<div id="resultModal" class="modal">
-	    <div class="modal-content">
-	        <div class="loading-container">
-	            <div class="rotating-border"></div>
-	            <div class="static-image">
-	                <img id="modalImage" src="img/logo1.png" alt="로고">
-	            </div>
-	        </div>
-	        <p id="modalMessage" class="modal_text">분석 중입니다...</p>
-	        <button class="btn" id="btn_confirm">확인</button>
-	    </div>
-	</div>
-	
-	<div id="resultModal2" class="modal">
-	    <div class="modal-content">
-	        <div class="loading-container">         
-	            <div class="static-image">
-	                <img id="modalImage" src="img/check.png" alt="로고">
-	            </div>
-	        </div>
-	        <p id="modalMessage" class="modal_text">음성이 일치합니다.</p>
-	        <button class="btn" id="btn_confirm">확인</button>
-	    </div>
-	</div>
-	
 	<script>
         // 웹캠 스트림 가져오기
         const webcam = document.getElementById("webcam");
