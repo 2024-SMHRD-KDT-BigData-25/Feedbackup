@@ -6,13 +6,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css" />
     <title>Header</title>
   </head>
 
   <style>
+  	@font-face {
+	    font-family: 'SUIT-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	    }
+	    
      body {
-      font-family: 'Pretendard", sans-serif';
       position: relative;
     }
 
