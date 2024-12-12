@@ -31,40 +31,33 @@
 .sex_container{
   text-align: center;
   align-items: center;
-  gap: 20px;
   width: 800px;
-  height: 100px;
+  height: 200px;
   padding: 30px 40px;
   margin: 30px auto;
-  color: #8071FC;
-  font-size: 11px;
-  font-weight: bold;
+
 }
 
 .sex_select{
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   gap: 20px;
   margin: 0px auto;
-  justify-content: center;
 }
 
 .sex{
   display: flex;
-  justify-content: center;
   gap: 20px;
   font-size: 18px;
 }
 
 .box{
-  display: flex;
-  justify-content: center; /* 수평 정렬 */
-  align-items: center;  
   background-color: #FFFFFF;
   border: 1px solid #8071FC;
-  width: 130px;
-  height: 70px;
+  width: 140px;
+  height: 140px;
   margin-top:20px;
   border-radius: 15px;
   font-size: 15px;
@@ -132,8 +125,14 @@
   <div class="sex_container">
   	<div class="sex_select">
       	<div class="sex">
-	  		<div class="box" data-gender="male">남성</div>
-	  		<div class="box" data-gender="woman">여성</div>
+	  		<div class="box" data-gender="male">
+		  		<img src="../img/man.png">
+		  		<div>남성</div>
+	  		</div>
+	  		<div class="box" data-gender="woman">
+	  			<img src="../img/woman.png" style="margin-top: 12px;">
+		  		<div>여성</div>
+	  		</div>
   		</div>
   	</div>
   </div>
