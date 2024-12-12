@@ -475,7 +475,7 @@ video {
         let lastHairTouchCount = 0;  // 전역 변수로 선언
         let lastNoseTouchCount = 0;  // 전역 변수로 선언
         
-        const questionNumbers = ["${firstNumber}", "${seconNumber}", "${thirNumber}"];
+        const questionNumbers = ["${firstNumber}", "${secondNumber}", "${thirdNumber}"];
         
 		// 버튼 클릭 시 음성 분석 및 동작 인식 시작/중지
 		
