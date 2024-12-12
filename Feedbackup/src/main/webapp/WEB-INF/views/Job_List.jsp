@@ -20,9 +20,9 @@
     }
 
     .text1 {
-        font-size: 26px;
-        font-weight: bold;
-        margin-top: 40px;
+        font-size: 30px;
+        font-weight: 800;
+        margin-top: 60px;
         text-align: center;
     }
 
@@ -79,13 +79,14 @@
         color: #333333;
         border: 1px solid white;
         border-radius: 10px;
-        font-size: 10px;
+        font-size: 12px;
         text-align: center;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
-        font-weight: 550;
+        font-weight: 500;
         width: 100px;
-        height: 30px;
+        height: 35px;
+        
     }
 
     .category-button:hover {
@@ -156,11 +157,12 @@
         color: #8071FC;
         border: 2px solid #8071FC;
         font-weight: bold;
+        transition: 0.4s ;
     }
 
     .box.active {
-        background-color: #8071FC;
-        color: white;
+        background-color: #F3EDFF;
+        color: #8071FC;
         border: 2px solid #8071FC;
         font-weight: bold;
     }
@@ -201,7 +203,9 @@
     }
 
     .next_btn:hover {
-        background-color: #6a5ecc;
+        background-color: white;
+        color: #8071FC;
+        transition: 0.4s;
     }
     
     .search-container {
@@ -216,9 +220,9 @@
 	  width: 180px;
 	  height: 30px;
 	  padding: 3px;
-	  border: 1px solid #8071FC;
+	  border: 1px solid #94A3B8;
 	  border-radius: 5px;
-	  font-size: 14px;
+	  font-size: 12px;
 	}
 	
 	.search-button {
@@ -233,7 +237,8 @@
 	}
 	
 	.search-button:hover {
-	  background-color: #6a5ecc;
+	  background-color: white;
+	  color: #8071FC;
 	}
 	
 	.search-result {
