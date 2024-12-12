@@ -6,13 +6,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css" />
     <title>Header</title>
   </head>
 
   <style>
+  	@font-face {
+	    font-family: 'SUIT-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+	    font-weight: normal;
+	    font-style: normal;
+	    }
+	    
      body {
-      font-family: 'Pretendard", sans-serif';
       position: relative;
     }
 
@@ -26,7 +31,7 @@
 
     .logo {
       object-fit: cover;
-      margin-left: 20px;
+      margin-left: 40px;
       margin-right: 30px;
     }
 
@@ -43,7 +48,7 @@
       background-color: black;
       color: white;
       width: 580px;
-      height: 60px;
+      height: 40px;
       border-radius: 200px;
     }
 
@@ -58,8 +63,7 @@
     .nav-list a {
       text-decoration: none;
       color: white;
-      font-size: 20px;
-      
+      font-size: 17px;
       transition: 0.35s;
       border-radius: 35px;
     }
@@ -71,7 +75,7 @@
   font-weight: 600;
   transition: 0.35s;
   display: block;
-  padding: 10px;
+  padding: 5px 10px;
  
 }
 
@@ -84,10 +88,11 @@
     }
 
     .auth-btn button {
-      padding: 10px;
+      padding: 5px;
       font-size: 16px;
       font-weight: 600;
       border-radius: 50px;
+      width: 100px;
     }
 
     .btn-login {
@@ -97,10 +102,10 @@
     }
 
     .btn-login:hover {
-      background-color: #8071FC;
+      background-color: black;
       color: white;
       transition: 0.35s;
-      border-color: #8071FC;
+      border-color: white;
       cursor: pointer;
     }
 
@@ -108,7 +113,7 @@
       background: linear-gradient(to right, #8071FC, #ACA4F0);
       border: none;
       color: white;
-      width: 1000px;
+      width: 600px;
     }
 
     .btn-sign:hover {
@@ -281,7 +286,7 @@
     <header class="header">
       <div class="logo">
         <a href="${pageContext.request.contextPath}/">
-          <img src="${pageContext.request.contextPath}/img/logo2.png" title="logo" height="59" width="265">
+          <img src="${pageContext.request.contextPath}/img/logo2.png" title="logo" width="165">
         </a>
       </div>
       <nav class="nav">
@@ -294,28 +299,24 @@
       </nav>
       <div class="auth-btn">
       
-      <%
-   MavenMember member = (MavenMember) session.getAttribute("member");
-   %>
-
-   <%
-   if (member == null) {
-   %>
-
-   <button class="btn-sign" onclick="location.href='login'">로그인</button>
-   <button class="btn-login" onclick="location.href='users/signup'">시작하기</button>
-   
-   <%
-   } else {
-   %>
-   <a class="btn-user" onclick="location.href='/myapp/users/mypage'"><strong><%=member.getName()%></strong>&nbsp;&nbsp;님</a>
-   
-   <button class="btn-logout" onclick="location.href='/myapp/logout'">로그아웃</button>
-
-
-   <%
-   }
-   %>
+	   <%
+	   MavenMember member = (MavenMember) session.getAttribute("member");
+	%>
+	
+	<%
+	   if (member == null) {
+	%>
+	   <!-- 절대 경로로 수정 -->
+	   <button class="btn-login" onclick="location.href='<%=request.getContextPath()%>/login'">로그인</button>
+	   <button class="btn-sign" onclick="location.href='<%=request.getContextPath()%>/users/signup'">시작하기</button>
+	<%
+	   } else {
+	%>
+	   <a class="btn-user" onclick="location.href='<%=request.getContextPath()%>/users/mypage'"><strong><%=member.getName()%></strong>&nbsp;&nbsp;님</a>
+	   <button class="btn-logout" onclick="location.href='<%=request.getContextPath()%>/logout'">로그아웃</button>
+	<%
+	   }
+	%>
       </div>  
     </header>
     

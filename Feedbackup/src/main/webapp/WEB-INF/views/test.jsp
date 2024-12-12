@@ -137,7 +137,7 @@
 
     .box {
         background-color: #FFFFFF;
-        border: 1px solid #8071FC;
+        border: 1px solid #CBD5E1;
         width: 140px;
         height: 140px;
         margin-top: 20px;
@@ -148,6 +148,7 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        box-shadow: 0 1px 20px 0 rgb(220, 220, 220);
     }
 
     .box:hover {
@@ -162,6 +163,19 @@
         color: white;
         border: 2px solid #8071FC;
         font-weight: bold;
+    }
+    
+	.man{
+		width: 90px;
+	}
+	
+	.woman{
+		width: 78px;
+		margin-top: 12px; 
+	}
+    
+    .box > div{
+    	margin-top: 5px;
     }
 
     .next {
@@ -231,6 +245,8 @@
 </style>
 </head>
 <body>
+	 <!-- 헤더 불러오기 -->
+    <div><jsp:include page="header.jsp"></jsp:include> </div>
 <div class="Job_list_wrapper">
     <div class="text1">희망하시는 기업을 선택해 주세요</div>
     <div class="text2">* 확실한 면접 준비를 위해 각각 한가지만 선택가능 합니다.</div>
@@ -292,14 +308,14 @@
 		      		<div class="step-circle">2</div>
 		    	</div>	
                 <div class="sex">
-                    <div class="box" data-gender="male">
-                        <img src="../img/man.png" alt="남성">
-                        <div>남성</div>
-                    </div>
-                    <div class="box" data-gender="female">
-                        <img src="../img/woman.png" alt="여성">
-                        <div>여성</div>
-                    </div>
+			  		<div class="box" data-gender="male">
+				  		<img src="../img/man.png" class="man">
+				  		<div>남성</div>
+			  		</div>
+			  		<div class="box" data-gender="woman">
+			  			<img src="../img/woman.png" class="woman">
+				  		<div>여성</div>
+			  		</div>
                 </div>
             </div>
         </div>
@@ -310,80 +326,85 @@
         </div>
     </form>
 </div>
+	<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 
 <script>
-    // 검색 로직
-    document.getElementById('search-button').addEventListener('click', searchCompany);
-    document.getElementById('search-input').addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            searchCompany();
+//검색 로직
+document.getElementById('search-button').addEventListener('click', searchCompany);
+document.getElementById('search-input').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        searchCompany();
+    }
+});
+
+function searchCompany() {
+    const input = document.getElementById('search-input').value.trim().toLowerCase();
+    const buttons = document.querySelectorAll('.category-button');
+    let result = '';
+    const activeCompanies = []; // 활성화된 버튼 저장 배열
+
+    buttons.forEach(button => {
+        const companyName = button.textContent.trim().toLowerCase();
+
+        // 검색어가 버튼 텍스트에 포함되어 있는지 확인
+        if (companyName.includes(input)) {
+            result += `${button.textContent} `;
+            button.classList.add('active');
+            document.getElementById('selected-company').value = button.textContent.trim(); // 선택된 기업 설정
+            activeCompanies.push(companyName);
+        } else {
+            button.classList.remove('active');
         }
     });
 
-    function searchCompany() {
-        const input = document.getElementById('search-input').value.trim().toLowerCase();
-        const buttons = document.querySelectorAll('.category-button');
-        let result = '';
-        const activeCompanies = []; // 활성화된 버튼 저장 배열
-
-        buttons.forEach(button => {
-            const companyName = button.textContent.trim().toLowerCase();
-
-            // 검색어가 버튼 텍스트에 포함되어 있는지 확인
-            if (companyName.includes(input)) {
-                result += `${button.textContent} `;
-                button.classList.add('active');
-                activeCompanies.push(companyName);
-            } else {
-                button.classList.remove('active');
-            }
-        });
-
-        if (!input) {
-            result = '검색어를 입력하세요.';
-        } else if (result === '') {
-            result = '일치하는 기업이 없습니다.';
-        }
-
-        document.getElementById('search-result').textContent = result;
+    if (!input) {
+        result = '검색어를 입력하세요.';
+    } else if (result === '') {
+        result = '일치하는 기업이 없습니다.';
     }
 
-    // 성별 선택
-    document.querySelectorAll('.box').forEach(box => {
-        box.addEventListener('click', function () {
-            document.querySelectorAll('.box').forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            document.getElementById('selected-gender').value = this.dataset.gender;
-        });
+    document.getElementById('search-result').textContent = result;
+}
+
+// 성별 선택
+document.querySelectorAll('.box').forEach(box => {
+    box.addEventListener('click', function () {
+        document.querySelectorAll('.box').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('selected-gender').value = this.dataset.gender; // 선택된 성별 설정
     });
+});
 
-    // 기업 선택
-    document.querySelectorAll('.category-button').forEach(button => {
-        button.addEventListener('click', function () {
-            document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            document.getElementById('selected-company').value = this.textContent.trim();
-        });
+// 기업 선택 (검색 없이 클릭만으로도 가능)
+document.querySelectorAll('.category-button').forEach(button => {
+    button.addEventListener('click', function () {
+        document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('selected-company').value = this.textContent.trim(); // 선택된 기업 설정
     });
+});
 
-    // 다음 버튼 클릭
-    document.querySelector('.next_btn').addEventListener('click', function () {
-        const gender = document.getElementById('selected-gender').value;
-        const company = document.getElementById('selected-company').value;
+// 다음 버튼 클릭
+document.querySelector('.next_btn').addEventListener('click', function () {
+    const gender = document.getElementById('selected-gender').value;
+    const company = document.getElementById('selected-company').value;
 
-        if (!gender) {
-            alert('성별을 선택해 주세요.');
-            return;
-        }
+    if (!gender) {
+        alert('성별을 선택해 주세요.');
+        return;
+    }
 
-        if (!company) {
-            alert('기업을 선택해 주세요.');
-            return;
-        }
+    if (!company) {
+        alert('기업을 선택해 주세요.');
+        return;
+    }
 
-        document.getElementById('main-form').submit();
-    });
+    document.getElementById('main-form').submit();
+});
+
+
 </script>
 </body>
 </html>

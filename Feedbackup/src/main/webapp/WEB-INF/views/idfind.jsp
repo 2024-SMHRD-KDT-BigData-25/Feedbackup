@@ -239,8 +239,7 @@
     </style>
 </head>
 <body>
-	 <!-- 헤더 불러오기 -->
-    <div><jsp:include page="header.jsp"></jsp:include> </div>
+
     <div class="top">
     	<a href="/myapp"><img src="../img/logo2.png" alt="logo" class="idfind-logo"></a><br><br><br><br>
     </div>
@@ -288,8 +287,7 @@
             <a href="javascript:void(0);" class="btn" onclick="closeModal()">확인</a> <!-- 확인 버튼 클릭 시 closeModal() 호출 -->
         </div>
     </div>
-	<!-- 푸터 불러오기 -->
-    <div><jsp:include page="footer.jsp"></jsp:include> </div>
+
     <script>
         window.onload = function() {
             var success = '${success != null ? success : 'false'}' === 'true'; // 성공 여부 확인

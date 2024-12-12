@@ -9,7 +9,6 @@
 	<title>FeedbackUp</title>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 	<link rel="stylesheet" href="css/index.css">
-    <script src="js/header.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css" />
     <script src="https://kit.fontawesome.com/eefb1e8780.js" crossorigin="anonymous"></script>
 
