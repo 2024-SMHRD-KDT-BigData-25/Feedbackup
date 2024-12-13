@@ -53,12 +53,13 @@
 
   .title img{
     width: 140px;
-    height: auto; ;
+    height: auto;
+    margin-top: 50px;
   }
 
   .title_text {
     margin-top: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     text-align: center;
     color: #64748B;
     font-size: 20px;
@@ -78,32 +79,20 @@
   height: auto;
 }
 
-.info {
-  position: absolute;
-  top: 5%; /* 사진 기준으로 위치 */
-  right: 22.5%;
-  transform: translate(-50%, -50%);
-  background-color: #ECEAFF;
-  color: #6C63FF;
-  font-size: 12px;
-  padding: 8px 15px;
-  border-radius: 20px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
 
 .recording-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 50px;
-  padding: 10px 20px;
-  width: 15%;
-  max-width: 400px;
-  position: fixed;
-  bottom: 45px;
-  left: 625px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    padding: 10px 20px;
+    width: 15%;
+    max-width: 400px;
+    position: fixed;
+    bottom: 105px;
+    left: 625px;
 }
 
 .recording-bar .status {
@@ -255,13 +244,14 @@ video {
     position: relative; /* 내부 자식 요소의 기준점 */
     width: 100%; /* 부모 크기에 맞춤 */
     height: 120px; /* 고정 크기 설정 */
+    margin-top: 20px;
 }
 
 /* 회전하는 테두리 */
 .rotating-border {
     position: absolute; /* loading-container 기준 */
-    top: 42%; /* 부모 기준 중앙 */
-    left: 46.5%; /* 부모 기준 중앙 */
+    top: 5%; /* 부모 기준 중앙 */
+    left: 39.5%; /* 부모 기준 중앙 */
     transform: translate(-50%, -50%);
     width: 100px;
     height: 100px;
@@ -285,7 +275,7 @@ video {
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; 
 }
 
 .static-image img {
@@ -323,59 +313,41 @@ video {
    margin: 11% auto;
    padding: 20px;
    border: 1px solid #888;
-   width: 600px;
+   width: 500px;
    height: 250px;
    text-align: center;
    border: 2px solid #8071FC;
    border-radius: 30px;
 }
 /* 확인 버튼 */
-.close {
-   color: #aaa;
-   float: right;
-   font-size: 28px;
-   font-weight: bold;
+.btn {
+  border: 1px solid #D4C5FF;
+  background-color: transparent;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #8071FC;
+  cursor: pointer;
 }
 
-.close:hover, .close:focus {
-   color: black;
-   text-decoration: none;
-   cursor: pointer;
+.btn:hover, .close:focus {
+  background-color: #8071FC;
+  color: #FFFFFF;
 }
 
 </style>
 </head>
 <body>
 
-<!-- 헤더 불러오기 -->
-    <div><jsp:include page="header.jsp"></jsp:include> </div>
-
-  <div class="top_btn">
-    <button class="btn1" hidden>질문 다시 듣기</button>
-  </div>
   <div class="title"><img src="../img/feedbackup.png"></div>
   <div class="title_text">AI 면접 연습</div>
   <div class="content">
     <!-- 웹캠 화면을 담을 div -->
 	<div id="webcamContainer">
 		<video id="webcam" autoplay></video>
-		<div class="info" hidden>본 질문은 삼성전자 기출 질문입니다.</div>
 	</div>
 	<div>
-
-    
-    <span>${firstNumber}</span>
-
-    <br>
-    
-    <span>${secondNumber}</span>
-
-    <br>
-    
-    <span>${thirdNumber}</span>
-
-    <br>
-
 
     </div>
   </div>
@@ -419,7 +391,7 @@ video {
 	
 	<div id="resultModal" class="modal" hidden>
 	    <div class="modal-content">
-	        <div class="loading-container">
+	        <div class="loading-container" style="position: relative; width: 100%; height: 120px; margin-top: 20px;">
 	            <div class="rotating-border"></div>
 	            <div class="static-image">
 	                <img id="modalImage" src="../img/logo1.png" alt="로고">
@@ -432,7 +404,7 @@ video {
 	
 	<div id="resultModal2" class="modal" hidden>
 	    <div class="modal-content">
-	        <div class="loading-container">         
+	        <div class="loading-container" style="position: relative; width: 100%; height: 120px; margin-top: 20px;">         
 	            <div class="static-image">
 	                <img id="modalImage" src="../img/check.png" alt="로고">
 	            </div>
@@ -441,10 +413,7 @@ video {
 	        <button class="btn" id="btn_confirm">확인</button>
 	    </div>
 	</div>
-	
-	<!-- 푸터 불러오기 -->
-    <div><jsp:include page="footer.jsp"></jsp:include> </div>
-	
+		
 	<script>
         // 웹캠 스트림 가져오기
         const webcam = document.getElementById("webcam");
@@ -546,7 +515,7 @@ video {
 		        mediaRecorder.start(); // 녹음 시작
 		        startMotionDetection(); // 동작 인식 시작
 		
-		        recordingBar.styledisplay = "flex"; // .recording-bar 보이기
+		        recordingBar.style.display = "flex"; // .recording-bar 보이기
 		        document.getElementById("status").style.display = "block"; // 상태 텍스트 보이기
 		        document.getElementById("waveform").style.display = "flex"; // 웨이브폼 보이기
 		        document.getElementById("icon").style.display = "flex";

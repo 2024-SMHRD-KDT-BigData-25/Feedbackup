@@ -311,7 +311,7 @@ li {
     padding: 10px;
 }
 
-.btn:hover {
+.modal-content >.btn:hover {
 	color: #8071FC;
 	background-color: white;
 	border-color: #8071FC;

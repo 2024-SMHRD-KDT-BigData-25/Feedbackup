@@ -32,7 +32,7 @@
     border: 1px solid #D4C5FF;
     background-color: #8071FC;
     border-radius: 20px;
-    padding: 10px 30px;
+    padding: 10px 20px;
     font-size: 14px;
     font-weight: bold;
     color: #FFFFFF;
@@ -50,6 +50,7 @@
     font-weight: bold;
     font-size: 18px;
     color: #6C63FF;
+    margin-top: -32px;
   }
 
   .title img{
@@ -59,7 +60,7 @@
 
   .title_text {
     margin-top: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     text-align: center;
     color: #64748B;
     font-size: 20px;
@@ -82,11 +83,12 @@
     background-color: #6C63FF;
     color: white;
     border: none;
-    padding: 15px 40px;
+    padding: 10px 20px;
     border-radius: 25px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    margin-top: 15px;
   }
 
   .button-container button:hover {
@@ -116,14 +118,12 @@
 </style>
 </head>
 <body>
-	 <!-- 헤더 불러오기 -->
-    <div><jsp:include page="header.jsp"></jsp:include> </div>
-    
+   
   <div class="top_btn">
     <button class="btn2" onclick="window.location.href='/myapp/AI_Interview';">나가기</button>
   </div>
   <div class="title"><img src="../img/feedbackup.png"></div>
-  <div class="title_text">AI 면접 연습</div>
+  <div class="title_text">카메라를 확인해 주세요</div>
   <div class="content">
 <div>
   </div>
@@ -132,21 +132,12 @@
 		<video id="webcam" autoplay></video>
 	</div>
     <div class="button-container">
-    <form action="/myapp/users/One_Real_Interview_Start" method="POST">
-    <div type="hidden" name="firstqText" value="${firstqText}"></div>
-    <input type="hidden" name="secondqText" value="${secondqText}">
-    <input type="hidden" name="thirdqText" value="${thirdqText}">
-    <input type="hidden" name="firstaText" value="${firstaText}">
-    <input type="hidden" name="secondaText" value="${secondaText}">
-    <input type="hidden" name="thirdaText" value="${thirdaText}">
-    <button type="submit" class="button-container">시작하기</button>
-	</form>
+
+    <a href="One_Real_Interview_Start" style="text-decoration: none;"><button type="button" class="button-container">확인 완료</button></a>
+
     </div>
   </div>
-  
-  	<!-- 푸터 불러오기 -->
-    <div><jsp:include page="footer.jsp"></jsp:include> </div>
-  
+    
 <script>
 //웹캠 스트림 가져오기
 const webcam = document.getElementById("webcam");
