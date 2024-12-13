@@ -826,7 +826,13 @@ window.onload = function() {
 function loadResult(index) {
     const resultIndex = savedResults2.length - 1 - index;
     const selectedResult = savedResults2[resultIndex];
-
+    
+ 	// 로컬 스토리지에서 값 가져오기
+    const selectedGender = localStorage.getItem('selectedGender');
+    if (selectedGender) {
+        console.log('선택된 성별:', selectedGender);
+    }
+    
     if (!selectedResult) {
         console.error("선택된 데이터가 없습니다.");
         return;
@@ -838,15 +844,28 @@ function loadResult(index) {
     const averagePitch = selectedResult.averagePitch || 0; // averagePitch 값 확인 및 초기화
     let pitchDescription = ""; // pitchDescription 변수 명확히 선언
 
-    // 피치 설명 문구 생성
-    if (averagePitch < 120) {
-    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 낮은 피치로 분석되었습니다. 차분하고 안정적인 인상을 주지만, 때로는 너무 낮게 들릴 수 있어 상대방에게 다소 침체된 느낌을 줄 수 있습니다. 목소리의 톤을 조금 더 높여 긍정적인 이미지를 전달하는 것이 좋습니다.";
-    } else if (120 <= averagePitch && averagePitch < 180) {
-    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 중간 피치로 분석되었습니다. 일반적으로 안정적이고 자연스러운 톤으로, 면접 시 적합한 목소리 톤입니다. 다만, 일정 부분 더 강렬하고 명확한 표현을 위해 목소리를 조금 더 강조해 보세요.";
-   	} else if (180 <= averagePitch && averagePitch < 250) {
-    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 높은 피치로 분석되었습니다. 밝고 경쾌한 인상을 주지만, 너무 높으면 긴장하거나 불안해 보일 수 있습니다. 목소리 톤을 적절히 낮춰 안정감을 더하는 것이 중요합니다.";
-    } else if (averagePitch >= 250) {
-    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 매우 높은 피치로 분석되었습니다. 지나치게 높은 목소리는 불안정하거나 긴장한 인상을 줄 수 있습니다. 목소리의 톤을 낮추어 좀 더 안정적이고 신뢰감을 주는 톤을 유지하는 것이 좋습니다.";
+    if (selectedGender === "male") {
+	    // 남성 피치 설명 문구 생성
+	    if (averagePitch < 120) {
+	    	pitchDescription = "남성 기준으로, 면접자님의 목소리는 낮은 피치로 분석되었습니다. 차분하고 안정적인 인상을 주지만, 때로는 너무 낮게 들릴 수 있어 상대방에게 다소 침체된 느낌을 줄 수 있습니다. 목소리의 톤을 조금 더 높여 긍정적인 이미지를 전달하는 것이 좋습니다.";
+	    } else if (120 <= averagePitch && averagePitch < 180) {
+	    	pitchDescription = "남성 기준으로, 면접자님의 목소리는 중간 피치로 분석되었습니다. 일반적으로 안정적이고 자연스러운 톤으로, 면접 시 적합한 목소리 톤입니다. 다만, 일정 부분 더 강렬하고 명확한 표현을 위해 목소리를 조금 더 강조해 보세요.";
+	   	} else if (180 <= averagePitch && averagePitch < 250) {
+	    	pitchDescription = "남성 기준으로, 면접자님의 목소리는 높은 피치로 분석되었습니다. 밝고 경쾌한 인상을 주지만, 너무 높으면 긴장하거나 불안해 보일 수 있습니다. 목소리 톤을 적절히 낮춰 안정감을 더하는 것이 중요합니다.";
+	    } else if (averagePitch => 250) {
+	    	pitchDescription = "남성 기준으로, 면접자님의 목소리는 매우 높은 피치로 분석되었습니다. 지나치게 높은 목소리는 불안정하거나 긴장한 인상을 줄 수 있습니다. 목소리의 톤을 낮추어 좀 더 안정적이고 신뢰감을 주는 톤을 유지하는 것이 좋습니다.";
+	    }
+    } else {
+    	// 여성 피치 설명 문구 생성
+        if (averagePitch < 150) {
+            pitchDescription = "여성 기준으로, 면접자님의 목소리는 낮은 피치로 분석되었습니다. 차분하고 안정적인 인상을 주지만, 때로는 너무 낮게 들릴 수 있어 상대방에게 다소 침체된 느낌을 줄 수 있습니다. 목소리의 톤을 조금 더 높여 긍정적인 이미지를 전달하는 것이 좋습니다.";
+        } else if (150 <= averagePitch && averagePitch < 250) {
+            pitchDescription = "여성 기준으로, 면접자님의 목소리는 중간 피치로 분석되었습니다. 일반적으로 안정적이고 자연스러운 톤으로, 면접 시 적합한 목소리 톤입니다. 다만, 일정 부분 더 강렬하고 명확한 표현을 위해 목소리를 조금 더 강조해 보세요.";
+        } else if (250 <= averagePitch && averagePitch < 350) {
+            pitchDescription = "여성 기준으로, 면접자님의 목소리는 높은 피치로 분석되었습니다. 밝고 경쾌한 인상을 주지만, 너무 높으면 긴장하거나 불안해 보일 수 있습니다. 목소리 톤을 적절히 낮춰 안정감을 더하는 것이 중요합니다.";
+        } else if (averagePitch >= 350) {
+            pitchDescription = "여성 기준으로, 면접자님의 목소리는 매우 높은 피치로 분석되었습니다. 지나치게 높은 목소리는 불안정하거나 긴장한 인상을 줄 수 있습니다. 목소리의 톤을 낮추어 좀 더 안정적이고 신뢰감을 주는 톤을 유지하는 것이 좋습니다.";
+        }
     }
 
     const hairTouchCount = selectedResult.hairTouchCount || 0;

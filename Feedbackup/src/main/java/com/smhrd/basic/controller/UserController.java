@@ -273,7 +273,9 @@ public class UserController {
 	                                 @RequestParam("secondNumber") int secondNumber,
 	                                 @RequestParam("thirdNumber") int thirdNumber,
 	                                 @RequestParam("jobCode") String jobCode,
-	                                 Model model) {
+	                                 Model model,
+	                                 HttpSession session
+	                                 ) {
 	    // 받은 데이터를 모델에 다시 추가하여 JSP로 전달
 	    model.addAttribute("firstqText", firstqText);
 	    model.addAttribute("secondqText", secondqText);
@@ -285,9 +287,21 @@ public class UserController {
 	    model.addAttribute("secondNumber", secondNumber);
 	    model.addAttribute("thirdNumber", thirdNumber);
 	    model.addAttribute("jobCode", jobCode);
-
-
-       return "Real_Interview_Start"; // Real_Interview_Start.jsp
+	    
+	    
+	    MavenMember member = (MavenMember) session.getAttribute("member");
+	    if (member == null) {
+            return "redirect:/login";  // 로그인하지 않았다면 로그인 페이지로 리다이렉트
+        }
+	    
+	    int res = service.get_session(member);
+	    
+	    if (res > 0) {
+	        return "Real_Interview_Start";  // 성공적인 저장 후 페이지로 이동
+	    } else {
+	        model.addAttribute("error", "세션 정보를 저장하는데 실패했습니다.");
+	        return "ErrorPage"; // 에러 페이지로 이동
+	    }
    }
    
    @GetMapping("/users/Real_Interview_Start")
@@ -353,6 +367,7 @@ public class UserController {
    public String One_ResultForm() {
       return "One_Result";
    }
+   
 }
 
 

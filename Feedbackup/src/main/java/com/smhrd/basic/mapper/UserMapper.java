@@ -67,5 +67,7 @@ public interface UserMapper {
     
     @Select("SELECT * FROM QUESTIONS")
     List<MavenMember> getqanda();
+    
+    public int get_session(MavenMember member);
 }
 

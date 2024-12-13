@@ -22,20 +22,40 @@
     <div class="mp-wrap">
         <div class="mp-box">
             <div class="mp-user">
-                <h2>My Page</h2>
+                <h2>내 정보</h2>
                 <div class="mp-text">
+                <img src="../img/male.png">
                     <p class="mp-uname"><%= member.getName() %></p>
-                    &nbsp;<p class="mp-nim">님</p>
-                    &nbsp;&nbsp;<img src="../img/logo4.svg">
-                    <button class="btn-mylogout" onclick="location.href='/myapp/logout'">로그아웃</button>
+                    &nbsp;<p class="mp-nim">님</p>                   
                 </div>
             </div>
-            <div class="mp-content-box">
-                <a href="/myapp/users/result_list"><div class="interview-result">
-                    <p>AI 면접 분석 결과</p>
-                    <span>${nameCount}</span>
-                </div></a>
-            </div>
+            
+            <div class="edit-container">
+        		<h2></h2>
+		        <form action="#" method="post">
+		            <div class="edit-group">
+		                <label for="email">이메일</label>
+		                <input class="email-input" type="email" id="email" name="email" value="<%= member.getEmail() %>" readonly>
+		            </div>
+		            <div class="edit-group">
+			            <div class="pw-group">
+			                <label for="new-password">새 비밀번호</label>
+			                <input type="password" id="new-password" name="new-password" placeholder="새 비밀번호를 입력하세요" required>
+		            	</div>
+	            </div>
+            <div class="edit-group">
+	            <div class="pw-group2">
+	                <label for="confirm-password">새 비밀번호 확인</label>
+	                <input type="password" id="confirm-password" name="confirm-password" placeholder="비밀번호를 다시 입력하세요" required>
+	                <div class="error-message" id="error-message" style="display: none;">비밀번호가 일치하지 않습니다.</div>
+	            </div>
+             </div>
+		            <div class="btn-save">
+		                <button type="submit">저장하기</button>
+		            </div>
+		        </form>
+    		</div>
+            
             <button class="btn-out" onclick="deleteMember('<%= member.getUser_id() %>')">탈퇴하기</button>
         </div>
     </div>
@@ -52,6 +72,21 @@
                 location.href = "/myapp/users/" + id + "/delete";  // 탈퇴 처리 URL로 이동
             }
         }
+    
+    
+    
+        document.getElementById('update-form').addEventListener('submit', function(event) {
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (newPassword !== confirmPassword) {
+                errorMessage.style.display = 'block';
+                event.preventDefault(); // 폼 제출 방지
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
