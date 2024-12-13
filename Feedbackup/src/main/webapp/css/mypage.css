@@ -52,8 +52,8 @@ h2 {
     display: inline;
 }
 
-mp-uname > img {
-    width: 6%;
+.mp-text > img {
+    width: 7%;
 }
 
 .mp-content-box {
@@ -65,19 +65,16 @@ mp-uname > img {
     gap: 50px;
 }
 
-.interview-result {
-    background-color: #F6F6F6;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 20px;
-    text-align: left;
-    transition: all 0.3s ease;
-    width: 200px;
-    height: 200px;
-    text-align: center;
+.mp-content-box > a {
+	text-decoration: none;
+	color: black;
 }
 
-.introduce-result {
+.mp-content-box > a:active {
+	color: #8071FC;
+}
+
+.interview-result {
     background-color: #F6F6F6;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -93,14 +90,8 @@ mp-uname > img {
 	background-color: #F3EDFF;
 	border: 5px solid #8071FC;
 	color:#8071FC;
+	cursor: pointer;
 }
-
-.introduce-result:hover {
-	background-color: #F3EDFF;
-	border: 5px solid #8071FC;
-	color:#8071FC;
-}
-
 
 .mp-content-box p {
     font-size: 20px;
@@ -136,7 +127,7 @@ button {
     color: #94A3B8;
     float: right;
     margin-right: 30px;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 .btn-out:hover {
