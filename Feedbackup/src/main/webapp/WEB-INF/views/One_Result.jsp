@@ -536,9 +536,9 @@ body {
           <!-- 그래프 2: 떨림 -->
           <div class="graph-container">
             <div class="y-axis">
-              <span>0.01</span>
-              <span>0.006</span>
-              <span>0.003</span>
+              <span>0.02</span>
+              <span>0.014</span>
+              <span>0.007</span>
               <span>0</span>
             </div>
             <div class="grid-lines">
@@ -564,7 +564,7 @@ body {
 		
 		<div id="tremorDescription"></div><br>
         
-        기록 날짜<div id="timestamp"></div>
+        <div id="timestamp" hidden></div>
         
         </div>
       </div>
@@ -660,7 +660,7 @@ function setBarHeight2(barId, valueId, value) {
 	    return;
 	}
 
-	const maxHeight = 0.01;
+	const maxHeight = 0.02;
 	const minHeight = 0;
 	const normalizedHeight = ((value - minHeight) / (maxHeight - minHeight)) * 100;
 
@@ -870,12 +870,10 @@ function loadResult(index) {
 	
     // 움직임 분석
     let gestureAnalysis = '';
-    if (totalTouches >= 10) {
+    if (totalTouches >= 7) {
         gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘미흡’입니다. 면접 중 손으로 머리나 코를 자주 만지셨습니다. 면접에서 긴장이나 불안의 신호로 해석될 수 있으니, 신경 쓰셔야 할 부분입니다.';
-    } else if (totalTouches >= 7) {
-        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다. 머리나 코를 만지는 횟수가 다소 있었지만, 과도하지 않았습니다. 면접 중 약간의 긴장감은 자연스러운 반응일 수 있습니다.';
-    } else if (totalTouches >= 4) {
-        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘양호’입니다. 손으로 머리나 코를 만지신 횟수가 적었습니다. 긴장하지 않고 자연스러운 면접을 진행하신 것으로 보입니다.';
+	} else if (totalTouches >= 4) {
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다. 손으로 머리나 코를 만지신 횟수가 보통입니다. 조금의 긴장감을 가졌지만 나름 자연스러운 면접을 진행하신 것으로 보입니다.';
     } else {
         gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다. 손으로 머리나 코를 만지신 횟수가 매우 적었습니다. 면접 중 안정감과 자신감을 잘 표현하셨습니다.';
     }
