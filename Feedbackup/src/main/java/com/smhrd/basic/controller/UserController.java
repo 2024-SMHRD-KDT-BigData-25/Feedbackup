@@ -27,161 +27,161 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class UserController {
 
-	private final UserService service;
+   private final UserService service;
 
-	@GetMapping("/users/signup")
-	public String signupForm() {
-		return "signup";
-	}
+   @GetMapping("/users/signup")
+   public String signupForm() {
+      return "signup";
+   }
 
-	@GetMapping("/users/signup_success")
-	public String signupSuccess() {
-		return "signup_success"; // signup_success.jsp를 반환
-	}
+   @GetMapping("/users/signup_success")
+   public String signupSuccess() {
+      return "signup_success"; // signup_success.jsp를 반환
+   }
 
-	@PostMapping("/users")
-	public String signup(@ModelAttribute MavenMember member) {
-		int res = service.signup(member);
+   @PostMapping("/users")
+   public String signup(@ModelAttribute MavenMember member) {
+      int res = service.signup(member);
 
-		if (res == 0) {
-			return "redirect:/users/signup"; // 회원가입 실패 시, 다시 회원가입 페이지로 이동
-		} else {
-			return "redirect:/users/signup_success"; // 회원가입 성공 시, signup_success.jsp로 포워딩
-		}
-	}
+      if (res == 0) {
+         return "redirect:/users/signup"; // 회원가입 실패 시, 다시 회원가입 페이지로 이동
+      } else {
+         return "redirect:/users/signup_success"; // 회원가입 성공 시, signup_success.jsp로 포워딩
+      }
+   }
 
-	@GetMapping("/users/{id}/delete")
-	public String delete(@PathVariable String id, HttpSession session) {
+   @GetMapping("/users/{id}/delete")
+   public String delete(@PathVariable String id, HttpSession session) {
 
-		int res = service.delete(id);
-		System.out.println("res " + res);
+      int res = service.delete(id);
+      System.out.println("res " + res);
 
-		if (res > 0) {
-			session.removeAttribute("member");
-		}
-		return "redirect:/";
-	}
-
-
-
-	@GetMapping("/users/result_list")
-	public String getResultPage(HttpSession session, Model model) {
-		MavenMember member = (MavenMember) session.getAttribute("member");
-		 
-		if (member == null) {
-		        return "redirect:/login"; // member가 세션에 없으면 로그인 페이지로 리다이렉트
-		    }
-	    String userName = member.getName();
-	    List<MavenMember> users = service.findUsersByName(userName); // 같은 이름을 가진 사용자 조회
-
-	    // users 리스트를 모델에 추가하여 JSP로 전달
-	    model.addAttribute("users", users);
-	    return "result_list"; // result_list.jsp로 이동
-	}
+      if (res > 0) {
+         session.removeAttribute("member");
+      }
+      return "redirect:/";
+   }
 
 
-	// 회원가입 아이디 확인
-	@RequestMapping(value = "/users/check-id", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> checkId(@RequestParam String userId) {
-		Map<String, Object> response = new HashMap<>();
 
-		// 1. 아이디 길이가 4자리 이상인지 체크
-		if (userId.length() < 4) {
-			response.put("valid", false);
-			response.put("message", "아이디는 4자리 이상이어야 합니다.");
-			response.put("exists", false); // 중복 여부는 중요하지 않음
-		} else {
-			// 2. 아이디 중복 여부 체크
-			boolean exists = service.checkIdExist(userId);
+   @GetMapping("/users/result_list")
+   public String getResultPage(HttpSession session, Model model) {
+      MavenMember member = (MavenMember) session.getAttribute("member");
+       
+      if (member == null) {
+              return "redirect:/login"; // member가 세션에 없으면 로그인 페이지로 리다이렉트
+          }
+       String userName = member.getName();
+       List<MavenMember> users = service.findUsersByName(userName); // 같은 이름을 가진 사용자 조회
 
-			if (exists) {
-				response.put("valid", true); // 중복된 아이디일 경우
-				response.put("message", "이미 존재하는 아이디입니다.");
-			} else {
-				response.put("valid", true); // 중복되지 않는 아이디일 경우
-				response.put("message", "✔ 아이디 사용 가능");
-			}
-			response.put("exists", exists);
-		}
+       // users 리스트를 모델에 추가하여 JSP로 전달
+       model.addAttribute("users", users);
+       return "result_list"; // result_list.jsp로 이동
+   }
 
-		return response;
-	}
 
-	@GetMapping("/users/idfind")
-	public String idfindForm() {
-		return "idfind"; // idfind.jsp로 이동
-	}
+   // 회원가입 아이디 확인
+   @RequestMapping(value = "/users/check-id", method = RequestMethod.POST)
+   @ResponseBody
+   public Map<String, Object> checkId(@RequestParam String userId) {
+      Map<String, Object> response = new HashMap<>();
 
-	@PostMapping("/users/idfind")
-	public String findId(@RequestParam String name, @RequestParam String email, Model model) {
-	    // 이름과 이메일로 먼저 검색
-	    MavenMember result = service.idfind(name, email);
+      // 1. 아이디 길이가 4자리 이상인지 체크
+      if (userId.length() < 4) {
+         response.put("valid", false);
+         response.put("message", "아이디는 4자리 이상이어야 합니다.");
+         response.put("exists", false); // 중복 여부는 중요하지 않음
+      } else {
+         // 2. 아이디 중복 여부 체크
+         boolean exists = service.checkIdExist(userId);
 
-	    if (result == null) {
-	        // 이름이나 이메일이 일치하는 회원 정보가 없으면
-	        model.addAttribute("success", false);
-	        model.addAttribute("message", "가입하신 회원정보가 없습니다.");
-	    } else {
-	        // 이름과 이메일이 모두 일치하는 경우 아이디 반환
-	        String id = result.getUser_id();
-	        String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
+         if (exists) {
+            response.put("valid", true); // 중복된 아이디일 경우
+            response.put("message", "이미 존재하는 아이디입니다.");
+         } else {
+            response.put("valid", true); // 중복되지 않는 아이디일 경우
+            response.put("message", "✔ 아이디 사용 가능");
+         }
+         response.put("exists", exists);
+      }
 
-	        model.addAttribute("success", true);
-	        model.addAttribute("user_id", maskedId);
-	        model.addAttribute("name", result.getName());
-	    }
+      return response;
+   }
 
-	    return "idfind"; // JSP 페이지 이름을 반환
-	}
-	
-	@GetMapping("/users/pwfind")
-	public String pwfindForm() {
-		return "pwfind"; // pwfind.jsp로 이동
-	}
+   @GetMapping("/users/idfind")
+   public String idfindForm() {
+      return "idfind"; // idfind.jsp로 이동
+   }
 
-	@PostMapping("/users/pwfind")
-	public String findPw(@RequestParam String name, @RequestParam String email, @RequestParam String user_id, Model model) {
-		// 이름과 이메일과 아이디로 패스워드를 찾기
-		MavenMember result = service.pwfind(name, email, user_id);
+   @PostMapping("/users/idfind")
+   public String findId(@RequestParam String name, @RequestParam String email, Model model) {
+       // 이름과 이메일로 먼저 검색
+       MavenMember result = service.idfind(name, email);
 
-	    if (result == null) {
-	        // 이름이나 이메일이나 아이디가 일치하는 회원 정보가 없으면
-	        model.addAttribute("success", false);
-	        model.addAttribute("message", "가입하신 회원정보가 없습니다.");
-	    } else {
-	        // 이름과 이메일과 아이디가 모두 일치하는 경우 아이디 반환
-	        String pw = result.getPw();
+       if (result == null) {
+           // 이름이나 이메일이 일치하는 회원 정보가 없으면
+           model.addAttribute("success", false);
+           model.addAttribute("message", "가입하신 회원정보가 없습니다.");
+       } else {
+           // 이름과 이메일이 모두 일치하는 경우 아이디 반환
+           String id = result.getUser_id();
+           String maskedId = id.substring(0, 3) + "*".repeat(id.length() - 3);
 
-	        model.addAttribute("success", true);
-	        model.addAttribute("pw", pw);
-	        model.addAttribute("name", result.getName());
-	    }
+           model.addAttribute("success", true);
+           model.addAttribute("user_id", maskedId);
+           model.addAttribute("name", result.getName());
+       }
 
-		return "pwfind"; // 결과를 pwfind.jsp로 전달하여 결과 표시
-	}
-	
-	@GetMapping("/Interview_Select")
-	public String Interview_Select() {
-		return "Interview_Select";
-	}
-	
-	@GetMapping("/AI_Interview")
-	public String AI_InterviewForm() {
-		return "AI_Interview";
-	}
-	
-	@GetMapping("/AI_Interview_play")
-	public String AI_Interview_playForm() {
-		return "AI_Interview_play";
-	}
-	
-	@GetMapping("/test")
-	public String testForm() {
-		return "test";
-	}
-	
-	@GetMapping("/users/mypage")
+       return "idfind"; // JSP 페이지 이름을 반환
+   }
+   
+   @GetMapping("/users/pwfind")
+   public String pwfindForm() {
+      return "pwfind"; // pwfind.jsp로 이동
+   }
+
+   @PostMapping("/users/pwfind")
+   public String findPw(@RequestParam String name, @RequestParam String email, @RequestParam String user_id, Model model) {
+      // 이름과 이메일과 아이디로 패스워드를 찾기
+      MavenMember result = service.pwfind(name, email, user_id);
+
+       if (result == null) {
+           // 이름이나 이메일이나 아이디가 일치하는 회원 정보가 없으면
+           model.addAttribute("success", false);
+           model.addAttribute("message", "가입하신 회원정보가 없습니다.");
+       } else {
+           // 이름과 이메일과 아이디가 모두 일치하는 경우 아이디 반환
+           String pw = result.getPw();
+
+           model.addAttribute("success", true);
+           model.addAttribute("pw", pw);
+           model.addAttribute("name", result.getName());
+       }
+
+      return "pwfind"; // 결과를 pwfind.jsp로 전달하여 결과 표시
+   }
+   
+   @GetMapping("/Interview_Select")
+   public String Interview_Select() {
+      return "Interview_Select";
+   }
+   
+   @GetMapping("/AI_Interview")
+   public String AI_InterviewForm() {
+      return "AI_Interview";
+   }
+   
+   @GetMapping("/AI_Interview_play")
+   public String AI_Interview_playForm() {
+      return "AI_Interview_play";
+   }
+   
+   @GetMapping("/test")
+   public String testForm() {
+      return "test";
+   }
+   
+   @GetMapping("/users/mypage")
     public String myPage(Model model, HttpSession session) {
         MavenMember member = (MavenMember) session.getAttribute("member");
         
@@ -197,45 +197,46 @@ public class UserController {
 
         return "mypage";  // mypage.jsp 페이지로 이동
     }
-	
-	@GetMapping("/users/Job_List")
-	public String Job_List() {
-		return "Job_List";
-	}
-	
-	@PostMapping("/users/Job_List")
-	public String searchJobCodeAndGetAnswer(@RequestParam("jobCode") String jobCode, Model model) {
-	    // jobCode를 받아서 q_text 값을 가져옵니다.
-		List<String> qText = service.getQTextByJobCode(jobCode);
-		String firstqText = qText.get(0);
-		String secondqText = qText.get(1);
-		String thirdqText = qText.get(2);
-		
-		// q_text에 해당하는 a_text를 가져옵니다.
-		String firstaText = service.getATextByfirstqText(firstqText);
-		String secondaText = service.getATextBysecondqText(secondqText);
-		String thirdaText = service.getATextBythirdqText(thirdqText);
-		
-		int firstNumber = service.getATextByfirstNumber(firstqText);
-		int secondNumber = service.getATextBysecondNumber(secondqText);
-		int thirdNumber = service.getATextBythirdNumber(thirdqText);
-		
-	    
-		// qText 값이 정상적으로 가져와졌는지 확인
-		System.out.println("검색된 q_text 값: " + qText);
-		
-		
-	    System.out.println("검색된 q_text 값: " + firstqText);
-	    System.out.println("검색된 a_text 값: " + firstaText);
-	    System.out.println("검색된 ID 값: " + firstNumber);
-	    
-	    System.out.println("검색된 q_text 값: " + secondqText);
-	    System.out.println("검색된 a_text 값: " + secondaText);
-	    System.out.println("검색된 ID 값: " + secondNumber);
-	    
-	    System.out.println("검색된 q_text 값: " + thirdqText);
-	    System.out.println("검색된 a_text 값: " + thirdaText);
-	    System.out.println("검색된 ID 값: " + thirdNumber);
+
+   
+   @GetMapping("/users/Job_List")
+   public String Job_List() {
+      return "Job_List";
+   }
+   
+   @PostMapping("/users/Job_List")
+   public String searchJobCodeAndGetAnswer(@RequestParam("jobCode") String jobCode, Model model) {
+       // jobCode를 받아서 q_text 값을 가져옵니다.
+      List<String> qText = service.getQTextByJobCode(jobCode);
+      String firstqText = qText.get(0);
+      String secondqText = qText.get(1);
+      String thirdqText = qText.get(2);
+      
+      // q_text에 해당하는 a_text를 가져옵니다.
+      String firstaText = service.getATextByfirstqText(firstqText);
+      String secondaText = service.getATextBysecondqText(secondqText);
+      String thirdaText = service.getATextBythirdqText(thirdqText);
+      
+      int firstNumber = service.getATextByfirstNumber(firstqText);
+      int secondNumber = service.getATextBysecondNumber(secondqText);
+      int thirdNumber = service.getATextBythirdNumber(thirdqText);
+
+       
+      // qText 값이 정상적으로 가져와졌는지 확인
+      System.out.println("검색된 q_text 값: " + qText);
+      
+      
+       System.out.println("검색된 q_text 값: " + firstqText);
+       System.out.println("검색된 a_text 값: " + firstaText);
+       System.out.println("검색된 ID 값: " + firstNumber);
+       
+       System.out.println("검색된 q_text 값: " + secondqText);
+       System.out.println("검색된 a_text 값: " + secondaText);
+       System.out.println("검색된 ID 값: " + secondNumber);
+       
+       System.out.println("검색된 q_text 값: " + thirdqText);
+       System.out.println("검색된 a_text 값: " + thirdaText);
+       System.out.println("검색된 ID 값: " + thirdNumber);
 
 	    // qText 값을 모델에 추가하여 JSP로 전달
 	    model.addAttribute("firstqText", firstqText);
@@ -285,72 +286,73 @@ public class UserController {
 	    model.addAttribute("thirdNumber", thirdNumber);
 	    model.addAttribute("jobCode", jobCode);
 
-	    return "Real_Interview_Start"; // Real_Interview_Start.jsp
-	}
-	
-	@GetMapping("/users/Real_Interview_Start")
-	public String Real_Interview_StartForm() {
-		return "Real_Interview_Start";
-	}
-	
-	@GetMapping("/users/Loading")
-	public String LodingForm() {
-		return "Loading";
-	}
-	
-	@GetMapping("/model")
-	public String Model() {
-		return "model";
-	}
-	
-	@GetMapping("/model_test")
-	public String ModelTest() {
-		return "model_test";
-	}
-	
 
-	@GetMapping("/result_test")
-	public String ResultTest() {
-		return "result_test";
-	}
-	
-	@GetMapping("/users/Result")
-	public String ResultForm() {
-		return "Result";
-	}
-	
-	@GetMapping("/QandA")
-	public String listPage(Model model) { // + forwarding
-		List<MavenMember> list = service.getqanda();
-		model.addAttribute("list",list);
-		
-		return "QandA";
-	}
-	
-	@GetMapping("/One_Interview")
-	public String One_InterviewForm() {
-		return "One_Interview";
-	}
-	
-	@GetMapping("/users/Gender")
-	public String GenderForm() {
-		return "Gender";
-	}
-	
-	@GetMapping("/users/One_Real_Interview")
-	public String One_Real_Interview() {
-		return "One_Real_Interview";
-	}
-	
-	@GetMapping("/users/One_Real_Interview_Start")
-	public String One_Real_Interview_StartForm() {
-		return "One_Real_Interview_Start";
-	}
-	
-	@GetMapping("/users/One_Result")
-	public String One_ResultForm() {
-		return "One_Result";
-	}
+       return "Real_Interview_Start"; // Real_Interview_Start.jsp
+   }
+   
+   @GetMapping("/users/Real_Interview_Start")
+   public String Real_Interview_StartForm() {
+      return "Real_Interview_Start";
+   }
+   
+   @GetMapping("/users/Loading")
+   public String LodingForm() {
+      return "Loading";
+   }
+   
+   @GetMapping("/model")
+   public String Model() {
+      return "model";
+   }
+   
+   @GetMapping("/model_test")
+   public String ModelTest() {
+      return "model_test";
+   }
+   
+
+   @GetMapping("/result_test")
+   public String ResultTest() {
+      return "result_test";
+   }
+   
+   @GetMapping("/users/Result")
+   public String ResultForm() {
+      return "Result";
+   }
+   
+   @GetMapping("/QandA")
+   public String listPage(Model model) { // + forwarding
+      List<MavenMember> list = service.getqanda();
+      model.addAttribute("list",list);
+      
+      return "QandA";
+   }
+   
+   @GetMapping("/One_Interview")
+   public String One_InterviewForm() {
+      return "One_Interview";
+   }
+   
+   @GetMapping("/users/Gender")
+   public String GenderForm() {
+      return "Gender";
+   }
+   
+   @GetMapping("/users/One_Real_Interview")
+   public String One_Real_Interview() {
+      return "One_Real_Interview";
+   }
+   
+   @GetMapping("/users/One_Real_Interview_Start")
+   public String One_Real_Interview_StartForm() {
+      return "One_Real_Interview_Start";
+   }
+   
+   @GetMapping("/users/One_Result")
+   public String One_ResultForm() {
+      return "One_Result";
+   }
 }
 
 

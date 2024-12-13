@@ -31,14 +31,10 @@
                 </div>
             </div>
             <div class="mp-content-box">
-                <div class="interview-result">
-                    <p>면접 분석 결과</p>
+                <a href="/myapp/users/result_list"><div class="interview-result">
+                    <p>AI 면접 분석 결과</p>
                     <span>${nameCount}</span>
-                </div>
-                <div class="introduce-result">
-                    <p>자기소개 분석 결과</p>
-                    <span>${nameCount}</span>
-                </div>
+                </div></a>
             </div>
             <button class="btn-out" onclick="deleteMember('<%= member.getUser_id() %>')">탈퇴하기</button>
         </div>
