@@ -351,7 +351,7 @@ video {
     <div><jsp:include page="header.jsp"></jsp:include> </div>
 
   <div class="top_btn">
-    <button class="btn1">질문 다시 듣기</button>
+    <button class="btn1" hidden>질문 다시 듣기</button>
   </div>
   <div class="title"><img src="../img/feedbackup.png"></div>
   <div class="title_text">AI 면접 연습</div>
@@ -359,7 +359,7 @@ video {
     <!-- 웹캠 화면을 담을 div -->
 	<div id="webcamContainer">
 		<video id="webcam" autoplay></video>
-		<div class="info">본 질문은 삼성전자 기출 질문입니다.</div>
+		<div class="info" hidden>본 질문은 삼성전자 기출 질문입니다.</div>
 	</div>
 	<div>
 
