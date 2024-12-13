@@ -450,12 +450,28 @@ body {
   color: #CBD5E1;
   margin-right: 5px;
 }
+
+#topButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background-color: #8071FC;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#topButton:hover {
+    background-color: white;
+    color: #8071FC;
+}
 </style>
 </head>
 <body>
-  
-  <!-- 헤더 불러오기 -->
-    <div><jsp:include page="header.jsp"></jsp:include> </div>
   
   <div class="container">
     <div class="top-buttons">
@@ -614,10 +630,34 @@ body {
   </div>
 </div>
 
-<!-- 푸터 불러오기 -->
-    <div><jsp:include page="footer.jsp"></jsp:include> </div>
+   <button id="topButton"><i class="fa-solid fa-chevron-up"></i></button>
+
+	<script src="js/index.js"></script>
+<script src="https://kit.fontawesome.com/eefb1e8780.js" crossorigin="anonymous"></script>
 
 <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const topButton = document.getElementById("topButton");
+
+    // 스크롤 이벤트 처리
+    window.addEventListener("scroll", () => {
+        // 스크롤 위치가 200px 이상일 때 버튼 표시
+        if (window.scrollY > 200) {
+            topButton.style.display = "block"; // 버튼 표시
+        } else {
+            topButton.style.display = "none"; // 버튼 숨기기
+        }
+    });
+
+    // 버튼 클릭 시 페이지 상단으로 스크롤
+    topButton.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth", // 부드럽게 스크롤
+        });
+    });
+});
 
 //막대 그래프 높이를 설정하는 함수
 function setBarHeight(barId, valueId, value) {

@@ -145,6 +145,8 @@ body {
 .tabs {
   display: flex;
   gap: 10px; /* 버튼 간격 조정 */
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .tabs button {
@@ -450,13 +452,32 @@ body {
   color: #CBD5E1;
   margin-right: 5px;
 }
+
+#topButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background-color: #8071FC;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#topButton:hover {
+    background-color: white;
+    color: #8071FC;
+}
 </style>
+
 </head>
 <body>
   
   <div class="container">
     <div class="top-buttons">
-      <button class="btn" id="resetButton">데이터 초기화</button>
       <button class="btn" onclick="window.location.href='/myapp/';">나가기</button>
     </div>
 
@@ -465,6 +486,12 @@ body {
     <div class="subtitle"><span class="highlight">면접자</span> 님의 결과를 확인해 주세요</div>
     <div class="subtitle2">결과는 <span class="highlight">[피드백업 홈페이지 > AI 분석결과]</span> 에서 다시 확인할 수 있어요</div>
 
+        <div class="tabs">
+          <button class="active" id="loadResult0">첫번째 질문</button>
+          <button id="loadResult1">두번째 질문</button>
+          <button id="loadResult2">세번째 질문</button>
+        </div>
+
     <!-- AI 답변 분석 -->
     <div class="title_container">
       <div class="title_detail">AI 답변 분석</div>
@@ -472,11 +499,6 @@ body {
     <div class="section">
       <div class="section-header">
         <div class="section-title">AI 답변 분석 상세결과</div>
-        <div class="tabs">
-          <button class="active" id="loadResult0">Q1</button>
-          <button id="loadResult1">Q2</button>
-          <button id="loadResult2">Q3</button>
-        </div>
       </div>
     
       <div class="card">
@@ -614,9 +636,33 @@ body {
   </div>
 </div>
 
+   <button id="topButton"><i class="fa-solid fa-chevron-up"></i></button>
 
-
+	<script src="js/index.js"></script>
+<script src="https://kit.fontawesome.com/eefb1e8780.js" crossorigin="anonymous"></script>
 <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const topButton = document.getElementById("topButton");
+
+    // 스크롤 이벤트 처리
+    window.addEventListener("scroll", () => {
+        // 스크롤 위치가 200px 이상일 때 버튼 표시
+        if (window.scrollY > 200) {
+            topButton.style.display = "block"; // 버튼 표시
+        } else {
+            topButton.style.display = "none"; // 버튼 숨기기
+        }
+    });
+
+    // 버튼 클릭 시 페이지 상단으로 스크롤
+    topButton.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth", // 부드럽게 스크롤
+        });
+    });
+});
 
 //막대 그래프 높이를 설정하는 함수
 function setBarHeight(barId, valueId, value) {
