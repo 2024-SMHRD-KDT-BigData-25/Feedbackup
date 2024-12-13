@@ -301,7 +301,6 @@
                 <button type="button" class="category-button">금호아시아나</button>
                 <button type="button" class="category-button">하림</button>
                 <button type="button" class="category-button">SM</button>
-                <!-- Add more companies as needed -->
             </div>
         </div>
         

@@ -139,7 +139,9 @@
     <input type="hidden" name="firstNumber" value="${firstNumber}">
     <input type="hidden" name="secondNumber" value="${secondNumber}">
     <input type="hidden" name="thirdNumber" value="${thirdNumber}">
+    <input type="hidden" name="jobCode" value="${jobCode}">	
     <button type="submit" class="button-container">시작하기</button>
+    
 	</form>
     </div>
   </div>

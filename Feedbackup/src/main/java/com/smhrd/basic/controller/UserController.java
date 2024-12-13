@@ -219,7 +219,7 @@ public class UserController {
 		int firstNumber = service.getATextByfirstNumber(firstqText);
 		int secondNumber = service.getATextBysecondNumber(secondqText);
 		int thirdNumber = service.getATextBythirdNumber(thirdqText);
-
+		
 	    
 		// qText 값이 정상적으로 가져와졌는지 확인
 		System.out.println("검색된 q_text 값: " + qText);
@@ -249,6 +249,8 @@ public class UserController {
 	    model.addAttribute("firstNumber", firstNumber);
 	    model.addAttribute("secondNumber", secondNumber);
 	    model.addAttribute("thirdNumber", thirdNumber);
+	    
+	    model.addAttribute("jobCode", jobCode);
 
 	    // 결과를 출력할 JSP 페이지로 이동
 	    return "Real_Interview";
@@ -269,6 +271,7 @@ public class UserController {
 	                                 @RequestParam("firstNumber") int firstNumber,
 	                                 @RequestParam("secondNumber") int secondNumber,
 	                                 @RequestParam("thirdNumber") int thirdNumber,
+	                                 @RequestParam("jobCode") String jobCode,
 	                                 Model model) {
 	    // 받은 데이터를 모델에 다시 추가하여 JSP로 전달
 	    model.addAttribute("firstqText", firstqText);
@@ -280,6 +283,7 @@ public class UserController {
 	    model.addAttribute("firstNumber", firstNumber);
 	    model.addAttribute("secondNumber", secondNumber);
 	    model.addAttribute("thirdNumber", thirdNumber);
+	    model.addAttribute("jobCode", jobCode);
 
 	    return "Real_Interview_Start"; // Real_Interview_Start.jsp
 	}
