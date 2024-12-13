@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>One Results</title>
+<title>One_Results</title>
 <style>
 @font-face {
   font-family: 'SUIT-Regular';
@@ -238,7 +238,7 @@ body {
   display: flex; /* Flexbox 활성화 */
   justify-content: center; /* 가로축 중앙 정렬 */
   align-items: center; /* 세로축 중앙 정렬 */
-  gap: 20px; /* 각 div 사이 간격 */
+  gap: 115px; /* 각 div 사이 간격 */
   margin: 20px auto;
   max-width: 700px;
 }
@@ -453,16 +453,47 @@ body {
 </style>
 </head>
 <body>
-	 <!-- 헤더 불러오기 -->
+  
+  <!-- 헤더 불러오기 -->
     <div><jsp:include page="header.jsp"></jsp:include> </div>
   
   <div class="container">
     <div class="top-buttons">
-      <button class="btn">나가기</button>
+      <button class="btn" id="resetButton">데이터 초기화</button>
+      <button class="btn" onclick="window.location.href='/myapp/';">나가기</button>
     </div>
 
     <div class="title"><img src="../img/feedbackup.png"></div>
+    <div class="title_text">AI 분석 결과</div>
+    
+    <div hidden>
+    <!-- AI 답변 분석 -->
+    <div class="title_container">
+      <div class="title_detail">AI 답변 분석</div>
+    </div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">AI 답변 분석 상세결과</div>
+      </div>
+    
+      <div class="card">
+        <div class="content-title">핵심 키워드</div>
+        <div class="key-points">
+            <span>#개발이슈</span>
+            <span>#A/B 테스트 결과</span>
+            <span>#MVP 수정</span>
+            <span>#프로젝트 현황</span>
+            <span>#POC 검증</span>
+        </div>
 
+        <div class="content-title">모범답안과의 유사도 결과 및 개선점</div>
+        <div class="feedback">분석 결과</div><br>
+        
+        인식된 테스트<div id="recognizedText"></div><br>
+        
+      </div>
+    </div>
+	</div>
     <!-- AI 음성 분석 -->
     <div class="title_container">
       <div class="title_detail">AI 음성 분석</div>
@@ -471,25 +502,22 @@ body {
       <div class="section-header">
         <div class="section-title">AI 음성 분석 상세 결과</div>
         <div class="tabs">
-          <button class="active">Q1</button>
-          <button>Q2</button>
-          <button>Q3</button>
+          <button class="active" id="loadResult2">Q1</button>
         </div>
       </div>
       <div class="card">
         <div class="voice_title box1">
           <div>높낮이</div>
           <div>떨림</div>
-          <div>속도</div>
         </div>
         <div class="voice">
           <!-- 그래프 1: 높낮이 -->
           <div class="graph-container">
             <div class="y-axis">
-              <span>300</span>
+              <span>275</span>
               <span>200</span>
-              <span>100</span>
-              <span>90</span>
+              <span>125</span>
+              <span>50</span>
             </div>
             <div class="grid-lines">
               <div class="grid-line"></div>
@@ -508,10 +536,10 @@ body {
           <!-- 그래프 2: 떨림 -->
           <div class="graph-container">
             <div class="y-axis">
-              <span>300</span>
-              <span>200</span>
-              <span>100</span>
-              <span>90</span>
+              <span>0.01</span>
+              <span>0.006</span>
+              <span>0.003</span>
+              <span>0</span>
             </div>
             <div class="grid-lines">
               <div class="grid-line"></div>
@@ -526,32 +554,25 @@ body {
             </div>
             <div class="x-axis">떨림</div>
           </div>
-      
-          <!-- 그래프 3: 속도 -->
-          <div class="graph-container">
-            <div class="y-axis">
-              <span>300</span>
-              <span>200</span>
-              <span>100</span>
-              <span>90</span>
-            </div>
-            <div class="grid-lines">
-              <div class="grid-line"></div>
-              <div class="grid-line"></div>
-              <div class="grid-line"></div>
-              <div class="grid-line"></div>
-            </div>
-            <div class="bar-container">
-              <div class="bar" id="bar3">
-                <span id="bar-value3"></span>
-              </div>
-            </div>
-            <div class="x-axis">속도</div>
-          </div>
         </div>
-        <div class="voice_result">음성 평가 내용</div>
+        <div class="voice_result">음성 평가 내용<br><br>
+
+		평균 피치 (Hz)<div id="averagePitch"></div><br>
+		상대적 떨림 (ΔF/F)<div id="relativeTremor"></div><br>
+		
+		<div id="pitchDescription"></div><br>
+		
+		<div id="tremorDescription"></div><br>
+        
+        기록 날짜<div id="timestamp"></div>
+        
+        </div>
       </div>
     </div>
+    
+<!-- 있어야 페이지가 돌아감 (더미 데이터)   -->
+<div id="hairTouchCount" style="display: none;"></div>
+<div id="noseTouchCount" style="display: none;"></div>
 
   <!-- AI 제스처 분석 -->
   <div class="title_container">
@@ -560,11 +581,6 @@ body {
   <div class="section">
     <div class="section-header">
       <div class="section-title">AI 제스쳐 분석 상세 결과</div>
-      <div class="tabs">
-        <button class="active">Q1</button>
-        <button>Q2</button>
-        <button>Q3</button>
-      </div>
     </div>
     <div class="gesture-analysis-container">
       <div class="gesture-content">
@@ -590,8 +606,7 @@ body {
         </div>
         <div class="gesture-summary">
           <ul>
-            <li>머리 움직임이 다소 산만합니다.</li>
-            <li>불필요한 제스처의 움직임이 보통입니다.</li>
+            <li>결과 내용<div id="gestureAnalysis"></div></li>
           </ul>
         </div>
       </div>
@@ -599,36 +614,90 @@ body {
   </div>
 </div>
 
-	<!-- 푸터 불러오기 -->
-    <div><jsp:include page="footer.jsp"></jsp:include> </div>
+
+
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-	//막대 그래프 높이를 설정하는 함수
-	function setBarHeight(barId, valueId, value) {
-    console.log(`Attempting to set height for ${barId} with value: ${value}`);
 
-    const bar = document.getElementById(barId);
-    const barValue = document.getElementById(valueId);
+//막대 그래프 높이를 설정하는 함수
+function setBarHeight(barId, valueId, value) {
+console.log(`Attempting to set height for ${barId} with value: ${value}`);
 
-    if (!bar || !barValue) {
-        console.error(`DOM element not found: barId=${barId}, valueId=${valueId}`);
-        return;
-    }
+const bar = document.getElementById(barId);
+const barValue = document.getElementById(valueId);
 
-    if (value === undefined || value === null || value === "") {
-        console.error(`Invalid value provided for ${barId}: ${value}`);
-        return;
-    }
-
-    const maxHeight = 300;
-    const minHeight = 90;
-    const normalizedHeight = ((value - minHeight) / (maxHeight - minHeight)) * 100;
-
-    bar.style.height = normalizedHeight+'%';
-    barValue.innerText = value;
-    console.log(`Successfully set height for ${barId} to ${normalizedHeight}%`);
+if (!bar || !barValue) {
+    console.error(`DOM element not found: barId=${barId}, valueId=${valueId}`);
+    return;
 }
 
+if (value === undefined || value === null || value === "") {
+    console.error(`Invalid value provided for ${barId}: ${value}`);
+    return;
+}
+
+const maxHeight = 275;
+const minHeight = 50;
+const normalizedHeight = ((value - minHeight) / (maxHeight - minHeight)) * 100;
+
+bar.style.height = normalizedHeight+'%';
+barValue.innerText = value;
+console.log(`Successfully set height for ${barId} to ${normalizedHeight}%`);
+}
+
+function setBarHeight2(barId, valueId, value) {
+	console.log(`Attempting to set height for ${barId} with value: ${value}`);
+
+	const bar = document.getElementById(barId);
+	const barValue = document.getElementById(valueId);
+
+	if (!bar || !barValue) {
+	    console.error(`DOM element not found: barId=${barId}, valueId=${valueId}`);
+	    return;
+	}
+
+	if (value === undefined || value === null || value === "") {
+	    console.error(`Invalid value provided for ${barId}: ${value}`);
+	    return;
+	}
+
+	const maxHeight = 0.01;
+	const minHeight = 0;
+	const normalizedHeight = ((value - minHeight) / (maxHeight - minHeight)) * 100;
+
+	bar.style.height = normalizedHeight+'%';
+	barValue.innerText = value;
+	console.log(`Successfully set height for ${barId} to ${normalizedHeight}%`);
+	}
+
+//각 막대의 길이를 설정하는 함수
+function setGestureBarWidth(barId, valueId, value, maxValue) {
+  const barElement = document.getElementById(barId);
+  const valueElement = document.getElementById(valueId);
+
+  if (!barElement || !valueElement) {
+    console.error(`Element with ID ${barId} or ${valueId} not found`);
+    return;
+  }
+
+  // 값에 따른 비율 계산 (최대 100%)
+  let widthPercentage = (value / maxValue) * 100;
+  
+  // 막대의 길이와 값 설정 (애니메이션 적용)
+  setTimeout(() => {
+    barElement.style.width = widthPercentage+'%';
+  }, 100); // 애니메이션 지연 시간 추가
+ 
+  //0일 경우 텍스트 색상 변경 (흰색이 아니라 잘 보이는 색으로)
+  if (value === 0) {
+    valueElement.innerText = '0회';
+    valueElement.style.color = '#999'; // 0일 경우 회색으로 표시
+  } else {
+    valueElement.innerText = +value + '회';
+    valueElement.style.color = '#FFFFFF'; // 값이 있을 때 기본 텍스트 색상 (검정)
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
 	// 초기 상태로 막대 높이를 0으로 설정
 	function resetBarHeight(barId) {
 	    const bar = document.getElementById(barId);
@@ -646,12 +715,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	    entries.forEach(entry => {
 	        if (entry.isIntersecting) {
 	            console.log('Element is in view');
-
-	            // 명확한 데이터 전달
+				
+	         	// 명확한 데이터 전달
+                const averagePitchValue = parseFloat(document.getElementById("averagePitch").textContent) || 0;
+				const relativeTremorValue = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
+	            
+				// 그래프 비율을 위한 수치 조정 (더하기 100)
+				// const scaledRelativeTremorValue = relativeTremorValue+100;
+				
 	            const bars = [
-	                { barId: 'bar1', valueId: 'bar-value1', value: 150 },
-	                { barId: 'bar2', valueId: 'bar-value2', value: 200 },
-	                { barId: 'bar3', valueId: 'bar-value3', value: 250 },
+	                { barId: 'bar1', valueId: 'bar-value1', value: averagePitchValue },
+	                { barId: 'bar2', valueId: 'bar-value2', value: relativeTremorValue  }
 	            ];
 
 	            // 디버깅 로그 추가
@@ -668,7 +742,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 초기화: 모든 막대를 높이 0으로 설정
 	resetBarHeight('bar1');
 	resetBarHeight('bar2');
-	resetBarHeight('bar3');
 	
 	// 관찰할 대상 요소
 	const target = document.querySelector('.voice');
@@ -677,37 +750,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	    observer.observe(target);
 	} else {
 	    console.error('.voice 요소를 찾을 수 없습니다.');
-	}
-	
-	// 제스쳐
-	// 데이터 값 설정
-	const gestureBarData = [
-	  { label: "머리카락 만짐", value: 4 },
-	  { label: "코 만짐", value: 1 },
-	];
-	
-	// 최대값 기준으로 막대 비율 계산
-	const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value)); // 최대값 계산
-	
-	// 각 막대의 길이를 설정하는 함수
-	function setGestureBarWidth(barId, valueId, value, maxValue) {
-	  const barElement = document.getElementById(barId);
-	  const valueElement = document.getElementById(valueId);
-	
-	  if (!barElement || !valueElement) {
-	    console.error(`Element with ID ${barId} or ${valueId} not found`);
-	    return;
-	  }
-	
-	  // 값에 따른 비율 계산 (최대 100%)
-	  const widthPercentage = (value / maxValue) * 100;
-	
-	  // 막대의 길이와 값 설정 (애니메이션 적용)
-	  setTimeout(() => {
-	    barElement.style.width = widthPercentage+'%';
-	  }, 100); // 애니메이션 지연 시간 추가
-	 
-	  valueElement.innerText = +value+'회';
 	}
 	
 	// 초기 상태로 막대 길이를 0으로 설정
@@ -724,6 +766,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	  rootMargin: '0px',
 	  threshold: 0.1, // 10% 이상 보이면 트리거
 	};
+	
+	// gestureBarData 업데이트
+    const gestureBarData = [
+        { label: "머리카락 만짐", value: hairTouchCount },
+        { label: "코 만짐", value: noseTouchCount },
+    ];
+	
+ 	// 최대값 계산 (그래프 비율 조정용)
+    const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value));
 	
 	const gestureObserverCallback = (entries, observer) => {
 	  entries.forEach(entry => {
@@ -762,6 +813,140 @@ document.addEventListener('DOMContentLoaded', () => {
 	  console.error('.gesture-bars 요소를 찾을 수 없습니다.');
 	}
 });
+
+
+// 백엔드 스크립트 코드 추가
+let savedResults = [];
+
+window.onload = function() {
+    getSavedResults(); // 데이터를 가져온 후 loadResult 호출
+};
+
+function loadResult(index) {
+    const resultIndex = savedResults.length - 1 - index;
+    const selectedResult = savedResults[resultIndex];
+
+    if (!selectedResult) {
+        console.error("선택된 데이터가 없습니다.");
+        return;
+    }
+
+    console.log("선택된 결과:", selectedResult);
+    
+    // 피치 설명 문구 생성
+    const averagePitch = selectedResult.averagePitch || 0; // averagePitch 값 확인 및 초기화
+    let pitchDescription = ""; // pitchDescription 변수 명확히 선언
+
+    // 피치 설명 문구 생성
+    if (averagePitch < 120) {
+    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 낮은 피치로 분석되었습니다. 차분하고 안정적인 인상을 주지만, 때로는 너무 낮게 들릴 수 있어 상대방에게 다소 침체된 느낌을 줄 수 있습니다. 목소리의 톤을 조금 더 높여 긍정적인 이미지를 전달하는 것이 좋습니다.";
+    } else if (120 <= averagePitch && averagePitch < 180) {
+    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 중간 피치로 분석되었습니다. 일반적으로 안정적이고 자연스러운 톤으로, 면접 시 적합한 목소리 톤입니다. 다만, 일정 부분 더 강렬하고 명확한 표현을 위해 목소리를 조금 더 강조해 보세요.";
+   	} else if (180 <= averagePitch && averagePitch < 250) {
+    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 높은 피치로 분석되었습니다. 밝고 경쾌한 인상을 주지만, 너무 높으면 긴장하거나 불안해 보일 수 있습니다. 목소리 톤을 적절히 낮춰 안정감을 더하는 것이 중요합니다.";
+    } else if (averagePitch >= 250) {
+    	pitchDescription = "피치 분석 결과, 면접자님의 목소리는 매우 높은 피치로 분석되었습니다. 지나치게 높은 목소리는 불안정하거나 긴장한 인상을 줄 수 있습니다. 목소리의 톤을 낮추어 좀 더 안정적이고 신뢰감을 주는 톤을 유지하는 것이 좋습니다.";
+    }
+
+    const hairTouchCount = selectedResult.hairTouchCount || 0;
+    const noseTouchCount = selectedResult.noseTouchCount || 0;
+    const totalTouches = hairTouchCount + noseTouchCount;
+
+    const formattedTotalTouches = totalTouches.toFixed(2);
+
+    // 상대적 떨림 분석
+    const relativeTremor = selectedResult.relativeTremor || 0;
+    let tremorDescription = '';
+
+    if (relativeTremor < 0.03) {
+    	tremorDescription = "떨림 분석 결과, 면접자님의 목소리는 매우 안정적입니다. 떨림이 거의 없으며, 자신감 있고 차분한 인상을 주어 면접에 적합합니다. 이러한 안정감 있는 톤을 계속 유지하면 더 긍정적인 영향을 줄 수 있습니다.";
+    } else if (0.03 <= relativeTremor && relativeTremor < 0.07) {
+        tremorDescription = "떨림 분석 결과, 면접자님의 목소리는 자연스러운 수준의 떨림을 보입니다. 떨림이 있지만 일반적으로 자연스럽게 느껴지며, 과도한 긴장 없이 잘 표현되고 있습니다. 떨림을 더 줄이려고 노력하면 더 자신감 있는 인상을 줄 수 있습니다.";
+    } else if (0.07 <= relativeTremor && relativeTremor < 0.12) {
+        tremorDescription = "떨림 분석 결과, 면접자님의 목소리에는 약간의 긴장 또는 미세한 떨림이 있습니다. 이는 긴장 상태를 나타낼 수 있으며, 면접에 불안감이 반영될 수 있습니다. 더 깊은 호흡과 안정적인 발음 연습을 통해 떨림을 줄여 보세요.";
+    } else if (relativeTremor >= 0.12) {
+        tremorDescription = "떨림 분석 결과, 면접자님의 목소리는 과도한 떨림을 보입니다. 강한 떨림은 불안감을 드러낼 수 있으며, 면접관에게 부정적인 인상을 줄 수 있습니다. 긴장 완화와 차분한 목소리 톤을 연습하면 떨림을 효과적으로 줄일 수 있습니다.";
+    }
+	
+    // 움직임 분석
+    let gestureAnalysis = '';
+    if (totalTouches >= 10) {
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘미흡’입니다. 면접 중 손으로 머리나 코를 자주 만지셨습니다. 면접에서 긴장이나 불안의 신호로 해석될 수 있으니, 신경 쓰셔야 할 부분입니다.';
+    } else if (totalTouches >= 7) {
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다. 머리나 코를 만지는 횟수가 다소 있었지만, 과도하지 않았습니다. 면접 중 약간의 긴장감은 자연스러운 반응일 수 있습니다.';
+    } else if (totalTouches >= 4) {
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘양호’입니다. 손으로 머리나 코를 만지신 횟수가 적었습니다. 긴장하지 않고 자연스러운 면접을 진행하신 것으로 보입니다.';
+    } else {
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다. 손으로 머리나 코를 만지신 횟수가 매우 적었습니다. 면접 중 안정감과 자신감을 잘 표현하셨습니다.';
+    }
+    
+    //그래프 업데이트
+    setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
+	setBarHeight2('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
+
+	// UI에 반영
+	// document.getElementById("recognizedText").textContent = selectedResult.recognizedText || "데이터 없음";
+    document.getElementById("averagePitch").textContent = selectedResult.averagePitch ? selectedResult.averagePitch.toFixed(2) : "0";
+    document.getElementById("relativeTremor").textContent = selectedResult.relativeTremor ? selectedResult.relativeTremor.toFixed(4) : "0";
+    document.getElementById("hairTouchCount").textContent = selectedResult.hairTouchCount || "0";
+    document.getElementById("noseTouchCount").textContent = selectedResult.noseTouchCount || "0";
+    document.getElementById("timestamp").textContent = selectedResult.timestamp || "타임스탬프 없음";
+    document.getElementById("pitchDescription").textContent = pitchDescription;
+    document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
+    document.getElementById("tremorDescription").textContent = tremorDescription;
+    
+    // gestureBarData 업데이트
+    const gestureBarData = [
+    	{ label: "머리카락 만짐", value: hairTouchCount },
+    	{ label: "코 만짐", value: noseTouchCount },
+	];
+	
+	console.log("업데이트된 제스처 데이터:", gestureBarData);
+	    
+	// 최대값 계산 (그래프 비율 조정용)
+	const maxGestureBarValue = Math.max(...gestureBarData.map(item => item.value));
+	
+	// 막대 그래프 업데이트
+	setGestureBarWidth('gesture-bar1', 'gesture-value1', gestureBarData[0].value, maxGestureBarValue);
+	setGestureBarWidth('gesture-bar2', 'gesture-value2', gestureBarData[1].value, maxGestureBarValue);
+	}
+	
+	// 버튼 클릭 시 결과 로드
+	document.getElementById("loadResult2").addEventListener("click", function() {
+	    loadResult(2); // 가장 최근의 결과 (2번) 로드
+	});
+	
+// 서버에서 데이터를 가져오기
+function getSavedResults() {
+	fetch("http://localhost:5700/get_results")
+		.then(response => response.json())
+		.then(data => {
+			console.log("서버에서 가져온 결과:", data.saved_results);
+			savedResults = data.saved_results; // 데이터를 전역 변수에 저장
+			loadResult(2); // 기본적으로 2번 데이터를 로드
+		})
+		.catch(error => {
+			console.error("서버에서 데이터를 가져오는 중 오류 발생:", error);
+		});
+	}
+	
+// 초기화 함수
+function resetResults() {
+    fetch("http://localhost:5700/reset_results", {
+        method: "POST"
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("초기화 응답:", data.message);
+        document.getElementById("resultsContainer").innerHTML = "<p>데이터가 초기화되었습니다.</p>";
+    })
+    .catch(error => {
+        console.error("초기화 요청 중 오류 발생:", error);
+    });
+}
+
+// 초기화 버튼 이벤트 연결
+document.getElementById("resetButton").addEventListener("click", resetResults);
 
 </script>
 </body>
