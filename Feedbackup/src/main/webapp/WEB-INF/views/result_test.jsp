@@ -17,6 +17,7 @@
     <p><strong>움직임 분석:</strong> <span id="gestureAnalysis"></span></p>
     <p><strong>피치 분석:</strong> <span id="pitchDescription"></span></p>
     <p><strong>떨림 분석:</strong> <span id="tremorDescription"></span></p>
+    <p><strong>유사도 분석:</strong> <span id="similarity_score"></span></p>
     
     <div id="resultsContainer"></div>
 
@@ -117,6 +118,7 @@
             document.getElementById("pitchDescription").textContent = pitchDescription;
             document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
             document.getElementById("tremorDescription").textContent = tremorDescription;
+            document.getElementById("similarity_score").textContent = selectedResult.similarity_score || "답변 분석 없음";
         }
     
 
