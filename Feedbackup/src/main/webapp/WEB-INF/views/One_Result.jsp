@@ -502,7 +502,7 @@ body {
       <div class="section-header">
         <div class="section-title">AI 음성 분석 상세 결과</div>
         <div class="tabs">
-          <button class="active" id="loadResult2">Q1</button>
+          <button class="active" id="loadResult0">Q1</button>
         </div>
       </div>
       <div class="card">
@@ -536,9 +536,9 @@ body {
           <!-- 그래프 2: 떨림 -->
           <div class="graph-container">
             <div class="y-axis">
-              <span>0.02</span>
-              <span>0.014</span>
-              <span>0.007</span>
+              <span>0.015</span>
+              <span>0.010</span>
+              <span>0.005</span>
               <span>0</span>
             </div>
             <div class="grid-lines">
@@ -614,7 +614,8 @@ body {
   </div>
 </div>
 
-
+<!-- 푸터 불러오기 -->
+    <div><jsp:include page="footer.jsp"></jsp:include> </div>
 
 <script>
 
@@ -660,7 +661,7 @@ function setBarHeight2(barId, valueId, value) {
 	    return;
 	}
 
-	const maxHeight = 0.02;
+	const maxHeight = 0.015;
 	const minHeight = 0;
 	const normalizedHeight = ((value - minHeight) / (maxHeight - minHeight)) * 100;
 
@@ -816,15 +817,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // 백엔드 스크립트 코드 추가
-let savedResults = [];
+let savedResults2 = [];
 
 window.onload = function() {
-    getSavedResults(); // 데이터를 가져온 후 loadResult 호출
+    getSavedResults2(); // 데이터를 가져온 후 loadResult 호출
 };
 
 function loadResult(index) {
-    const resultIndex = savedResults.length - 1 - index;
-    const selectedResult = savedResults[resultIndex];
+    const resultIndex = savedResults2.length - 1 - index;
+    const selectedResult = savedResults2[resultIndex];
 
     if (!selectedResult) {
         console.error("선택된 데이터가 없습니다.");
@@ -910,18 +911,18 @@ function loadResult(index) {
 	}
 	
 	// 버튼 클릭 시 결과 로드
-	document.getElementById("loadResult2").addEventListener("click", function() {
-	    loadResult(2); // 가장 최근의 결과 (2번) 로드
+	document.getElementById("loadResult0").addEventListener("click", function() {
+	    loadResult(0); // 가장 최근의 결과 (0번) 로드
 	});
 	
 // 서버에서 데이터를 가져오기
-function getSavedResults() {
-	fetch("http://localhost:5700/get_results")
+function getSavedResults2() {
+	fetch("http://localhost:5700/get_results2")
 		.then(response => response.json())
 		.then(data => {
-			console.log("서버에서 가져온 결과:", data.saved_results);
-			savedResults = data.saved_results; // 데이터를 전역 변수에 저장
-			loadResult(2); // 기본적으로 2번 데이터를 로드
+			console.log("서버에서 가져온 결과:", data.saved_results2);
+			savedResults2 = data.saved_results2; // 데이터를 전역 변수에 저장
+			loadResult(0); // 기본적으로 0번 데이터를 로드
 		})
 		.catch(error => {
 			console.error("서버에서 데이터를 가져오는 중 오류 발생:", error);
@@ -929,8 +930,8 @@ function getSavedResults() {
 	}
 	
 // 초기화 함수
-function resetResults() {
-    fetch("http://localhost:5700/reset_results", {
+function resetResults2() {
+    fetch("http://localhost:5700/reset_results2", {
         method: "POST"
     })
     .then(response => response.json())
@@ -944,7 +945,7 @@ function resetResults() {
 }
 
 // 초기화 버튼 이벤트 연결
-document.getElementById("resetButton").addEventListener("click", resetResults);
+document.getElementById("resetButton").addEventListener("click", resetResults2);
 
 </script>
 </body>

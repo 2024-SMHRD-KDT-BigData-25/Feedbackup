@@ -32,7 +32,7 @@
     border: 1px solid #D4C5FF;
     background-color: #8071FC;
     border-radius: 20px;
-    padding: 10px 30px;
+    padding: 10px 20px;
     font-size: 14px;
     font-weight: bold;
     color: #FFFFFF;
@@ -50,6 +50,7 @@
     font-weight: bold;
     font-size: 18px;
     color: #6C63FF;
+    margin-top: -32px;
   }
 
   .title img{
@@ -59,7 +60,7 @@
 
   .title_text {
     margin-top: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     text-align: center;
     color: #64748B;
     font-size: 20px;
@@ -82,11 +83,12 @@
     background-color: #6C63FF;
     color: white;
     border: none;
-    padding: 15px 40px;
+    padding: 10px 20px;
     border-radius: 25px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    margin-top: 15px;
   }
 
   .button-container button:hover {
@@ -120,7 +122,7 @@
     <button class="btn2" onclick="window.location.href='/myapp/AI_Interview';">나가기</button>
   </div>
   <div class="title"><img src="../img/feedbackup.png"></div>
-  <div class="title_text">AI 면접 연습</div>
+  <div class="title_text">카메라를 확인해 주세요</div>
   <div class="content">
 <div>
   </div>
@@ -140,7 +142,7 @@
     <input type="hidden" name="secondNumber" value="${secondNumber}">
     <input type="hidden" name="thirdNumber" value="${thirdNumber}">
     <input type="hidden" name="jobCode" value="${jobCode}">	
-    <button type="submit" class="button-container">시작하기</button>
+    <button type="submit" class="button-container">확인 완료</button>
     
 	</form>
     </div>

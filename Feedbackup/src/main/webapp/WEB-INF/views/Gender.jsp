@@ -109,20 +109,26 @@
 }
 
 .next_btn{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	border: 1px solid #8071FC;
- 	border-radius: 5px;
- 	width: 160px;
-  	height: 65px;
-  	background-color: #8071FC;
-  	color: white;
-  	border-radius: 50px; 
-  	font-size: 20px;
-  	font-weight: bold; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 1px solid #8071FC;
+        border-radius: 50px;
+        width: 160px;
+        height: 65px;
+        background-color: #8071FC;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
 }
+
+    .next_btn:hover {
+        background-color: white;
+        color: #8071FC;
+        transition: 0.4s;
+    }
 
 .sex_select .step-circle{
 	margin-bottom:20px;
@@ -134,11 +140,7 @@
     text-align: center;
     margin-top: 20px;
   }
-  .search-result {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
+
 </style>
 
 </head>
@@ -164,7 +166,7 @@
   	</div>
   </div>
   <div class="next">
-  	<button type="submit" style="text-decoration: none;" class="next_btn">다음</button>
+  	<a href="One_Real_Interview" style="text-decoration: none;"><button type="button" class="next_btn">다음</button></a>
   </div>
 </div>
 	<!-- 푸터 불러오기 -->

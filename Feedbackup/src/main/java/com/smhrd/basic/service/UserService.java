@@ -91,4 +91,9 @@ public class UserService {
     public List<MavenMember> getqanda() {
         return mapper.getqanda();
     }
+    
+
+    public int get_session(MavenMember member) {
+        return mapper.get_session(member);
+    }
 }
