@@ -492,7 +492,7 @@ body {
         <div class="content-title">모범답안과의 유사도 결과 및 개선점</div>
         <div class="feedback">분석 결과</div><br>
         
-        인식된 테스트<div id="recognizedText"></div><br>
+       <div id="similarity_score"></div><br>
         
       </div>
     </div>
@@ -887,7 +887,6 @@ function loadResult(index) {
 
 	
 	// UI에 반영
-	document.getElementById("recognizedText").textContent = selectedResult.recognizedText || "데이터 없음";
     document.getElementById("averagePitch").textContent = selectedResult.averagePitch ? selectedResult.averagePitch.toFixed(2) : "0";
     document.getElementById("relativeTremor").textContent = selectedResult.relativeTremor ? selectedResult.relativeTremor.toFixed(4) : "0";
     document.getElementById("hairTouchCount").textContent = selectedResult.hairTouchCount || "0";
@@ -896,6 +895,7 @@ function loadResult(index) {
     document.getElementById("pitchDescription").textContent = pitchDescription;
     document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
     document.getElementById("tremorDescription").textContent = tremorDescription;
+    document.getElementById("similarity_score").textContent = selectedResult.similarity_score || "분석 결과 없음";
     
     // gestureBarData 업데이트
     const gestureBarData = [

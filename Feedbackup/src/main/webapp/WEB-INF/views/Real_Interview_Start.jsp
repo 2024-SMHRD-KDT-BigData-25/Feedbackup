@@ -415,6 +415,7 @@ video {
 		<p><strong>상대적 떨림 (ΔF/F):</strong> <span id="relativeTremor"></span></p>
 		<p><strong>머리를 만진 횟수:</strong> <span id="hairTouchCount">0번</span></p>
 		<p><strong>코를 만진 횟수:</strong> <span id="noseTouchCount">0번</span></p>
+		<p><strong>유사도 분석:</strong> <span id="similarity_score"></span></p>
 	</div>
 	
 	<div id="resultModal" class="modal" hidden>
@@ -528,6 +529,11 @@ video {
 		                    data.average_pitch ? data.average_pitch.toFixed(2) : "N/A";
 		                document.getElementById("relativeTremor").textContent =
 		                    data.relative_tremor ? data.relative_tremor.toFixed(4) : "N/A";
+		                if (data.similarity_score) {
+			                document.getElementById("similarity_score").textContent = data.similarity_score;
+			            } else {
+			                document.getElementById("similarity_score").textContent = "답변 분석 실패";
+			            }
 						
 		                 // 분석 결과를 서버에 저장
 		                 saveResults();
@@ -537,6 +543,7 @@ video {
 		                document.getElementById("recognizedText").textContent = "음성 분석 실패";
 		                document.getElementById("averagePitch").textContent = "N/A";
 		                document.getElementById("relativeTremor").textContent = "N/A";
+		                document.getElementById("similarity_score").textContent = "답변 분석 실패";
 		            });
 		        };
 		
@@ -631,6 +638,7 @@ video {
             const recognizedText = document.getElementById("recognizedText").textContent;
             const averagePitch = parseFloat(document.getElementById("averagePitch").textContent) || 0;
             const relativeTremor = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
+            const similarity_score = document.getElementById("similarity_score").textContent;
 
             const result = {
                 hairTouchCount,
@@ -639,6 +647,7 @@ video {
                 averagePitch,
                 relativeTremor,
                 timestamp: new Date().toISOString(),
+                similarity_score,
             };
             
             
