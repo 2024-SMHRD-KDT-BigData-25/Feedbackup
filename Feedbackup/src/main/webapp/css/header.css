@@ -66,9 +66,8 @@
 
     .auth-btn {
     display: flex;               /* Flexbox를 사용하여 정렬 */
-    align-items: center;         /* 수직 정렬 */
-    gap: 20px;                   /* 버튼 간의 간격 */
-    margin-right: 30px;
+    align-items: center;         /* 수직 정렬 */               
+    margin-right: 50px;
 }
 
 .btn {
@@ -98,6 +97,7 @@
     background-color: white;
     border-width: 1px;
     border: 1px solid black;
+    margin-right: 20px;
 }
 
 .btn-login:hover {
@@ -260,3 +260,54 @@
         padding: 10px;
       }
     }
+    
+    .dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.arrow {
+    font-size: 20px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width: 150px;
+    display: none; /* 숨김 처리 */
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+.gear-icon {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gear-icon.open {
+    transform: rotate(90deg); /* 열릴 때 톱니바퀴 회전 */
+}

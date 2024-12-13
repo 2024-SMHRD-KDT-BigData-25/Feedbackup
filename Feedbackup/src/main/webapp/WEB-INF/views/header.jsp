@@ -40,8 +40,20 @@
 	<%
 	   } else {
 	%>
-	   <div class="btn btn-user"><a onclick="location.href='<%=request.getContextPath()%>/users/mypage'"><strong><%=member.getName()%></strong>&nbsp;&nbsp;님 마이페이지</a></div>
-	   <button class="btn btn-logout" onclick="location.href='<%=request.getContextPath()%>/logout'">로그아웃</button>
+		<div class="btn btn-user"><strong><%=member.getName()%></strong>&nbsp;&nbsp;님</div>
+
+		<div class="dropdown-container">
+		    <div class="dropdown-header" onclick="toggleDropdown()">
+		        <svg id="dropdown-icon" class="gear-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+		            <circle cx="12" cy="12" r="3"></circle>
+		            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V20a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-.09a1.65 1.65 0 0 0-1-.33 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h.09a1.65 1.65 0 0 0 1-.33 1.65 1.65 0 0 0 .33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-.33 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 .33 1.82 1.65 1.65 0 0 0 1.51 1H20a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+		        </svg>
+		    </div>
+		    <div class="dropdown-menu" id="dropdown-menu">
+		        <a href="<%=request.getContextPath()%>/users/mypage">내 정보</a>
+		        <a href="<%=request.getContextPath()%>/logout">로그아웃</a>
+		    </div>
+		</div>
 	<%
 	   }
 	%>
@@ -49,13 +61,32 @@
     </header>
     
        <script>
-      function deleteMember(id) {
-         let choice = confirm("정말 탈퇴하시겠습니까?")
+       function toggleDropdown() {
+    	    const dropdownMenu = document.getElementById("dropdown-menu");
+    	    const dropdownIcon = document.getElementById("dropdown-icon");
+    	    const isVisible = dropdownMenu.style.display === "block";
 
-         if (choice) {
-            location.href = "/myapp/users/" + id + "/delete";
-         }
-      }
+    	    // 토글 기능
+    	    if (isVisible) {
+    	        dropdownMenu.style.display = "none";
+    	        dropdownIcon.classList.remove("open"); // 회전 취소
+    	    } else {
+    	        dropdownMenu.style.display = "block";
+    	        dropdownIcon.classList.add("open"); // 회전 추가
+    	    }
+    	}
+
+    	// 페이지 외부를 클릭하면 닫히도록 설정
+    	document.addEventListener("click", function (event) {
+    	    const dropdownContainer = document.querySelector(".dropdown-container");
+    	    const dropdownMenu = document.getElementById("dropdown-menu");
+    	    const dropdownIcon = document.getElementById("dropdown-icon");
+
+    	    if (!dropdownContainer.contains(event.target)) {
+    	        dropdownMenu.style.display = "none";
+    	        dropdownIcon.classList.remove("open"); // 초기화
+    	    }
+    	});
    </script>
     
   </body>
