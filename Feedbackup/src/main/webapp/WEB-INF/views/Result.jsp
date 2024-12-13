@@ -952,15 +952,35 @@ function loadResult(index) {
 
 	}
 	
-	// 버튼 클릭 시 결과 로드
+	//버튼 활성화 상태를 관리하는 함수
+	function activateTab(buttonId) {
+	    // 모든 버튼에서 active 클래스 제거
+	    const buttons = document.querySelectorAll(".tabs button");
+	    buttons.forEach(button => button.classList.remove("active"));
+	
+	    // 클릭된 버튼에만 active 클래스 추가
+	    const clickedButton = document.getElementById(buttonId);
+	    if (clickedButton) {
+	        clickedButton.classList.add("active");
+	    }
+	}
+	
+	// Q1 버튼 클릭 시 활성화 상태 변경 및 데이터 로드
 	document.getElementById("loadResult0").addEventListener("click", function() {
-	    loadResult(2); // 가장 최근의 결과 (0번) 로드
+	    activateTab("loadResult0"); // Q1 버튼 활성화
+	    loadResult(2); // Q1 데이터 로드
 	});
+	
+	// Q2 버튼 클릭 시 활성화 상태 변경 및 데이터 로드
 	document.getElementById("loadResult1").addEventListener("click", function() {
-	    loadResult(1); // 뒤에서 2번째 결과 (1번) 로드
+	    activateTab("loadResult1"); // Q2 버튼 활성화
+	    loadResult(1); // Q2 데이터 로드
 	});
+	
+	// Q3 버튼 클릭 시 활성화 상태 변경 및 데이터 로드
 	document.getElementById("loadResult2").addEventListener("click", function() {
-	    loadResult(0); // 뒤에서 3번째 결과 (2번) 로드
+	    activateTab("loadResult2"); // Q3 버튼 활성화
+	    loadResult(0); // Q3 데이터 로드
 	});
 	
 // 서버에서 데이터를 가져오기
