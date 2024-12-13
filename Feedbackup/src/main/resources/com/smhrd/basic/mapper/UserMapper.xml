@@ -4,4 +4,8 @@
 	<insert id="signup" parameterType="com.smhrd.basic.model.MavenMember">
       insert into USERS (user_id,pw,name,email) values (#{user_id},#{pw},#{name},#{email})
    </insert>
+   <insert id="get_session" parameterType="com.smhrd.basic.model.MavenMember">
+      insert into ANALYSIS_SESSIONS (user_id) values (#{user_id})
+   </insert>
+   
 </mapper>

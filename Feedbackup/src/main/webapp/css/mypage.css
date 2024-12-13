@@ -1,6 +1,7 @@
 body {
     background-color: #F1F5F9;
 	font-family: 'Pretendard', sans-serif;
+	
 }
 
 .mp-wrap {
@@ -20,7 +21,7 @@ body {
     text-align: left;
     transition: all 0.3s ease;
     width: 800px;
-    height: 600px;
+    height: 550px;
     margin-bottom: 150px;
 }
 
@@ -42,7 +43,7 @@ h2 {
     font-size: 30px;
     font-weight: 800;
     display: inline;
-    margin-top: 50px;
+    margin-top: -10px;
     margin-left: 30px;
 }
 
@@ -52,74 +53,9 @@ h2 {
     display: inline;
 }
 
-.mp-text > img {
-    width: 7%;
-}
-
-.mp-content-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 15px;
-    margin-top: 60px;
-    gap: 50px;
-}
-
-.mp-content-box > a {
-	text-decoration: none;
-	color: black;
-}
-
-.mp-content-box > a:active {
-	color: #8071FC;
-}
-
-.interview-result {
-    background-color: #F6F6F6;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 20px;
-    text-align: left;
-    transition: all 0.3s ease;
-    width: 200px;
-    height: 200px;
-    text-align: center;
-}
-
-.interview-result:hover {
-	background-color: #F3EDFF;
-	border: 5px solid #8071FC;
-	color:#8071FC;
-	cursor: pointer;
-}
-
-.mp-content-box p {
-    font-size: 20px;
-    font-weight: 600;
-    margin-top: 30px;
-    margin-bottom: 60px;
-}
-
-.mp-content-box span {
-    font-size: 35px;
-    font-weight: 900;
-    color: #8071FC;
-}
-
-button {
-    border: none;
-    background-color: white;
-}
-
-.btn-mylogout {
-    font-size: 14px;
-    color: black;
-    margin-left: 15px;
-}
-
-.btn-mylogout:hover {
-    color: #8071FC;
-    cursor: pointer;
+.mp-user  img {
+	width: 10%;
+	margin-left: 30px;
 }
 
 .btn-out {
@@ -127,10 +63,67 @@ button {
     color: #94A3B8;
     float: right;
     margin-right: 30px;
-    margin-top: 30px;
+    margin-top: 80px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: white;
 }
 
 .btn-out:hover {
     color: black;
     cursor: pointer;
+}
+
+.edit-container {
+	display: absolute;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    line-height: 1.6;
+    letter-spacing: 1px; 
+    line-height: 40px;   
+    text-align: left;
+    margin-top: 40px;
+    margin-left: 100px;
+}
+
+.edit-container input {
+	border: 1px solid #CBD5E1;
+	border-radius: 5px;
+	width: 200px;
+	height: 25px;
+	margin-left: 5px;
+}
+
+.edit-container input:focus {
+	outline-color: #8071FC;
+}
+
+.pw-group2 {
+	margin-rigth: 20px;
+}
+
+
+.btn-save > button {
+	 border: none;
+	 border-radius: 50px;
+	 width: 80px;
+	 height: 40px;
+	 background: linear-gradient(to right, #8071FC, #ACA4F0);
+	 color: white; 
+	 margin-top: 30px;
+	 float: left;
+	 display: inline;
+	 margin-left: 0px;
+}
+
+.btn-save > button:hover {
+	color: black;
+	transition: 0.4s;
+}
+
+.email-input {
+	color: #94A3B8;
 }

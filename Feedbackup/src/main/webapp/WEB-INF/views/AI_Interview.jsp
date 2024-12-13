@@ -111,7 +111,7 @@
             </div>
         </div>
         <p id="modalMessage" class="modal_text">분석중 입니다..</p>
-        <button class="btn" id="btn_confirm">확인</button>
+        <button class="btn" id="btn_confirm">취소</button>
     </div>
 </div>
 
