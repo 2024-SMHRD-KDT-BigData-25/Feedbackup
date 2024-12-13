@@ -376,7 +376,12 @@
         box.addEventListener('click', function () {
             document.querySelectorAll('.box').forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
-            document.getElementById('selected-gender').value = this.dataset.gender;
+            const selectedGender = this.dataset.gender;
+            document.getElementById('selected-gender').value = selectedGender;
+            console.log(selectedGender);
+            
+         // 로컬 스토리지에 저장
+         localStorage.setItem('selectedGender', selectedGender);
         });
     });
 
