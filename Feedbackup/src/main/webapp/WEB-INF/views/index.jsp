@@ -115,7 +115,7 @@
                     맞춤형 면접 질문을 제공받을 수 있습니다.
                 </p>
             </div>
-            <img src="img/main7.svg" alt="희망 기업 선택 이미지">
+            <img src="img/main10.svg" alt="희망 기업 선택 이미지">
         </div>
 
         <!-- 카드 3 -->
