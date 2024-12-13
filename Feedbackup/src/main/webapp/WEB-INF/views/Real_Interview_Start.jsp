@@ -402,6 +402,7 @@ video {
 		<p><strong>머리를 만진 횟수:</strong> <span id="hairTouchCount">0번</span></p>
 		<p><strong>코를 만진 횟수:</strong> <span id="noseTouchCount">0번</span></p>
 		<p><strong>유사도 분석:</strong> <span id="similarity_score"></span></p>
+		<p><strong>속도 분석:</strong> <span id="speech_rate"></span><p>
 	</div>
 	
 	<div id="resultModal" class="modal" hidden>
@@ -524,6 +525,8 @@ video {
 			            } else {
 			                document.getElementById("similarity_score").textContent = "답변 분석 실패";
 			            }
+		                document.getElementById("speech_rate").textContent =
+		                	data.relative_tremor ? data.speech_rate : "N/A";
 						
 		                 // 분석 결과를 서버에 저장
 		                 saveResults();
@@ -534,6 +537,7 @@ video {
 		                document.getElementById("averagePitch").textContent = "N/A";
 		                document.getElementById("relativeTremor").textContent = "N/A";
 		                document.getElementById("similarity_score").textContent = "답변 분석 실패";
+		                document.getElementById("speech_rate").textContent = "속도 분석 실패";d
 		            });
 		        };
 		
@@ -628,12 +632,17 @@ video {
             const recognizedText = document.getElementById("recognizedText").textContent;
             const averagePitch = parseFloat(document.getElementById("averagePitch").textContent) || 0;
             const relativeTremor = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
+
             const similarity_score = document.getElementById("similarity_score").textContent;        
             const questionNumbers = ["${firstNumber}", "${secondNumber}", "${thirdNumber}"];
             const user_id = "<%=member.getUser_id() %>";
             const questionnumber = questionNumbers[executionCount];
             const table_name = ['ANALYSIS_Q1','ANALYSIS_Q2','ANALYSIS_Q3'];
             const table = table_name[executionCount];
+
+
+
+			const speech_rate = document.getElementById("speech_rate").textContent;
 
             
             const result = {
@@ -644,9 +653,13 @@ video {
                 relativeTremor,
                 timestamp: new Date().toISOString(),
                 similarity_score,
+
                 questionnumber,
                 user_id,
                 table,
+
+                speech_rate
+
             };
             
             

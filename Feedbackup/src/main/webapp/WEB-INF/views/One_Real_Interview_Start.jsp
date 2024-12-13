@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Real_Interview_Start</title>
+<title>One_Real_Interview_Start</title>
 <style>
 @font-face {
   font-family: 'SUIT-Regular';
@@ -387,6 +387,7 @@ video {
 		<p><strong>머리를 만진 횟수:</strong> <span id="hairTouchCount">0번</span></p>
 		<p><strong>코를 만진 횟수:</strong> <span id="noseTouchCount">0번</span></p>
 		<p><strong>유사도 분석:</strong> <span id="similarity_score"></span></p>
+		<p><strong>속도 분석:</strong> <span id="speech_rate"></span><p>
 	</div>
 	
 	<div id="resultModal" class="modal" hidden>
@@ -500,7 +501,11 @@ video {
 		                    data.average_pitch ? data.average_pitch.toFixed(2) : "N/A";
 		                document.getElementById("relativeTremor").textContent =
 		                    data.relative_tremor ? data.relative_tremor.toFixed(4) : "N/A";
-		                
+		                document.getElementById("speech_rate").textContent =
+			                data.relative_tremor ? data.speech_rate : "N/A";
+							
+		                    
+		                    
 		                 // 분석 결과를 서버에 저장
 		                 saveResults2();
 		           	})
@@ -509,6 +514,7 @@ video {
 		                document.getElementById("recognizedText").textContent = "음성 분석 실패";
 		                document.getElementById("averagePitch").textContent = "N/A";
 		                document.getElementById("relativeTremor").textContent = "N/A";
+		                document.getElementById("speech_rate").textContent = "속도 분석 실패";
 		            });
 		        };
 		
@@ -603,14 +609,16 @@ video {
             const recognizedText = document.getElementById("recognizedText").textContent;
             const averagePitch = parseFloat(document.getElementById("averagePitch").textContent) || 0;
             const relativeTremor = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
-
+            const speech_rate = document.getElementById("speech_rate").textContent;
+            
             const result = {
                 hairTouchCount,
                 noseTouchCount,
                 recognizedText,
                 averagePitch,
                 relativeTremor,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                speech_rate
             };
             
             

@@ -30,29 +30,27 @@
 
     <div class="list-wrap">
         <h2>AI 분석 결과</h2>
-        <div class="tab">
-            <button class="tab-btn active" data-target="interview">AI 면접</button>
-            <button class="tab-btn" data-target="introduce">자기소개</button>
-        </div>
-        <div class="list-result">
-            <%-- users 리스트를 반복문으로 출력 --%>
-            <%
-                if (users != null && !users.isEmpty()) {
-                    for (MavenMember user : users) {
-            %>
-                <div class="result-box" data-category="interview" onclick="location.href='#'">
-                    <h2>AI 면접 결과</h2>
-                    <p><%= user.getId() %> 면접 연습</p> <!-- 사용자 이름 -->
-                    <span><%= user.getPw() %></span> <!-- 사용자 아이디 -->
-                </div>
-            <%
-                    }
-                } else {
-            %>
-                <p>등록된 사용자가 없습니다.</p>
-            <%
-                }
-            %>
+		<div class="list-container">
+	        <div class="list-result">
+	            <%-- users 리스트를 반복문으로 출력 --%>
+	            <%
+	                if (users != null && !users.isEmpty()) {
+	                    for (MavenMember user : users) {
+	            %>
+	                <div class="result-box" data-category="interview" onclick="location.href='#'">
+	                    <h2>AI 면접 결과</h2>
+	                    <p><%= user.getId() %> 면접 연습</p> <!-- 사용자 이름 -->
+	                    <span><%= user.getPw() %></span> <!-- 사용자 아이디 -->
+	                </div>
+	            <%
+	                    }
+	                } else {
+	            %>
+	                <p>분석된 AI 면접이 없습니다.</p>
+	            <%
+	                }
+	            %>
+	        </div>
         </div>
     </div>
 

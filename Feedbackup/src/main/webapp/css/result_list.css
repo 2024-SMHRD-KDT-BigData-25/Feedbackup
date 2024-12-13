@@ -6,7 +6,9 @@ body {
 .list-wrap {
     text-align: center;
 	margin-top: 100px;
-    
+	margin: 0 auto;
+    width: 100%;
+    min-height: 500px;
 }
 
 .list-wrap > h2 {
@@ -39,14 +41,20 @@ button:hover {
     cursor: pointer;
 }
 
+.list-container{
+	padding: 40px;
+	background-color: white;
+	width: 1000px;
+	margin: 0 auto;
+	border: 1px solid white;
+    border-radius: 35px;
+}
+
 .list-result {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    margin-top: 40px;
     width: 800px;
-    
-   
 }
 
 a {

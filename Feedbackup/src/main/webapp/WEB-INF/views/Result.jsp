@@ -145,6 +145,8 @@ body {
 .tabs {
   display: flex;
   gap: 10px; /* 버튼 간격 조정 */
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .tabs button {
@@ -265,7 +267,6 @@ body {
 }
 
 .voice_result{
-  max-height: 500px;
   min-height: 200px;
   border-radius: 20px;
   border: 1px solid #A98BFF;
@@ -450,13 +451,32 @@ body {
   color: #CBD5E1;
   margin-right: 5px;
 }
+
+#topButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background-color: #8071FC;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#topButton:hover {
+    background-color: white;
+    color: #8071FC;
+}
 </style>
+
 </head>
 <body>
   
   <div class="container">
     <div class="top-buttons">
-      <button class="btn" id="resetButton">데이터 초기화</button>
       <button class="btn" onclick="window.location.href='/myapp/';">나가기</button>
     </div>
 
@@ -465,6 +485,12 @@ body {
     <div class="subtitle"><span class="highlight">면접자</span> 님의 결과를 확인해 주세요</div>
     <div class="subtitle2">결과는 <span class="highlight">[피드백업 홈페이지 > AI 분석결과]</span> 에서 다시 확인할 수 있어요</div>
 
+        <div class="tabs">
+          <button class="active" id="loadResult0">첫번째 질문</button>
+          <button id="loadResult1">두번째 질문</button>
+          <button id="loadResult2">세번째 질문</button>
+        </div>
+
     <!-- AI 답변 분석 -->
     <div class="title_container">
       <div class="title_detail">AI 답변 분석</div>
@@ -472,11 +498,6 @@ body {
     <div class="section">
       <div class="section-header">
         <div class="section-title">AI 답변 분석 상세결과</div>
-        <div class="tabs">
-          <button class="active" id="loadResult0">Q1</button>
-          <button id="loadResult1">Q2</button>
-          <button id="loadResult2">Q3</button>
-        </div>
       </div>
     
       <div class="card">
@@ -559,12 +580,15 @@ body {
 
 		평균 피치 (Hz)<div id="averagePitch"></div><br>
 		상대적 떨림 (ΔF/F)<div id="relativeTremor"></div><br>
+		속도 분석<div id="speech_rate"></div><br>
 		
 		<div id="pitchDescription"></div><br>
 		
 		<div id="tremorDescription"></div><br>
-        
-        기록 날짜<div id="timestamp"></div>
+		
+		<div id="speechAnalysis"></div><br>
+		
+        <div id="timestamp" hidden></div>
         
         </div>
       </div>
@@ -614,9 +638,33 @@ body {
   </div>
 </div>
 
+   <button id="topButton"><i class="fa-solid fa-chevron-up"></i></button>
 
-
+	<script src="js/index.js"></script>
+<script src="https://kit.fontawesome.com/eefb1e8780.js" crossorigin="anonymous"></script>
 <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const topButton = document.getElementById("topButton");
+
+    // 스크롤 이벤트 처리
+    window.addEventListener("scroll", () => {
+        // 스크롤 위치가 200px 이상일 때 버튼 표시
+        if (window.scrollY > 200) {
+            topButton.style.display = "block"; // 버튼 표시
+        } else {
+            topButton.style.display = "none"; // 버튼 숨기기
+        }
+    });
+
+    // 버튼 클릭 시 페이지 상단으로 스크롤
+    topButton.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth", // 부드럽게 스크롤
+        });
+    });
+});
 
 //막대 그래프 높이를 설정하는 함수
 function setBarHeight(barId, valueId, value) {
@@ -719,7 +767,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	         	// 명확한 데이터 전달
                 const averagePitchValue = parseFloat(document.getElementById("averagePitch").textContent) || 0;
 				const relativeTremorValue = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
-	            
+	            const speech_rate = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
+				
 				// 그래프 비율을 위한 수치 조정 (더하기 100)
 				const scaledRelativeTremorValue = relativeTremorValue+100;
 				
@@ -874,6 +923,8 @@ function loadResult(index) {
 
     const formattedTotalTouches = totalTouches.toFixed(2);
 
+    
+    
     // 상대적 떨림 분석
     const relativeTremor = selectedResult.relativeTremor || 0;
     let tremorDescription = '';
@@ -890,11 +941,11 @@ function loadResult(index) {
 	
     // 움직임 분석
     let gestureAnalysis = '';
-    if (totalTouches >= 10) {
+    if (totalTouches >= 6) {
         gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘미흡’입니다. 면접 중 손으로 머리나 코를 자주 만지셨습니다. 면접에서 긴장이나 불안의 신호로 해석될 수 있으니, 신경 쓰셔야 할 부분입니다.';
-    } else if (totalTouches >= 7) {
-        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다. 머리나 코를 만지는 횟수가 다소 있었지만, 과도하지 않았습니다. 면접 중 약간의 긴장감은 자연스러운 반응일 수 있습니다.';
     } else if (totalTouches >= 4) {
+        gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘보통’입니다. 머리나 코를 만지는 횟수가 다소 있었지만, 과도하지 않았습니다. 면접 중 약간의 긴장감은 자연스러운 반응일 수 있습니다.';
+    } else if (totalTouches >= 2) {
         gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘양호’입니다. 손으로 머리나 코를 만지신 횟수가 적었습니다. 긴장하지 않고 자연스러운 면접을 진행하신 것으로 보입니다.';
     } else {
         gestureAnalysis = '제스처 분석 결과, 면접자님의 제스처는 ‘우수’입니다. 손으로 머리나 코를 만지신 횟수가 매우 적었습니다. 면접 중 안정감과 자신감을 잘 표현하셨습니다.';
@@ -904,6 +955,17 @@ function loadResult(index) {
     setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
 	setBarHeight2('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
 
+	// 속도 분석
+	const speech_rate = selectedResult.speech_rate || 0;
+	let speechAnalysis = '';
+	
+	if (speech_rate < 0.5) {
+		speechAnalysis = "면접자님의 말하기 속도는 '느림'입니다. 답변이 다소 천천히 진행되고 있어, 때때로 긴장이나 불안이 느껴질 수 있습니다. 조금 더 자연스럽고 자신감 있게 답변을 이어가며 속도를 조절해보세요. 이렇게 하면 답변이 더 매끄럽고 청중이 지루함을 느끼지 않을 수 있습니다.";
+    } else if (0.5 <= speech_rate && speech_rate < 1) {
+    	speechAnalysis = "면접자님의 말하기 속도는 '보통'입니다. 적당한 속도로 생각을 정리하면서도 청중이 이해하기 쉽게 말하고 계십니다. 이 속도는 좋은 균형을 이룬 속도입니다. 다만, 중요한 포인트를 강조하고 싶을 때는 약간 더 느리게 말하거나, 강조할 부분에서 속도를 조절하는 것도 효과적일 수 있습니다.";
+    } else if (speech_rate >= 1) {
+    	speechAnalysis = "면접자님의 말하기 속도는 '빠름'입니다. 빠른 속도로 답변을 진행하셔서, 답변이 다소 급하게 느껴질 수 있습니다. 이 속도는 자신감을 보여줄 수 있지만, 너무 빠르면 청중이 내용을 따라가기 어려울 수 있습니다. 중요한 부분에서는 속도를 조금 늦추어 강조하는 연습이 필요할 것 같습니다.";
+    }
 	
 	// UI에 반영
     document.getElementById("averagePitch").textContent = selectedResult.averagePitch ? selectedResult.averagePitch.toFixed(2) : "0";
@@ -915,6 +977,9 @@ function loadResult(index) {
     document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
     document.getElementById("tremorDescription").textContent = tremorDescription;
     document.getElementById("similarity_score").textContent = selectedResult.similarity_score || "분석 결과 없음";
+    document.getElementById("speech_rate").textContent = selectedResult.speech_rate ? selectedResult.speech_rate : "0";
+    document.getElementById("speechAnalysis").textContent = speechAnalysis;
+    
     
     // gestureBarData 업데이트
     const gestureBarData = [
@@ -933,15 +998,35 @@ function loadResult(index) {
 
 	}
 	
-	// 버튼 클릭 시 결과 로드
+	//버튼 활성화 상태를 관리하는 함수
+	function activateTab(buttonId) {
+	    // 모든 버튼에서 active 클래스 제거
+	    const buttons = document.querySelectorAll(".tabs button");
+	    buttons.forEach(button => button.classList.remove("active"));
+	
+	    // 클릭된 버튼에만 active 클래스 추가
+	    const clickedButton = document.getElementById(buttonId);
+	    if (clickedButton) {
+	        clickedButton.classList.add("active");
+	    }
+	}
+	
+	// Q1 버튼 클릭 시 활성화 상태 변경 및 데이터 로드
 	document.getElementById("loadResult0").addEventListener("click", function() {
-	    loadResult(2); // 가장 최근의 결과 (0번) 로드
+	    activateTab("loadResult0"); // Q1 버튼 활성화
+	    loadResult(2); // Q1 데이터 로드
 	});
+	
+	// Q2 버튼 클릭 시 활성화 상태 변경 및 데이터 로드
 	document.getElementById("loadResult1").addEventListener("click", function() {
-	    loadResult(1); // 뒤에서 2번째 결과 (1번) 로드
+	    activateTab("loadResult1"); // Q2 버튼 활성화
+	    loadResult(1); // Q2 데이터 로드
 	});
+	
+	// Q3 버튼 클릭 시 활성화 상태 변경 및 데이터 로드
 	document.getElementById("loadResult2").addEventListener("click", function() {
-	    loadResult(0); // 뒤에서 3번째 결과 (2번) 로드
+	    activateTab("loadResult2"); // Q3 버튼 활성화
+	    loadResult(0); // Q3 데이터 로드
 	});
 	
 // 서버에서 데이터를 가져오기
