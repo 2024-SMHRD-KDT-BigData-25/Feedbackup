@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Real_Interview_Start</title>
+<title>One_Real_Interview_Start</title>
 <style>
 @font-face {
   font-family: 'SUIT-Regular';
