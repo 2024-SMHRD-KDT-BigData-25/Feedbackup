@@ -20,10 +20,6 @@
   }
 
 .top_btn {
-  display: flex;
-  justify-content: space-between;
-  width: 850px;
-  padding: 20px 0px;
   box-sizing: border-box;
   margin: 0px auto;
 }
@@ -53,12 +49,13 @@
 
   .title img{
     width: 140px;
-    height: auto; ;
+    height: auto;
+    margin-top: 50px;
   }
 
   .title_text {
     margin-top: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     text-align: center;
     color: #64748B;
     font-size: 20px;
@@ -73,37 +70,29 @@
   align-items: center;
 }
 
-.content img {
-  width: 850px;
-  height: auto;
-}
-
 .info {
-  position: absolute;
-  top: 5%; /* 사진 기준으로 위치 */
-  right: 22.5%;
-  transform: translate(-50%, -50%);
-  background-color: #ECEAFF;
-  color: #6C63FF;
-  font-size: 12px;
-  padding: 8px 15px;
-  border-radius: 20px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: -5%;
+    right: 20.5%;
+    transform: translate(-50%, -50%);
+    color: #6C63FF;
+    font-size: 12px;
+    padding: 8px 15px;
 }
 
 .recording-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 50px;
-  padding: 10px 20px;
-  width: 15%;
-  max-width: 400px;
-  position: fixed;
-  bottom: 45px;
-  left: 625px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    padding: 10px 20px;
+    width: 15%;
+    max-width: 400px;
+    position: fixed;
+    bottom: 105px;
+    left: 625px;
 }
 
 .recording-bar .status {
@@ -232,6 +221,11 @@ video {
 	margin-top: 20px;
 }
 
+.recording{
+ flex: display;
+ flex-direction: row;
+}
+
 .recording button {
   background-color: #6C63FF;
   color: white;
@@ -255,13 +249,14 @@ video {
     position: relative; /* 내부 자식 요소의 기준점 */
     width: 100%; /* 부모 크기에 맞춤 */
     height: 120px; /* 고정 크기 설정 */
+    margin-top: 20px;
 }
 
 /* 회전하는 테두리 */
 .rotating-border {
     position: absolute; /* loading-container 기준 */
-    top: 42%; /* 부모 기준 중앙 */
-    left: 46.5%; /* 부모 기준 중앙 */
+    top: 5%; /* 부모 기준 중앙 */
+    left: 39.5%; /* 부모 기준 중앙 */
     transform: translate(-50%, -50%);
     width: 100px;
     height: 100px;
@@ -323,56 +318,43 @@ video {
    margin: 11% auto;
    padding: 20px;
    border: 1px solid #888;
-   width: 600px;
+   width: 500px;
    height: 250px;
    text-align: center;
    border: 2px solid #8071FC;
    border-radius: 30px;
 }
 /* 확인 버튼 */
-.close {
-   color: #aaa;
-   float: right;
-   font-size: 28px;
-   font-weight: bold;
+.btn {
+  border: 1px solid #D4C5FF;
+  background-color: transparent;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #8071FC;
+  cursor: pointer;
 }
 
-.close:hover, .close:focus {
-   color: black;
-   text-decoration: none;
-   cursor: pointer;
+.btn:hover, .close:focus {
+  background-color: #8071FC;
+  color: #FFFFFF;
 }
+
 
 </style>
 </head>
 <body>
-  <div class="top_btn">
-    <button class="btn1">질문 다시 듣기</button>
-  </div>
   <div class="title"><img src="../img/feedbackup.png"></div>
   <div class="title_text">AI 면접 연습</div>
   <div class="content">
     <!-- 웹캠 화면을 담을 div -->
 	<div id="webcamContainer">
 		<video id="webcam" autoplay></video>
-		<div class="info">본 질문은 삼성전자 기출 질문입니다.</div>
+		<div class="info">본 질문은 실제 ${jobCode} 기출 질문입니다.</div>
 	</div>
 	<div>
-
-    
-    <span>${firstNumber}</span>
-
-    <br>
-    
-    <span>${secondNumber}</span>
-
-    <br>
-    
-    <span>${thirdNumber}</span>
-
-    <br>
-
-
+	
     </div>
   </div>
   <div class="recording-bar" style="display: none;">
@@ -400,7 +382,10 @@ video {
     </div>
 
     <div class="recording" align = center>
-		<button id="captureBtn">시작하기</button>
+    <div class="top_btn">
+		   <button class="btn1">다시 듣기</button>
+		   <button id="captureBtn">시작하기</button>
+		</div>
 		<!-- 오디오 플레이어 (숨겨져 있음) -->
     <audio id="ttsAudio" style="display: none;"></audio>
 
@@ -420,7 +405,7 @@ video {
 	
 	<div id="resultModal" class="modal" hidden>
 	    <div class="modal-content">
-	        <div class="loading-container">
+	        <div class="loading-container" style="position: relative; width: 100%; height: 120px; margin-top: 20px;">
 	            <div class="rotating-border"></div>
 	            <div class="static-image">
 	                <img id="modalImage" src="../img/logo1.png" alt="로고">
@@ -433,7 +418,7 @@ video {
 	
 	<div id="resultModal2" class="modal" hidden>
 	    <div class="modal-content">
-	        <div class="loading-container">         
+	        <div class="loading-container" style="position: relative; width: 100%; height: 120px; margin-top: 20px;">         
 	            <div class="static-image">
 	                <img id="modalImage" src="../img/check.png" alt="로고">
 	            </div>
