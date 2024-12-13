@@ -1,3 +1,4 @@
+<%@page import="com.smhrd.basic.model.MavenMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -461,7 +462,10 @@ video {
         let lastHairTouchCount = 0;  // 전역 변수로 선언
         let lastNoseTouchCount = 0;  // 전역 변수로 선언
         
+        <% MavenMember member = (MavenMember) session.getAttribute("member"); %>
+        
         const questionNumbers = ["${firstNumber}", "${secondNumber}", "${thirdNumber}"];
+        const user_id = "<%=member.getUser_id() %>";
         
 		// 버튼 클릭 시 음성 분석 및 동작 인식 시작/중지
 		
@@ -494,6 +498,7 @@ video {
 		            const formData = new FormData();
 		            formData.append("audio", file);
 		            formData.append("questionNumber", questionNumbers[executionCount]);
+		            formData.append("user_id", user_id);
 		            
 		            // 서버로 음성 데이터 전송
 		            fetch("http://localhost:5700/start_capture", {
@@ -623,8 +628,14 @@ video {
             const recognizedText = document.getElementById("recognizedText").textContent;
             const averagePitch = parseFloat(document.getElementById("averagePitch").textContent) || 0;
             const relativeTremor = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
-            const similarity_score = document.getElementById("similarity_score").textContent;
+            const similarity_score = document.getElementById("similarity_score").textContent;        
+            const questionNumbers = ["${firstNumber}", "${secondNumber}", "${thirdNumber}"];
+            const user_id = "<%=member.getUser_id() %>";
+            const questionnumber = questionNumbers[executionCount];
+            const table_name = ['ANALYSIS_Q1','ANALYSIS_Q2','ANALYSIS_Q3'];
+            const table = table_name[executionCount];
 
+            
             const result = {
                 hairTouchCount,
                 noseTouchCount,
@@ -633,6 +644,9 @@ video {
                 relativeTremor,
                 timestamp: new Date().toISOString(),
                 similarity_score,
+                questionnumber,
+                user_id,
+                table,
             };
             
             
@@ -652,6 +666,26 @@ video {
                 
 				openModal("resultModal2")
 				
+                
+            })
+            .catch((error) => console.error("결과 저장 중 오류:", error));
+            
+            // 서버에 저장
+            fetch("http://localhost:5700/get_all", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(result),
+            })
+            .then((response) => {
+                if (!response.ok) throw new Error("서버 저장 오류");
+                return response.json();
+            })
+            .then((data) => {
+                console.log("저장 값:", data);
+                
+				openModal("resultModal2")
+				
+           
                 // 분석이 끝났으면 페이지 이동
                 executionCount++;
                 if (executionCount >= 3) {
@@ -660,6 +694,8 @@ video {
             })
             .catch((error) => console.error("결과 저장 중 오류:", error));
         }
+        
+     
 
         // 초기화 함수
         function resetTouchCounts() {
