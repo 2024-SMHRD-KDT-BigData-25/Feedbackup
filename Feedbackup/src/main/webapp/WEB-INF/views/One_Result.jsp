@@ -265,7 +265,6 @@ body {
 }
 
 .voice_result{
-  max-height: 500px;
   min-height: 200px;
   border-radius: 20px;
   border: 1px solid #A98BFF;
@@ -575,10 +574,13 @@ body {
 
 		평균 피치 (Hz)<div id="averagePitch"></div><br>
 		상대적 떨림 (ΔF/F)<div id="relativeTremor"></div><br>
+		속도 분석<div id="speech_rate"></div><br>
 		
 		<div id="pitchDescription"></div><br>
 		
 		<div id="tremorDescription"></div><br>
+        
+        <div id="speechAnalysis"></div><br>
         
         <div id="timestamp" hidden></div>
         
@@ -760,7 +762,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	         	// 명확한 데이터 전달
                 const averagePitchValue = parseFloat(document.getElementById("averagePitch").textContent) || 0;
 				const relativeTremorValue = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
-	            
+				const speech_rate = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
+				
 				// 그래프 비율을 위한 수치 조정 (더하기 100)
 				// const scaledRelativeTremorValue = relativeTremorValue+100;
 				
@@ -941,7 +944,19 @@ function loadResult(index) {
     //그래프 업데이트
     setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
 	setBarHeight2('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
-
+	
+	// 속도 분석
+	const speech_rate = selectedResult.speech_rate || 0;
+	let speechAnalysis = '';
+	
+	if (speech_rate < 0.5) {
+		speechAnalysis = "면접자님의 말하기 속도는 '느림'입니다. 답변이 다소 천천히 진행되고 있어, 때때로 긴장이나 불안이 느껴질 수 있습니다. 조금 더 자연스럽고 자신감 있게 답변을 이어가며 속도를 조절해보세요. 이렇게 하면 답변이 더 매끄럽고 청중이 지루함을 느끼지 않을 수 있습니다.";
+    } else if (0.5 <= speech_rate && speech_rate < 1) {
+    	speechAnalysis = "면접자님의 말하기 속도는 '보통'입니다. 적당한 속도로 생각을 정리하면서도 청중이 이해하기 쉽게 말하고 계십니다. 이 속도는 좋은 균형을 이룬 속도입니다. 다만, 중요한 포인트를 강조하고 싶을 때는 약간 더 느리게 말하거나, 강조할 부분에서 속도를 조절하는 것도 효과적일 수 있습니다.";
+    } else if (speech_rate >= 1) {
+    	speechAnalysis = "면접자님의 말하기 속도는 '빠름'입니다. 빠른 속도로 답변을 진행하셔서, 답변이 다소 급하게 느껴질 수 있습니다. 이 속도는 자신감을 보여줄 수 있지만, 너무 빠르면 청중이 내용을 따라가기 어려울 수 있습니다. 중요한 부분에서는 속도를 조금 늦추어 강조하는 연습이 필요할 것 같습니다.";
+    }
+	
 	// UI에 반영
 	// document.getElementById("recognizedText").textContent = selectedResult.recognizedText || "데이터 없음";
     document.getElementById("averagePitch").textContent = selectedResult.averagePitch ? selectedResult.averagePitch.toFixed(2) : "0";
@@ -952,6 +967,9 @@ function loadResult(index) {
     document.getElementById("pitchDescription").textContent = pitchDescription;
     document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
     document.getElementById("tremorDescription").textContent = tremorDescription;
+    document.getElementById("speech_rate").textContent = selectedResult.speech_rate ? selectedResult.speech_rate : "0";
+    document.getElementById("speechAnalysis").textContent = speechAnalysis;
+    
     
     // gestureBarData 업데이트
     const gestureBarData = [
