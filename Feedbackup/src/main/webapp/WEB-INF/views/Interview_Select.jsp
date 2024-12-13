@@ -102,11 +102,11 @@
 	<div class="Interview_wrapper">
 		<div class="text1">원하는 연습을 선택하세요.</div>
 		<div class="container">
-			<div class="box" id="box1">
+			<a href="/myapp/One_Interview"><div class="box" id="box1">
 				<img src="img/one.png" class="one_img">
 				<p class="text2">자기소개</p>
 				<p class="text3">나만의 이야기를 완성하는<br>1분 자기소개 연습</p>
-			</div>
+			</div></a>
 			
 			<a href="/myapp/AI_Interview">
 			<div class="box" id="box2">
