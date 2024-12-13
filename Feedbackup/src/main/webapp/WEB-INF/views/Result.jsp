@@ -559,12 +559,12 @@ body {
 
 		평균 피치 (Hz)<div id="averagePitch"></div><br>
 		상대적 떨림 (ΔF/F)<div id="relativeTremor"></div><br>
+		속도 분석<div id="speech_rate"></div><br>
 		
 		<div id="pitchDescription"></div><br>
 		
 		<div id="tremorDescription"></div><br>
-        
-        기록 날짜<div id="timestamp"></div>
+        <div id="timestamp" hidden></div>
         
         </div>
       </div>
@@ -719,7 +719,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	         	// 명확한 데이터 전달
                 const averagePitchValue = parseFloat(document.getElementById("averagePitch").textContent) || 0;
 				const relativeTremorValue = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
-	            
+	            const speech_rate = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
+				
 				// 그래프 비율을 위한 수치 조정 (더하기 100)
 				const scaledRelativeTremorValue = relativeTremorValue+100;
 				
@@ -915,6 +916,7 @@ function loadResult(index) {
     document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
     document.getElementById("tremorDescription").textContent = tremorDescription;
     document.getElementById("similarity_score").textContent = selectedResult.similarity_score || "분석 결과 없음";
+    document.getElementById("speech_rate").textContent = selectedResult.speech_rate ? selectedResult.speech_rate : "0";
     
     // gestureBarData 업데이트
     const gestureBarData = [
