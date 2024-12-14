@@ -462,7 +462,7 @@ body {
   
   <div class="container">
     <div class="top-buttons">
-      <button class="btn" onclick="window.location.href='/myapp/';">나가기</button>
+      <button class="btn" onclick="window.location.href='/myapp/users/result_list';">나가기</button>
     </div>
 
     <div class="title"><img src="../img/feedbackup.png"></div>
