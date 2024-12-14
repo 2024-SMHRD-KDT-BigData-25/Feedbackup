@@ -46,8 +46,9 @@
                         String job_code1 = jobcodes1.get(i); // 인덱스로 job_code1 가져오기
             %>
                 <div class="result-box" data-category="interview" onclick="location.href='#'">
+               	 	
                     <h2>AI 면접 결과</h2>
-                    <p><%= job_code1 %> 면접 연습</p> <!-- 사용자 직업 코드 -->
+                    <p><%= job_code1 %> 면접연습</p> <!-- 사용자 직업 코드 -->
                     <span><%= user1.getCreated() %></span> <!-- 사용자 생성 일시 -->
                 </div>
             <%
@@ -58,17 +59,20 @@
             <%
                 }
             %>
+            
+            <div class="question-separator"></div> <!-- 첫 번째 분석과 두 번째 분석 사이에 줄바꿈 추가 -->
 	            
 	         <%-- 두번째 분석 --%>
-            <%
+            <%-- <%
                 if (users2 != null && !users2.isEmpty() && jobcodes2 != null && jobcodes2.size() == users2.size()) {
                     for (int i = 0; i < users2.size(); i++) {
                         MavenMember user2 = users2.get(i);
                         String job_code2 = jobcodes2.get(i); // 인덱스로 job_code1 가져오기
             %>
                 <div class="result-box" data-category="interview" onclick="location.href='#'">
+                	<span class="question-title">두번째 질문!</span>  <!-- 첫번째 질문 제목 -->
                     <h2>AI 면접 결과</h2>
-                    <p><%= job_code2 %> 면접 연습</p> <!-- 사용자 직업 코드 -->
+                    <p><%= job_code2 %> 면접연습</p> <!-- 사용자 직업 코드 -->
                     <span><%= user2.getCreated() %></span> <!-- 사용자 생성 일시 -->
                 </div>
             <%
@@ -78,18 +82,21 @@
                 <p>분석된 AI 면접이 없습니다.</p>
             <%
                 }
-            %>
+            %> --%>
+            
+            <div class="question-separator"></div> <!-- 첫 번째 분석과 두 번째 분석 사이에 줄바꿈 추가 -->
             
             <%-- 세번째 분석 --%>
-            <%
+            <%-- <%
                 if (users3 != null && !users3.isEmpty() && jobcodes3 != null && jobcodes3.size() == users3.size()) {
                     for (int i = 0; i < users3.size(); i++) {
                         MavenMember user3 = users3.get(i);
                         String job_code3 = jobcodes3.get(i); // 인덱스로 job_code1 가져오기
             %>
                 <div class="result-box" data-category="interview" onclick="location.href='#'">
+                	<span class="question-title">세번째 질문!</span>  <!-- 첫번째 질문 제목 -->
                     <h2>AI 면접 결과</h2>
-                    <p><%= job_code3 %> 면접 연습</p> <!-- 사용자 직업 코드 -->
+                    <p><%= job_code3 %> 면접연습</p> <!-- 사용자 직업 코드 -->
                     <span><%= user3.getCreated() %></span> <!-- 사용자 생성 일시 -->
                 </div>
             <%
@@ -99,7 +106,7 @@
                 <p>분석된 AI 면접이 없습니다.</p>
             <%
                 }
-            %>
+            %> --%>
 	        </div>
         </div>
     </div>
