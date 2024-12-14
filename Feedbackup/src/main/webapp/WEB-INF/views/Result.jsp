@@ -104,7 +104,6 @@ body {
   border-radius: 20px;
   text-align: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin: 0px auto;
 }
@@ -508,6 +507,7 @@ body {
         <div class="voice_title box1">
           <div>높낮이</div>
           <div>떨림</div>
+          <div>속도</div>
         </div>
         <div class="voice">
           <!-- 그래프 1: 높낮이 -->
