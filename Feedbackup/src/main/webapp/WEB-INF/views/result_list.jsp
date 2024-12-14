@@ -45,7 +45,7 @@
                         MavenMember user1 = users1.get(i);
                         String job_code1 = jobcodes1.get(i); // 인덱스로 job_code1 가져오기
             %>
-                <div class="result-box" data-category="interview" onclick="location.href='#'">
+                <div class="result-box" data-category="interview" onclick="location.href='/myapp/users/Result_Replay'">
                	 	
                     <h2>AI 면접 결과</h2>
                     <p><%= job_code1 %> 면접연습</p> <!-- 사용자 직업 코드 -->

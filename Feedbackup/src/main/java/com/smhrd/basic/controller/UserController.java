@@ -413,6 +413,11 @@ public class UserController {
       return "One_Result";
    }
    
+   @GetMapping("/users/Result_Replay")
+   public String Result_ReplayForm() {
+      return "Result_Replay";
+   }
+   
 }
 
 
