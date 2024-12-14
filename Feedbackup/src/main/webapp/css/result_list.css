@@ -11,7 +11,7 @@ body {
     min-height: 500px;
 }
 
-.list-wrap > h2 {
+.list-wrap > .result1 {
     font-size: 40px;
     font-weight: 800;
 }
@@ -61,11 +61,11 @@ a {
     text-decoration: none;
 }
 
-a:visited h2{
+a:visited .result1{
     color: #8071FC;
 }
 
-a:visited p,span{
+a:visited .result2,.result3{
     color: black;
 }
 
@@ -86,21 +86,21 @@ a:visited p,span{
     cursor: pointer;
 }
 
-.result-box h2 {
+.result-box > .result1 {
     font-size: 20px;
     color: #8071FC;
     margin-bottom: 30px;
     margin-top: -1px;
 }
 
-.result-box p {
+.result-box > .result2 {
     font-size: 15px;
     color: black;
     margin-bottom: 15px;
     font-weight: 300;
 }
 
-.result-box span {
+.result-box > .result3 {
     float: right;
     font-size: 13px;
     color: #64748B;

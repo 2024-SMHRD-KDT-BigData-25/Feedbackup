@@ -17,7 +17,7 @@
 
       footer {
         width: 100%;
-        height: 600px;
+        height: 500px;
         bottom: 0px;
         position: absolute;
         border-top: 1px solid white;
@@ -106,7 +106,7 @@
         display: flex;
       }
 
-      footer p span {
+      .footer-last1 {
         display: inline-block;
         margin-right: 20px;
         margin-bottom: 40px;
@@ -114,7 +114,7 @@
         margin-top: 30px;
       }
 
-      footer span {
+      .footer-last2 {
         margin-left: 30px;
         font-size: 13px;
       }
@@ -154,11 +154,11 @@
               <hr>
                <div>
                 <p>
-                  <span>이용약관</span><br>
-                  <span>개인정보처리방침</span><br>
-                  <span>공지사항</span>
+                  <span class="footer-last1">이용약관</span><br>
+                  <span class="footer-last1">개인정보처리방침</span><br>
+                  <span class="footer-last1">공지사항</span>
                 </p>
-                <span>Ⓒ 2024. FeedbackUp. All Rights Reserved.</span>
+                <span class="footer-last2">Ⓒ 2024. FeedbackUp. All Rights Reserved.</span>
               
             </div>
           </div>

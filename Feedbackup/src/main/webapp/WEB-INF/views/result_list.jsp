@@ -47,9 +47,9 @@
             %>
                 <div class="result-box" data-category="interview" onclick="location.href='/myapp/users/Result_Replay'">
                	 	
-                    <h2>AI 면접 결과</h2>
-                    <p><%= job_code1 %> 면접연습</p> <!-- 사용자 직업 코드 -->
-                    <span><%= user1.getCreated() %></span> <!-- 사용자 생성 일시 -->
+                    <h2 class="result1">AI 면접 결과</h2>
+                    <p class="result2"><%= job_code1 %> 면접연습</p> <!-- 사용자 직업 코드 -->
+                    <span class="result3"><%= user1.getCreated() %></span> <!-- 사용자 생성 일시 -->
                 </div>
             <%
                     }
