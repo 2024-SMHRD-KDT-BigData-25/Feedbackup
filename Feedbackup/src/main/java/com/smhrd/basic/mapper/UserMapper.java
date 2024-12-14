@@ -61,9 +61,29 @@ public interface UserMapper {
 	@Select("SELECT question_id FROM QUESTIONS WHERE q_text = #{thirdqText}")
 	int findATextBythirdNumber(@Param("thirdqText") String thirdqText);
 	
-	// 같은 이름을 가진 사용자들 정보 가져오기
-    @Select("SELECT * FROM test WHERE name = #{name}")
-    List<MavenMember> findUsersByName(@Param("name") String name);
+	// 첫번째 분석 같은 아이디를 가진 사용자들 정보 가져오기
+    @Select("SELECT * FROM ANALYSIS_Q1 WHERE user_id = #{user_id}")
+    List<MavenMember> findUsersByANALYSIS_Q1(@Param("user_id") String user_id);
+    
+    // 두번째 분석 같은 아이디를 가진 사용자들 정보 가져오기
+    @Select("SELECT * FROM ANALYSIS_Q2 WHERE user_id = #{user_id}")
+    List<MavenMember> findUsersByANALYSIS_Q2(@Param("user_id") String user_id);
+    
+    // 세번째 분석 같은 아이디를 가진 사용자들 정보 가져오기
+    @Select("SELECT * FROM ANALYSIS_Q3 WHERE user_id = #{user_id}")
+    List<MavenMember> findUsersByANALYSIS_Q3(@Param("user_id") String user_id);
+    
+    // 질문번호로 기업을 찾기
+    @Select("SELECT JOB_CODE FROM QUESTIONS WHERE question_id = #{question_id}")
+    String findbyquestionid(@Param("question_id") int question_id);
+
+    // 분석2 질문번호로 기업을 찾기
+    @Select("SELECT JOB_CODE FROM ANALYSIS_Q2 WHERE question_id = #{question_id}")
+    String findbyquestionid2(@Param("question_id") int question_id);
+    
+    // 분석1 질문번호로 기업을 찾기
+    @Select("SELECT JOB_CODE FROM ANALYSIS_Q3 WHERE question_id = #{question_id}")
+    String findbyquestionid3(@Param("question_id") int question_id);
     
     @Select("SELECT * FROM QUESTIONS")
     List<MavenMember> getqanda();

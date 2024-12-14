@@ -82,10 +82,36 @@ public class UserService {
         return mapper.findATextBythirdNumber(thirdqText);
     }
     
- // 이름을 기준으로 사용자 정보를 찾는 메소드
-    public List<MavenMember> findUsersByName(String name) {
-        return mapper.findUsersByName(name);
+ // 첫번째 분석 아이디를 기준으로 사용자 정보를 찾는 메소드
+    public List<MavenMember> findUsersByANALYSIS_Q1(String user_id) {
+        return mapper.findUsersByANALYSIS_Q1(user_id);
     }
+   
+ // 두번째 분석 아이디를 기준으로 사용자 정보를 찾는 메소드
+    public List<MavenMember> findUsersByANALYSIS_Q2(String user_id) {
+        return mapper.findUsersByANALYSIS_Q2(user_id);
+    }
+    
+ // 세번째 분석 아이디를 기준으로 사용자 정보를 찾는 메소드
+    public List<MavenMember> findUsersByANALYSIS_Q3(String user_id) {
+        return mapper.findUsersByANALYSIS_Q3(user_id);
+    }
+    
+    // 분석1 문제 질문으로 기업을 찾는 메소드
+    public String findbyquestionid(int question_id) {
+    	return mapper.findbyquestionid(question_id);
+    }
+    
+ // 분석2 문제 질문으로 기업을 찾는 메소드
+    public String findbyquestionid2(int question_id) {
+    	return mapper.findbyquestionid2(question_id);
+    }
+    
+ // 분석3 문제 질문으로 기업을 찾는 메소드
+    public String findbyquestionid3(int question_id) {
+    	return mapper.findbyquestionid3(question_id);
+    }
+    
     
  // 회원 목록 조회
     public List<MavenMember> getqanda() {

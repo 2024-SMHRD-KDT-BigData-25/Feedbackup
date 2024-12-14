@@ -66,16 +66,61 @@ public class UserController {
 
    @GetMapping("/users/result_list")
    public String getResultPage(HttpSession session, Model model) {
-      MavenMember member = (MavenMember) session.getAttribute("member");
+       MavenMember member = (MavenMember) session.getAttribute("member");
        
-      if (member == null) {
-              return "redirect:/login"; // member가 세션에 없으면 로그인 페이지로 리다이렉트
-          }
-       String userName = member.getName();
-       List<MavenMember> users = service.findUsersByName(userName); // 같은 이름을 가진 사용자 조회
+       if (member == null) {
+           return "redirect:/login"; // member가 세션에 없으면 로그인 페이지로 리다이렉트
+       }
+       
+       String user_id = member.getUser_id(); // 세션에서 가져온 user_id
+       
+       List<MavenMember> users1 = service.findUsersByANALYSIS_Q1(user_id);
+       List<MavenMember> users2 = service.findUsersByANALYSIS_Q2(user_id);
+       List<MavenMember> users3 = service.findUsersByANALYSIS_Q3(user_id);
+       
+       List<Integer> questionids1 = new ArrayList<>();
+       List<Integer> questionids2 = new ArrayList<>();
+       List<Integer> questionids3 = new ArrayList<>();
+       
+       List<String> jobCodes1 = new ArrayList<>();
+       List<String> jobCodes2 = new ArrayList<>();
+       List<String> jobCodes3 = new ArrayList<>();
+       
+       for (MavenMember user : users1) {
+           int question_id = user.getQuestion_id();
+           questionids1.add(question_id);
+           String job_code = service.findbyquestionid(question_id);
+           jobCodes1.add(job_code);
+       }
+       
+       // users2 리스트에서 각 question_id와 job_code를 가져오기
+       for (MavenMember user : users2) {
+           int question_id = user.getQuestion_id();
+           questionids2.add(question_id);
+           String job_code = service.findbyquestionid(question_id);
+           jobCodes2.add(job_code);
+       }
+
+       // users3 리스트에서 각 question_id와 job_code를 가져오기
+       for (MavenMember user : users3) {
+           int question_id = user.getQuestion_id();
+           questionids3.add(question_id);
+           String job_code = service.findbyquestionid(question_id);
+           jobCodes3.add(job_code);
+       }
+
+
+
+
+       model.addAttribute("jobcodes1", jobCodes1);
+       model.addAttribute("jobcodes2", jobCodes2);
+       model.addAttribute("jobcodes3", jobCodes3);
 
        // users 리스트를 모델에 추가하여 JSP로 전달
-       model.addAttribute("users", users);
+       model.addAttribute("users1", users1);
+       model.addAttribute("users2", users2);
+       model.addAttribute("users3", users3);
+
        return "result_list"; // result_list.jsp로 이동
    }
 

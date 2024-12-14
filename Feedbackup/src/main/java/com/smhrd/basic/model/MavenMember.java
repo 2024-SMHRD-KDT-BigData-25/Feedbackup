@@ -1,5 +1,7 @@
 package com.smhrd.basic.model;
 
+import java.time.LocalDate;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,5 +22,8 @@ public class MavenMember {
 	private String job_code;
 	private String q_text;
 	private String a_text;
+	private LocalDate created;
+	private int question_id;
+	private int session_id;
 
 }
