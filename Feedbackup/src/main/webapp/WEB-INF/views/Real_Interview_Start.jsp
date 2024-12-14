@@ -93,7 +93,7 @@
     max-width: 400px;
     position: fixed;
     bottom: 105px;
-    left: 625px;
+    left: 630px;
 }
 
 .recording-bar .status {

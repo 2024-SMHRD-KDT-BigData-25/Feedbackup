@@ -180,21 +180,7 @@ body {
   min-height: 400px;
 }
 
-.key-points {
-  font-size: 14px;
-  margin-top: 20px;
-  min-height: 100px;
-}
 
-.key-points span {
-  display: inline-block;
-  background-color: #ECEAFF;
-  color: #8071FC;
-  padding: 5px 10px;
-  border-radius: 10px;
-  margin-right: 5px;
-  font-size: 12px;
-}
 
 .chart-container {
   text-align: center;
@@ -501,14 +487,6 @@ body {
       </div>
     
       <div class="card">
-        <div class="content-title">핵심 키워드</div>
-        <div class="key-points">
-            <span>#개발이슈</span>
-            <span>#A/B 테스트 결과</span>
-            <span>#MVP 수정</span>
-            <span>#프로젝트 현황</span>
-            <span>#POC 검증</span>
-        </div>
 
         <div class="content-title">모범답안과의 유사도 결과 및 개선점</div>
         <div class="feedback">분석 결과</div><br>
@@ -574,6 +552,27 @@ body {
               </div>
             </div>
             <div class="x-axis">떨림</div>
+          </div>
+          <!--  그래프 3: 속도 -->
+          <div class="graph-container">
+            <div class="y-axis">
+              <span>2</span>
+              <span>1.5</span>
+              <span>1</span>
+              <span>0.5</span>
+            </div>
+            <div class="grid-lines">
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+            </div>
+            <div class="bar-container">
+              <div class="bar" id="bar3">
+                <span id="bar-value3"></span>
+              </div>
+            </div>
+            <div class="x-axis">속도</div>
           </div>
         </div>
         <div class="voice_result">음성 평가 내용<br><br>
@@ -775,6 +774,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	            const bars = [
 	                { barId: 'bar1', valueId: 'bar-value1', value: averagePitchValue },
 	                { barId: 'bar2', valueId: 'bar-value2', value: scaledRelativeTremorValue  }
+	                { barId: 'bar3', valueId: 'bar-value3', value: speech_rate  }
 	            ];
 
 	            // 디버깅 로그 추가
@@ -791,6 +791,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 초기화: 모든 막대를 높이 0으로 설정
 	resetBarHeight('bar1');
 	resetBarHeight('bar2');
+	resetBarHeight('bar3');
 	
 	// 관찰할 대상 요소
 	const target = document.querySelector('.voice');
@@ -843,6 +844,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	        gestureBarData[1].value,
 	        maxGestureBarValue
 	      );
+	      setGestureBarWidth(
+	  	        'gesture-bar3',
+	  	        'gesture-value3',
+	  	        gestureBarData[1].value,
+	  	        maxGestureBarValue
+	  	      );
 	
 	      observer.unobserve(entry.target); // 한 번 실행 후 관찰 중지
 	    }
@@ -852,6 +859,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 초기화: 모든 막대를 길이 0으로 설정
 	resetGestureBars('gesture-bar1');
 	resetGestureBars('gesture-bar2');
+	resetGestureBars('gesture-bar3');
 	
 	// 관찰할 대상 요소
 	const gestureBarsContainer = document.querySelector('.gesture-bars'); // 막대 그래프 컨테이너

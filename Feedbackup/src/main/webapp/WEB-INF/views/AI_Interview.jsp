@@ -110,7 +110,7 @@
                 <img id="modalImage" src="img/logo1.png" alt="로고">
             </div>
         </div>
-        <p id="modalMessage" class="modal_text">분석중 입니다..</p>
+        <p id="modalMessage" class="modal_text">분석 중입니다..</p>
         <button class="btn" id="btn_confirm">취소</button>
     </div>
 </div>
