@@ -792,12 +792,11 @@ document.addEventListener('DOMContentLoaded', () => {
 				const relativeTremorValue = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
 	            const speech_rateValue = parseFloat(document.getElementById("speech_rate").textContent) || 0;
 				
-				// 그래프 비율을 위한 수치 조정 (더하기 100)
-				const scaledRelativeTremorValue = relativeTremorValue+100;
+
 				
 	            const bars = [
 	                { barId: 'bar1', valueId: 'bar-value1', value: averagePitchValue },
-	                { barId: 'bar2', valueId: 'bar-value2', value: scaledRelativeTremorValue  },
+	                { barId: 'bar2', valueId: 'bar-value2', value: relativeTremorValue  },
 	                { barId: 'bar3', valueId: 'bar-value3', value: speech_rateValue  }
 	            ];
 
