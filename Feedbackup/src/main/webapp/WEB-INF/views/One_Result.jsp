@@ -477,7 +477,7 @@ body {
     </div>
 
     <div class="title"><img src="../img/feedbackup.png"></div>
-    <div class="title_text">AI 분석 결과</div>
+    <div class="title_text">자기소개 분석 결과</div>
     
     <div hidden>
     <!-- AI 답변 분석 -->
