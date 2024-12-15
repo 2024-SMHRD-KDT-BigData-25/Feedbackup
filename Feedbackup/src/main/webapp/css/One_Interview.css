@@ -1,4 +1,4 @@
-@charset "UTF-8";
+
 
 @font-face {
 	font-family: 'SUIT';
@@ -241,7 +241,8 @@ li {
 	margin: 11% auto;
 	padding: 20px;
 	border: 1px solid #888;
-	width: 600px;
+	width: 500px;
+	min-height: 250px;
 	text-align: center;
 	border: 2px solid #8071FC;
 	border-radius: 30px;
@@ -262,7 +263,7 @@ li {
 
 /* 분석중 메시지 */
 .modal_text {
-	font-size: 28px;
+	font-size: 15px;
 	color: #333333;
 }
 
@@ -301,11 +302,12 @@ li {
 	display: inline-block;
 	background-color: #8071FC;
 	color: white;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 18px;
     width: 100px;
     margin: 0 15px;
     margin-top: 20px;
+    margin-bottom: 10px;
     border-radius: 25px;
     border: 0.5px #CBD5E1 solid;
     padding: 10px;
@@ -333,6 +335,7 @@ li {
     position: relative; /* 내부 자식 요소의 기준점 */
     width: 100%; /* 부모 크기에 맞춤 */
     height: 120px; /* 고정 크기 설정 */
+    margin-top: 20px;
 }
 
 
@@ -340,7 +343,7 @@ li {
 .rotating-border {
     position: absolute; /* loading-container 기준 */
     top: 6%; /* 부모 기준 중앙 */
-    left: 40%; /* 부모 기준 중앙 */
+    left: 38%; /* 부모 기준 중앙 */
     transform: translate(-50%, -50%);
     width: 100px;
     height: 100px;

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page import="com.smhrd.basic.model.MavenMember"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -464,10 +465,12 @@ body {
     <div class="top-buttons">
       <button class="btn" onclick="window.location.href='/myapp/';">나가기</button>
     </div>
-
+	   <%
+	   MavenMember member = (MavenMember) session.getAttribute("member");
+	%>
     <div class="title"><img src="../img/feedbackup.png"></div>
     <div class="title_text">AI 분석 결과</div>
-    <div class="subtitle"><span class="highlight">면접자</span> 님의 결과를 확인해 주세요</div>
+    <div class="subtitle"><span class="highlight"><%=member.getName()%></span> 님의 결과를 확인해 주세요</div>
     <div class="subtitle2">결과는 <span class="highlight">[피드백업 홈페이지 > AI 분석결과]</span> 에서 다시 확인할 수 있어요</div>
 
         <div class="tabs">

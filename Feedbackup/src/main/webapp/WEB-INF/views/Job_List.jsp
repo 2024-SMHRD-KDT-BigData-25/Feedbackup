@@ -20,14 +20,14 @@
     }
 
     .text1 {
-        font-size: 30px;
+        font-size: 35px;
         font-weight: 800;
         margin-top: 60px;
         text-align: center;
     }
 
     .text2 {
-        font-size: 10px;
+        font-size: 15px;
         margin-top: 10px;
         margin-bottom: 20px;
         text-align: center;

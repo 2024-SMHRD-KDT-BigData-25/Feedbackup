@@ -104,7 +104,6 @@ body {
   border-radius: 20px;
   text-align: center;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin: 0px auto;
 }
@@ -238,7 +237,7 @@ body {
   display: flex; /* Flexbox 활성화 */
   justify-content: center; /* 가로축 중앙 정렬 */
   align-items: center; /* 세로축 중앙 정렬 */
-  gap: 115px; /* 각 div 사이 간격 */
+  gap: 15px; /* 각 div 사이 간격 */
   margin: 20px auto;
   max-width: 700px;
 }
@@ -474,7 +473,6 @@ body {
   
   <div class="container">
     <div class="top-buttons">
-      <button class="btn" id="resetButton">데이터 초기화</button>
       <button class="btn" onclick="window.location.href='/myapp/';">나가기</button>
     </div>
 
@@ -516,14 +514,12 @@ body {
     <div class="section"> 
       <div class="section-header">
         <div class="section-title">AI 음성 분석 상세 결과</div>
-        <div class="tabs">
-          <button class="active" id="loadResult0">Q1</button>
-        </div>
       </div>
       <div class="card">
         <div class="voice_title box1">
           <div>높낮이</div>
           <div>떨림</div>
+          <div>속도</div>
         </div>
         <div class="voice">
           <!-- 그래프 1: 높낮이 -->
@@ -551,9 +547,9 @@ body {
           <!-- 그래프 2: 떨림 -->
           <div class="graph-container">
             <div class="y-axis">
-              <span>0.015</span>
-              <span>0.010</span>
-              <span>0.005</span>
+              <span>0.01</span>
+              <span>0.006</span>
+              <span>0.003</span>
               <span>0</span>
             </div>
             <div class="grid-lines">
@@ -569,6 +565,27 @@ body {
             </div>
             <div class="x-axis">떨림</div>
           </div>
+          <!--  그래프 3: 속도 -->
+          <div class="graph-container">
+            <div class="y-axis">
+              <span>1.5</span>
+              <span>1</span>
+              <span>0.5</span>
+              <span>0</span>
+            </div>
+            <div class="grid-lines">
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+              <div class="grid-line"></div>
+            </div>
+            <div class="bar-container">
+              <div class="bar" id="bar3">
+                <span id="bar-value3"></span>
+              </div>
+            </div>
+            <div class="x-axis">속도</div>
+          </div>
         </div>
         <div class="voice_result">음성 평가 내용<br><br>
 
@@ -579,9 +596,9 @@ body {
 		<div id="pitchDescription"></div><br>
 		
 		<div id="tremorDescription"></div><br>
-        
-        <div id="speechAnalysis"></div><br>
-        
+		
+		<div id="speechAnalysis"></div><br>
+		
         <div id="timestamp" hidden></div>
         
         </div>
@@ -711,6 +728,31 @@ function setBarHeight2(barId, valueId, value) {
 	barValue.innerText = value;
 	console.log(`Successfully set height for ${barId} to ${normalizedHeight}%`);
 	}
+	
+function setBarHeight3(barId, valueId, value) {
+	console.log(`Attempting to set height for ${barId} with value: ${value}`);
+
+	const bar = document.getElementById(barId);
+	const barValue = document.getElementById(valueId);
+
+	if (!bar || !barValue) {
+	    console.error(`DOM element not found: barId=${barId}, valueId=${valueId}`);
+	    return;
+	}
+
+	if (value === undefined || value === null || value === "") {
+	    console.error(`Invalid value provided for ${barId}: ${value}`);
+	    return;
+	}
+
+	const maxHeight = 1.5;
+	const minHeight = 0;
+	const normalizedHeight = ((value - minHeight) / (maxHeight - minHeight)) * 100;
+
+	bar.style.height = normalizedHeight+'%';
+	barValue.innerText = value;
+	console.log(`Successfully set height for ${barId} to ${normalizedHeight}%`);
+	}
 
 //각 막대의 길이를 설정하는 함수
 function setGestureBarWidth(barId, valueId, value, maxValue) {
@@ -762,14 +804,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	         	// 명확한 데이터 전달
                 const averagePitchValue = parseFloat(document.getElementById("averagePitch").textContent) || 0;
 				const relativeTremorValue = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
-				const speech_rate = parseFloat(document.getElementById("relativeTremor").textContent) || 0;
-				
-				// 그래프 비율을 위한 수치 조정 (더하기 100)
-				// const scaledRelativeTremorValue = relativeTremorValue+100;
+				const speech_rateValue = parseFloat(document.getElementById("speech_rate").textContent) || 0;
 				
 	            const bars = [
 	                { barId: 'bar1', valueId: 'bar-value1', value: averagePitchValue },
-	                { barId: 'bar2', valueId: 'bar-value2', value: relativeTremorValue  }
+	                { barId: 'bar2', valueId: 'bar-value2', value: relativeTremorValue  },
+	                { barId: 'bar3', valueId: 'bar-value3', value: speech_rateValue  }
 	            ];
 
 	            // 디버깅 로그 추가
@@ -786,6 +826,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 초기화: 모든 막대를 높이 0으로 설정
 	resetBarHeight('bar1');
 	resetBarHeight('bar2');
+	resetBarHeight('bar3');
 	
 	// 관찰할 대상 요소
 	const target = document.querySelector('.voice');
@@ -944,6 +985,7 @@ function loadResult(index) {
     //그래프 업데이트
     setBarHeight('bar1', 'bar-value1', selectedResult.averagePitch); // 피치 값 반영
 	setBarHeight2('bar2', 'bar-value2', selectedResult.relativeTremor); // 떨림 값 반영
+	setBarHeight3('bar3', 'bar-value3', parseFloat(selectedResult.speech_rate).toFixed(2));
 	
 	// 속도 분석
 	const speech_rate = selectedResult.speech_rate || 0;
@@ -967,7 +1009,9 @@ function loadResult(index) {
     document.getElementById("pitchDescription").textContent = pitchDescription;
     document.getElementById("gestureAnalysis").textContent = gestureAnalysis;
     document.getElementById("tremorDescription").textContent = tremorDescription;
-    document.getElementById("speech_rate").textContent = selectedResult.speech_rate ? selectedResult.speech_rate : "0";
+    document.getElementById("speech_rate").textContent = selectedResult.speech_rate
+    ? parseFloat(selectedResult.speech_rate).toFixed(2)
+    : "0.00";
     document.getElementById("speechAnalysis").textContent = speechAnalysis;
     
     
@@ -987,10 +1031,7 @@ function loadResult(index) {
 	setGestureBarWidth('gesture-bar2', 'gesture-value2', gestureBarData[1].value, maxGestureBarValue);
 	}
 	
-	// 버튼 클릭 시 결과 로드
-	document.getElementById("loadResult0").addEventListener("click", function() {
-	    loadResult(0); // 가장 최근의 결과 (0번) 로드
-	});
+
 	
 // 서버에서 데이터를 가져오기
 function getSavedResults2() {
@@ -1006,24 +1047,6 @@ function getSavedResults2() {
 		});
 	}
 	
-// 초기화 함수
-function resetResults2() {
-    fetch("http://localhost:5700/reset_results2", {
-        method: "POST"
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("초기화 응답:", data.message);
-        document.getElementById("resultsContainer").innerHTML = "<p>데이터가 초기화되었습니다.</p>";
-    })
-    .catch(error => {
-        console.error("초기화 요청 중 오류 발생:", error);
-    });
-}
-
-// 초기화 버튼 이벤트 연결
-document.getElementById("resetButton").addEventListener("click", resetResults2);
-
 </script>
 </body>
 </html>

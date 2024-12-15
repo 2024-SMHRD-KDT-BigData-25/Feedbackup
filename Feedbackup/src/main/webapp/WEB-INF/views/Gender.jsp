@@ -21,14 +21,14 @@
 		}
 		
 		.text1{
-		    font-size: 26px;
+		    font-size: 35px;
 		    font-weight: bold;
 		    margin-top: 100px;
 		    text-align: center;
 		}
 		
 		.text2 {
-	        font-size: 10px;
+	        font-size: 15px;
 	        margin-top: 10px;
 	        margin-bottom: 20px;
 	        text-align: center;
