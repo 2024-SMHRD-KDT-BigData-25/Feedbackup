@@ -39,26 +39,25 @@
 		<div class="list-container">
 	        <div class="list-result">
 	        <%-- 첫번째 분석 --%>
-            <%
-                if (users1 != null && !users1.isEmpty() && jobcodes1 != null && jobcodes1.size() == users1.size()) {
-                    for (int i = 0; i < users1.size(); i++) {
-                        MavenMember user1 = users1.get(i);
-                        String job_code1 = jobcodes1.get(i); // 인덱스로 job_code1 가져오기
-            %>
-                <div class="result-box" data-category="interview" onclick="location.href='/myapp/users/Result_Replay'">
-               	 	
-                    <h2 class="result1">AI 면접 결과</h2>
-                    <p class="result2"><%= job_code1 %> 면접연습</p> <!-- 사용자 직업 코드 -->
-                    <span class="result3"><%= user1.getCreated() %></span> <!-- 사용자 생성 일시 -->
-                </div>
-            <%
-                    }
-                } else {
-            %>
-                <p>분석된 AI 면접이 없습니다.</p>
-            <%
-                }
-            %>
+				<%
+				if (users1 != null && !users1.isEmpty() && jobcodes1 != null && jobcodes1.size() == users1.size()) {
+				    for (int i = users1.size() - 1; i >= 0; i--) { // 역순으로 반복
+				        MavenMember user1 = users1.get(i);
+				        String job_code1 = jobcodes1.get(i);
+				%>
+				    <div class="result-box" data-category="interview" onclick="location.href='/myapp/users/Result_Replay'">
+				        <h2 class="result1">AI 면접 결과</h2>
+				        <p class="result2"><%= job_code1 %> 면접연습</p>
+				        <span class="result3"><%= user1.getCreated() %></span>
+				    </div>
+				<%
+				    }
+				} else {
+				%>
+				    <p>분석된 AI 면접이 없습니다.</p>
+				<%
+				}
+				%>
             
             <div class="question-separator"></div> <!-- 첫 번째 분석과 두 번째 분석 사이에 줄바꿈 추가 -->
 	            
