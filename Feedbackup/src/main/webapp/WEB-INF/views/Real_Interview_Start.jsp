@@ -325,6 +325,13 @@ video {
    border: 2px solid #8071FC;
    border-radius: 30px;
 }
+
+/* 분석중 메시지 */
+.modal_text {
+	font-size: 20px;
+	color: #333333;
+}
+
 /* 확인 버튼 */
 .btn {
   border: 1px solid #D4C5FF;
